@@ -1,30 +1,32 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { FsComponentComponent } from './components/fs-component/fs-component.component';
-import { FsComponentService } from './services/fs-component.service';
+import { FsCommonModule } from '@firestitch/common';
+
+import { FsFileComponent } from './components';
+
 
 @NgModule({
   imports: [
     CommonModule,
+    FsCommonModule,
   ],
   exports: [
-    FsComponentComponent,
+    FsFileComponent,
   ],
   entryComponents: [
   ],
   declarations: [
-    FsComponentComponent,
+    FsFileComponent,
   ],
   providers: [
-    FsComponentService,
   ],
 })
-export class FsComponentModule {
+export class FsFileModule {
   static forRoot(): ModuleWithProviders {
     return {
-      ngModule: FsComponentModule,
-      providers: [FsComponentService]
+      ngModule: FsFileModule,
+      providers: []
     };
   }
 }

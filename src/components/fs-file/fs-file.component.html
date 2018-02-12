@@ -1,0 +1,7 @@
+<label [for]="uniqId">
+  <ng-content></ng-content>
+</label>
+<input type="file" id="test" style="display: none"
+       [id]="uniqId"
+       [multiple]="fsFile.multiple"
+       [attr.accept]="fsFile.accept">

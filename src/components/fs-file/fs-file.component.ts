@@ -1,0 +1,72 @@
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output
+} from '@angular/core';
+import { FsFileService } from '../../services/fs-component.service';
+import { FsUtil } from '@firestitch/common';
+
+@Component({
+  selector: 'fs-file',
+  providers: [FsFileService],
+  templateUrl: './fs-file.component.html'
+})
+export class FsFileComponent implements OnInit {
+
+  @Input()
+  set multiple(value) {
+    this.fsFile.multiple = value;
+  }
+
+  @Input()
+  set accept(value) {
+    this.fsFile.accept = value;
+  }
+
+  @Input()
+  set minSize(value) {
+    this.fsFile.minSize = value;
+  };
+
+  @Input()
+  set maxSize(value) {
+    this.fsFile.maxSize = value
+  }
+
+  @Input()
+  set imageMaxWidth(value) {
+    this.fsFile.imageMaxWidth = value
+  }
+
+  @Input()
+  set imageMaxHeight(value) {
+    this.fsFile.imageMaxHeight = value
+  }
+
+  @Input()
+  set imageQuality(value) {
+    this.fsFile.imageQuality = value;
+  }
+
+  @Input()
+  set imageFormat(value) {
+    this.fsFile.imageFormat = value;
+  }
+
+  @Input() imageFixOrientation = true;
+
+  @Output('selected') public selected: EventEmitter<any>;
+
+  public uniqId = this.fsUtil.guid();
+
+  constructor(public el: ElementRef, public fsFile: FsFileService, public fsUtil: FsUtil) {
+    this.selected = this.fsFile.selected;
+  }
+
+  public ngOnInit() {
+    this.fsFile.initForElement(this.el.nativeElement);
+  }
+}

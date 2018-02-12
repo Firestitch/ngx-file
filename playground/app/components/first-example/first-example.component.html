@@ -1,1 +1,11 @@
-<fs-component></fs-component>
+<fs-file (selected)="selected($event)"
+         accept="image/*, application/pdf"
+         multiple="true"
+         minSize="100"
+         maxSize="1500"
+         imageMaxWidth="1000"
+         imageMaxHeight="1000"
+         imageQuality=".3"
+>
+  <p>Tap for upload</p>
+</fs-file>
