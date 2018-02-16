@@ -5,7 +5,12 @@
          maxSize="1500"
          imageMaxWidth="1000"
          imageMaxHeight="1000"
-         imageQuality=".3"
+         imageQuality=".1"
+         preview="true"
 >
   <p>Tap for upload</p>
 </fs-file>
+
+<div *ngFor="let file of test">
+  <img [src]="file.preview">
+</div>

@@ -20,7 +20,9 @@ export class FsFileService {
   public selected  = new EventEmitter();
 
   private _options = {
+    disabled: false,
     multiple: false,
+    preview: false,
     accept: [],
     minSize: void 0,
     maxSize: void 0,
@@ -90,6 +92,22 @@ export class FsFileService {
     }
   }
 
+  set disabled(value) {
+    this._options.disabled = value;
+  }
+
+  get disabled() {
+    return this._options.disabled;
+  }
+
+  set preview(value) {
+    if (typeof(value) === 'boolean') {
+      this._options.preview = value;
+    } else {
+      this._options.preview = value === 'true';
+    }
+  }
+
   public initForElement(el: any) {
     this.el = el;
     this.onChanges();
@@ -98,7 +116,6 @@ export class FsFileService {
   public onChanges() {
     FileAPI.event.on(this.el, 'change', (event) => {
       const files = FileAPI.getFiles(event);
-
       this.filterFiles(files).subscribe((result: any) => {
         if (result.files && result.files.length > 0) {
           const processedFiles = [];
@@ -115,8 +132,52 @@ export class FsFileService {
             }
           });
 
-          Promise.all(processedFiles).then((res) => {
-            this.selected.next(res);
+          Promise.all(processedFiles).then((resFiles) => {
+
+            const previewPromises = [];
+
+            resFiles.forEach((file) => {
+              if (this._options.preview || true) {
+                const filePromise = new Promise((resolve, reject) => {
+                  FileAPI.Image(file)
+                    .preview(100, 100)
+                    .get(function (err, img) {
+                      FileAPI.readAsDataURL(img, (event) => {
+                        if (event.type === 'load') {
+                          resolve({
+                            file: file,
+                            preview: event.result
+                          })
+                        }
+                      });
+                    });
+                });
+                previewPromises.push(filePromise);
+              } else {
+                previewPromises.push({
+                  file: file
+                });
+              }
+            });
+
+            Promise.all(previewPromises).then((resultFiles) => {
+              this.selected.next(resultFiles);
+            })
+
+            // FileAPI.readAsDataURL(file, (evt) => {
+            //   if (evt.type === 'load') {
+            //     const previewUrl = URL.createObjectURL(file);
+            //     const newImg = document.createElement('img');
+            //
+            //     newImg.onload = function() {
+            //       // no longer need to read the blob so it's revoked
+            //       URL.revokeObjectURL(previewUrl);
+            //     };
+            //
+            //     newImg.src = previewUrl;
+            //     document.body.appendChild(newImg);
+            //   }
+            // })
           })
         }
       })
@@ -188,7 +249,7 @@ export class FsFileService {
       const fileType = (this._options.imageFormat) ? 'image/' + this._options.imageFormat : file.type;
       image.get((err, img) => {
         if (!err) {
-          img.toBlob((blob) => {
+          img.toDataUrl((blob) => {
             resolve(new File([blob], file.name, { type: fileType }));
           }, fileType, this._options.imageQuality || 1)
         } else {
