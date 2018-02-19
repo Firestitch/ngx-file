@@ -1,16 +1,15 @@
 <fs-file (selected)="selected($event)"
          accept="image/*, application/pdf"
          multiple="true"
-         minSize="100"
-         maxSize="1500"
-         imageMaxWidth="1000"
-         imageMaxHeight="1000"
          imageQuality=".1"
          preview="true"
 >
   <p>Tap for upload</p>
 </fs-file>
+<!--minSize="100"
+         maxSize="1500"
+         imageMaxWidth="1000"
+         imageMaxHeight="1000"-->
 
-<div *ngFor="let file of test">
-  <img [src]="file.preview">
-</div>
+<fs-file-queue [files]="files">
+</fs-file-queue>

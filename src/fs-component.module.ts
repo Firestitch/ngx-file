@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { FsCommonModule } from '@firestitch/common';
 
-import { FsFileComponent } from './components';
+import { FsFileComponent, FsFileQueueComponent } from './components';
 
 
 @NgModule({
@@ -13,11 +13,13 @@ import { FsFileComponent } from './components';
   ],
   exports: [
     FsFileComponent,
+    FsFileQueueComponent,
   ],
   entryComponents: [
   ],
   declarations: [
     FsFileComponent,
+    FsFileQueueComponent,
   ],
   providers: [
   ],
