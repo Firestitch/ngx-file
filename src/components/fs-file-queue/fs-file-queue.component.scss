@@ -1,0 +1,17 @@
+.queue {
+  position: relative;
+  display: inline-block;
+}
+
+.preview {
+
+  &:hover {
+    .actions {
+      display: block;
+    }
+  }
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+  border: 2px #a0a0a0 solid;
+}

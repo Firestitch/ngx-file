@@ -1,5 +1,5 @@
-<div *ngFor="let file of files">
-  <img [src]="file.loadImage()" *ngIf="file.progress" width="file.imageWidth" height="file.imageHeight">
-  <img [src]="file.preview" *ngIf="!file.progress && file.typeImage">
-  <img [src]="file.loadImage()" *ngIf="!file.progress && !file.typeImage">
-</div>
+<fs-file-queue-preview
+  *ngFor="let file of files"
+  [file]="file"
+  class="preview">
+</fs-file-queue-preview>

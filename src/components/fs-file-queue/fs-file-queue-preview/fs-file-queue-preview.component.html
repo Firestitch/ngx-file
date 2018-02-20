@@ -1,0 +1,8 @@
+<img [src]="file.loadImage()" *ngIf="file.progress" width="file.imageWidth" height="file.imageHeight">
+<img [src]="file.preview" *ngIf="!file.progress && file.typeImage">
+<img [src]="file.loadImage()" *ngIf="!file.progress && !file.typeImage">
+<div class="actions">
+  <span class="action top-left">
+    <mat-icon class="icon">close</mat-icon>
+  </span>
+</div>
