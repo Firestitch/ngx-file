@@ -1,8 +1,24 @@
-<img [src]="file.loadImage()" *ngIf="file.progress" width="file.imageWidth" height="file.imageHeight">
-<img [src]="file.preview" *ngIf="!file.progress && file.typeImage">
-<img [src]="file.loadImage()" *ngIf="!file.progress && !file.typeImage">
+<ng-container *ngIf="file.typeImage; else nonImage">
+  <img [src]="file.preview" *ngIf="!file.progress && file.typeImage; else dummyImage">
+  <ng-template #dummyImage>
+    <img src="/assets/image.png">
+  </ng-template>
+</ng-container>
+<ng-template #nonImage>
+  <ng-container [ngSwitch]="file.extension">
+    <ng-template [ngSwitchCase]="'pdf'">
+      <img src="/assets/pdf.png" [width]="previewWidth || 100" [height]="previewHeight || 100">
+    </ng-template>
+  </ng-container>
+</ng-template>
 <div class="actions">
-  <span class="action top-left">
-    <mat-icon class="icon">close</mat-icon>
+  <span class="action" *ngFor="let action of actions; let i=index"
+        [ngClass]="getActionClasses(action)"
+        matTooltip
+        [attr.matTooltip]="action.placeholder"
+        [matTooltipPosition]="bottom"
+        (click)="callAction(action)"
+  >
+    <ng-template [ngTemplateOutlet]="actionsTemplate[i]"></ng-template>
   </span>
 </div>

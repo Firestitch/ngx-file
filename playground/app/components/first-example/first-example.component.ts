@@ -9,7 +9,10 @@ export class FirstExampleComponent {
   public files = [];
 
   public selected(files) {
-    console.log(files);
-    this.files = files;
+    this.files.push(...files);
+  }
+
+  public enhance(file) {
+    console.log('enhance', file);
   }
 }

@@ -11,5 +11,14 @@
          imageMaxWidth="1000"
          imageMaxHeight="1000"-->
 
-<fs-file-queue [files]="files">
+<fs-file-queue [files]="files" previewWidth="100" previewHeight="100">
+  <ng-template fs-file-queue-action placement="top-right" action="remove" tooltip="Remove">
+    <mat-icon>close</mat-icon>
+  </ng-template>
+  <ng-template fs-file-queue-action placement="bottom-right" (click)="enhance($event)" tooltip="Enhance">
+    <mat-icon>brush</mat-icon>
+  </ng-template>
+  <ng-template fs-file-queue-action placement="bottom-left" action="zoom" tooltip="Zoom">
+    <mat-icon>search</mat-icon>
+  </ng-template>
 </fs-file-queue>

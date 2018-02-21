@@ -57,13 +57,4 @@ export class FsFile {
     this.imageWidth = info.width;
     this.imageHeight = info.height;
   }
-
-  public loadImage() {
-    if (this.typeImage) {
-      return '/assets/image.png';
-    } else {
-      debugger;
-      return '/assets/pdf.png';
-    }
-  }
 }

@@ -1,6 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material';
+import {MatIconModule, MatTooltipModule} from '@angular/material';
 
 import { FsCommonModule } from '@firestitch/common';
 
@@ -9,6 +9,7 @@ import {
   FsFileQueueComponent,
   FsFileQueuePreviewComponent
 } from './components';
+import { FsFileQueueActionDirective } from './directives';
 
 
 @NgModule({
@@ -16,10 +17,12 @@ import {
     CommonModule,
     FsCommonModule,
     MatIconModule,
+    MatTooltipModule,
   ],
   exports: [
     FsFileComponent,
     FsFileQueueComponent,
+    FsFileQueueActionDirective,
   ],
   entryComponents: [
   ],
@@ -27,6 +30,8 @@ import {
     FsFileComponent,
     FsFileQueueComponent,
     FsFileQueuePreviewComponent,
+
+    FsFileQueueActionDirective,
   ],
   providers: [
   ],
