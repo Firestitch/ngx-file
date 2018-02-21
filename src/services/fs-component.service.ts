@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import {ElementRef, EventEmitter, Injectable} from '@angular/core';
 import * as FileAPI from 'fileapi';
 import { Subject } from 'rxjs/Subject';
 import {FsFile} from '../models/fs-file';
@@ -127,85 +127,81 @@ export class FsFileService {
     }
   }
 
-  public initForElement(el: any) {
+  /**
+   * Initialize service for target element
+   * @param el
+   */
+  public initForElement(el: ElementRef) {
     this.el = el;
     this.onChanges();
   }
 
+  /**
+   * Fire when input was changed
+   */
   public onChanges() {
     FileAPI.event.on(this.el, 'change', (event) => {
       const files = FileAPI.getFiles(event);
 
       this.filterFiles(files).then((result: any) => {
         if (result.files && result.files.length > 0) {
-
-          result.files = result.files.map((f) => new FsFile(f));
-
-          this.selected.next(result.files);
-
-          const processedFiles = [];
-
-          result.files.forEach((file) => {
-            if (/^image/.test(file.type)) {
-              const processorsIter = processors(Object.keys(PROCESSORS));
-              const resFilePromise = new Promise((resolve, reject) => {
-                this.applyProcessors(file, processorsIter, resolve, reject);
-              });
-              processedFiles.push(resFilePromise);
-            } else {
-              processedFiles.push(file);
-            }
-          });
-
-          Promise.all(processedFiles).then((resFiles) => {
-            const previewPromises = [];
-
-            resFiles.forEach((file) => {
-              if (this._options.preview) {
-                const filePromise = new Promise((resolve, reject) => {
-                  FileAPI.Image(file.file)
-                    .preview(this._options.previewSizes.width, this._options.previewSizes.height)
-                    .get((err, img) => {
-                      FileAPI.readAsDataURL(img, (event) => {
-                        if (event.type === 'load') {
-                          file.preview = event.result;
-                          file.previewWidth = this._options.previewSizes.width;
-                          file.previewHeight = this._options.previewSizes.height;
-                          file.progress = false;
-
-                          resolve(file)
-                        }
-                      });
-                    });
-                });
-                previewPromises.push(filePromise);
-              } else {
-                previewPromises.push(file);
-              }
-            });
-
-            Promise.all(previewPromises).then((resultFiles) => {
-              console.log('done', resultFiles);
-            })
-
-            // FileAPI.readAsDataURL(file, (evt) => {
-            //   if (evt.type === 'load') {
-            //     const previewUrl = URL.createObjectURL(file);
-            //     const newImg = document.createElement('img');
-            //
-            //     newImg.onload = function() {
-            //       // no longer need to read the blob so it's revoked
-            //       URL.revokeObjectURL(previewUrl);
-            //     };
-            //
-            //     newImg.src = previewUrl;
-            //     document.body.appendChild(newImg);
-            //   }
-            // })
-          })
+          this.processFiles(result.files);
         }
       })
     });
+  }
+
+  /**
+   * Process uploaded files
+   * @param files
+   */
+  private processFiles(files) {
+    files = files.map((f) => new FsFile(f));
+
+    this.selected.next(files);
+
+    const processedFiles = [];
+
+    files.forEach((file: FsFile) => {
+      if (/^image/.test(file.type)) {
+        const processorsIter = processors(Object.keys(PROCESSORS));
+        const resFilePromise = new Promise((resolve, reject) => {
+          this.applyProcessors(file, processorsIter, resolve, reject);
+        });
+        processedFiles.push(resFilePromise);
+      } else {
+        processedFiles.push(file);
+      }
+    });
+
+    Promise.all(processedFiles).then((resFiles: FsFile[]) => {
+      if (this._options.preview) {
+        resFiles
+          .filter((file) => file.typeImage)
+          .forEach((file) => {
+            this.generateFilePreview(file);
+        })
+      }
+    })
+  }
+
+  /**
+   * Generate preview images for file
+   * @param {FsFile} file
+   */
+  private generateFilePreview(file: FsFile) {
+    FileAPI.Image(file.file)
+      .preview(this._options.previewSizes.width, this._options.previewSizes.height)
+      .get((err, img) => {
+        FileAPI.readAsDataURL(img, (event) => {
+          if (event.type === 'load') {
+            file.preview = event.result;
+            file.previewWidth = this._options.previewSizes.width;
+            file.previewHeight = this._options.previewSizes.height;
+            file.progress = false;
+          }
+        });
+      });
   }
 
   /**
@@ -214,7 +210,7 @@ export class FsFileService {
    * @returns {Subject<any>}
    */
   private filterFiles(rawFiles) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       FileAPI.filterFiles(rawFiles, (file, info) => {
         let sizeRule = void 0;
         if (/^image/.test(file.type)) {
@@ -261,7 +257,7 @@ export class FsFileService {
 
   /**
    * Change image format
-   * @param file
+   * @param originFile
    * @returns {Promise<any>}
    */
   private changeImageFormat(originFile: FsFile) {
@@ -280,21 +276,10 @@ export class FsFileService {
       });
     });
   }
-  // private resizeImage(file) {
-  //   return new Promise((resolve, reject) => {
-  //     FileAPI.Image(file).resize(100, 100).get((err, img) => {
-  //       if (!err) {
-  //         resolve(img);
-  //       } else {
-  //         reject(err);
-  //       }
-  //     });
-  //   });
-  // }
 
   /**
-   * Get image info
-   * @param originFile
+   * Retrun information about image (width/height)
+   * @param {FsFile} originFile
    * @returns {Promise<any>}
    */
   private getImageInfo(originFile: FsFile) {
@@ -311,7 +296,7 @@ export class FsFileService {
 
   /**
    * Change image quality
-   * @param file
+   * @param originFile
    * @returns {Promise<any>}
    */
   private changeQuality(originFile: FsFile) {
@@ -337,7 +322,7 @@ export class FsFileService {
    * @param resolve
    * @param reject
    */
-  private applyProcessors(file, processorsIter, resolve, reject) {
+  private applyProcessors(file: FsFile, processorsIter, resolve, reject) {
     const nextValue = processorsIter.next();
     if (!nextValue.done) {
       file.progress = true;
@@ -353,7 +338,7 @@ export class FsFileService {
 
         case 1: {
           if (this._options.imageQuality !== void 0) {
-            this.changeQuality(file).then((resultFile) => {
+            this.changeQuality(file).then((resultFile: FsFile) => {
               this.applyProcessors(resultFile, processorsIter, resolve, reject);
             }).catch((error) => {
               reject(error);
@@ -365,7 +350,7 @@ export class FsFileService {
 
         case 2: {
           if (this._options.imageFormat !== void 0) {
-            this.changeImageFormat(file).then((resultFile) => {
+            this.changeImageFormat(file).then((resultFile: FsFile) => {
               this.applyProcessors(resultFile, processorsIter, resolve, reject);
             }).catch((error) => {
               reject(error);
