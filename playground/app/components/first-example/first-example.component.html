@@ -2,7 +2,7 @@
          accept="image/*, application/pdf"
          multiple="true"
          imageQuality=".1"
-         preview="true"
+         preview="100"
 >
   <p>Tap for upload</p>
 </fs-file>
@@ -11,7 +11,7 @@
          imageMaxWidth="1000"
          imageMaxHeight="1000"-->
 
-<fs-file-queue [files]="files" previewWidth="100" previewHeight="100">
+<fs-file-queue [files]="files">
   <ng-template fs-file-queue-action placement="top-right" action="remove" tooltip="Remove">
     <mat-icon>close</mat-icon>
   </ng-template>

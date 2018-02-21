@@ -30,6 +30,14 @@ export class FsFileQueuePreviewComponent implements OnInit {
 
   public ngOnInit() {
     this.cleanActions();
+
+    if (!this.previewWidth) {
+      this.previewWidth = this.file.previewWidth || 100;
+    }
+
+    if (!this.previewHeight) {
+      this.previewHeight = this.file.previewHeight || 100;
+    }
   }
 
   public getActionClasses(action) {

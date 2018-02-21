@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import * as FileAPI from 'fileapi';
 import { Subject } from 'rxjs/Subject';
-import {FsFile} from "../models/fs-file";
+import {FsFile} from '../models/fs-file';
 
 const PROCESSORS = {
   0: 'imageInfo',
@@ -25,6 +25,7 @@ export class FsFileService {
     disabled: false,
     multiple: false,
     preview: false,
+    previewSizes: { width: null, height: null },
     accept: [],
     minSize: void 0,
     maxSize: void 0,
@@ -103,10 +104,26 @@ export class FsFileService {
   }
 
   set preview(value) {
-    if (typeof(value) === 'boolean') {
+    if (typeof(value) === 'boolean' || value === 'true') {
       this._options.preview = value;
-    } else {
-      this._options.preview = value === 'true';
+      this._options.previewSizes.width = 100;
+      this._options.previewSizes.height = 100;
+    } else if (typeof value == 'string' || value instanceof String) {
+      const [width, height] = value.split('x').map((val) => +val);
+      this._options.preview = true;
+
+      if (width && height) {
+        this._options.previewSizes.width = width;
+        this._options.previewSizes.height = height;
+      } else if (width && !height) {
+        this._options.previewSizes.width = width;
+        this._options.previewSizes.height = width;
+      } else if (height && !width) {
+        this._options.previewSizes.width = height;
+        this._options.previewSizes.height = height;
+      } else {
+        this._options.preview = false;
+      }
     }
   }
 
@@ -144,15 +161,18 @@ export class FsFileService {
             const previewPromises = [];
 
             resFiles.forEach((file) => {
-              if (this._options.preview || true) {
+              if (this._options.preview) {
                 const filePromise = new Promise((resolve, reject) => {
                   FileAPI.Image(file.file)
-                    .preview(100, 100)
-                    .get(function (err, img) {
+                    .preview(this._options.previewSizes.width, this._options.previewSizes.height)
+                    .get((err, img) => {
                       FileAPI.readAsDataURL(img, (event) => {
                         if (event.type === 'load') {
                           file.preview = event.result;
+                          file.previewWidth = this._options.previewSizes.width;
+                          file.previewHeight = this._options.previewSizes.height;
                           file.progress = false;
+
                           resolve(file)
                         }
                       });

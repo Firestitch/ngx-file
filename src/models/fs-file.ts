@@ -4,6 +4,8 @@ export class FsFile {
 
   public imageWidth: null;
   public imageHeight: null;
+  public previewWidth: null;
+  public previewHeight: null;
 
   private _file: File;
   private _preview: string;
