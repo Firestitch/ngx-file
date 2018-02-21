@@ -1,15 +1,17 @@
-<ng-container *ngIf="file.typeImage; else nonImage">
+<ng-container *ngIf="file.typeImage; else nonImage"> <!-- Image container -->
   <img [src]="file.preview" *ngIf="!file.progress && file.typeImage; else dummyImage">
   <ng-template #dummyImage>
     <img src="/assets/image.png">
+    <mat-spinner class="spinner" [diameter]="(previewWidth || 100)/2"></mat-spinner>
   </ng-template>
 </ng-container>
-<ng-template #nonImage>
+<ng-template #nonImage> <!-- Non image container -->
   <ng-container [ngSwitch]="file.extension">
     <ng-template [ngSwitchCase]="'pdf'">
       <img src="/assets/pdf.png" [width]="previewWidth || 100" [height]="previewHeight || 100">
     </ng-template>
   </ng-container>
+  <mat-spinner class="spinner" *ngIf="file.progress" [diameter]="(previewWidth || 100)/2"></mat-spinner>
 </ng-template>
 <div class="actions">
   <span class="action" *ngFor="let action of filteredActions"
