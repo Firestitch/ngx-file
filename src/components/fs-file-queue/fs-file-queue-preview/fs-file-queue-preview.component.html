@@ -12,7 +12,7 @@
   </ng-container>
 </ng-template>
 <div class="actions">
-  <span class="action" *ngFor="let action of actions; let i=index"
+  <span class="action" *ngFor="let action of filteredActions; let i=index"
         [ngClass]="getActionClasses(action)"
         matTooltip
         [attr.matTooltip]="action.placeholder"

@@ -29,7 +29,15 @@ export class FsFileQueueComponent implements OnInit {
 
   @ContentChildren(FsFileQueueActionDirective)
   private set actionsParams(val: QueryList<FsFileQueueActionDirective>) {
-    this.actions = val.toArray()
+    this.actions = val.toArray().map((action, index) => {
+      const newAction = Object.assign({}, action);
+      newAction.index = index;
+      if (newAction.forTypes && !Array.isArray(newAction.forTypes)) {
+        newAction.forTypes = newAction.forTypes.split(',').map((type) => type.trim());
+      }
+
+      return newAction;
+    });
   }
 
   @ContentChildren(FsFileQueueActionDirective, {read: TemplateRef})
