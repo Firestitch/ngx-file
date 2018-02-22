@@ -4,9 +4,9 @@ import {
   EventEmitter,
   Input,
   OnInit,
-  Output
+  Output, ViewChild
 } from '@angular/core';
-import { FsFileService } from '../../services/fs-component.service';
+import { FsFileService } from '../../services';
 import { FsUtil } from '@firestitch/common';
 
 @Component({
@@ -70,13 +70,15 @@ export class FsFileComponent implements OnInit {
 
   @Output('selected') public selected: EventEmitter<any>;
 
+  @ViewChild('fileInput') public fileInput: any;
+
   public uniqId = this.fsUtil.guid();
 
-  constructor(public el: ElementRef, public fsFile: FsFileService, public fsUtil: FsUtil) {
+  constructor(public fsFile: FsFileService, public fsUtil: FsUtil) {
     this.selected = this.fsFile.selected;
   }
 
   public ngOnInit() {
-    this.fsFile.initForElement(this.el.nativeElement);
+    this.fsFile.initForElement(this.fileInput);
   }
 }

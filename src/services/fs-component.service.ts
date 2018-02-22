@@ -132,7 +132,7 @@ export class FsFileService {
    * @param el
    */
   public initForElement(el: ElementRef) {
-    this.el = el;
+    this.el = el.nativeElement;
     this.onChanges();
   }
 
@@ -142,6 +142,9 @@ export class FsFileService {
   public onChanges() {
     FileAPI.event.on(this.el, 'change', (event) => {
       const files = FileAPI.getFiles(event);
+
+      // Clear input value
+      this.el.value = null;
 
       this.filterFiles(files).then((result: any) => {
         if (result.files && result.files.length > 0) {
