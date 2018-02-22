@@ -1,0 +1,44 @@
+Options/restrictions:
+<ul>
+  <li>Accept: <b>image/*</b></li>
+  <li>Multiple: <b>true</b></li>
+  <li>Reduce quality to: <b>0.1</b></li>
+  <li>Min size (KB): <b>100</b></li>
+  <li>Max size (KB): <b>3000</b></li>
+  <li>Max width: <b>2500</b></li>
+  <li>Max height: <b>2500</b></li>
+  <li>Preview: <b>200x200</b></li>
+</ul>
+<fs-file (selected)="selected($event)"
+         accept="image/*"
+         multiple="true"
+         imageQuality=".1"
+         minSize="100"
+         maxSize="3000"
+         imageMaxWidth="2500"
+         imageMaxHeight="2500"
+         preview="200"
+>
+  <button mat-raised-button color="primary">Select File</button>
+</fs-file>
+
+<fs-file-queue [files]="files">
+  <ng-template fs-file-queue-action placement="top-right" action="remove" tooltip="Remove">
+    <mat-icon>close</mat-icon>
+  </ng-template>
+  <ng-template fs-file-queue-action
+               placement="bottom-right"
+               (click)="enhance($event)"
+               tooltip="Enhance"
+               for-types="image/*">
+    <mat-icon>brush</mat-icon>
+  </ng-template>
+  <ng-template fs-file-queue-action placement="bottom-left" action="zoom" tooltip="Zoom" for-types="image/*">
+    <mat-icon>search</mat-icon>
+  </ng-template>
+</fs-file-queue>
+
+<fieldset *ngIf="filesJsonInfo.length > 0">
+  <legend>File</legend>
+  <pre>{{ filesJsonInfo | json }}</pre>
+</fieldset>

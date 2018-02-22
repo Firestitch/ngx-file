@@ -1,3 +1,4 @@
 export * from './fs-component.module';
-export * from './components/fs-component';
-export * from './services/fs-component.service';
+export * from './components';
+export * from './services';
+export * from './directives';
