@@ -59,4 +59,22 @@ export class FsFile {
     this.imageWidth = info.width;
     this.imageHeight = info.height;
   }
+
+  public toJson() {
+    return {
+      file: this.file,
+      name: this.name,
+      type: this.type,
+      size: this.size,
+      progress: this.progress,
+      preview: this.preview,
+      extrension: this.extension,
+      typeImage: this.typeImage,
+      imageWidth: this.imageWidth,
+      imageHeight: this.imageHeight,
+      previewWidth: this.previewWidth,
+      previewHeight: this.previewHeight,
+    }
+  }
+
 }

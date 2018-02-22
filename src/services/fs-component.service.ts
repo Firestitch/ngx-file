@@ -159,7 +159,13 @@ export class FsFileService {
    * @param files
    */
   private processFiles(files) {
-    files = files.map((f) => new FsFile(f));
+    files = files.map((f) => {
+      const file = new FsFile(f);
+      file.previewWidth = this._options.previewSizes.width;
+      file.previewHeight = this._options.previewSizes.height;
+
+      return file;
+    });
 
     this.selected.next(files);
 
@@ -199,8 +205,6 @@ export class FsFileService {
         FileAPI.readAsDataURL(img, (event) => {
           if (event.type === 'load') {
             file.preview = event.result;
-            file.previewWidth = this._options.previewSizes.width;
-            file.previewHeight = this._options.previewSizes.height;
             file.progress = false;
           }
         });

@@ -1,0 +1,9 @@
+<fs-file (selected)="selected($event)">
+  <button mat-raised-button color="primary">Select File</button>
+</fs-file>
+
+<fieldset *ngIf="file">
+  <legend>File</legend>
+  <pre>{{ file.toJson() | json }}</pre>
+</fieldset>
+

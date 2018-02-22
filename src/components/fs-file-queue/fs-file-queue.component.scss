@@ -1,6 +1,6 @@
 .queue {
   position: relative;
-  display: inline-block;
+  display: block;
 }
 
 .preview {
@@ -8,6 +8,7 @@
   position: relative;
   margin-right: 10px;
   border: 2px #a0a0a0 solid;
+  vertical-align: top;
 
   &:hover {
     .actions {

@@ -1,3 +1,20 @@
+.file-info-container {
+
+  .file-ext {
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    padding-top: 10px;
+  }
+
+  .file-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 5px;
+  }
+}
+
 .actions {
   position: absolute;
   display: none;
@@ -30,19 +47,24 @@
       bottom: 5px;
       right: 5px;
     }
+
+    &.mat-mini-fab {
+      width: 30px;
+      height: 30px;
+      line-height: 15px !important;
+
+      .mat-button-wrapper {
+        padding: 4px 0;
+        line-height: 15px !important;
+      }
+    }
   }
 }
 
 :host ::ng-deep {
-  .mat-icon {
-    font-weight: bolder;
-    color: #000;
-    background: #fff;
-    border-radius: 15px;
-    width: 20px;
-    height: 20px;
-    font-size: 20px;
-    padding: 4px;
+  .mat-button-wrapper {
+    padding: 0;
+    line-height: 15px !important;
   }
 
   .spinner {

@@ -1,6 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatIconModule, MatProgressSpinnerModule, MatTooltipModule} from '@angular/material';
+import {MatButtonModule, MatIconModule, MatProgressSpinnerModule, MatTooltipModule} from '@angular/material';
 
 import { FsCommonModule } from '@firestitch/common';
 
@@ -19,6 +19,7 @@ import { FsFileQueueActionDirective } from './directives';
     MatIconModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
+    MatButtonModule,
   ],
   exports: [
     FsFileComponent,

@@ -9,21 +9,20 @@
 
 <!-- Non image container -->
 <ng-template #nonImage>
-  <ng-container [ngSwitch]="file.extension">
-    <ng-template [ngSwitchCase]="'pdf'">
-      <img src="/assets/pdf.png" [width]="previewWidth" [height]="previewHeight">
-    </ng-template>
-  </ng-container>
+  <div class="file-info-container" [style.width.px]="previewWidth" [style.height.px]="previewHeight">
+    <div class="file-ext">{{file.extension}}</div>
+    <div class="file-name" [matTooltip]="file.name">{{file.name}}</div>
+  </div>
   <mat-spinner class="spinner" *ngIf="file.progress" [diameter]="previewWidth/2"></mat-spinner>
 </ng-template>
 
 <!-- Actions -->
 <div class="actions">
-  <span class="action" *ngFor="let action of filteredActions"
-        [ngClass]="getActionClasses(action)"
-        [matTooltip]="action.tooltip"
-        (click)="callAction(action)"
-  >
+  <button class="action" mat-mini-fab color="primary"
+          *ngFor="let action of filteredActions"
+          [ngClass]="getActionClasses(action)"
+          [matTooltip]="action.tooltip"
+          (click)="callAction(action)">
     <ng-template [ngTemplateOutlet]="actionsTemplate[action.index]"></ng-template>
-  </span>
+  </button>
 </div>

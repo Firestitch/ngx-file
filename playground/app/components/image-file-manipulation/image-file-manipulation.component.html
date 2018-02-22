@@ -1,15 +1,26 @@
+Options/restrictions:
+<ul>
+  <li>Accept: <b>image/*</b></li>
+  <li>Multiple: <b>true</b></li>
+  <li>Reduce quality to: <b>0.1</b></li>
+  <li>Min size (KB): <b>100</b></li>
+  <li>Max size (KB): <b>3000</b></li>
+  <li>Max width: <b>2500</b></li>
+  <li>Max height: <b>2500</b></li>
+  <li>Preview: <b>200x200</b></li>
+</ul>
 <fs-file (selected)="selected($event)"
-         accept="image/*, application/pdf"
+         accept="image/*"
          multiple="true"
          imageQuality=".1"
-         preview="100"
+         minSize="100"
+         maxSize="3000"
+         imageMaxWidth="2500"
+         imageMaxHeight="2500"
+         preview="200"
 >
-  <p>Tap for upload</p>
+  <button mat-raised-button color="primary">Select File</button>
 </fs-file>
-<!--minSize="100"
-         maxSize="1500"
-         imageMaxWidth="1000"
-         imageMaxHeight="1000"-->
 
 <fs-file-queue [files]="files">
   <ng-template fs-file-queue-action placement="top-right" action="remove" tooltip="Remove">
@@ -26,3 +37,8 @@
     <mat-icon>search</mat-icon>
   </ng-template>
 </fs-file-queue>
+
+<fieldset *ngIf="filesJsonInfo.length > 0">
+  <legend>File</legend>
+  <pre>{{ filesJsonInfo | json }}</pre>
+</fieldset>
