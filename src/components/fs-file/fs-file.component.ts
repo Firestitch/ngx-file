@@ -60,11 +60,6 @@ export class FsFileComponent implements OnInit {
     this.fsFile.disabled = value;
   }
 
-  @Input()
-  set preview(value) {
-    this.fsFile.preview = value;
-  }
-
   @Input() imageFixOrientation = true;
 
   @Output('selected') public selected: EventEmitter<any>;

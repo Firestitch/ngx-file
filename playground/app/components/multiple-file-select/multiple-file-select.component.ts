@@ -11,6 +11,5 @@ export class MultipleFileSelectComponent {
 
   public selected(files) {
     this.files.push(...files);
-    this.filesJsonInfo.push(...files.map((file) => file.toJson()));
   }
 }

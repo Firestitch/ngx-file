@@ -11,7 +11,6 @@ export class ImageFileManipulationComponent {
 
   public selected(files) {
     this.files.push(...files);
-    this.filesJsonInfo.push(...files.map((file) => file.toJson()));
   }
 
   public enhance(file) {

@@ -7,8 +7,13 @@
   display: inline-block;
   position: relative;
   margin-right: 10px;
-  border: 2px #a0a0a0 solid;
+  border: 1px #DDD solid;
   vertical-align: top;
+  border-radius: 3px;
+
+  &:last-child {
+    margin-right: 0;
+  }
 
   &:hover {
     .actions {
@@ -18,5 +23,6 @@
 
   img {
     display: block;
+    border-radius: 3px;
   }
 }

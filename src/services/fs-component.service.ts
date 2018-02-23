@@ -25,7 +25,7 @@ export class FsFileService {
     disabled: false,
     multiple: false,
     preview: false,
-    previewSizes: { width: null, height: null },
+    previewSizes: { width: 150, height: 150 },
     accept: [],
     minSize: void 0,
     maxSize: void 0,
@@ -104,25 +104,23 @@ export class FsFileService {
   }
 
   set preview(value) {
-    if (typeof(value) === 'boolean' || value === 'true') {
-      this._options.preview = value;
-      this._options.previewSizes.width = 100;
-      this._options.previewSizes.height = 100;
-    } else if (typeof value == 'string' || value instanceof String) {
-      const [width, height] = value.split('x').map((val) => +val);
-      this._options.preview = true;
 
-      if (width && height) {
-        this._options.previewSizes.width = width;
-        this._options.previewSizes.height = height;
-      } else if (width && !height) {
-        this._options.previewSizes.width = width;
-        this._options.previewSizes.height = width;
-      } else if (height && !width) {
-        this._options.previewSizes.width = height;
-        this._options.previewSizes.height = height;
-      } else {
-        this._options.preview = false;
+    this._options.preview = !!value && value !== 'false';
+
+    if (this._options.preview) {
+      if (typeof value == 'string' || value instanceof String) {
+        const [width, height] = value.split('x').map((val) => +val);
+
+        if (width && height) {
+          this._options.previewSizes.width = width;
+          this._options.previewSizes.height = height;
+        } else if (width && !height) {
+          this._options.previewSizes.width = width;
+          this._options.previewSizes.height = width;
+        } else if (height && !width) {
+          this._options.previewSizes.width = height;
+          this._options.previewSizes.height = height;
+        }
       }
     }
   }
@@ -159,12 +157,9 @@ export class FsFileService {
    * @param files
    */
   private processFiles(files) {
-    files = files.map((f) => {
-      const file = new FsFile(f);
-      file.previewWidth = this._options.previewSizes.width;
-      file.previewHeight = this._options.previewSizes.height;
 
-      return file;
+    files = files.map((f) => {
+      return new FsFile(f);
     });
 
     this.selected.next(files);
@@ -172,7 +167,8 @@ export class FsFileService {
     const processedFiles = [];
 
     files.forEach((file: FsFile) => {
-      if (/^image/.test(file.type)) {
+
+      if (file.typeImage) {
         const processorsIter = processors(Object.keys(PROCESSORS));
         const resFilePromise = new Promise((resolve, reject) => {
           this.applyProcessors(file, processorsIter, resolve, reject);
@@ -182,33 +178,6 @@ export class FsFileService {
         processedFiles.push(file);
       }
     });
-
-    Promise.all(processedFiles).then((resFiles: FsFile[]) => {
-      if (this._options.preview) {
-        resFiles
-          .filter((file) => file.typeImage)
-          .forEach((file) => {
-            this.generateFilePreview(file);
-        })
-      }
-    })
-  }
-
-  /**
-   * Generate preview images for file
-   * @param {FsFile} file
-   */
-  private generateFilePreview(file: FsFile) {
-    FileAPI.Image(file.file)
-      .preview(this._options.previewSizes.width, this._options.previewSizes.height)
-      .get((err, img) => {
-        FileAPI.readAsDataURL(img, (event) => {
-          if (event.type === 'load') {
-            file.preview = event.result;
-            file.progress = false;
-          }
-        });
-      });
   }
 
   /**
@@ -220,7 +189,7 @@ export class FsFileService {
     return new Promise((resolve) => {
       FileAPI.filterFiles(rawFiles, (file, info) => {
         let sizeRule = void 0;
-        if (/^image/.test(file.type)) {
+        if (file.typeImage) {
           sizeRule = this.checkResolutionRule(info);
         } else {
           sizeRule = true;

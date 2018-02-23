@@ -8,27 +8,27 @@ import {
   TemplateRef,
   ViewEncapsulation,
 } from '@angular/core';
-import {FsFileQueueActionDirective} from '../../directives';
+import { FsFilePreviewActionDirective } from '../../directives';
 
 @Component({
-  selector: 'fs-file-queue',
-  templateUrl: 'fs-file-queue.component.html',
-  styleUrls: [ 'fs-file-queue.component.scss' ],
+  selector: 'fs-file-previews',
+  templateUrl: 'fs-file-previews.component.html',
+  styleUrls: [ 'fs-file-previews.component.scss' ],
   encapsulation: ViewEncapsulation.None
 })
-export class FsFileQueueComponent implements OnInit {
+export class FsFilePreviewsComponent implements OnInit {
 
   @Input() public files;
-  @Input() public previewWidth;
-  @Input() public previewHeight;
+  @Input() public previewWidth = 150;
+  @Input() public previewHeight = 150;
 
   @HostBinding('class.queue') queue = true;
 
   public actions;
   public actionsTemplate;
 
-  @ContentChildren(FsFileQueueActionDirective)
-  private set actionsParams(val: QueryList<FsFileQueueActionDirective>) {
+  @ContentChildren(FsFilePreviewActionDirective)
+  private set actionsParams(val: QueryList<FsFilePreviewActionDirective>) {
     this.actions = val.toArray().map((action, index) => {
       const newAction = Object.assign({}, action);
       newAction.index = index;
@@ -40,8 +40,8 @@ export class FsFileQueueComponent implements OnInit {
     });
   }
 
-  @ContentChildren(FsFileQueueActionDirective, {read: TemplateRef})
-  private set actionsTemplateRefs(val: QueryList<FsFileQueueActionDirective>) {
+  @ContentChildren(FsFilePreviewActionDirective, {read: TemplateRef})
+  private set actionsTemplateRefs(val: QueryList<FsFilePreviewActionDirective>) {
     this.actionsTemplate = val.toArray();
   }
 

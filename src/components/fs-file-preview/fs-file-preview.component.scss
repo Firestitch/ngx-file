@@ -1,0 +1,97 @@
+
+.file-ext {
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 15px 0;
+  font-size: 25px;
+}
+
+.file-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 5px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.actions {
+  position: absolute;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+
+  .action {
+
+    position: absolute;
+    cursor: pointer;
+
+    &.top-left {
+      top: 5%;
+      right: 5%;
+    }
+
+    &.top-right {
+      top: 5%;
+      right: 5%;
+    }
+
+    &.bottom-left {
+      bottom: 5%;
+      left: 5%;
+    }
+
+    &.bottom-right {
+      bottom: 5%;
+      right: 5%;
+    }
+
+    &.mat-mini-fab {
+      width: 22%;
+      height: 22%;
+      min-width: 30px;
+      min-height: 30px;
+      max-width: 42px;
+      max-height: 42px;
+      line-height: 15px !important;
+
+      .mat-button-wrapper {
+        padding: 4px 0;
+        line-height: 15px !important;
+      }
+    }
+  }
+}
+
+:host {
+  &:hover .file-name {
+    overflow: visible;
+    white-space: normal;
+  }
+}
+
+:host ::ng-deep {
+  .mat-button-wrapper {
+    padding: 0;
+    line-height: 15px !important;
+  }
+
+  .spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -25%;
+    margin-top: -25%;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .actions {
+      display: block;
+      background: none;
+  }
+}

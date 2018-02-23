@@ -5,39 +5,37 @@ import {
   Output,
   OnInit,
 } from '@angular/core';
-
-import { FsFile } from '../../../models/fs-file';
+import * as FileAPI from 'fileapi';
+import { FsFile } from '../../models/fs-file';
 
 @Component({
-  selector: 'fs-file-queue-preview',
-  templateUrl: 'fs-file-queue-preview.component.html',
-  styleUrls: [ 'fs-file-queue-preview.component.scss' ]
+  selector: 'fs-file-preview',
+  templateUrl: 'fs-file-preview.component.html',
+  styleUrls: [ 'fs-file-preview.component.scss' ]
 })
-export class FsFileQueuePreviewComponent implements OnInit {
+export class FsFilePreviewComponent implements OnInit {
 
+  public file: FsFile;
+  public preview: string;
   @Input() public actions;
   @Input() public actionsTemplate;
-  @Input() public file: FsFile;
-  @Input() public previewWidth;
-  @Input() public previewHeight;
+  @Input() public previewWidth = 150;
+  @Input() public previewHeight = 150;
+  @Input('file') set _file(file: FsFile) {
+    this.file = file;
+    this.generateFilePreview(file);
+  }
 
   @Output() public deleted = new EventEmitter();
 
   public filteredActions = [];
 
   constructor() {
+
   }
 
   public ngOnInit() {
     this.cleanActions();
-
-    if (!this.previewWidth) {
-      this.previewWidth = this.file.previewWidth || 100;
-    }
-
-    if (!this.previewHeight) {
-      this.previewHeight = this.file.previewHeight || 100;
-    }
   }
 
   public getActionClasses(action) {
@@ -59,6 +57,27 @@ export class FsFileQueuePreviewComponent implements OnInit {
         }
       }
     }
+  }
+
+  /**
+   * Generate preview images for file
+   * @param {FsFile} file
+   */
+  private generateFilePreview(file: FsFile) {
+    if (!this.file.typeImage) {
+      return;
+    }
+    file.progress = true;
+    FileAPI.Image(file.file)
+      .preview(this.previewWidth, this.previewHeight)
+      .get((err, img) => {
+        FileAPI.readAsDataURL(img, (event) => {
+          if (event.type === 'load') {
+            this.preview = event.result;
+            file.progress = false;
+          }
+        });
+      });
   }
 
   private cleanActions() {

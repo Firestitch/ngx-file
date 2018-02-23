@@ -6,10 +6,10 @@ import { FsCommonModule } from '@firestitch/common';
 
 import {
   FsFileComponent,
-  FsFileQueueComponent,
-  FsFileQueuePreviewComponent
+  FsFilePreviewsComponent,
+  FsFilePreviewComponent
 } from './components';
-import { FsFileQueueActionDirective } from './directives';
+import { FsFilePreviewActionDirective } from './directives';
 
 
 @NgModule({
@@ -23,17 +23,16 @@ import { FsFileQueueActionDirective } from './directives';
   ],
   exports: [
     FsFileComponent,
-    FsFileQueueComponent,
-    FsFileQueueActionDirective,
+    FsFilePreviewsComponent,
+    FsFilePreviewActionDirective,
   ],
   entryComponents: [
   ],
   declarations: [
     FsFileComponent,
-    FsFileQueueComponent,
-    FsFileQueuePreviewComponent,
-
-    FsFileQueueActionDirective,
+    FsFilePreviewsComponent,
+    FsFilePreviewComponent,
+    FsFilePreviewActionDirective
   ],
   providers: [
   ],

@@ -1,1 +1,1 @@
-export * from './fs-file-queue-action.directive';
+export * from './fs-file-preview-action.directive';

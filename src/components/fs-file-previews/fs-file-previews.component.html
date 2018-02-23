@@ -1,4 +1,4 @@
-<fs-file-queue-preview
+<fs-file-preview
   *ngFor="let file of files"
   [file]="file"
   [actions]="actions"
@@ -7,4 +7,4 @@
   [previewHeight]="previewHeight"
   (deleted)="removeFile($event)"
   class="preview">
-</fs-file-queue-preview>
+</fs-file-preview>
