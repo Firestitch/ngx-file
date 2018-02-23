@@ -1312,10 +1312,73 @@ webpackEmptyAsyncContext.id = "../tools lazy recursive";
 
 /***/ }),
 
+/***/ "../tools/components/examples/examples.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"example-title\">{{title}}</div>\n<mat-tab-group>\n  <mat-tab label=\"Examples\">\n      <div class=\"examples-body\">\n        <ng-content></ng-content>\n      </div>\n  </mat-tab>\n  <mat-tab label=\"Docs\" *ngIf=\"loaded\">\n    <div class=\"iframe-container\">\n      <iframe class=\"iframe-example ng-star-inserted\" [src]=\"submoduleUrl\"></iframe>\n    </div>\n  </mat-tab>\n</mat-tab-group>\n"
+
+/***/ }),
+
+/***/ "../tools/components/examples/examples.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../node_modules/@angular/core/esm2015/core.js");
+var platform_browser_1 = __webpack_require__("../node_modules/@angular/platform-browser/esm2015/platform-browser.js");
+var FsExamplesComponent = (function () {
+    function FsExamplesComponent(sanitizer) {
+        this.sanitizer = sanitizer;
+        this.loaded = false;
+    }
+    FsExamplesComponent.prototype.ngOnInit = function () {
+        this._submoduleUrl = this.sanitizer
+            .bypassSecurityTrustResourceUrl("https://" + this.submoduleName + ".components.firestitch.com/docs");
+        this.loaded = true;
+    };
+    Object.defineProperty(FsExamplesComponent.prototype, "submoduleUrl", {
+        get: function () {
+            return this._submoduleUrl;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], FsExamplesComponent.prototype, "title", void 0);
+    __decorate([
+        core_1.Input('name'),
+        __metadata("design:type", String)
+    ], FsExamplesComponent.prototype, "submoduleName", void 0);
+    FsExamplesComponent = __decorate([
+        core_1.Component({
+            selector: 'fs-examples',
+            template: __webpack_require__("../tools/components/examples/examples.component.html")
+        }),
+        __metadata("design:paramtypes", [platform_browser_1.DomSanitizer])
+    ], FsExamplesComponent);
+    return FsExamplesComponent;
+}());
+exports.FsExamplesComponent = FsExamplesComponent;
+
+
+/***/ }),
+
 /***/ "./app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Files</h1>\n<div class=\"example\">\n    <fs-example title=\"Single File Select\" componentName=\"single-file-select\">\n        <single-file-select></single-file-select>\n    </fs-example>\n</div>\n\n<div class=\"example\">\n  <fs-example title=\"Multiple File Select\" componentName=\"multiple-file-select\">\n    <multiple-file-select></multiple-file-select>\n  </fs-example>\n</div>\n\n<div class=\"example\">\n  <fs-example title=\"Image File Manipulation\" componentName=\"multiple-file-select\">\n    <image-file-manipulation></image-file-manipulation>\n  </fs-example>\n</div>\n"
+module.exports = "<fs-examples title=\"Files\" name=\"file\">\n  <div class=\"example\">\n    <fs-example title=\"Single File Select\" componentName=\"single-file-select\">\n      <single-file-select></single-file-select>\n    </fs-example>\n  </div>\n\n  <div class=\"example\">\n    <fs-example title=\"Multiple File Select\" componentName=\"multiple-file-select\">\n      <multiple-file-select></multiple-file-select>\n    </fs-example>\n  </div>\n\n  <div class=\"example\">\n    <fs-example title=\"Image File Manipulation\" componentName=\"multiple-file-select\">\n      <image-file-manipulation></image-file-manipulation>\n    </fs-example>\n  </div>\n</fs-examples>\n\n\n\n"
 
 /***/ }),
 
@@ -1719,6 +1782,7 @@ var animations_1 = __webpack_require__("../node_modules/@angular/platform-browse
 var material_module_1 = __webpack_require__("./app/material.module.ts");
 var example_1 = __webpack_require__("../node_modules/@firestitch/example/package/index.js");
 var components_1 = __webpack_require__("./app/components/index.ts");
+var examples_component_1 = __webpack_require__("../tools/components/examples/examples.component.ts");
 var PlaygroundModule = (function () {
     function PlaygroundModule() {
     }
@@ -1735,6 +1799,7 @@ var PlaygroundModule = (function () {
             ],
             entryComponents: [],
             declarations: [
+                examples_component_1.FsExamplesComponent,
                 app_component_1.AppComponent,
                 components_1.SingleFileSelectComponent,
                 components_1.MultipleFileSelectComponent,

@@ -14,6 +14,8 @@ import {
   ImageFileManipulationComponent,
 } from './app/components';
 
+import { FsExamplesComponent } from '../tools/components/examples/examples.component';
+
 @NgModule({
   bootstrap: [ AppComponent ],
   imports: [
@@ -27,6 +29,8 @@ import {
   entryComponents: [
   ],
   declarations: [
+    FsExamplesComponent,
+
     AppComponent,
     SingleFileSelectComponent,
     MultipleFileSelectComponent,
