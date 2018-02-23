@@ -9,8 +9,7 @@ export class MultipleFileSelectComponent {
   public files = [];
   public filesJsonInfo = [];
 
-  public selected(files) {
+  public select(files) {
     this.files.push(...files);
-    this.filesJsonInfo.push(...files.map((file) => file.toJson()));
   }
 }

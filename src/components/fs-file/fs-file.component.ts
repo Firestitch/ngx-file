@@ -62,14 +62,14 @@ export class FsFileComponent implements OnInit {
 
   @Input() imageFixOrientation = true;
 
-  @Output('selected') public selected: EventEmitter<any>;
+  @Output('select') public select: EventEmitter<any>;
 
   @ViewChild('fileInput') public fileInput: any;
 
   public uniqId = this.fsUtil.guid();
 
   constructor(public fsFile: FsFileService, public fsUtil: FsUtil) {
-    this.selected = this.fsFile.selected;
+    this.select = this.fsFile.select;
   }
 
   public ngOnInit() {

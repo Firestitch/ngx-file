@@ -19,7 +19,7 @@ function* processors(list) {
 export class FsFileService {
 
   public el: any;
-  public selected  = new EventEmitter();
+  public select  = new EventEmitter();
 
   private _options = {
     disabled: false,
@@ -162,7 +162,7 @@ export class FsFileService {
       return new FsFile(f);
     });
 
-    this.selected.next(files);
+    this.select.next(this._options.multiple ? files : files[0]);
 
     const processedFiles = [];
 

@@ -7,7 +7,8 @@ import { FsCommonModule } from '@firestitch/common';
 import {
   FsFileComponent,
   FsFilePreviewsComponent,
-  FsFilePreviewComponent
+  FsFilePreviewComponent,
+  FsFilePickerComponent
 } from './components';
 import { FsFilePreviewActionDirective } from './directives';
 
@@ -25,6 +26,7 @@ import { FsFilePreviewActionDirective } from './directives';
     FsFileComponent,
     FsFilePreviewsComponent,
     FsFilePreviewActionDirective,
+    FsFilePickerComponent
   ],
   entryComponents: [
   ],
@@ -32,7 +34,8 @@ import { FsFilePreviewActionDirective } from './directives';
     FsFileComponent,
     FsFilePreviewsComponent,
     FsFilePreviewComponent,
-    FsFilePreviewActionDirective
+    FsFilePreviewActionDirective,
+    FsFilePickerComponent
   ],
   providers: [
   ],

@@ -26,7 +26,7 @@ export class FsFilePreviewComponent implements OnInit {
     this.generateFilePreview(file);
   }
 
-  @Output() public deleted = new EventEmitter();
+  @Output() public remove = new EventEmitter();
 
   public filteredActions = [];
 
@@ -49,7 +49,7 @@ export class FsFilePreviewComponent implements OnInit {
   public callAction(action) {
     switch (action.action) {
       case 'remove': {
-        this.deleted.emit(this.file);
+        this.remove.emit(this.file);
       } break;
       default: {
         if (action.click) {

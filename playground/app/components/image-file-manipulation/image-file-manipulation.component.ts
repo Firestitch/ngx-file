@@ -9,7 +9,7 @@ export class ImageFileManipulationComponent {
   public files = [];
   public filesJsonInfo = [];
 
-  public selected(files) {
+  public select(files) {
     this.files.push(...files);
   }
 

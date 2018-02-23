@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class SingleFileSelectComponent {
   public file = void 0;
 
-  public selected(files) {
-    this.file = files[0];
+  public select(file) {
+    this.file = file;
   }
 }

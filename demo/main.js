@@ -1,6 +1,6 @@
 webpackJsonp([2],{
 
-/***/ "../node_modules/css-loader/index.js?{\"sourceMap\":true}!../node_modules/postcss-loader/lib/index.js?{\"sourceMap\":true}!../node_modules/resolve-url-loader/index.js?{\"sourceMap\":true,\"absolute\":false,\"fail\":false,\"silent\":false,\"keepQuery\":false,\"attempts\":0,\"debug\":false,\"root\":null,\"includeRoot\":false}!../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../src/components/fs-file-queue/fs-file-queue-preview/fs-file-queue-preview.component.scss":
+/***/ "../node_modules/css-loader/index.js??ref--2-1!../node_modules/postcss-loader/lib/index.js??ref--2-2!../node_modules/resolve-url-loader/index.js??ref--2-3!./app/components/file-picker/file-picker.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")(true);
@@ -8,14 +8,14 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, ".file-info-container .file-ext {\n  font-weight: bold;\n  text-align: center;\n  text-transform: uppercase;\n  padding-top: 10px;\n}\n\n.file-info-container .file-name {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  padding: 5px;\n}\n\n.actions {\n  position: absolute;\n  display: none;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n  background: rgba(119, 119, 119, .5);\n}\n\n.actions .action {\n  position: absolute;\n  cursor: pointer;\n}\n\n.actions .action.top-left {\n  top: 5px;\n  left: 5px;\n}\n\n.actions .action.top-right {\n  top: 5px;\n  right: 5px;\n}\n\n.actions .action.bottom-left {\n  bottom: 5px;\n  left: 5px;\n}\n\n.actions .action.bottom-right {\n  bottom: 5px;\n  right: 5px;\n}\n\n.actions .action.mat-mini-fab {\n  width: 30px;\n  height: 30px;\n  line-height: 15px !important;\n}\n\n.actions .action.mat-mini-fab .mat-button-wrapper {\n  padding: 4px 0;\n  line-height: 15px !important;\n}\n\n:host ::ng-deep .mat-button-wrapper {\n  padding: 0;\n  line-height: 15px !important;\n}\n\n:host ::ng-deep .spinner {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin-left: -25%;\n  margin-top: -25%;\n}\n\n", "", {"version":3,"sources":["/Users/Basters/dev/firestitch/fs-file/src/components/fs-file-queue/fs-file-queue-preview/src/components/fs-file-queue/fs-file-queue-preview/fs-file-queue-preview.component.scss","/Users/Basters/dev/firestitch/fs-file/fs-file-queue-preview.component.scss"],"names":[],"mappings":"AAAA;EAGI,kBAAA;EACA,mBAAA;EACA,0BAAA;EACA,kBAAA;CCDH;;ADIC;EACE,oBAAA;EACA,iBAAA;EACA,wBAAA;EACA,aAAA;CCDH;;ADKD;EACE,mBAAA;EACA,cAAA;EACA,YAAA;EACA,aAAA;EACA,OAAA;EACA,QAAA;EACA,oCAAA;CCFD;;ADIC;EACE,mBAAA;EACA,gBAAA;CCDH;;ADDC;EAKI,SAAA;EACA,UAAA;CCAL;;ADfD;EAmBM,SAAA;EACA,WAAA;CCAL;;ADpBD;EAwBM,YAAA;EACA,UAAA;CCAL;;ADhBC;EAoBI,YAAA;EACA,WAAA;CCAL;;ADrBC;EAyBI,YAAA;EACA,aAAA;EACA,6BAAA;CCAL;;ADpCD;EAuCQ,eAAA;EACA,6BAAA;CCCP;;ADKD;EAEI,WAAA;EACA,6BAAA;CCHH;;ADMC;EACE,mBAAA;EACA,SAAA;EACA,UAAA;EACA,kBAAA;EACA,iBAAA;CCHH","file":"fs-file-queue-preview.component.scss","sourcesContent":[".file-info-container {\n\n  .file-ext {\n    font-weight: bold;\n    text-align: center;\n    text-transform: uppercase;\n    padding-top: 10px;\n  }\n\n  .file-name {\n    white-space: nowrap;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    padding: 5px;\n  }\n}\n\n.actions {\n  position: absolute;\n  display: none;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n  background: rgba(119, 119, 119, 0.5);\n\n  .action {\n    position: absolute;\n    cursor: pointer;\n\n    &.top-left {\n      top: 5px;\n      left: 5px;\n    }\n\n    &.top-right {\n      top: 5px;\n      right: 5px;\n    }\n\n    &.bottom-left {\n      bottom: 5px;\n      left: 5px;\n    }\n\n    &.bottom-right {\n      bottom: 5px;\n      right: 5px;\n    }\n\n    &.mat-mini-fab {\n      width: 30px;\n      height: 30px;\n      line-height: 15px !important;\n\n      .mat-button-wrapper {\n        padding: 4px 0;\n        line-height: 15px !important;\n      }\n    }\n  }\n}\n\n:host ::ng-deep {\n  .mat-button-wrapper {\n    padding: 0;\n    line-height: 15px !important;\n  }\n\n  .spinner {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    margin-left: -25%;\n    margin-top: -25%;\n  }\n}\n",".file-info-container .file-ext {\n  font-weight: bold;\n  text-align: center;\n  text-transform: uppercase;\n  padding-top: 10px;\n}\n\n.file-info-container .file-name {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  padding: 5px;\n}\n\n.actions {\n  position: absolute;\n  display: none;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n  background: rgba(119, 119, 119, 0.5);\n}\n\n.actions .action {\n  position: absolute;\n  cursor: pointer;\n}\n\n.actions .action.top-left {\n  top: 5px;\n  left: 5px;\n}\n\n.actions .action.top-right {\n  top: 5px;\n  right: 5px;\n}\n\n.actions .action.bottom-left {\n  bottom: 5px;\n  left: 5px;\n}\n\n.actions .action.bottom-right {\n  bottom: 5px;\n  right: 5px;\n}\n\n.actions .action.mat-mini-fab {\n  width: 30px;\n  height: 30px;\n  line-height: 15px !important;\n}\n\n.actions .action.mat-mini-fab .mat-button-wrapper {\n  padding: 4px 0;\n  line-height: 15px !important;\n}\n\n:host ::ng-deep .mat-button-wrapper {\n  padding: 0;\n  line-height: 15px !important;\n}\n\n:host ::ng-deep .spinner {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin-left: -25%;\n  margin-top: -25%;\n}\n\n"],"sourceRoot":""}]);
+exports.push([module.i, ".queue {\n  margin-top: 10px;\n}", "", {"version":3,"sources":["C:/Projects/fs-file/playground/app/components/file-picker/C:/Projects/fs-file/file-picker.component.css"],"names":[],"mappings":"AAAA;EACE,iBAAA;CACD","file":"file-picker.component.css","sourcesContent":[".queue {\r\n  margin-top: 10px;\r\n}\r\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
 
-/***/ "../node_modules/css-loader/index.js?{\"sourceMap\":true}!../node_modules/postcss-loader/lib/index.js?{\"sourceMap\":true}!../node_modules/resolve-url-loader/index.js?{\"sourceMap\":true}!../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../src/components/fs-file-queue/fs-file-queue.component.scss":
+/***/ "../node_modules/css-loader/index.js??ref--2-1!../node_modules/postcss-loader/lib/index.js??ref--2-2!../node_modules/resolve-url-loader/index.js??ref--2-3!./app/components/image-file-manipulation/image-file-manipulation.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")(true);
@@ -23,14 +23,14 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, ".queue {\n  position: relative;\n  display: block;\n}\n\n.preview {\n  display: inline-block;\n  position: relative;\n  margin-right: 10px;\n  border: 2px #a0a0a0 solid;\n  vertical-align: top;\n}\n\n.preview:hover .actions {\n  display: block;\n}\n\n.preview img {\n  display: block;\n}\n\n", "", {"version":3,"sources":["/Users/Basters/dev/firestitch/fs-file/src/components/fs-file-queue/src/components/fs-file-queue/fs-file-queue.component.scss","/Users/Basters/dev/firestitch/fs-file/fs-file-queue.component.scss"],"names":[],"mappings":"AAAA;EACE,mBAAA;EACA,eAAA;CCCD;;ADED;EACE,sBAAA;EACA,mBAAA;EACA,mBAAA;EACA,0BAAA;EACA,oBAAA;CCCD;;ADND;EASM,eAAA;CCCL;;ADGC;EACE,eAAA;CCAH","file":"fs-file-queue.component.scss","sourcesContent":[".queue {\n  position: relative;\n  display: block;\n}\n\n.preview {\n  display: inline-block;\n  position: relative;\n  margin-right: 10px;\n  border: 2px #a0a0a0 solid;\n  vertical-align: top;\n\n  &:hover {\n    .actions {\n      display: block;\n    }\n  }\n\n  img {\n    display: block;\n  }\n}\n",".queue {\n  position: relative;\n  display: block;\n}\n\n.preview {\n  display: inline-block;\n  position: relative;\n  margin-right: 10px;\n  border: 2px #a0a0a0 solid;\n  vertical-align: top;\n}\n\n.preview:hover .actions {\n  display: block;\n}\n\n.preview img {\n  display: block;\n}\n\n"],"sourceRoot":""}]);
+exports.push([module.i, ".queue {\n  margin-top: 10px;\n}", "", {"version":3,"sources":["C:/Projects/fs-file/playground/app/components/image-file-manipulation/C:/Projects/fs-file/image-file-manipulation.component.css"],"names":[],"mappings":"AAAA;EACE,iBAAA;CACD","file":"image-file-manipulation.component.css","sourcesContent":[".queue {\r\n  margin-top: 10px;\r\n}\r\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
 
-/***/ "../node_modules/css-loader/index.js?{\"sourceMap\":true}!../node_modules/postcss-loader/lib/index.js?{\"sourceMap\":true}!../node_modules/resolve-url-loader/index.js?{\"sourceMap\":true}!./app/components/image-file-manipulation/image-file-manipulation.component.css":
+/***/ "../node_modules/css-loader/index.js??ref--2-1!../node_modules/postcss-loader/lib/index.js??ref--2-2!../node_modules/resolve-url-loader/index.js??ref--2-3!./app/components/multiple-file-select/multiple-file-select.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")(true);
@@ -38,29 +38,14 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, ".queue {\n  margin-top: 10px;\n}", "", {"version":3,"sources":["/Users/Basters/dev/firestitch/fs-file/image-file-manipulation.component.css"],"names":[],"mappings":"AAAA;EACE,iBAAA;CACD","file":"image-file-manipulation.component.css","sourcesContent":[".queue {\n  margin-top: 10px;\n}\n"],"sourceRoot":""}]);
+exports.push([module.i, ".queue {\n  margin-top: 15px;\n}", "", {"version":3,"sources":["C:/Projects/fs-file/playground/app/components/multiple-file-select/C:/Projects/fs-file/multiple-file-select.component.css"],"names":[],"mappings":"AAAA;EACE,iBAAA;CACD","file":"multiple-file-select.component.css","sourcesContent":[".queue {\r\n  margin-top: 15px;\r\n}\r\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
 
-/***/ "../node_modules/css-loader/index.js?{\"sourceMap\":true}!../node_modules/postcss-loader/lib/index.js?{\"sourceMap\":true}!../node_modules/resolve-url-loader/index.js?{\"sourceMap\":true}!./app/components/multiple-file-select/multiple-file-select.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")(true);
-// imports
-
-
-// module
-exports.push([module.i, ".queue {\n  margin-top: 15px;\n}", "", {"version":3,"sources":["/Users/Basters/dev/firestitch/fs-file/multiple-file-select.component.css"],"names":[],"mappings":"AAAA;EACE,iBAAA;CACD","file":"multiple-file-select.component.css","sourcesContent":[".queue {\n  margin-top: 15px;\n}\n"],"sourceRoot":""}]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "../node_modules/css-loader/index.js?{\"sourceMap\":true}!../node_modules/postcss-loader/lib/index.js?{\"sourceMap\":true}!../node_modules/resolve-url-loader/index.js?{\"sourceMap\":true}!./app/components/single-file-select/single-file-select.component.css":
+/***/ "../node_modules/css-loader/index.js??ref--2-1!../node_modules/postcss-loader/lib/index.js??ref--2-2!../node_modules/resolve-url-loader/index.js??ref--2-3!./app/components/single-file-select/single-file-select.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")(true);
@@ -75,18 +60,63 @@ exports.push([module.i, "", "", {"version":3,"sources":[],"names":[],"mappings":
 
 /***/ }),
 
-/***/ "../src/components/fs-file-queue/fs-file-queue-preview/fs-file-queue-preview.component.html":
-/***/ (function(module, exports) {
+/***/ "../node_modules/css-loader/index.js??ref--3-1!../node_modules/postcss-loader/lib/index.js??ref--3-2!../node_modules/resolve-url-loader/index.js??ref--3-3!../node_modules/sass-loader/lib/loader.js??ref--3-4!../src/components/fs-file-picker/fs-file-picker.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = "<!-- Image container -->\n<ng-container *ngIf=\"file.typeImage; else nonImage\">\n  <img [src]=\"file.preview\" *ngIf=\"file.preview && !file.progress && file.typeImage; else dummyImage\">\n  <ng-template #dummyImage>\n    <img src=\"/assets/image.png\" [width]=\"previewWidth\" [height]=\"previewHeight\">\n    <mat-spinner class=\"spinner\" *ngIf=\"file.progress\" [diameter]=\"previewWidth/2\"></mat-spinner>\n  </ng-template>\n</ng-container>\n\n<!-- Non image container -->\n<ng-template #nonImage>\n  <div class=\"file-info-container\" [style.width.px]=\"previewWidth\" [style.height.px]=\"previewHeight\">\n    <div class=\"file-ext\">{{file.extension}}</div>\n    <div class=\"file-name\" [matTooltip]=\"file.name\">{{file.name}}</div>\n  </div>\n  <mat-spinner class=\"spinner\" *ngIf=\"file.progress\" [diameter]=\"previewWidth/2\"></mat-spinner>\n</ng-template>\n\n<!-- Actions -->\n<div class=\"actions\">\n  <button class=\"action\" mat-mini-fab color=\"primary\"\n          *ngFor=\"let action of filteredActions\"\n          [ngClass]=\"getActionClasses(action)\"\n          [matTooltip]=\"action.tooltip\"\n          (click)=\"callAction(action)\">\n    <ng-template [ngTemplateOutlet]=\"actionsTemplate[action.index]\"></ng-template>\n  </button>\n</div>\n"
+exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")(true);
+// imports
+
+
+// module
+exports.push([module.i, ":host ::ng-deep label {\n  text-align: center;\n  border: 1px solid #ddd;\n  border-radius: 3px;\n  width: 150px;\n  height: 150px;\n  display: inline-block;\n  padding: 10px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n\nmat-icon {\n  -webkit-transform: scale(1.8);\n          transform: scale(1.8);\n  color: #ddd;\n}\n\n.instruction {\n  font-size: 12px;\n  padding: 8px 0;\n}\n\n.label {\n  -webkit-transform: scale(0.75) translateZ(0.001px);\n          transform: scale(0.75) translateZ(0.001px);\n  -webkit-transform-origin: 0 0;\n          transform-origin: 0 0;\n}\n\n", "", {"version":3,"sources":["C:/Projects/fs-file/src/components/fs-file-picker/C:/Projects/fs-file/src/components/fs-file-picker/src/components/fs-file-picker/fs-file-picker.component.scss","C:/Projects/fs-file/src/components/fs-file-picker/C:/Projects/fs-file/fs-file-picker.component.scss"],"names":[],"mappings":"AAII;EACI,mBAAA;EACA,uBAAA;EACA,mBAAA;EACA,aAAA;EACA,cAAA;EACA,sBAAA;EACA,cAAA;EACA,qBAAA;EAAA,qBAAA;EAAA,cAAA;EACA,yBAAA;MAAA,sBAAA;UAAA,wBAAA;EACA,6BAAA;EAAA,8BAAA;MAAA,2BAAA;UAAA,uBAAA;EACA,+BAAA;UAAA,uBAAA;CCHP;;ADOD;EACI,8BAAA;UAAA,sBAAA;EACA,YAAA;CCJH;;ADOD;EACI,gBAAA;EACA,eAAA;CCJH;;ADOD;EACI,mDAAA;UAAA,2CAAA;EACA,8BAAA;UAAA,sBAAA;CCJH","file":"fs-file-picker.component.scss","sourcesContent":[":host {\r\n}\r\n\r\n:host ::ng-deep {\r\n    label {\r\n        text-align: center;\r\n        border: 1px solid #ddd;\r\n        border-radius: 3px;\r\n        width: 150px;\r\n        height: 150px;\r\n        display: inline-block;\r\n        padding: 10px;\r\n        display: flex;\r\n        justify-content: center;\r\n        flex-direction: column;\r\n        box-sizing: border-box;\r\n    }\r\n}\r\n\r\nmat-icon {\r\n    transform: scale(1.8);\r\n    color: #ddd;\r\n}\r\n\r\n.instruction {\r\n    font-size: 12px;\r\n    padding: 8px 0;\r\n}\r\n\r\n.label {  \r\n    transform: scale(.75) translateZ(.001px);\r\n    transform-origin: 0 0;    \r\n}",":host ::ng-deep label {\n  text-align: center;\n  border: 1px solid #ddd;\n  border-radius: 3px;\n  width: 150px;\n  height: 150px;\n  display: inline-block;\n  padding: 10px;\n  display: flex;\n  justify-content: center;\n  flex-direction: column;\n  box-sizing: border-box;\n}\n\nmat-icon {\n  transform: scale(1.8);\n  color: #ddd;\n}\n\n.instruction {\n  font-size: 12px;\n  padding: 8px 0;\n}\n\n.label {\n  transform: scale(0.75) translateZ(0.001px);\n  transform-origin: 0 0;\n}\n\n"],"sourceRoot":""}]);
+
+// exports
+
 
 /***/ }),
 
-/***/ "../src/components/fs-file-queue/fs-file-queue-preview/fs-file-queue-preview.component.scss":
+/***/ "../node_modules/css-loader/index.js??ref--3-1!../node_modules/postcss-loader/lib/index.js??ref--3-2!../node_modules/resolve-url-loader/index.js??ref--3-3!../node_modules/sass-loader/lib/loader.js??ref--3-4!../src/components/fs-file-preview/fs-file-preview.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")(true);
+// imports
+
+
+// module
+exports.push([module.i, ".file-ext {\n  font-weight: bold;\n  text-align: center;\n  text-transform: uppercase;\n  padding: 15px 0;\n  font-size: 25px;\n}\n\n.file-name {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  padding: 0 5px;\n  font-size: 12px;\n  text-align: center;\n}\n\n.actions {\n  position: absolute;\n  display: none;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n  background: rgba(0, 0, 0, .5);\n}\n\n.actions .action {\n  position: absolute;\n  cursor: pointer;\n}\n\n.actions .action.top-left {\n  top: 5%;\n  right: 5%;\n}\n\n.actions .action.top-right {\n  top: 5%;\n  right: 5%;\n}\n\n.actions .action.bottom-left {\n  bottom: 5%;\n  left: 5%;\n}\n\n.actions .action.bottom-right {\n  bottom: 5%;\n  right: 5%;\n}\n\n.actions .action.mat-mini-fab {\n  width: 22%;\n  height: 22%;\n  min-width: 30px;\n  min-height: 30px;\n  max-width: 42px;\n  max-height: 42px;\n  line-height: 15px !important;\n}\n\n.actions .action.mat-mini-fab .mat-button-wrapper {\n  padding: 4px 0;\n  line-height: 15px !important;\n}\n\n:host:hover .file-name {\n  overflow: visible;\n  white-space: normal;\n}\n\n:host ::ng-deep .mat-button-wrapper {\n  padding: 0;\n  line-height: 15px !important;\n}\n\n:host ::ng-deep .spinner {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin-left: -25%;\n  margin-top: -25%;\n}\n\n@media only screen and (max-width: 550px) {\n  .actions {\n    display: block;\n    background: none;\n  }\n}\n\n", "", {"version":3,"sources":["C:/Projects/fs-file/src/components/fs-file-preview/C:/Projects/fs-file/src/components/fs-file-preview/src/components/fs-file-preview/fs-file-preview.component.scss","C:/Projects/fs-file/src/components/fs-file-preview/C:/Projects/fs-file/fs-file-preview.component.scss"],"names":[],"mappings":"AACA;EACE,kBAAA;EACA,mBAAA;EACA,0BAAA;EACA,gBAAA;EACA,gBAAA;CCAD;;ADGD;EACE,oBAAA;EACA,iBAAA;EACA,wBAAA;EACA,eAAA;EACA,gBAAA;EACA,mBAAA;CCAD;;ADGD;EACE,mBAAA;EACA,cAAA;EACA,YAAA;EACA,aAAA;EACA,OAAA;EACA,QAAA;EACA,8BAAA;CCAD;;ADPD;EAWI,mBAAA;EACA,gBAAA;CCAH;;ADZD;EAeM,QAAA;EACA,UAAA;CCCL;;ADjBD;EAoBM,QAAA;EACA,UAAA;CCCL;;ADtBD;EAyBM,WAAA;EACA,SAAA;CCCL;;ADlBC;EAqBI,WAAA;EACA,UAAA;CCCL;;ADhCD;EAmCM,WAAA;EACA,YAAA;EACA,gBAAA;EACA,iBAAA;EACA,gBAAA;EACA,iBAAA;EACA,6BAAA;CCCL;;AD1CD;EA4CQ,eAAA;EACA,6BAAA;CCEP;;ADKS;EACN,kBAAA;EACA,oBAAA;CCFH;;ADMD;EAEI,WAAA;EACA,6BAAA;CCJH;;ADOC;EACE,mBAAA;EACA,SAAA;EACA,UAAA;EACA,kBAAA;EACA,iBAAA;CCJH;;ADQD;EACE;IACI,eAAA;IACA,iBAAA;GCLH;CACF","file":"fs-file-preview.component.scss","sourcesContent":["\n.file-ext {\n  font-weight: bold;\n  text-align: center;\n  text-transform: uppercase;\n  padding: 15px 0;\n  font-size: 25px;\n}\n\n.file-name {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  padding: 0 5px;\n  font-size: 12px;\n  text-align: center;\n}\n\n.actions {\n  position: absolute;\n  display: none;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n  background: rgba(0, 0, 0, 0.5);\n\n  .action {\n\n    position: absolute;\n    cursor: pointer;\n\n    &.top-left {\n      top: 5%;\n      right: 5%;\n    }\n\n    &.top-right {\n      top: 5%;\n      right: 5%;\n    }\n\n    &.bottom-left {\n      bottom: 5%;\n      left: 5%;\n    }\n\n    &.bottom-right {\n      bottom: 5%;\n      right: 5%;\n    }\n\n    &.mat-mini-fab {\n      width: 22%;\n      height: 22%;\n      min-width: 30px;\n      min-height: 30px;\n      max-width: 42px;\n      max-height: 42px;\n      line-height: 15px !important;\n\n      .mat-button-wrapper {\n        padding: 4px 0;\n        line-height: 15px !important;\n      }\n    }\n  }\n}\n\n:host {\n  &:hover .file-name {\n    overflow: visible;\n    white-space: normal;\n  }\n}\n\n:host ::ng-deep {\n  .mat-button-wrapper {\n    padding: 0;\n    line-height: 15px !important;\n  }\n\n  .spinner {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    margin-left: -25%;\n    margin-top: -25%;\n  }\n}\n\n@media only screen and (max-width: 550px) {\n  .actions {\n      display: block;\n      background: none;\n  }\n}\n",".file-ext {\n  font-weight: bold;\n  text-align: center;\n  text-transform: uppercase;\n  padding: 15px 0;\n  font-size: 25px;\n}\n\n.file-name {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  padding: 0 5px;\n  font-size: 12px;\n  text-align: center;\n}\n\n.actions {\n  position: absolute;\n  display: none;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n  background: rgba(0, 0, 0, 0.5);\n}\n\n.actions .action {\n  position: absolute;\n  cursor: pointer;\n}\n\n.actions .action.top-left {\n  top: 5%;\n  right: 5%;\n}\n\n.actions .action.top-right {\n  top: 5%;\n  right: 5%;\n}\n\n.actions .action.bottom-left {\n  bottom: 5%;\n  left: 5%;\n}\n\n.actions .action.bottom-right {\n  bottom: 5%;\n  right: 5%;\n}\n\n.actions .action.mat-mini-fab {\n  width: 22%;\n  height: 22%;\n  min-width: 30px;\n  min-height: 30px;\n  max-width: 42px;\n  max-height: 42px;\n  line-height: 15px !important;\n}\n\n.actions .action.mat-mini-fab .mat-button-wrapper {\n  padding: 4px 0;\n  line-height: 15px !important;\n}\n\n:host:hover .file-name {\n  overflow: visible;\n  white-space: normal;\n}\n\n:host ::ng-deep .mat-button-wrapper {\n  padding: 0;\n  line-height: 15px !important;\n}\n\n:host ::ng-deep .spinner {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin-left: -25%;\n  margin-top: -25%;\n}\n\n@media only screen and (max-width: 550px) {\n  .actions {\n    display: block;\n    background: none;\n  }\n}\n\n"],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "../node_modules/css-loader/index.js??ref--3-1!../node_modules/postcss-loader/lib/index.js??ref--3-2!../node_modules/resolve-url-loader/index.js??ref--3-3!../node_modules/sass-loader/lib/loader.js??ref--3-4!../src/components/fs-file-previews/fs-file-previews.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")(true);
+// imports
+
+
+// module
+exports.push([module.i, ".queue {\n  position: relative;\n  display: block;\n}\n\n.preview {\n  display: inline-block;\n  position: relative;\n  margin-right: 10px;\n  border: 1px #DDD solid;\n  vertical-align: top;\n  border-radius: 3px;\n}\n\n.preview:last-child {\n  margin-right: 0;\n}\n\n.preview:hover .actions {\n  display: block;\n}\n\n.preview img {\n  display: block;\n  border-radius: 3px;\n}\n\n", "", {"version":3,"sources":["C:/Projects/fs-file/src/components/fs-file-previews/C:/Projects/fs-file/src/components/fs-file-previews/src/components/fs-file-previews/fs-file-previews.component.scss","C:/Projects/fs-file/src/components/fs-file-previews/C:/Projects/fs-file/fs-file-previews.component.scss"],"names":[],"mappings":"AAAA;EACE,mBAAA;EACA,eAAA;CCCD;;ADED;EACE,sBAAA;EACA,mBAAA;EACA,mBAAA;EACA,uBAAA;EACA,oBAAA;EACA,mBAAA;CCCD;;ADPD;EASI,gBAAA;CCEH;;ADXD;EAcM,eAAA;CCCL;;ADGC;EACE,eAAA;EACA,mBAAA;CCAH","file":"fs-file-previews.component.scss","sourcesContent":[".queue {\n  position: relative;\n  display: block;\n}\n\n.preview {\n  display: inline-block;\n  position: relative;\n  margin-right: 10px;\n  border: 1px #DDD solid;\n  vertical-align: top;\n  border-radius: 3px;\n\n  &:last-child {\n    margin-right: 0;\n  }\n\n  &:hover {\n    .actions {\n      display: block;\n    }\n  }\n\n  img {\n    display: block;\n    border-radius: 3px;\n  }\n}\n",".queue {\n  position: relative;\n  display: block;\n}\n\n.preview {\n  display: inline-block;\n  position: relative;\n  margin-right: 10px;\n  border: 1px #DDD solid;\n  vertical-align: top;\n  border-radius: 3px;\n}\n\n.preview:last-child {\n  margin-right: 0;\n}\n\n.preview:hover .actions {\n  display: block;\n}\n\n.preview img {\n  display: block;\n  border-radius: 3px;\n}\n\n"],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "../src/components/fs-file-picker/fs-file-picker.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"label\"><ng-content select=\"[fs-file-label]\"></ng-content></div>\n<div *ngIf=\"file; else preview\">\n  <fs-file-preview [file]=\"file\">\n    <ng-template fs-file-preview-action placement=\"top-right\" action=\"remove\" tooltip=\"Remove\">\n      <mat-icon>close</mat-icon>\n    </ng-template>\n    <ng-template fs-file-preview-action placement=\"bottom-right\" tooltip=\"Reupload\">\n      <mat-icon>cloud_upload</mat-icon>\n    </ng-template>\n  </fs-file-preview>\n</div>\n\n<ng-template #preview>\n <fs-file (select)=\"select($event)\"\n          accept=\"accept\"\n          multiple=\"false\"\n          imageQuality=\"imageQuality\"\n          imageMaxWidth=\"imageMaxWidth\"\n          imageMaxHeight=\"imageMaxHeight\">\n    <div class=\"select\">\n      <mat-icon>cloud_upload</mat-icon>\n      <div class=\"instruction\">{{instruction}}</div>\n      <button mat-raised-button color=\"primary\">Upload</button>\n    </div>\n  </fs-file>\n</ng-template>\n\n"
+
+/***/ }),
+
+/***/ "../src/components/fs-file-picker/fs-file-picker.component.scss":
 /***/ (function(module, exports, __webpack_require__) {
 
 
-        var result = __webpack_require__("../node_modules/css-loader/index.js?{\"sourceMap\":true}!../node_modules/postcss-loader/lib/index.js?{\"sourceMap\":true}!../node_modules/resolve-url-loader/index.js?{\"sourceMap\":true,\"absolute\":false,\"fail\":false,\"silent\":false,\"keepQuery\":false,\"attempts\":0,\"debug\":false,\"root\":null,\"includeRoot\":false}!../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../src/components/fs-file-queue/fs-file-queue-preview/fs-file-queue-preview.component.scss");
+        var result = __webpack_require__("../node_modules/css-loader/index.js??ref--3-1!../node_modules/postcss-loader/lib/index.js??ref--3-2!../node_modules/resolve-url-loader/index.js??ref--3-3!../node_modules/sass-loader/lib/loader.js??ref--3-4!../src/components/fs-file-picker/fs-file-picker.component.scss");
 
         if (typeof result === "string") {
             module.exports = result;
@@ -97,7 +127,7 @@ module.exports = "<!-- Image container -->\n<ng-container *ngIf=\"file.typeImage
 
 /***/ }),
 
-/***/ "../src/components/fs-file-queue/fs-file-queue-preview/fs-file-queue-preview.component.ts":
+/***/ "../src/components/fs-file-picker/fs-file-picker.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -113,22 +143,119 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../node_modules/@angular/core/esm2015/core.js");
+var FsFilePickerComponent = (function () {
+    function FsFilePickerComponent() {
+        this.instruction = 'Drag & Drop your file or use the button below';
+    }
+    FsFilePickerComponent.prototype.ngOnInit = function () {
+    };
+    FsFilePickerComponent.prototype.select = function (file) {
+        this.file = file;
+    };
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object)
+    ], FsFilePickerComponent.prototype, "accept", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object)
+    ], FsFilePickerComponent.prototype, "imageMaxWidth", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object)
+    ], FsFilePickerComponent.prototype, "imageMaxHeight", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object)
+    ], FsFilePickerComponent.prototype, "imageQuality", void 0);
+    FsFilePickerComponent = __decorate([
+        core_1.Component({
+            selector: 'fs-file-picker',
+            template: __webpack_require__("../src/components/fs-file-picker/fs-file-picker.component.html"),
+            styles: [__webpack_require__("../src/components/fs-file-picker/fs-file-picker.component.scss")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], FsFilePickerComponent);
+    return FsFilePickerComponent;
+}());
+exports.FsFilePickerComponent = FsFilePickerComponent;
+
+
+/***/ }),
+
+/***/ "../src/components/fs-file-picker/index.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__("../src/components/fs-file-picker/fs-file-picker.component.ts"));
+
+
+/***/ }),
+
+/***/ "../src/components/fs-file-preview/fs-file-preview.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div [style.width.px]=\"previewWidth\" [style.height.px]=\"previewHeight\">\n\n  <!-- Progress container -->\n  <ng-container *ngIf=\"file.progress; else elsePreview\">\n    <mat-spinner class=\"spinner\" [diameter]=\"previewWidth/2\"></mat-spinner>\n  </ng-container>\n\n  <!-- Image container -->\n  <ng-template #elsePreview>\n    <ng-container *ngIf=\"file.typeImage; else nonImage\">\n      <img [src]=\"preview\">\n    </ng-container>\n\n    <!-- Non image container -->\n    <ng-template #nonImage>\n        <div class=\"file-ext\">{{file.extension}}</div>\n        <div class=\"file-name\" [matTooltip]=\"file.name\">{{file.name}}</div>\n    </ng-template>\n  </ng-template>\n</div>\n\n<!-- Actions -->\n<div class=\"actions\">\n  <button class=\"action\" mat-mini-fab color=\"primary\"\n          *ngFor=\"let action of filteredActions\"\n          [ngClass]=\"getActionClasses(action)\"\n          [matTooltip]=\"action.tooltip\"\n          (click)=\"callAction(action)\">\n    <ng-template [ngTemplateOutlet]=\"actionsTemplate[action.index]\"></ng-template>\n  </button>\n</div>\n"
+
+/***/ }),
+
+/***/ "../src/components/fs-file-preview/fs-file-preview.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+
+        var result = __webpack_require__("../node_modules/css-loader/index.js??ref--3-1!../node_modules/postcss-loader/lib/index.js??ref--3-2!../node_modules/resolve-url-loader/index.js??ref--3-3!../node_modules/sass-loader/lib/loader.js??ref--3-4!../src/components/fs-file-preview/fs-file-preview.component.scss");
+
+        if (typeof result === "string") {
+            module.exports = result;
+        } else {
+            module.exports = result.toString();
+        }
+    
+
+/***/ }),
+
+/***/ "../src/components/fs-file-preview/fs-file-preview.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../node_modules/@angular/core/esm2015/core.js");
+var FileAPI = __webpack_require__("../node_modules/fileapi/dist/FileAPI.js");
 var fs_file_1 = __webpack_require__("../src/models/fs-file.ts");
-var FsFileQueuePreviewComponent = (function () {
-    function FsFileQueuePreviewComponent() {
-        this.deleted = new core_1.EventEmitter();
+var FsFilePreviewComponent = (function () {
+    function FsFilePreviewComponent() {
+        this.previewWidth = 150;
+        this.previewHeight = 150;
+        this.remove = new core_1.EventEmitter();
         this.filteredActions = [];
     }
-    FsFileQueuePreviewComponent.prototype.ngOnInit = function () {
+    Object.defineProperty(FsFilePreviewComponent.prototype, "_file", {
+        set: function (file) {
+            this.file = file;
+            this.generateFilePreview(file);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    FsFilePreviewComponent.prototype.ngOnInit = function () {
         this.cleanActions();
-        if (!this.previewWidth) {
-            this.previewWidth = this.file.previewWidth || 100;
-        }
-        if (!this.previewHeight) {
-            this.previewHeight = this.file.previewHeight || 100;
-        }
     };
-    FsFileQueuePreviewComponent.prototype.getActionClasses = function (action) {
+    FsFilePreviewComponent.prototype.getActionClasses = function (action) {
         if (action.placement) {
             return [action.placement];
         }
@@ -136,11 +263,11 @@ var FsFileQueuePreviewComponent = (function () {
             return [];
         }
     };
-    FsFileQueuePreviewComponent.prototype.callAction = function (action) {
+    FsFilePreviewComponent.prototype.callAction = function (action) {
         switch (action.action) {
             case 'remove':
                 {
-                    this.deleted.emit(this.file);
+                    this.remove.emit(this.file);
                 }
                 break;
             default: {
@@ -150,7 +277,28 @@ var FsFileQueuePreviewComponent = (function () {
             }
         }
     };
-    FsFileQueuePreviewComponent.prototype.cleanActions = function () {
+    /**
+     * Generate preview images for file
+     * @param {FsFile} file
+     */
+    FsFilePreviewComponent.prototype.generateFilePreview = function (file) {
+        var _this = this;
+        if (!this.file.typeImage) {
+            return;
+        }
+        file.progress = true;
+        FileAPI.Image(file.file)
+            .preview(this.previewWidth, this.previewHeight)
+            .get(function (err, img) {
+            FileAPI.readAsDataURL(img, function (event) {
+                if (event.type === 'load') {
+                    _this.preview = event.result;
+                    file.progress = false;
+                }
+            });
+        });
+    };
+    FsFilePreviewComponent.prototype.cleanActions = function () {
         for (var action in this.actions) {
             if (this.actions.hasOwnProperty(action) && this.actions[action].forTypes) {
                 // save original type
@@ -174,43 +322,44 @@ var FsFileQueuePreviewComponent = (function () {
     __decorate([
         core_1.Input(),
         __metadata("design:type", Object)
-    ], FsFileQueuePreviewComponent.prototype, "actions", void 0);
+    ], FsFilePreviewComponent.prototype, "actions", void 0);
     __decorate([
         core_1.Input(),
         __metadata("design:type", Object)
-    ], FsFileQueuePreviewComponent.prototype, "actionsTemplate", void 0);
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", fs_file_1.FsFile)
-    ], FsFileQueuePreviewComponent.prototype, "file", void 0);
+    ], FsFilePreviewComponent.prototype, "actionsTemplate", void 0);
     __decorate([
         core_1.Input(),
         __metadata("design:type", Object)
-    ], FsFileQueuePreviewComponent.prototype, "previewWidth", void 0);
+    ], FsFilePreviewComponent.prototype, "previewWidth", void 0);
     __decorate([
         core_1.Input(),
         __metadata("design:type", Object)
-    ], FsFileQueuePreviewComponent.prototype, "previewHeight", void 0);
+    ], FsFilePreviewComponent.prototype, "previewHeight", void 0);
+    __decorate([
+        core_1.Input('file'),
+        __metadata("design:type", fs_file_1.FsFile),
+        __metadata("design:paramtypes", [fs_file_1.FsFile])
+    ], FsFilePreviewComponent.prototype, "_file", null);
     __decorate([
         core_1.Output(),
         __metadata("design:type", Object)
-    ], FsFileQueuePreviewComponent.prototype, "deleted", void 0);
-    FsFileQueuePreviewComponent = __decorate([
+    ], FsFilePreviewComponent.prototype, "remove", void 0);
+    FsFilePreviewComponent = __decorate([
         core_1.Component({
-            selector: 'fs-file-queue-preview',
-            template: __webpack_require__("../src/components/fs-file-queue/fs-file-queue-preview/fs-file-queue-preview.component.html"),
-            styles: [__webpack_require__("../src/components/fs-file-queue/fs-file-queue-preview/fs-file-queue-preview.component.scss")]
+            selector: 'fs-file-preview',
+            template: __webpack_require__("../src/components/fs-file-preview/fs-file-preview.component.html"),
+            styles: [__webpack_require__("../src/components/fs-file-preview/fs-file-preview.component.scss")]
         }),
         __metadata("design:paramtypes", [])
-    ], FsFileQueuePreviewComponent);
-    return FsFileQueuePreviewComponent;
+    ], FsFilePreviewComponent);
+    return FsFilePreviewComponent;
 }());
-exports.FsFileQueuePreviewComponent = FsFileQueuePreviewComponent;
+exports.FsFilePreviewComponent = FsFilePreviewComponent;
 
 
 /***/ }),
 
-/***/ "../src/components/fs-file-queue/fs-file-queue-preview/index.ts":
+/***/ "../src/components/fs-file-preview/index.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -219,23 +368,23 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__("../src/components/fs-file-queue/fs-file-queue-preview/fs-file-queue-preview.component.ts"));
+__export(__webpack_require__("../src/components/fs-file-preview/fs-file-preview.component.ts"));
 
 
 /***/ }),
 
-/***/ "../src/components/fs-file-queue/fs-file-queue.component.html":
+/***/ "../src/components/fs-file-previews/fs-file-previews.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<fs-file-queue-preview\n  *ngFor=\"let file of files\"\n  [file]=\"file\"\n  [actions]=\"actions\"\n  [actionsTemplate]=\"actionsTemplate\"\n  [previewWidth]=\"previewWidth\"\n  [previewHeight]=\"previewHeight\"\n  (deleted)=\"removeFile($event)\"\n  class=\"preview\">\n</fs-file-queue-preview>\n"
+module.exports = "<fs-file-preview\n  *ngFor=\"let file of files\"\n  [file]=\"file\"\n  [actions]=\"actions\"\n  [actionsTemplate]=\"actionsTemplate\"\n  [previewWidth]=\"previewWidth\"\n  [previewHeight]=\"previewHeight\"\n  (remove)=\"removeFile($event)\"\n  class=\"preview\">\n</fs-file-preview>\n"
 
 /***/ }),
 
-/***/ "../src/components/fs-file-queue/fs-file-queue.component.scss":
+/***/ "../src/components/fs-file-previews/fs-file-previews.component.scss":
 /***/ (function(module, exports, __webpack_require__) {
 
 
-        var result = __webpack_require__("../node_modules/css-loader/index.js?{\"sourceMap\":true}!../node_modules/postcss-loader/lib/index.js?{\"sourceMap\":true}!../node_modules/resolve-url-loader/index.js?{\"sourceMap\":true}!../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../src/components/fs-file-queue/fs-file-queue.component.scss");
+        var result = __webpack_require__("../node_modules/css-loader/index.js??ref--3-1!../node_modules/postcss-loader/lib/index.js??ref--3-2!../node_modules/resolve-url-loader/index.js??ref--3-3!../node_modules/sass-loader/lib/loader.js??ref--3-4!../src/components/fs-file-previews/fs-file-previews.component.scss");
 
         if (typeof result === "string") {
             module.exports = result;
@@ -246,7 +395,7 @@ module.exports = "<fs-file-queue-preview\n  *ngFor=\"let file of files\"\n  [fil
 
 /***/ }),
 
-/***/ "../src/components/fs-file-queue/fs-file-queue.component.ts":
+/***/ "../src/components/fs-file-previews/fs-file-previews.component.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -263,11 +412,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../node_modules/@angular/core/esm2015/core.js");
 var directives_1 = __webpack_require__("../src/directives/index.ts");
-var FsFileQueueComponent = (function () {
-    function FsFileQueueComponent() {
+var FsFilePreviewsComponent = (function () {
+    function FsFilePreviewsComponent() {
+        this.previewWidth = 150;
+        this.previewHeight = 150;
         this.queue = true;
     }
-    Object.defineProperty(FsFileQueueComponent.prototype, "actionsParams", {
+    Object.defineProperty(FsFilePreviewsComponent.prototype, "actionsParams", {
         set: function (val) {
             this.actions = val.toArray().map(function (action, index) {
                 var newAction = Object.assign({}, action);
@@ -281,16 +432,16 @@ var FsFileQueueComponent = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(FsFileQueueComponent.prototype, "actionsTemplateRefs", {
+    Object.defineProperty(FsFilePreviewsComponent.prototype, "actionsTemplateRefs", {
         set: function (val) {
             this.actionsTemplate = val.toArray();
         },
         enumerable: true,
         configurable: true
     });
-    FsFileQueueComponent.prototype.ngOnInit = function () {
+    FsFilePreviewsComponent.prototype.ngOnInit = function () {
     };
-    FsFileQueueComponent.prototype.removeFile = function (file) {
+    FsFilePreviewsComponent.prototype.removeFile = function (file) {
         var index = this.files.indexOf(file);
         if (index > -1) {
             this.files.splice(index, 1);
@@ -299,46 +450,46 @@ var FsFileQueueComponent = (function () {
     __decorate([
         core_1.Input(),
         __metadata("design:type", Object)
-    ], FsFileQueueComponent.prototype, "files", void 0);
+    ], FsFilePreviewsComponent.prototype, "files", void 0);
     __decorate([
         core_1.Input(),
         __metadata("design:type", Object)
-    ], FsFileQueueComponent.prototype, "previewWidth", void 0);
+    ], FsFilePreviewsComponent.prototype, "previewWidth", void 0);
     __decorate([
         core_1.Input(),
         __metadata("design:type", Object)
-    ], FsFileQueueComponent.prototype, "previewHeight", void 0);
+    ], FsFilePreviewsComponent.prototype, "previewHeight", void 0);
     __decorate([
         core_1.HostBinding('class.queue'),
         __metadata("design:type", Object)
-    ], FsFileQueueComponent.prototype, "queue", void 0);
+    ], FsFilePreviewsComponent.prototype, "queue", void 0);
     __decorate([
-        core_1.ContentChildren(directives_1.FsFileQueueActionDirective),
+        core_1.ContentChildren(directives_1.FsFilePreviewActionDirective),
         __metadata("design:type", core_1.QueryList),
         __metadata("design:paramtypes", [core_1.QueryList])
-    ], FsFileQueueComponent.prototype, "actionsParams", null);
+    ], FsFilePreviewsComponent.prototype, "actionsParams", null);
     __decorate([
-        core_1.ContentChildren(directives_1.FsFileQueueActionDirective, { read: core_1.TemplateRef }),
+        core_1.ContentChildren(directives_1.FsFilePreviewActionDirective, { read: core_1.TemplateRef }),
         __metadata("design:type", core_1.QueryList),
         __metadata("design:paramtypes", [core_1.QueryList])
-    ], FsFileQueueComponent.prototype, "actionsTemplateRefs", null);
-    FsFileQueueComponent = __decorate([
+    ], FsFilePreviewsComponent.prototype, "actionsTemplateRefs", null);
+    FsFilePreviewsComponent = __decorate([
         core_1.Component({
-            selector: 'fs-file-queue',
-            template: __webpack_require__("../src/components/fs-file-queue/fs-file-queue.component.html"),
-            styles: [__webpack_require__("../src/components/fs-file-queue/fs-file-queue.component.scss")],
+            selector: 'fs-file-previews',
+            template: __webpack_require__("../src/components/fs-file-previews/fs-file-previews.component.html"),
+            styles: [__webpack_require__("../src/components/fs-file-previews/fs-file-previews.component.scss")],
             encapsulation: core_1.ViewEncapsulation.None
         }),
         __metadata("design:paramtypes", [])
-    ], FsFileQueueComponent);
-    return FsFileQueueComponent;
+    ], FsFilePreviewsComponent);
+    return FsFilePreviewsComponent;
 }());
-exports.FsFileQueueComponent = FsFileQueueComponent;
+exports.FsFilePreviewsComponent = FsFilePreviewsComponent;
 
 
 /***/ }),
 
-/***/ "../src/components/fs-file-queue/index.ts":
+/***/ "../src/components/fs-file-previews/index.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -347,8 +498,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__("../src/components/fs-file-queue/fs-file-queue.component.ts"));
-__export(__webpack_require__("../src/components/fs-file-queue/fs-file-queue-preview/index.ts"));
+__export(__webpack_require__("../src/components/fs-file-previews/fs-file-previews.component.ts"));
 
 
 /***/ }),
@@ -356,7 +506,7 @@ __export(__webpack_require__("../src/components/fs-file-queue/fs-file-queue-prev
 /***/ "../src/components/fs-file/fs-file.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<label [for]=\"uniqId\" (click)=\"fileInput.click()\">\n  <ng-content></ng-content>\n</label>\n<input type=\"file\" style=\"display: none\"\n       [id]=\"uniqId\"\n       [disabled]=\"fsFile.disabled\"\n       [multiple]=\"fsFile.multiple\"\n       [attr.accept]=\"fsFile.accept\"\n       #fileInput\n>\n"
+module.exports = "<label [for]=\"uniqId\" (click)=\"fileInput.click()\">\r\n  <ng-content></ng-content>\r\n</label>\r\n<input type=\"file\" style=\"display: none\"\r\n       [id]=\"uniqId\"\r\n       [disabled]=\"fsFile.disabled\"\r\n       [multiple]=\"fsFile.multiple\"\r\n       [attr.accept]=\"fsFile.accept\"\r\n       #fileInput\r\n>\r\n"
 
 /***/ }),
 
@@ -377,14 +527,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../node_modules/@angular/core/esm2015/core.js");
 var services_1 = __webpack_require__("../src/services/index.ts");
-var common_1 = __webpack_require__("../node_modules/@firestitch/common/common.umd.js");
+var common_1 = __webpack_require__("../node_modules/@firestitch/common/package/index.js");
 var FsFileComponent = (function () {
     function FsFileComponent(fsFile, fsUtil) {
         this.fsFile = fsFile;
         this.fsUtil = fsUtil;
         this.imageFixOrientation = true;
         this.uniqId = this.fsUtil.guid();
-        this.selected = this.fsFile.selected;
+        this.select = this.fsFile.select;
     }
     Object.defineProperty(FsFileComponent.prototype, "multiple", {
         set: function (value) {
@@ -450,13 +600,6 @@ var FsFileComponent = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(FsFileComponent.prototype, "preview", {
-        set: function (value) {
-            this.fsFile.preview = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
     FsFileComponent.prototype.ngOnInit = function () {
         this.fsFile.initForElement(this.fileInput);
     };
@@ -507,17 +650,12 @@ var FsFileComponent = (function () {
     ], FsFileComponent.prototype, "disabled", null);
     __decorate([
         core_1.Input(),
-        __metadata("design:type", Object),
-        __metadata("design:paramtypes", [Object])
-    ], FsFileComponent.prototype, "preview", null);
-    __decorate([
-        core_1.Input(),
         __metadata("design:type", Object)
     ], FsFileComponent.prototype, "imageFixOrientation", void 0);
     __decorate([
-        core_1.Output('selected'),
+        core_1.Output('select'),
         __metadata("design:type", core_1.EventEmitter)
-    ], FsFileComponent.prototype, "selected", void 0);
+    ], FsFileComponent.prototype, "select", void 0);
     __decorate([
         core_1.ViewChild('fileInput'),
         __metadata("design:type", Object)
@@ -561,12 +699,14 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__("../src/components/fs-file/index.ts"));
-__export(__webpack_require__("../src/components/fs-file-queue/index.ts"));
+__export(__webpack_require__("../src/components/fs-file-previews/index.ts"));
+__export(__webpack_require__("../src/components/fs-file-preview/index.ts"));
+__export(__webpack_require__("../src/components/fs-file-picker/index.ts"));
 
 
 /***/ }),
 
-/***/ "../src/directives/fs-file-queue-action.directive.ts":
+/***/ "../src/directives/fs-file-preview-action.directive.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -582,39 +722,39 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../node_modules/@angular/core/esm2015/core.js");
-var FsFileQueueActionDirective = (function () {
-    function FsFileQueueActionDirective() {
+var FsFilePreviewActionDirective = (function () {
+    function FsFilePreviewActionDirective() {
         this.index = null;
         this.click = new core_1.EventEmitter();
     }
     __decorate([
         core_1.Input(),
         __metadata("design:type", String)
-    ], FsFileQueueActionDirective.prototype, "placement", void 0);
+    ], FsFilePreviewActionDirective.prototype, "placement", void 0);
     __decorate([
         core_1.Input(),
         __metadata("design:type", String)
-    ], FsFileQueueActionDirective.prototype, "tooltip", void 0);
+    ], FsFilePreviewActionDirective.prototype, "tooltip", void 0);
     __decorate([
         core_1.Input(),
         __metadata("design:type", String)
-    ], FsFileQueueActionDirective.prototype, "action", void 0);
+    ], FsFilePreviewActionDirective.prototype, "action", void 0);
     __decorate([
         core_1.Input('for-types'),
         __metadata("design:type", Object)
-    ], FsFileQueueActionDirective.prototype, "forTypes", void 0);
+    ], FsFilePreviewActionDirective.prototype, "forTypes", void 0);
     __decorate([
         core_1.Output(),
         __metadata("design:type", Object)
-    ], FsFileQueueActionDirective.prototype, "click", void 0);
-    FsFileQueueActionDirective = __decorate([
+    ], FsFilePreviewActionDirective.prototype, "click", void 0);
+    FsFilePreviewActionDirective = __decorate([
         core_1.Directive({
-            selector: '[fs-file-queue-action]'
+            selector: '[fs-file-preview-action]'
         })
-    ], FsFileQueueActionDirective);
-    return FsFileQueueActionDirective;
+    ], FsFilePreviewActionDirective);
+    return FsFilePreviewActionDirective;
 }());
-exports.FsFileQueueActionDirective = FsFileQueueActionDirective;
+exports.FsFilePreviewActionDirective = FsFilePreviewActionDirective;
 
 
 /***/ }),
@@ -628,7 +768,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__("../src/directives/fs-file-queue-action.directive.ts"));
+__export(__webpack_require__("../src/directives/fs-file-preview-action.directive.ts"));
 
 
 /***/ }),
@@ -648,7 +788,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../node_modules/@angular/core/esm2015/core.js");
 var common_1 = __webpack_require__("../node_modules/@angular/common/esm2015/common.js");
 var material_1 = __webpack_require__("../node_modules/@angular/material/esm2015/material.js");
-var common_2 = __webpack_require__("../node_modules/@firestitch/common/common.umd.js");
+var common_2 = __webpack_require__("../node_modules/@firestitch/common/package/index.js");
 var components_1 = __webpack_require__("../src/components/index.ts");
 var directives_1 = __webpack_require__("../src/directives/index.ts");
 var FsFileModule = (function () {
@@ -673,15 +813,17 @@ var FsFileModule = (function () {
             ],
             exports: [
                 components_1.FsFileComponent,
-                components_1.FsFileQueueComponent,
-                directives_1.FsFileQueueActionDirective,
+                components_1.FsFilePreviewsComponent,
+                directives_1.FsFilePreviewActionDirective,
+                components_1.FsFilePickerComponent
             ],
             entryComponents: [],
             declarations: [
                 components_1.FsFileComponent,
-                components_1.FsFileQueueComponent,
-                components_1.FsFileQueuePreviewComponent,
-                directives_1.FsFileQueueActionDirective,
+                components_1.FsFilePreviewsComponent,
+                components_1.FsFilePreviewComponent,
+                directives_1.FsFilePreviewActionDirective,
+                components_1.FsFilePickerComponent
             ],
             providers: [],
         })
@@ -721,62 +863,17 @@ var FsFile = (function () {
     function FsFile(file) {
         this.progress = false;
         this.file = file;
+        this.name = file.name;
+        this.size = file.size;
+        this.type = file.type;
+        var parts = this.file.name.split('.');
+        if (parts.length > 1) {
+            this.extension = parts[parts.length - 1];
+        }
     }
-    Object.defineProperty(FsFile.prototype, "file", {
-        get: function () {
-            return this._file;
-        },
-        set: function (value) {
-            this._file = value;
-            var parts = this._file.name.split('.');
-            if (parts.length > 1) {
-                this._ext = parts[parts.length - 1];
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(FsFile.prototype, "name", {
-        get: function () {
-            return this.file.name;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(FsFile.prototype, "type", {
-        get: function () {
-            return this.file.type;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(FsFile.prototype, "size", {
-        get: function () {
-            return this.file.size;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(FsFile.prototype, "preview", {
-        get: function () {
-            return this._preview;
-        },
-        set: function (value) {
-            this._preview = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(FsFile.prototype, "extension", {
-        get: function () {
-            return this._ext;
-        },
-        enumerable: true,
-        configurable: true
-    });
     Object.defineProperty(FsFile.prototype, "typeImage", {
         get: function () {
-            return this.type.match(/^image/i);
+            return !!this.type.match(/^image/i);
         },
         enumerable: true,
         configurable: true
@@ -785,20 +882,16 @@ var FsFile = (function () {
         this.imageWidth = info.width;
         this.imageHeight = info.height;
     };
-    FsFile.prototype.toJson = function () {
+    FsFile.prototype.toObject = function () {
         return {
-            file: this.file,
             name: this.name,
             type: this.type,
             size: this.size,
             progress: this.progress,
-            preview: this.preview,
-            extrension: this.extension,
+            extension: this.extension,
             typeImage: this.typeImage,
             imageWidth: this.imageWidth,
-            imageHeight: this.imageHeight,
-            previewWidth: this.previewWidth,
-            previewHeight: this.previewHeight,
+            imageHeight: this.imageHeight
         };
     };
     return FsFile;
@@ -808,7 +901,7 @@ exports.FsFile = FsFile;
 
 /***/ }),
 
-/***/ "../src/services/fs-component.service.ts":
+/***/ "../src/services/fs-file.service.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -881,12 +974,12 @@ function processors(list) {
 }
 var FsFileService = (function () {
     function FsFileService() {
-        this.selected = new core_1.EventEmitter();
+        this.select = new core_1.EventEmitter();
         this._options = {
             disabled: false,
             multiple: false,
             preview: false,
-            previewSizes: { width: null, height: null },
+            previewSizes: { width: 150, height: 150 },
             accept: [],
             minSize: void 0,
             maxSize: void 0,
@@ -988,28 +1081,22 @@ var FsFileService = (function () {
     });
     Object.defineProperty(FsFileService.prototype, "preview", {
         set: function (value) {
-            if (typeof (value) === 'boolean' || value === 'true') {
-                this._options.preview = value;
-                this._options.previewSizes.width = 100;
-                this._options.previewSizes.height = 100;
-            }
-            else if (typeof value == 'string' || value instanceof String) {
-                var _a = value.split('x').map(function (val) { return +val; }), width = _a[0], height = _a[1];
-                this._options.preview = true;
-                if (width && height) {
-                    this._options.previewSizes.width = width;
-                    this._options.previewSizes.height = height;
-                }
-                else if (width && !height) {
-                    this._options.previewSizes.width = width;
-                    this._options.previewSizes.height = width;
-                }
-                else if (height && !width) {
-                    this._options.previewSizes.width = height;
-                    this._options.previewSizes.height = height;
-                }
-                else {
-                    this._options.preview = false;
+            this._options.preview = !!value && value !== 'false';
+            if (this._options.preview) {
+                if (typeof value == 'string' || value instanceof String) {
+                    var _a = value.split('x').map(function (val) { return +val; }), width = _a[0], height = _a[1];
+                    if (width && height) {
+                        this._options.previewSizes.width = width;
+                        this._options.previewSizes.height = height;
+                    }
+                    else if (width && !height) {
+                        this._options.previewSizes.width = width;
+                        this._options.previewSizes.height = width;
+                    }
+                    else if (height && !width) {
+                        this._options.previewSizes.width = height;
+                        this._options.previewSizes.height = height;
+                    }
                 }
             }
         },
@@ -1047,15 +1134,12 @@ var FsFileService = (function () {
     FsFileService.prototype.processFiles = function (files) {
         var _this = this;
         files = files.map(function (f) {
-            var file = new fs_file_1.FsFile(f);
-            file.previewWidth = _this._options.previewSizes.width;
-            file.previewHeight = _this._options.previewSizes.height;
-            return file;
+            return new fs_file_1.FsFile(f);
         });
-        this.selected.next(files);
+        this.select.next(this._options.multiple ? files : files[0]);
         var processedFiles = [];
         files.forEach(function (file) {
-            if (/^image/.test(file.type)) {
+            if (file.typeImage) {
                 var processorsIter_1 = processors(Object.keys(PROCESSORS));
                 var resFilePromise = new Promise(function (resolve, reject) {
                     _this.applyProcessors(file, processorsIter_1, resolve, reject);
@@ -1065,31 +1149,6 @@ var FsFileService = (function () {
             else {
                 processedFiles.push(file);
             }
-        });
-        Promise.all(processedFiles).then(function (resFiles) {
-            if (_this._options.preview) {
-                resFiles
-                    .filter(function (file) { return file.typeImage; })
-                    .forEach(function (file) {
-                    _this.generateFilePreview(file);
-                });
-            }
-        });
-    };
-    /**
-     * Generate preview images for file
-     * @param {FsFile} file
-     */
-    FsFileService.prototype.generateFilePreview = function (file) {
-        FileAPI.Image(file.file)
-            .preview(this._options.previewSizes.width, this._options.previewSizes.height)
-            .get(function (err, img) {
-            FileAPI.readAsDataURL(img, function (event) {
-                if (event.type === 'load') {
-                    file.preview = event.result;
-                    file.progress = false;
-                }
-            });
         });
     };
     /**
@@ -1102,7 +1161,7 @@ var FsFileService = (function () {
         return new Promise(function (resolve) {
             FileAPI.filterFiles(rawFiles, function (file, info) {
                 var sizeRule = void 0;
-                if (/^image/.test(file.type)) {
+                if (file.typeImage) {
                     sizeRule = _this.checkResolutionRule(info);
                 }
                 else {
@@ -1283,7 +1342,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__("../src/services/fs-component.service.ts"));
+__export(__webpack_require__("../src/services/fs-file.service.ts"));
 
 
 /***/ }),
@@ -1315,7 +1374,7 @@ webpackEmptyAsyncContext.id = "../tools lazy recursive";
 /***/ "../tools/components/examples/examples.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"example-title\">{{title}}</div>\n<mat-tab-group>\n  <mat-tab label=\"Examples\">\n      <div class=\"examples-body\">\n        <ng-content></ng-content>\n      </div>\n  </mat-tab>\n  <mat-tab label=\"Docs\" *ngIf=\"loaded\">\n    <div class=\"iframe-container\">\n      <iframe class=\"iframe-example ng-star-inserted\" [src]=\"submoduleUrl\"></iframe>\n    </div>\n  </mat-tab>\n</mat-tab-group>\n"
+module.exports = "<div class=\"example-title\">{{title}}</div>\r\n<mat-tab-group>\r\n  <mat-tab label=\"Examples\">\r\n      <div class=\"examples-body\">\r\n        <ng-content></ng-content>\r\n      </div>\r\n  </mat-tab>\r\n  <mat-tab label=\"Docs\">\r\n    <!-- <iframe src=\"/docs\" class=\"iframe-example\"></iframe> -->\r\n    <div class=\"iframe-container\">\r\n      <iframe class=\"iframe-example ng-star-inserted\" src=\"http://list.components.firestitch.com/docs\"></iframe>\r\n    </div>\r\n  </mat-tab>\r\n</mat-tab-group>\r\n"
 
 /***/ }),
 
@@ -1335,38 +1394,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../node_modules/@angular/core/esm2015/core.js");
-var platform_browser_1 = __webpack_require__("../node_modules/@angular/platform-browser/esm2015/platform-browser.js");
 var FsExamplesComponent = (function () {
-    function FsExamplesComponent(sanitizer) {
-        this.sanitizer = sanitizer;
-        this.loaded = false;
+    function FsExamplesComponent() {
     }
-    FsExamplesComponent.prototype.ngOnInit = function () {
-        this._submoduleUrl = this.sanitizer
-            .bypassSecurityTrustResourceUrl("https://" + this.submoduleName + ".components.firestitch.com/docs");
-        this.loaded = true;
-    };
-    Object.defineProperty(FsExamplesComponent.prototype, "submoduleUrl", {
-        get: function () {
-            return this._submoduleUrl;
-        },
-        enumerable: true,
-        configurable: true
-    });
     __decorate([
         core_1.Input(),
         __metadata("design:type", String)
     ], FsExamplesComponent.prototype, "title", void 0);
-    __decorate([
-        core_1.Input('name'),
-        __metadata("design:type", String)
-    ], FsExamplesComponent.prototype, "submoduleName", void 0);
     FsExamplesComponent = __decorate([
         core_1.Component({
             selector: 'fs-examples',
             template: __webpack_require__("../tools/components/examples/examples.component.html")
-        }),
-        __metadata("design:paramtypes", [platform_browser_1.DomSanitizer])
+        })
     ], FsExamplesComponent);
     return FsExamplesComponent;
 }());
@@ -1378,7 +1417,7 @@ exports.FsExamplesComponent = FsExamplesComponent;
 /***/ "./app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<fs-examples title=\"Files\" name=\"file\">\n  <div class=\"example\">\n    <fs-example title=\"Single File Select\" componentName=\"single-file-select\">\n      <single-file-select></single-file-select>\n    </fs-example>\n  </div>\n\n  <div class=\"example\">\n    <fs-example title=\"Multiple File Select\" componentName=\"multiple-file-select\">\n      <multiple-file-select></multiple-file-select>\n    </fs-example>\n  </div>\n\n  <div class=\"example\">\n    <fs-example title=\"Image File Manipulation\" componentName=\"multiple-file-select\">\n      <image-file-manipulation></image-file-manipulation>\n    </fs-example>\n  </div>\n</fs-examples>\n\n\n\n"
+module.exports = "<fs-examples title=\"Files\" name=\"file\">\n  <div class=\"example\">\n    <fs-example title=\"File\" componentName=\"single-file-select\">\n      <single-file-select></single-file-select>\n    </fs-example>\n  </div>\n\n  <div class=\"example\">\n    <fs-example title=\"Multiple With Preview\" componentName=\"multiple-file-select\">\n      <multiple-file-select></multiple-file-select>\n    </fs-example>\n  </div>\n\n  <div class=\"example\">\n    <fs-example title=\"Image Resampling\" componentName=\"multiple-file-select\">\n      <image-file-manipulation></image-file-manipulation>\n    </fs-example>\n  </div>\n\n  <div class=\"example\">\n    <fs-example title=\"File Picker\" componentName=\"file-picker\">\n      <file-picker></file-picker>\n    </fs-example>\n  </div>  \n</fs-examples>\n\n\n\n"
 
 /***/ }),
 
@@ -1411,11 +1450,81 @@ exports.AppComponent = AppComponent;
 
 /***/ }),
 
+/***/ "./app/components/file-picker/file-picker.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+
+        var result = __webpack_require__("../node_modules/css-loader/index.js??ref--2-1!../node_modules/postcss-loader/lib/index.js??ref--2-2!../node_modules/resolve-url-loader/index.js??ref--2-3!./app/components/file-picker/file-picker.component.css");
+
+        if (typeof result === "string") {
+            module.exports = result;
+        } else {
+            module.exports = result.toString();
+        }
+    
+
+/***/ }),
+
+/***/ "./app/components/file-picker/file-picker.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<fs-file-picker>\n    <div fs-file-label>File Picker Label</div>\n</fs-file-picker>\n"
+
+/***/ }),
+
+/***/ "./app/components/file-picker/file-picker.component.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("../node_modules/@angular/core/esm2015/core.js");
+var FilePickerComponent = (function () {
+    function FilePickerComponent() {
+        this.file = null;
+    }
+    FilePickerComponent.prototype.select = function (file) {
+        this.file = file;
+    };
+    FilePickerComponent = __decorate([
+        core_1.Component({
+            selector: 'file-picker',
+            template: __webpack_require__("./app/components/file-picker/file-picker.component.html"),
+            styles: [__webpack_require__("./app/components/file-picker/file-picker.component.css")]
+        })
+    ], FilePickerComponent);
+    return FilePickerComponent;
+}());
+exports.FilePickerComponent = FilePickerComponent;
+
+
+/***/ }),
+
+/***/ "./app/components/file-picker/index.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__("./app/components/file-picker/file-picker.component.ts"));
+
+
+/***/ }),
+
 /***/ "./app/components/image-file-manipulation/image-file-manipulation.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 
-        var result = __webpack_require__("../node_modules/css-loader/index.js?{\"sourceMap\":true}!../node_modules/postcss-loader/lib/index.js?{\"sourceMap\":true}!../node_modules/resolve-url-loader/index.js?{\"sourceMap\":true}!./app/components/image-file-manipulation/image-file-manipulation.component.css");
+        var result = __webpack_require__("../node_modules/css-loader/index.js??ref--2-1!../node_modules/postcss-loader/lib/index.js??ref--2-2!../node_modules/resolve-url-loader/index.js??ref--2-3!./app/components/image-file-manipulation/image-file-manipulation.component.css");
 
         if (typeof result === "string") {
             module.exports = result;
@@ -1429,7 +1538,7 @@ exports.AppComponent = AppComponent;
 /***/ "./app/components/image-file-manipulation/image-file-manipulation.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "Options/restrictions:\n<ul>\n  <li>Accept: <b>image/*</b></li>\n  <li>Multiple: <b>true</b></li>\n  <li>Reduce quality to: <b>0.1</b></li>\n  <li>Min size (KB): <b>100</b></li>\n  <li>Max size (KB): <b>3000</b></li>\n  <li>Max width: <b>2500</b></li>\n  <li>Max height: <b>2500</b></li>\n  <li>Preview: <b>200x200</b></li>\n</ul>\n<fs-file (selected)=\"selected($event)\"\n         accept=\"image/*\"\n         multiple=\"true\"\n         imageQuality=\".1\"\n         minSize=\"100\"\n         maxSize=\"3000\"\n         imageMaxWidth=\"2500\"\n         imageMaxHeight=\"2500\"\n         preview=\"200\"\n>\n  <button mat-raised-button color=\"primary\">Select File</button>\n</fs-file>\n\n<fs-file-queue [files]=\"files\">\n  <ng-template fs-file-queue-action placement=\"top-right\" action=\"remove\" tooltip=\"Remove\">\n    <mat-icon>close</mat-icon>\n  </ng-template>\n  <ng-template fs-file-queue-action\n               placement=\"bottom-right\"\n               (click)=\"enhance($event)\"\n               tooltip=\"Enhance\"\n               for-types=\"image/*\">\n    <mat-icon>brush</mat-icon>\n  </ng-template>\n  <ng-template fs-file-queue-action placement=\"bottom-left\" action=\"zoom\" tooltip=\"Zoom\" for-types=\"image/*\">\n    <mat-icon>search</mat-icon>\n  </ng-template>\n</fs-file-queue>\n\n<fieldset *ngIf=\"filesJsonInfo.length > 0\">\n  <legend>File</legend>\n  <pre>{{ filesJsonInfo | json }}</pre>\n</fieldset>\n"
+module.exports = "Options/restrictions:\r\n<ul>\r\n  <li>Accept: <b>image/*</b></li>\r\n  <li>Multiple: <b>true</b></li>\r\n  <li>Reduce quality to: <b>0.1</b></li>\r\n  <li>Resample max width: <b>2500</b></li>\r\n  <li>Resample max height: <b>2500</b></li>\r\n  <li>Preview: <b>200x200</b></li>\r\n</ul>\r\n<fs-file (select)=\"select($event)\"\r\n         accept=\"image/*\"\r\n         multiple=\"true\"\r\n         imageQuality=\".1\"\r\n         imageMaxWidth=\"2500\"\r\n         imageMaxHeight=\"2500\"\r\n>\r\n  <button mat-raised-button color=\"primary\">Select File</button>\r\n</fs-file>\r\n\r\n<fs-file-previews [files]=\"files\" width=\"200\" height=\"200\">\r\n  <ng-template fs-file-preview-action placement=\"top-right\" action=\"remove\" tooltip=\"Remove\">\r\n    <mat-icon>close</mat-icon>\r\n  </ng-template>\r\n  <ng-template fs-file-preview-action\r\n               placement=\"bottom-right\"\r\n               (click)=\"enhance($event)\"\r\n               tooltip=\"Enhance\"\r\n               for-types=\"image/*\">\r\n    <mat-icon>brush</mat-icon>\r\n  </ng-template>\r\n  <ng-template fs-file-preview-action placement=\"bottom-left\" action=\"zoom\" tooltip=\"Zoom\" for-types=\"image/*\">\r\n    <mat-icon>search</mat-icon>\r\n  </ng-template>\r\n</fs-file-previews>\r\n\r\n<fieldset *ngIf=\"files.length > 0\">\r\n  <legend>Files</legend>\r\n  <pre>{{ files | json }}</pre>\r\n</fieldset>\r\n"
 
 /***/ }),
 
@@ -1451,10 +1560,9 @@ var ImageFileManipulationComponent = (function () {
         this.files = [];
         this.filesJsonInfo = [];
     }
-    ImageFileManipulationComponent.prototype.selected = function (files) {
+    ImageFileManipulationComponent.prototype.select = function (files) {
         (_a = this.files).push.apply(_a, files);
-        (_b = this.filesJsonInfo).push.apply(_b, files.map(function (file) { return file.toJson(); }));
-        var _a, _b;
+        var _a;
     };
     ImageFileManipulationComponent.prototype.enhance = function (file) {
         console.log('enhance', file);
@@ -1499,6 +1607,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__("./app/components/single-file-select/index.ts"));
 __export(__webpack_require__("./app/components/multiple-file-select/index.ts"));
 __export(__webpack_require__("./app/components/image-file-manipulation/index.ts"));
+__export(__webpack_require__("./app/components/file-picker/index.ts"));
 
 
 /***/ }),
@@ -1521,7 +1630,7 @@ __export(__webpack_require__("./app/components/multiple-file-select/multiple-fil
 /***/ (function(module, exports, __webpack_require__) {
 
 
-        var result = __webpack_require__("../node_modules/css-loader/index.js?{\"sourceMap\":true}!../node_modules/postcss-loader/lib/index.js?{\"sourceMap\":true}!../node_modules/resolve-url-loader/index.js?{\"sourceMap\":true}!./app/components/multiple-file-select/multiple-file-select.component.css");
+        var result = __webpack_require__("../node_modules/css-loader/index.js??ref--2-1!../node_modules/postcss-loader/lib/index.js??ref--2-2!../node_modules/resolve-url-loader/index.js??ref--2-3!./app/components/multiple-file-select/multiple-file-select.component.css");
 
         if (typeof result === "string") {
             module.exports = result;
@@ -1535,7 +1644,7 @@ __export(__webpack_require__("./app/components/multiple-file-select/multiple-fil
 /***/ "./app/components/multiple-file-select/multiple-file-select.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<fs-file (selected)=\"selected($event)\" multiple=\"true\">\n  <button mat-raised-button color=\"primary\">Select File</button>\n</fs-file>\n\n<fs-file-queue [files]=\"files\">\n  <ng-template fs-file-queue-action placement=\"top-right\" action=\"remove\" tooltip=\"Remove\">\n    <mat-icon>close</mat-icon>\n  </ng-template>\n</fs-file-queue>\n\n<fieldset *ngIf=\"filesJsonInfo.length > 0\">\n  <legend>File</legend>\n  <pre>{{ filesJsonInfo | json }}</pre>\n</fieldset>\n"
+module.exports = "<fs-file (select)=\"select($event)\" multiple=\"true\">\n  <button mat-raised-button color=\"primary\">Select File</button>\n</fs-file>\n\n<fs-file-previews [files]=\"files\">\n  <ng-template fs-file-preview-action placement=\"top-right\" action=\"remove\" tooltip=\"Remove\">\n    <mat-icon>close</mat-icon>\n  </ng-template>\n</fs-file-previews>\n\n<fieldset *ngIf=\"filesJsonInfo.length > 0\">\n  <legend>Files</legend>\n  <pre>{{ filesJsonInfo | json }}</pre>\n</fieldset>\n"
 
 /***/ }),
 
@@ -1557,10 +1666,9 @@ var MultipleFileSelectComponent = (function () {
         this.files = [];
         this.filesJsonInfo = [];
     }
-    MultipleFileSelectComponent.prototype.selected = function (files) {
+    MultipleFileSelectComponent.prototype.select = function (files) {
         (_a = this.files).push.apply(_a, files);
-        (_b = this.filesJsonInfo).push.apply(_b, files.map(function (file) { return file.toJson(); }));
-        var _a, _b;
+        var _a;
     };
     MultipleFileSelectComponent = __decorate([
         core_1.Component({
@@ -1594,7 +1702,7 @@ __export(__webpack_require__("./app/components/single-file-select/single-file-se
 /***/ (function(module, exports, __webpack_require__) {
 
 
-        var result = __webpack_require__("../node_modules/css-loader/index.js?{\"sourceMap\":true}!../node_modules/postcss-loader/lib/index.js?{\"sourceMap\":true}!../node_modules/resolve-url-loader/index.js?{\"sourceMap\":true}!./app/components/single-file-select/single-file-select.component.css");
+        var result = __webpack_require__("../node_modules/css-loader/index.js??ref--2-1!../node_modules/postcss-loader/lib/index.js??ref--2-2!../node_modules/resolve-url-loader/index.js??ref--2-3!./app/components/single-file-select/single-file-select.component.css");
 
         if (typeof result === "string") {
             module.exports = result;
@@ -1608,7 +1716,7 @@ __export(__webpack_require__("./app/components/single-file-select/single-file-se
 /***/ "./app/components/single-file-select/single-file-select.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<fs-file (selected)=\"selected($event)\">\n  <button mat-raised-button color=\"primary\">Select File</button>\n</fs-file>\n\n<fieldset *ngIf=\"file\">\n  <legend>File</legend>\n  <pre>{{ file.toJson() | json }}</pre>\n</fieldset>\n\n"
+module.exports = "<fs-file (select)=\"select($event)\">\n  <button mat-raised-button color=\"primary\">Select File</button>\n</fs-file>\n\n<fieldset *ngIf=\"file\">\n  <legend>File</legend>\n  <pre>{{ file | json }}</pre>\n</fieldset>\n\n"
 
 /***/ }),
 
@@ -1629,8 +1737,8 @@ var SingleFileSelectComponent = (function () {
     function SingleFileSelectComponent() {
         this.file = void 0;
     }
-    SingleFileSelectComponent.prototype.selected = function (files) {
-        this.file = files[0];
+    SingleFileSelectComponent.prototype.select = function (file) {
+        this.file = file;
     };
     SingleFileSelectComponent = __decorate([
         core_1.Component({
@@ -1804,6 +1912,7 @@ var PlaygroundModule = (function () {
                 components_1.SingleFileSelectComponent,
                 components_1.MultipleFileSelectComponent,
                 components_1.ImageFileManipulationComponent,
+                components_1.FilePickerComponent
             ],
             providers: [],
         })
