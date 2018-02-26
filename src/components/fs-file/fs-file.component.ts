@@ -3,7 +3,8 @@ import {
   EventEmitter,
   Input,
   OnInit,
-  Output, ViewChild
+  Output,
+  ViewChild
 } from '@angular/core';
 import { FsFileService } from '../../services';
 import { FsUtil } from '@firestitch/common';
