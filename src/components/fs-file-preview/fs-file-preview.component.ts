@@ -3,22 +3,28 @@ import {
   Component,
   Input,
   Output,
-  OnInit,
+  AfterViewInit,
 } from '@angular/core';
 import * as FileAPI from 'fileapi';
 import { FsFile } from '../../models/fs-file';
+import { FsFilePreviewsBaseComponent } from '../fs-file-preview-base';
 
 @Component({
   selector: 'fs-file-preview',
   templateUrl: 'fs-file-preview.component.html',
   styleUrls: [ 'fs-file-preview.component.scss' ]
 })
-export class FsFilePreviewComponent implements OnInit {
+export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implements AfterViewInit {
 
   public file: FsFile;
   public preview: string;
-  @Input() public actions;
-  @Input() public actionsTemplate;
+
+  @Input() set _actions(value) {
+    this.actions.push(...value);
+  }
+  @Input() set _actionsTemplate(value) {
+    this.actionsTemplate.push(...value);
+  }
   @Input() public previewWidth = 150;
   @Input() public previewHeight = 150;
   @Input('file') set _file(file: FsFile) {
@@ -31,10 +37,10 @@ export class FsFilePreviewComponent implements OnInit {
   public filteredActions = [];
 
   constructor() {
-
+    super();
   }
 
-  public ngOnInit() {
+  public ngAfterViewInit() {
     this.cleanActions();
   }
 

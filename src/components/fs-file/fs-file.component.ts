@@ -1,5 +1,6 @@
 import {
   Component,
+  ElementRef,
   EventEmitter,
   Input,
   OnInit,
@@ -7,14 +8,14 @@ import {
   ViewChild
 } from '@angular/core';
 import { FsFileService } from '../../services';
-import { FsUtil } from '@firestitch/common';
+import { FsFileDragBaseComponent } from '../fs-file-drag-base';
 
 @Component({
   selector: 'fs-file',
   providers: [FsFileService],
   templateUrl: './fs-file.component.html'
 })
-export class FsFileComponent implements OnInit {
+export class FsFileComponent extends FsFileDragBaseComponent implements OnInit {
 
   @Input()
   set multiple(value) {
@@ -67,13 +68,13 @@ export class FsFileComponent implements OnInit {
 
   @ViewChild('fileInput') public fileInput: any;
 
-  public uniqId = this.fsUtil.guid();
-
-  constructor(public fsFile: FsFileService, public fsUtil: FsUtil) {
+  constructor(public fsFile: FsFileService, public el: ElementRef) {
+    super(el);
     this.select = this.fsFile.select;
   }
 
   public ngOnInit() {
     this.fsFile.initForElement(this.fileInput);
+    this.fsFile.initDragNDropForElement(this.el);
   }
 }

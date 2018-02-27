@@ -9,6 +9,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FsFilePreviewActionDirective } from '../../directives';
+import {FsFilePreviewsBaseComponent} from "../fs-file-preview-base";
 
 @Component({
   selector: 'fs-file-previews',
@@ -16,7 +17,7 @@ import { FsFilePreviewActionDirective } from '../../directives';
   styleUrls: [ 'fs-file-previews.component.scss' ],
   encapsulation: ViewEncapsulation.None
 })
-export class FsFilePreviewsComponent implements OnInit {
+export class FsFilePreviewsComponent extends FsFilePreviewsBaseComponent implements OnInit {
 
   @Input() public files;
   @Input() public previewWidth = 150;
@@ -24,28 +25,8 @@ export class FsFilePreviewsComponent implements OnInit {
 
   @HostBinding('class.queue') queue = true;
 
-  public actions;
-  public actionsTemplate;
-
-  @ContentChildren(FsFilePreviewActionDirective)
-  private set actionsParams(val: QueryList<FsFilePreviewActionDirective>) {
-    this.actions = val.toArray().map((action, index) => {
-      const newAction = Object.assign({}, action);
-      newAction.index = index;
-      if (newAction.forTypes && !Array.isArray(newAction.forTypes)) {
-        newAction.forTypes = newAction.forTypes.split(',').map((type) => type.trim());
-      }
-
-      return newAction;
-    });
-  }
-
-  @ContentChildren(FsFilePreviewActionDirective, {read: TemplateRef})
-  private set actionsTemplateRefs(val: QueryList<FsFilePreviewActionDirective>) {
-    this.actionsTemplate = val.toArray();
-  }
-
   constructor() {
+    super();
   }
 
   public ngOnInit() {

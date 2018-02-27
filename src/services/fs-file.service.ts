@@ -18,6 +18,7 @@ function* processors(list) {
 @Injectable()
 export class FsFileService {
 
+  public containerEl: any;
   public el: any;
   public select  = new EventEmitter();
 
@@ -125,6 +126,14 @@ export class FsFileService {
     }
   }
 
+  get previewWidth() {
+    return this._options.previewSizes && this._options.previewSizes.width
+  }
+
+  get previewHeight() {
+    return this._options.previewSizes && this._options.previewSizes.height
+  }
+
   /**
    * Initialize service for target element
    * @param el
@@ -134,11 +143,34 @@ export class FsFileService {
     this.onChanges();
   }
 
+  public initDragNDropForElement(el: ElementRef) {
+    this.containerEl = el.nativeElement;
+    this.onDrop();
+  }
+
   /**
    * Fire when input was changed
    */
   public onChanges() {
     FileAPI.event.on(this.el, 'change', (event) => {
+      const files = FileAPI.getFiles(event);
+
+      // Clear input value
+      this.el.value = null;
+
+      this.filterFiles(files).then((result: any) => {
+        if (result.files && result.files.length > 0) {
+          this.processFiles(result.files);
+        }
+      })
+    });
+  }
+
+  /**
+   * Fire when on root element was dropped file
+   */
+  public onDrop() {
+    FileAPI.event.on(this.containerEl, 'drop', (event) => {
       const files = FileAPI.getFiles(event);
 
       // Clear input value

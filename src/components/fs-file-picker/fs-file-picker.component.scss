@@ -1,33 +1,46 @@
 :host {
-}
+  &.dragover {
+    .select {
+      border: 2px #07a8e6 dashed;
+      color: #07a8e6;
 
-:host ::ng-deep {
-    label {
-        text-align: center;
-        border: 1px solid #ddd;
-        border-radius: 3px;
-        width: 150px;
-        height: 150px;
-        display: inline-block;
-        padding: 10px;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        box-sizing: border-box;
+      button {
+        display: none;
+      }
+
+      .mat-icon {
+        color: #07a8e6;
+      }
     }
+  }
 }
 
-mat-icon {
+.select {
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  width: 150px;
+  height: 150px;
+  display: table-cell;
+  vertical-align: middle;
+  padding: 10px;
+  justify-content: center;
+  flex-direction: column;
+  box-sizing: border-box;
+
+
+  mat-icon {
     transform: scale(1.8);
     color: #ddd;
+  }
 }
 
 .instruction {
-    font-size: 12px;
-    padding: 8px 0;
+  font-size: 12px;
+  padding: 8px 0;
 }
 
-.label {  
-    transform: scale(.75) translateZ(.001px);
-    transform-origin: 0 0;    
+.label {
+  transform: scale(.75) translateZ(.001px);
+  transform-origin: 0 0;
 }

@@ -25,6 +25,7 @@ import { FsFilePreviewActionDirective } from './directives';
   exports: [
     FsFileComponent,
     FsFilePreviewsComponent,
+    FsFilePreviewComponent,
     FsFilePreviewActionDirective,
     FsFilePickerComponent
   ],

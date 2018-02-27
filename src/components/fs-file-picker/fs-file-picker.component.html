@@ -1,27 +1,32 @@
 <div class="label"><ng-content select="[fs-file-label]"></ng-content></div>
 <div *ngIf="file; else preview">
-  <fs-file-preview [file]="file">
-    <ng-template fs-file-preview-action placement="top-right" action="remove" tooltip="Remove">
+  <fs-file-preview class="preview"
+                   (remove)="removeFile($event)"
+                   [file]="file"
+                   [previewWidth]="fsFile.previewWidth"
+                   [previewHeight]="fsFile.previewHeight">
+    <ng-template fs-file-preview-action placement="bottom-left" action="remove" tooltip="Remove">
       <mat-icon>close</mat-icon>
     </ng-template>
-    <ng-template fs-file-preview-action placement="bottom-right" tooltip="Reupload">
+    <ng-template fs-file-preview-action placement="bottom-right" tooltip="Reupload" (click)="fileInput.click()">
       <mat-icon>cloud_upload</mat-icon>
     </ng-template>
   </fs-file-preview>
 </div>
 
 <ng-template #preview>
- <fs-file (select)="select($event)"
-          accept="accept"
-          multiple="false"
-          imageQuality="imageQuality"
-          imageMaxWidth="imageMaxWidth"
-          imageMaxHeight="imageMaxHeight">
-    <div class="select">
-      <mat-icon>cloud_upload</mat-icon>
-      <div class="instruction">{{instruction}}</div>
-      <button mat-raised-button color="primary">Upload</button>
-    </div>
-  </fs-file>
+  <div class="select" (click)="fileInput.click()">
+    <mat-icon>cloud_upload</mat-icon>
+    <div class="instruction">{{instruction}}</div>
+    <button mat-raised-button color="primary">Upload</button>
+  </div>
 </ng-template>
+
+<input type="file"
+       [hidden]="true"
+       [disabled]="fsFile.disabled"
+       [multiple]="fsFile.multiple"
+       [attr.accept]="fsFile.accept"
+       #fileInput
+>
 
