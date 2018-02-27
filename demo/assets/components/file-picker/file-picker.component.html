@@ -1,3 +1,8 @@
-<fs-file-picker>
+<fs-file-picker (select)="select($event)">
     <div fs-file-label>File Picker Label</div>
 </fs-file-picker>
+
+<fieldset *ngIf="file">
+  <legend>File</legend>
+  <pre>{{ file | json }}</pre>
+</fieldset>

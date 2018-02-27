@@ -72,36 +72,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (activeMenu) {
         activeLink = document.querySelector('.' + activeMenuClass + ' .active');
-        if (activeLink) {
-            activeMenu.scrollTop = activeLink.offsetTop;
-            if (activeLink.innerHTML.toLowerCase().indexOf('readme') != -1 || activeLink.innerHTML.toLowerCase().indexOf('overview') != -1) {
-                activeMenu.scrollTop = 0;
-            }
-            var linkType = activeLink.getAttribute('data-type');
-            if (linkType === 'entity-link') {
-                var parentLi = activeLink.parentNode,
-                    parentUl,
-                    parentChapterMenu;
-                if (parentLi) {
-                    parentUl = parentLi.parentNode;
-                    if (parentUl) {
-                        parentChapterMenu = parentUl.parentNode;
-                        if (parentChapterMenu) {
-                            var toggler = parentChapterMenu.querySelector('.menu-toggler'),
-                                elementIconChild = toggler.getElementsByClassName(faAngleUpClass)[0];
-                            if (toggler && !elementIconChild) {
-                                toggler.click();
-                            }
+        activeMenu.scrollTop = activeLink.offsetTop;
+        if (activeLink.innerHTML.toLowerCase().indexOf('readme') != -1 || activeLink.innerHTML.toLowerCase().indexOf('overview') != -1) {
+            activeMenu.scrollTop = 0;
+        }
+        var linkType = activeLink.getAttribute('data-type');
+        if (linkType === 'entity-link') {
+            var parentLi = activeLink.parentNode,
+                parentUl,
+                parentChapterMenu;
+            if (parentLi) {
+                parentUl = parentLi.parentNode;
+                if (parentUl) {
+                    parentChapterMenu = parentUl.parentNode;
+                    if (parentChapterMenu) {
+                        var toggler = parentChapterMenu.querySelector('.menu-toggler'),
+                            elementIconChild = toggler.getElementsByClassName(faAngleUpClass)[0];
+                        if (toggler && !elementIconChild) {
+                            toggler.click();
                         }
                     }
                 }
-    
-            } else if (linkType === 'chapter-link') {
-                var toggler = activeLink.querySelector('.menu-toggler');
-                if (toggler) {
-                    toggler.click();
-                }
+            }
+
+        } else if (linkType === 'chapter-link') {
+            var toggler = activeLink.querySelector('.menu-toggler');
+            if (toggler) {
+                toggler.click();
             }
         }
+
     }
 });

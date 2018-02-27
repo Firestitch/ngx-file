@@ -6,9 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: [ 'file-picker.component.css' ]
 })
 export class FilePickerComponent {
-  public file = null;
-  
+  public file = void 0;
+
   public select(file) {
-    this.file = file;
   }
 }

@@ -58,11 +58,10 @@
                     link = './';
                     break;
                 case 1:
+                    link = '../';
+                    break;
                 case 2:
-                case 3:
-                case 4:
-                case 5:
-                    link = '../'.repeat(COMPODOC_CURRENT_PAGE_DEPTH);
+                    link = '../../';
                     break;
             }
 
