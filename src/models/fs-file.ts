@@ -21,7 +21,8 @@ export class FsFile {
   }
 
   get typeImage(): any {
-    return !!this.type.match(/^image/i);
+    return !!this.type
+      .match(/^image\/(gif|jpeg|pjpeg|png|svg\+xml|tiff|vnd\.microsoft\.icon|vnd\.wap\.wbmp|webp)/i);
   }
 
   public parseInfo(info) {
