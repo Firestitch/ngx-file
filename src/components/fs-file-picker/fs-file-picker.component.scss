@@ -12,6 +12,22 @@
         color: #07a8e6;
       }
     }
+    ::ng-deep {
+      .preview-container {
+        &:after {
+          content: "";
+          width: 98%;
+          display: block;
+          height: 98%;
+          position: absolute;
+          left: 0;
+          top: 0;
+          border: 2px #07a8e6 dashed;
+          background: #07a8e6;
+          opacity: 0.4;
+        }
+      }
+    }
   }
 }
 
