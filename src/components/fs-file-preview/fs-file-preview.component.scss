@@ -70,6 +70,7 @@
   &:hover .file-name {
     overflow: visible;
     white-space: normal;
+    word-wrap: break-word;
   }
 
   &.preview {
