@@ -78,9 +78,16 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
       .preview(this.previewWidth, this.previewHeight)
       .get((err, img) => {
         FileAPI.readAsDataURL(img, (event) => {
-          if (event.type === 'load') {
-            this.preview = event.result;
-            file.progress = false;
+          switch (event.type) {
+            case 'load': {
+              this.preview = event.result;
+              file.progress = false;
+            } break;
+
+            case 'error': {
+              alert(`Image preview error for file ${file.name}`);
+              file.progress = false;
+            } break;
           }
         });
       });

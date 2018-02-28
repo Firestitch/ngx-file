@@ -3,8 +3,8 @@
   <fs-file-preview class="preview"
                    (remove)="removeFile($event)"
                    [file]="file"
-                   [previewWidth]="fsFile.previewWidth"
-                   [previewHeight]="fsFile.previewHeight">
+                   [previewWidth]="previewWidth"
+                   [previewHeight]="previewHeight">
     <ng-template fs-file-preview-action placement="bottom-left" action="remove" tooltip="Remove">
       <mat-icon>close</mat-icon>
     </ng-template>

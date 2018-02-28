@@ -26,7 +26,6 @@ export class FsFileService {
     disabled: false,
     multiple: false,
     preview: false,
-    previewSizes: { width: 150, height: 150 },
     accept: [],
     minSize: void 0,
     maxSize: void 0,
@@ -104,36 +103,6 @@ export class FsFileService {
     return this._options.disabled;
   }
 
-  set preview(value) {
-
-    this._options.preview = !!value && value !== 'false';
-
-    if (this._options.preview) {
-      if (typeof value == 'string' || value instanceof String) {
-        const [width, height] = value.split('x').map((val) => +val);
-
-        if (width && height) {
-          this._options.previewSizes.width = width;
-          this._options.previewSizes.height = height;
-        } else if (width && !height) {
-          this._options.previewSizes.width = width;
-          this._options.previewSizes.height = width;
-        } else if (height && !width) {
-          this._options.previewSizes.width = height;
-          this._options.previewSizes.height = height;
-        }
-      }
-    }
-  }
-
-  get previewWidth() {
-    return this._options.previewSizes && this._options.previewSizes.width
-  }
-
-  get previewHeight() {
-    return this._options.previewSizes && this._options.previewSizes.height
-  }
-
   /**
    * Initialize service for target element
    * @param el
@@ -205,9 +174,12 @@ export class FsFileService {
         const resFilePromise = new Promise((resolve, reject) => {
           this.applyProcessors(file, processorsIter, resolve, reject);
         });
-        processedFiles.push(resFilePromise);
-      } else {
-        processedFiles.push(file);
+        resFilePromise.then(
+          () => {},
+          (error) => {
+            this.alertImageProcessingError(error.file);
+          }
+        );
       }
     });
   }
@@ -340,7 +312,7 @@ export class FsFileService {
             file.parseInfo(result);
             this.applyProcessors(file, processorsIter, resolve, reject);
           }).catch((error) => {
-            reject(error);
+            reject({ error, file });
           })
         } break;
 
@@ -349,7 +321,7 @@ export class FsFileService {
             this.changeQuality(file).then((resultFile: FsFile) => {
               this.applyProcessors(resultFile, processorsIter, resolve, reject);
             }).catch((error) => {
-              reject(error);
+              reject({ error, file });
             })
           } else {
             this.applyProcessors(file, processorsIter, resolve, reject);
@@ -361,7 +333,7 @@ export class FsFileService {
             this.changeImageFormat(file).then((resultFile: FsFile) => {
               this.applyProcessors(resultFile, processorsIter, resolve, reject);
             }).catch((error) => {
-              reject(error);
+              reject({ error, file });
             })
           } else {
             this.applyProcessors(file, processorsIter, resolve, reject);
@@ -372,5 +344,9 @@ export class FsFileService {
       file.progress = this._options.preview;
       resolve(file);
     }
+  }
+
+  private alertImageProcessingError(file) {
+    alert(`File ${file.name} can't be processed as image. File was rejected`);
   }
 }

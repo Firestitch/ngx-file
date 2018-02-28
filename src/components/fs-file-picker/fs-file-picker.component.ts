@@ -19,11 +19,6 @@ import {FsFileDragBaseComponent} from '../fs-file-drag-base';
 export class FsFilePickerComponent extends FsFileDragBaseComponent implements OnInit {
 
   @Input()
-  set preview(value) {
-    this.fsFile.preview = value;
-  }
-
-  @Input()
   set multiple(value) {
     this.fsFile.multiple = value;
   }
@@ -67,6 +62,9 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
   set disabled(value) {
     this.fsFile.disabled = value;
   }
+
+  @Input() public previewWidth = 150;
+  @Input() public previewHeight = 150;
 
   @Output('select') public select = new EventEmitter<any>();
 
