@@ -997,7 +997,7 @@
 
 
     <div class="tab-pane fade" id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div [style.width.px]&#x3D;&quot;previewWidth&quot; [style.height.px]&#x3D;&quot;previewHeight&quot;&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div [style.width.px]&#x3D;&quot;previewWidth&quot; [style.height.px]&#x3D;&quot;previewHeight&quot; class&#x3D;&quot;preview-container&quot;&gt;
 
   &lt;!-- Progress container --&gt;
   &lt;ng-container *ngIf&#x3D;&quot;file.progress; else elsePreview&quot;&gt;
@@ -1054,7 +1054,7 @@
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div [style.width.px]="previewWidth" [style.height.px]="previewHeight">  <!-- Progress container -->  <ng-container *ngIf="file.progress; else elsePreview">    <mat-spinner class="spinner" [diameter]="previewWidth/2"></mat-spinner>  </ng-container>  <!-- Image container -->  <ng-template #elsePreview>    <ng-container *ngIf="file.typeImage; else nonImage">      <img [src]="preview">    </ng-container>    <!-- Non image container -->    <ng-template #nonImage>        <div class="file-ext">{{file.extension}}</div>        <div class="file-name" [matTooltip]="file.name">{{file.name}}</div>    </ng-template>  </ng-template></div><!-- Actions --><div class="actions">  <button class="action" mat-mini-fab color="primary"          *ngFor="let action of filteredActions"          [ngClass]="getActionClasses(action)"          [matTooltip]="action.tooltip"          (click)="callAction(action)">    <ng-template [ngTemplateOutlet]="actionsTemplate[action.index]"></ng-template>  </button></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div [style.width.px]="previewWidth" [style.height.px]="previewHeight" class="preview-container">  <!-- Progress container -->  <ng-container *ngIf="file.progress; else elsePreview">    <mat-spinner class="spinner" [diameter]="previewWidth/2"></mat-spinner>  </ng-container>  <!-- Image container -->  <ng-template #elsePreview>    <ng-container *ngIf="file.typeImage; else nonImage">      <img [src]="preview">    </ng-container>    <!-- Non image container -->    <ng-template #nonImage>        <div class="file-ext">{{file.extension}}</div>        <div class="file-name" [matTooltip]="file.name">{{file.name}}</div>    </ng-template>  </ng-template></div><!-- Actions --><div class="actions">  <button class="action" mat-mini-fab color="primary"          *ngFor="let action of filteredActions"          [ngClass]="getActionClasses(action)"          [matTooltip]="action.tooltip"          (click)="callAction(action)">    <ng-template [ngTemplateOutlet]="actionsTemplate[action.index]"></ng-template>  </button></div></div>'
     var COMPONENTS = [{'name': 'FsFileComponent', 'selector': 'fs-file'},{'name': 'FsFileDragBaseComponent', 'selector': 'fs-file-drag-base'},{'name': 'FsFilePickerComponent', 'selector': 'fs-file-picker'},{'name': 'FsFilePreviewComponent', 'selector': 'fs-file-preview'},{'name': 'FsFilePreviewsBaseComponent', 'selector': 'fs-file-previews-base'},{'name': 'FsFilePreviewsComponent', 'selector': 'fs-file-previews'}];
     var DIRECTIVES = [{'name': 'FsFilePreviewActionDirective', 'selector': '[fs-file-preview-action]'}];
     var ACTUAL_COMPONENT = {'name': 'FsFilePreviewComponent'};
