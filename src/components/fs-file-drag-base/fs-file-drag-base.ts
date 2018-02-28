@@ -17,13 +17,6 @@ export class FsFileDragBaseComponent {
     }
   }
 
-  @HostListener('dragleave', ['$event'])
-  public onDragLeaveElement(event) {
-    if (!this.el.nativeElement.contains(event.target)) {
-      this.fileOverTarget = false;
-    }
-  }
-
   @HostListener('window:drop', ['$event'])
   public onDrop(event) {
     if (this.fileOverTarget) {
@@ -38,6 +31,10 @@ export class FsFileDragBaseComponent {
     if (this.fileOverTarget) {
       event.preventDefault();
       event.stopPropagation();
+
+      if (!this.el.nativeElement.contains(event.target)) {
+        this.fileOverTarget = false;
+      }
     }
   }
 }
