@@ -1,18 +1,20 @@
-<div class="label"><ng-content select="[fs-file-label]"></ng-content></div>
-<div *ngIf="file; else preview">
-  <fs-file-preview class="preview"
-                   (remove)="removeFile($event)"
-                   [file]="file"
-                   [previewWidth]="previewWidth"
-                   [previewHeight]="previewHeight">
-    <ng-template fs-file-preview-action placement="bottom-left" action="remove" tooltip="Remove">
-      <mat-icon>close</mat-icon>
-    </ng-template>
-    <ng-template fs-file-preview-action placement="bottom-right" tooltip="Reupload" (click)="fileInput.click()">
-      <mat-icon>cloud_upload</mat-icon>
-    </ng-template>
-  </fs-file-preview>
+<div class="label"
+     [ngStyle]="{'width.px': previewWidth || 150}">
+  <ng-content select="[fs-file-label]"></ng-content>
 </div>
+<fs-file-preview class="preview"
+                 *ngIf="file; else preview"
+                 (remove)="removeFile($event)"
+                 [file]="file"
+                 [previewWidth]="previewWidth"
+                 [previewHeight]="previewHeight">
+  <ng-template fs-file-preview-action placement="bottom-left" action="remove" tooltip="Remove">
+    <mat-icon>close</mat-icon>
+  </ng-template>
+  <ng-template fs-file-preview-action placement="bottom-right" tooltip="Reupload" (click)="fileInput.click()">
+    <mat-icon>cloud_upload</mat-icon>
+  </ng-template>
+</fs-file-preview>
 
 <ng-template #preview>
   <div class="select" (click)="fileInput.click()">
