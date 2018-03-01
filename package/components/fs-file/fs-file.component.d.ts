@@ -1,9 +1,9 @@
-import { EventEmitter, OnInit } from '@angular/core';
+import { ElementRef, EventEmitter, OnInit } from '@angular/core';
 import { FsFileService } from '../../services';
-import { FsUtil } from '@firestitch/common';
-export declare class FsFileComponent implements OnInit {
+import { FsFileDragBaseComponent } from '../fs-file-drag-base';
+export declare class FsFileComponent extends FsFileDragBaseComponent implements OnInit {
     fsFile: FsFileService;
-    fsUtil: FsUtil;
+    el: ElementRef;
     multiple: any;
     accept: any;
     minSize: any;
@@ -13,11 +13,9 @@ export declare class FsFileComponent implements OnInit {
     imageQuality: any;
     imageFormat: any;
     disabled: any;
-    preview: any;
     imageFixOrientation: boolean;
-    selected: EventEmitter<any>;
+    select: EventEmitter<any>;
     fileInput: any;
-    uniqId: string;
-    constructor(fsFile: FsFileService, fsUtil: FsUtil);
+    constructor(fsFile: FsFileService, el: ElementRef);
     ngOnInit(): void;
 }

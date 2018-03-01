@@ -34,15 +34,18 @@ var FsFileModule = (function () {
             ],
             exports: [
                 components_1.FsFileComponent,
-                components_1.FsFileQueueComponent,
-                directives_1.FsFileQueueActionDirective,
+                components_1.FsFilePreviewsComponent,
+                components_1.FsFilePreviewComponent,
+                directives_1.FsFilePreviewActionDirective,
+                components_1.FsFilePickerComponent
             ],
             entryComponents: [],
             declarations: [
                 components_1.FsFileComponent,
-                components_1.FsFileQueueComponent,
-                components_1.FsFileQueuePreviewComponent,
-                directives_1.FsFileQueueActionDirective,
+                components_1.FsFilePreviewsComponent,
+                components_1.FsFilePreviewComponent,
+                directives_1.FsFilePreviewActionDirective,
+                components_1.FsFilePickerComponent
             ],
             providers: [],
         })

@@ -1,33 +1,23 @@
 export declare class FsFile {
     progress: boolean;
-    imageWidth: null;
-    imageHeight: null;
-    previewWidth: null;
-    previewHeight: null;
-    private _file;
-    private _preview;
-    private _ext;
-    constructor(file: File);
+    imageWidth: number;
+    imageHeight: number;
     file: File;
-    readonly name: string;
-    readonly type: string;
-    readonly size: number;
-    preview: string;
-    readonly extension: string;
-    readonly typeImage: RegExpMatchArray;
+    extension: string;
+    name: string;
+    type: string;
+    size: number;
+    constructor(file: File);
+    readonly typeImage: any;
     parseInfo(info: any): void;
-    toJson(): {
-        file: File;
+    toObject(): {
         name: string;
         type: string;
         size: number;
         progress: boolean;
-        preview: string;
-        extrension: string;
-        typeImage: RegExpMatchArray;
-        imageWidth: null;
-        imageHeight: null;
-        previewWidth: null;
-        previewHeight: null;
+        extension: string;
+        typeImage: any;
+        imageWidth: number;
+        imageHeight: number;
     };
 }

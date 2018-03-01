@@ -1253,21 +1253,23 @@
 
 
     <div class="tab-pane fade" id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;label&quot;&gt;&lt;ng-content select&#x3D;&quot;[fs-file-label]&quot;&gt;&lt;/ng-content&gt;&lt;/div&gt;
-&lt;div *ngIf&#x3D;&quot;file; else preview&quot;&gt;
-  &lt;fs-file-preview class&#x3D;&quot;preview&quot;
-                   (remove)&#x3D;&quot;removeFile($event)&quot;
-                   [file]&#x3D;&quot;file&quot;
-                   [previewWidth]&#x3D;&quot;previewWidth&quot;
-                   [previewHeight]&#x3D;&quot;previewHeight&quot;&gt;
-    &lt;ng-template fs-file-preview-action placement&#x3D;&quot;bottom-left&quot; action&#x3D;&quot;remove&quot; tooltip&#x3D;&quot;Remove&quot;&gt;
-      &lt;mat-icon&gt;close&lt;/mat-icon&gt;
-    &lt;/ng-template&gt;
-    &lt;ng-template fs-file-preview-action placement&#x3D;&quot;bottom-right&quot; tooltip&#x3D;&quot;Reupload&quot; (click)&#x3D;&quot;fileInput.click()&quot;&gt;
-      &lt;mat-icon&gt;cloud_upload&lt;/mat-icon&gt;
-    &lt;/ng-template&gt;
-  &lt;/fs-file-preview&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;label&quot;
+     [ngStyle]&#x3D;&quot;{&#x27;width.px&#x27;: previewWidth || 150}&quot;&gt;
+  &lt;ng-content select&#x3D;&quot;[fs-file-label]&quot;&gt;&lt;/ng-content&gt;
 &lt;/div&gt;
+&lt;fs-file-preview class&#x3D;&quot;preview&quot;
+                 *ngIf&#x3D;&quot;file; else preview&quot;
+                 (remove)&#x3D;&quot;removeFile($event)&quot;
+                 [file]&#x3D;&quot;file&quot;
+                 [previewWidth]&#x3D;&quot;previewWidth&quot;
+                 [previewHeight]&#x3D;&quot;previewHeight&quot;&gt;
+  &lt;ng-template fs-file-preview-action placement&#x3D;&quot;bottom-left&quot; action&#x3D;&quot;remove&quot; tooltip&#x3D;&quot;Remove&quot;&gt;
+    &lt;mat-icon&gt;close&lt;/mat-icon&gt;
+  &lt;/ng-template&gt;
+  &lt;ng-template fs-file-preview-action placement&#x3D;&quot;bottom-right&quot; tooltip&#x3D;&quot;Reupload&quot; (click)&#x3D;&quot;fileInput.click()&quot;&gt;
+    &lt;mat-icon&gt;cloud_upload&lt;/mat-icon&gt;
+  &lt;/ng-template&gt;
+&lt;/fs-file-preview&gt;
 
 &lt;ng-template #preview&gt;
   &lt;div class&#x3D;&quot;select&quot; (click)&#x3D;&quot;fileInput.click()&quot;&gt;
@@ -1311,7 +1313,7 @@
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="label"><ng-content select="[fs-file-label]"></ng-content></div><div *ngIf="file; else preview">  <fs-file-preview class="preview"                   (remove)="removeFile($event)"                   [file]="file"                   [previewWidth]="previewWidth"                   [previewHeight]="previewHeight">    <ng-template fs-file-preview-action placement="bottom-left" action="remove" tooltip="Remove">      <mat-icon>close</mat-icon>    </ng-template>    <ng-template fs-file-preview-action placement="bottom-right" tooltip="Reupload" (click)="fileInput.click()">      <mat-icon>cloud_upload</mat-icon>    </ng-template>  </fs-file-preview></div><ng-template #preview>  <div class="select" (click)="fileInput.click()">    <mat-icon>cloud_upload</mat-icon>    <div class="instruction">{{instruction}}</div>    <button mat-raised-button color="primary">Upload</button>  </div></ng-template><input type="file"       [hidden]="true"       [disabled]="fsFile.disabled"       [multiple]="fsFile.multiple"       [attr.accept]="fsFile.accept"       #fileInput></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="label"     [ngStyle]="{\'width.px\': previewWidth || 150}">  <ng-content select="[fs-file-label]"></ng-content></div><fs-file-preview class="preview"                 *ngIf="file; else preview"                 (remove)="removeFile($event)"                 [file]="file"                 [previewWidth]="previewWidth"                 [previewHeight]="previewHeight">  <ng-template fs-file-preview-action placement="bottom-left" action="remove" tooltip="Remove">    <mat-icon>close</mat-icon>  </ng-template>  <ng-template fs-file-preview-action placement="bottom-right" tooltip="Reupload" (click)="fileInput.click()">    <mat-icon>cloud_upload</mat-icon>  </ng-template></fs-file-preview><ng-template #preview>  <div class="select" (click)="fileInput.click()">    <mat-icon>cloud_upload</mat-icon>    <div class="instruction">{{instruction}}</div>    <button mat-raised-button color="primary">Upload</button>  </div></ng-template><input type="file"       [hidden]="true"       [disabled]="fsFile.disabled"       [multiple]="fsFile.multiple"       [attr.accept]="fsFile.accept"       #fileInput></div>'
     var COMPONENTS = [{'name': 'FsFileComponent', 'selector': 'fs-file'},{'name': 'FsFileDragBaseComponent', 'selector': 'fs-file-drag-base'},{'name': 'FsFilePickerComponent', 'selector': 'fs-file-picker'},{'name': 'FsFilePreviewComponent', 'selector': 'fs-file-preview'},{'name': 'FsFilePreviewsBaseComponent', 'selector': 'fs-file-previews-base'},{'name': 'FsFilePreviewsComponent', 'selector': 'fs-file-previews'}];
     var DIRECTIVES = [{'name': 'FsFilePreviewActionDirective', 'selector': '[fs-file-preview-action]'}];
     var ACTUAL_COMPONENT = {'name': 'FsFilePickerComponent'};
