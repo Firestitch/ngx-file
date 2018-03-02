@@ -1,6 +1,6 @@
 webpackJsonp([2],{
 
-/***/ "../node_modules/css-loader/index.js?{\"sourceMap\":true}!../node_modules/postcss-loader/lib/index.js?{\"sourceMap\":true}!../node_modules/resolve-url-loader/index.js?{\"sourceMap\":true}!../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../src/components/fs-file-picker/fs-file-picker.component.scss":
+/***/ "../node_modules/css-loader/index.js??ref--2-1!../node_modules/postcss-loader/lib/index.js??ref--2-2!../node_modules/resolve-url-loader/index.js??ref--2-3!./app/components/file-picker/file-picker.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")(true);
@@ -8,14 +8,14 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, ":host.dragover .select {\n  border: 2px #07a8e6 dashed;\n  color: #07a8e6;\n}\n\n:host.dragover .select button {\n  display: none;\n}\n\n:host.dragover .select .mat-icon {\n  color: #07a8e6;\n}\n\n:host.dragover ::ng-deep .preview-container:after {\n  content: \"\";\n  width: 98%;\n  display: block;\n  height: 98%;\n  position: absolute;\n  left: 0;\n  top: 0;\n  border: 2px #07a8e6 dashed;\n  background: #07a8e6;\n  opacity: 0.4;\n}\n\n.select {\n  text-align: center;\n  border: 1px solid #ddd;\n  border-radius: 3px;\n  width: 150px;\n  height: 150px;\n  display: table-cell;\n  vertical-align: middle;\n  padding: 10px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n\n.select mat-icon {\n  -webkit-transform: scale(1.8);\n          transform: scale(1.8);\n  color: #ddd;\n}\n\n.instruction {\n  font-size: 12px;\n  padding: 8px 0;\n}\n\n.label {\n  -webkit-transform: scale(0.75) translateZ(0.001px);\n          transform: scale(0.75) translateZ(0.001px);\n  -webkit-transform-origin: 0 0;\n          transform-origin: 0 0;\n}\n\n", "", {"version":3,"sources":["/Users/Basters/dev/firestitch/fs-file/src/components/fs-file-picker/src/components/fs-file-picker/fs-file-picker.component.scss","/Users/Basters/dev/firestitch/fs-file/fs-file-picker.component.scss"],"names":[],"mappings":"AAAA;EAGM,2BAAA;EACA,eAAA;CCDL;;ADHD;EAOQ,cAAA;CCAP;;ADPD;EAWQ,eAAA;CCAP;;ADXD;EAiBU,YAAA;EACA,WAAA;EACA,eAAA;EACA,YAAA;EACA,mBAAA;EACA,QAAA;EACA,OAAA;EACA,2BAAA;EACA,oBAAA;EACA,aAAA;CCFT;;ADSD;EACE,mBAAA;EACA,uBAAA;EACA,mBAAA;EACA,aAAA;EACA,cAAA;EACA,oBAAA;EACA,uBAAA;EACA,cAAA;EACA,yBAAA;MAAA,sBAAA;UAAA,wBAAA;EACA,6BAAA;EAAA,8BAAA;MAAA,2BAAA;UAAA,uBAAA;EACA,+BAAA;UAAA,uBAAA;CCND;;ADLD;EAeI,8BAAA;UAAA,sBAAA;EACA,YAAA;CCNH;;ADUD;EACE,gBAAA;EACA,eAAA;CCPD;;ADUD;EACE,mDAAA;UAAA,2CAAA;EACA,8BAAA;UAAA,sBAAA;CCPD","file":"fs-file-picker.component.scss","sourcesContent":[":host {\n  &.dragover {\n    .select {\n      border: 2px #07a8e6 dashed;\n      color: #07a8e6;\n\n      button {\n        display: none;\n      }\n\n      .mat-icon {\n        color: #07a8e6;\n      }\n    }\n    ::ng-deep {\n      .preview-container {\n        &:after {\n          content: \"\";\n          width: 98%;\n          display: block;\n          height: 98%;\n          position: absolute;\n          left: 0;\n          top: 0;\n          border: 2px #07a8e6 dashed;\n          background: #07a8e6;\n          opacity: 0.4;\n        }\n      }\n    }\n  }\n}\n\n.select {\n  text-align: center;\n  border: 1px solid #ddd;\n  border-radius: 3px;\n  width: 150px;\n  height: 150px;\n  display: table-cell;\n  vertical-align: middle;\n  padding: 10px;\n  justify-content: center;\n  flex-direction: column;\n  box-sizing: border-box;\n\n\n  mat-icon {\n    transform: scale(1.8);\n    color: #ddd;\n  }\n}\n\n.instruction {\n  font-size: 12px;\n  padding: 8px 0;\n}\n\n.label {\n  transform: scale(.75) translateZ(.001px);\n  transform-origin: 0 0;\n}\n",":host.dragover .select {\n  border: 2px #07a8e6 dashed;\n  color: #07a8e6;\n}\n\n:host.dragover .select button {\n  display: none;\n}\n\n:host.dragover .select .mat-icon {\n  color: #07a8e6;\n}\n\n:host.dragover ::ng-deep .preview-container:after {\n  content: \"\";\n  width: 98%;\n  display: block;\n  height: 98%;\n  position: absolute;\n  left: 0;\n  top: 0;\n  border: 2px #07a8e6 dashed;\n  background: #07a8e6;\n  opacity: 0.4;\n}\n\n.select {\n  text-align: center;\n  border: 1px solid #ddd;\n  border-radius: 3px;\n  width: 150px;\n  height: 150px;\n  display: table-cell;\n  vertical-align: middle;\n  padding: 10px;\n  justify-content: center;\n  flex-direction: column;\n  box-sizing: border-box;\n}\n\n.select mat-icon {\n  transform: scale(1.8);\n  color: #ddd;\n}\n\n.instruction {\n  font-size: 12px;\n  padding: 8px 0;\n}\n\n.label {\n  transform: scale(0.75) translateZ(0.001px);\n  transform-origin: 0 0;\n}\n\n"],"sourceRoot":""}]);
+exports.push([module.i, ".queue {\n  margin-top: 10px;\n}", "", {"version":3,"sources":["C:/Projects/fs-file/playground/app/components/file-picker/C:/Projects/fs-file/file-picker.component.css"],"names":[],"mappings":"AAAA;EACE,iBAAA;CACD","file":"file-picker.component.css","sourcesContent":[".queue {\r\n  margin-top: 10px;\r\n}\r\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
 
-/***/ "../node_modules/css-loader/index.js?{\"sourceMap\":true}!../node_modules/postcss-loader/lib/index.js?{\"sourceMap\":true}!../node_modules/resolve-url-loader/index.js?{\"sourceMap\":true}!../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../src/components/fs-file-preview/fs-file-preview.component.scss":
+/***/ "../node_modules/css-loader/index.js??ref--2-1!../node_modules/postcss-loader/lib/index.js??ref--2-2!../node_modules/resolve-url-loader/index.js??ref--2-3!./app/components/image-file-manipulation/image-file-manipulation.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")(true);
@@ -23,14 +23,14 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, ".file-ext {\n  font-weight: bold;\n  text-align: center;\n  text-transform: uppercase;\n  padding: 15px 0;\n  font-size: 25px;\n}\n\n.file-name {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  padding: 0 5px;\n  font-size: 12px;\n  text-align: center;\n}\n\n.actions {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n}\n\n@media only screen and (max-width: 767.98px) {\n  .actions {\n    display: block;\n  }\n}\n\n@media only screen and (min-width: 768px) {\n  .actions {\n    display: none;\n    background: rgba(0, 0, 0, .5);\n  }\n}\n\n.actions .action {\n  position: absolute;\n  cursor: pointer;\n}\n\n.actions .action.top-left {\n  top: 5%;\n  right: 5%;\n}\n\n.actions .action.top-right {\n  top: 5%;\n  right: 5%;\n}\n\n.actions .action.bottom-left {\n  bottom: 5%;\n  left: 5%;\n}\n\n.actions .action.bottom-right {\n  bottom: 5%;\n  right: 5%;\n}\n\n.actions .action.mat-mini-fab {\n  width: 22%;\n  height: 22%;\n  min-width: 30px;\n  min-height: 30px;\n  max-width: 42px;\n  max-height: 42px;\n  line-height: 15px !important;\n}\n\n.actions .action.mat-mini-fab .mat-button-wrapper {\n  padding: 4px 0;\n  line-height: 15px !important;\n}\n\n:host:hover .file-name {\n  overflow: visible;\n  white-space: normal;\n  word-wrap: break-word;\n}\n\n:host.preview {\n  display: inline-block;\n  position: relative;\n  margin-right: 10px;\n  border: 1px #DDD solid;\n  vertical-align: top;\n  border-radius: 3px;\n}\n\n:host.preview:last-child {\n  margin-right: 0;\n}\n\n:host.preview:hover .actions,\n:host.preview:focus .actions {\n  display: block;\n}\n\n:host.preview img {\n  display: block;\n  border-radius: 3px;\n}\n\n:host ::ng-deep .mat-button-wrapper {\n  padding: 0;\n  line-height: 15px !important;\n}\n\n:host ::ng-deep .spinner {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin-left: -25%;\n  margin-top: -25%;\n}\n\n@media only screen and (max-width: 550px) {\n  .actions {\n    display: block;\n    background: none;\n  }\n}\n\n", "", {"version":3,"sources":["/Users/Basters/dev/firestitch/fs-file/src/components/fs-file-preview/src/components/fs-file-preview/fs-file-preview.component.scss","/Users/Basters/dev/firestitch/fs-file/fs-file-preview.component.scss","/Users/Basters/dev/firestitch/fs-file/src/components/fs-file-preview/src/styles/_mixins.scss"],"names":[],"mappings":"AAEA;EACE,kBAAA;EACA,mBAAA;EACA,0BAAA;EACA,gBAAA;EACA,gBAAA;CCDD;;ADID;EACE,oBAAA;EACA,iBAAA;EACA,wBAAA;EACA,eAAA;EACA,gBAAA;EACA,mBAAA;CCDD;;ADID;EACE,mBAAA;EAWA,YAAA;EACA,aAAA;EACA,OAAA;EACA,QAAA;CCXD;;ACSC;EFbF;IAII,eAAA;GCKD;CACF;;ACGC;EFbF;IAQI,cAAA;IACA,8BAAA;GCOD;CACF;;ADjBD;EAmBI,mBAAA;EACA,gBAAA;CCEH;;ADLC;EAMI,QAAA;EACA,UAAA;CCGL;;AD3BD;EA4BM,QAAA;EACA,UAAA;CCGL;;ADhCD;EAiCM,WAAA;EACA,SAAA;CCGL;;ADrCD;EAsCM,WAAA;EACA,UAAA;CCGL;;AD1CD;EA2CM,WAAA;EACA,YAAA;EACA,gBAAA;EACA,iBAAA;EACA,gBAAA;EACA,iBAAA;EACA,6BAAA;CCGL;;ADDK;EACE,eAAA;EACA,6BAAA;CCIP;;ADED;EAEI,kBAAA;EACA,oBAAA;EACA,sBAAA;CCAH;;ADGC;EACE,sBAAA;EACA,mBAAA;EACA,mBAAA;EACA,uBAAA;EACA,oBAAA;EACA,mBAAA;CCAH;;ADbD;EAgBM,gBAAA;CCCL;;ADjBD;;EAqBQ,eAAA;CCCP;;ADGG;EACE,eAAA;EACA,mBAAA;CCAL;;ADMD;EAEI,WAAA;EACA,6BAAA;CCJH;;ADCD;EAOI,mBAAA;EACA,SAAA;EACA,UAAA;EACA,kBAAA;EACA,iBAAA;CCJH;;ADQD;EACE;IACI,eAAA;IACA,iBAAA;GCLH;CACF","file":"fs-file-preview.component.scss","sourcesContent":["@import \"../../styles/mixins\";\n\n.file-ext {\n  font-weight: bold;\n  text-align: center;\n  text-transform: uppercase;\n  padding: 15px 0;\n  font-size: 25px;\n}\n\n.file-name {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  padding: 0 5px;\n  font-size: 12px;\n  text-align: center;\n}\n\n.actions {\n  position: absolute;\n\n  @include apply-to(less-than, phone) {\n    display: block;\n  }\n\n  @include apply-to(greater-than, phone) {\n    display: none;\n    background: rgba(0, 0, 0, 0.5);\n  }\n\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n\n  .action {\n\n    position: absolute;\n    cursor: pointer;\n\n    &.top-left {\n      top: 5%;\n      right: 5%;\n    }\n\n    &.top-right {\n      top: 5%;\n      right: 5%;\n    }\n\n    &.bottom-left {\n      bottom: 5%;\n      left: 5%;\n    }\n\n    &.bottom-right {\n      bottom: 5%;\n      right: 5%;\n    }\n\n    &.mat-mini-fab {\n      width: 22%;\n      height: 22%;\n      min-width: 30px;\n      min-height: 30px;\n      max-width: 42px;\n      max-height: 42px;\n      line-height: 15px !important;\n\n      .mat-button-wrapper {\n        padding: 4px 0;\n        line-height: 15px !important;\n      }\n    }\n  }\n}\n\n:host {\n  &:hover .file-name {\n    overflow: visible;\n    white-space: normal;\n    word-wrap: break-word;\n  }\n\n  &.preview {\n    display: inline-block;\n    position: relative;\n    margin-right: 10px;\n    border: 1px #DDD solid;\n    vertical-align: top;\n    border-radius: 3px;\n\n    &:last-child {\n      margin-right: 0;\n    }\n\n    &:hover, &:focus {\n      .actions {\n        display: block;\n      }\n    }\n\n    img {\n      display: block;\n      border-radius: 3px;\n    }\n  }\n\n}\n\n:host ::ng-deep {\n  .mat-button-wrapper {\n    padding: 0;\n    line-height: 15px !important;\n  }\n\n  .spinner {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    margin-left: -25%;\n    margin-top: -25%;\n  }\n}\n\n@media only screen and (max-width: 550px) {\n  .actions {\n      display: block;\n      background: none;\n  }\n}\n",".file-ext {\n  font-weight: bold;\n  text-align: center;\n  text-transform: uppercase;\n  padding: 15px 0;\n  font-size: 25px;\n}\n\n.file-name {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  padding: 0 5px;\n  font-size: 12px;\n  text-align: center;\n}\n\n.actions {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n}\n\n@media only screen and (max-width: 767.98px) {\n  .actions {\n    display: block;\n  }\n}\n\n@media only screen and (min-width: 768px) {\n  .actions {\n    display: none;\n    background: rgba(0, 0, 0, 0.5);\n  }\n}\n\n.actions .action {\n  position: absolute;\n  cursor: pointer;\n}\n\n.actions .action.top-left {\n  top: 5%;\n  right: 5%;\n}\n\n.actions .action.top-right {\n  top: 5%;\n  right: 5%;\n}\n\n.actions .action.bottom-left {\n  bottom: 5%;\n  left: 5%;\n}\n\n.actions .action.bottom-right {\n  bottom: 5%;\n  right: 5%;\n}\n\n.actions .action.mat-mini-fab {\n  width: 22%;\n  height: 22%;\n  min-width: 30px;\n  min-height: 30px;\n  max-width: 42px;\n  max-height: 42px;\n  line-height: 15px !important;\n}\n\n.actions .action.mat-mini-fab .mat-button-wrapper {\n  padding: 4px 0;\n  line-height: 15px !important;\n}\n\n:host:hover .file-name {\n  overflow: visible;\n  white-space: normal;\n  word-wrap: break-word;\n}\n\n:host.preview {\n  display: inline-block;\n  position: relative;\n  margin-right: 10px;\n  border: 1px #DDD solid;\n  vertical-align: top;\n  border-radius: 3px;\n}\n\n:host.preview:last-child {\n  margin-right: 0;\n}\n\n:host.preview:hover .actions,\n:host.preview:focus .actions {\n  display: block;\n}\n\n:host.preview img {\n  display: block;\n  border-radius: 3px;\n}\n\n:host ::ng-deep .mat-button-wrapper {\n  padding: 0;\n  line-height: 15px !important;\n}\n\n:host ::ng-deep .spinner {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin-left: -25%;\n  margin-top: -25%;\n}\n\n@media only screen and (max-width: 550px) {\n  .actions {\n    display: block;\n    background: none;\n  }\n}\n\n","@import \"variables\";\n\n\n@mixin apply-to($ltgt, $device) {\n  $extrema: null;\n  $boundary-target: null;\n  $delta: null;\n\n  @if $ltgt == less-than {\n    $extrema: max;\n    $delta: -1;\n  } @else if $ltgt == greater-than {\n    $extrema: min;\n    $delta: +1;\n  }\n\n  @if $device == phone {\n    @if $ltgt == less-than {\n      $boundary-target: $phone-width-max;\n    } @else if $ltgt == greater-than {\n      $boundary-target: $tablet-width-min;\n    }\n  } @else if $device == tablet {\n    @if $ltgt == less-than {\n      $boundary-target: $tablet-width-min;\n    } @else if $ltgt == greater-than {\n      $boundary-target: $tablet-width-max;\n    }\n  } @else if $device == desktop {\n    $boundary-target: $desktop-width-min;\n  }\n\n  @media only screen and (#{$extrema}-width: $boundary-target) {\n    @content;\n  }\n}\n\n@mixin phone {\n  @media only screen and (max-width: #{$phone-width-max}) {\n    @content;\n  }\n}\n\n@mixin tablet {\n  @media only screen and (min-width: #{$tablet-width-min}) and (max-width: #{$tablet-width-max}) {\n    @content;\n  }\n}\n\n@mixin desktop {\n  @media only screen and (min-width: #{$desktop-width-min}) {\n    @content;\n  }\n}\n"],"sourceRoot":""}]);
+exports.push([module.i, ".queue {\n  margin-top: 10px;\n}", "", {"version":3,"sources":["C:/Projects/fs-file/playground/app/components/image-file-manipulation/C:/Projects/fs-file/image-file-manipulation.component.css"],"names":[],"mappings":"AAAA;EACE,iBAAA;CACD","file":"image-file-manipulation.component.css","sourcesContent":[".queue {\r\n  margin-top: 10px;\r\n}\r\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
 
-/***/ "../node_modules/css-loader/index.js?{\"sourceMap\":true}!../node_modules/postcss-loader/lib/index.js?{\"sourceMap\":true}!../node_modules/resolve-url-loader/index.js?{\"sourceMap\":true}!../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../src/components/fs-file-previews/fs-file-previews.component.scss":
+/***/ "../node_modules/css-loader/index.js??ref--2-1!../node_modules/postcss-loader/lib/index.js??ref--2-2!../node_modules/resolve-url-loader/index.js??ref--2-3!./app/components/multiple-file-select/multiple-file-select.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")(true);
@@ -38,59 +38,14 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, ".queue {\n  position: relative;\n  display: block;\n}\n\n", "", {"version":3,"sources":["/Users/Basters/dev/firestitch/fs-file/src/components/fs-file-previews/src/components/fs-file-previews/fs-file-previews.component.scss","/Users/Basters/dev/firestitch/fs-file/fs-file-previews.component.scss"],"names":[],"mappings":"AAAA;EACE,mBAAA;EACA,eAAA;CCCD","file":"fs-file-previews.component.scss","sourcesContent":[".queue {\n  position: relative;\n  display: block;\n}\n",".queue {\n  position: relative;\n  display: block;\n}\n\n"],"sourceRoot":""}]);
+exports.push([module.i, ".queue {\n  margin-top: 15px;\n}", "", {"version":3,"sources":["C:/Projects/fs-file/playground/app/components/multiple-file-select/C:/Projects/fs-file/multiple-file-select.component.css"],"names":[],"mappings":"AAAA;EACE,iBAAA;CACD","file":"multiple-file-select.component.css","sourcesContent":[".queue {\r\n  margin-top: 15px;\r\n}\r\n"],"sourceRoot":""}]);
 
 // exports
 
 
 /***/ }),
 
-/***/ "../node_modules/css-loader/index.js?{\"sourceMap\":true}!../node_modules/postcss-loader/lib/index.js?{\"sourceMap\":true}!../node_modules/resolve-url-loader/index.js?{\"sourceMap\":true}!./app/components/file-picker/file-picker.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")(true);
-// imports
-
-
-// module
-exports.push([module.i, ".queue {\n  margin-top: 10px;\n}", "", {"version":3,"sources":["/Users/Basters/dev/firestitch/fs-file/file-picker.component.css"],"names":[],"mappings":"AAAA;EACE,iBAAA;CACD","file":"file-picker.component.css","sourcesContent":[".queue {\n  margin-top: 10px;\n}\n"],"sourceRoot":""}]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "../node_modules/css-loader/index.js?{\"sourceMap\":true}!../node_modules/postcss-loader/lib/index.js?{\"sourceMap\":true}!../node_modules/resolve-url-loader/index.js?{\"sourceMap\":true}!./app/components/image-file-manipulation/image-file-manipulation.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")(true);
-// imports
-
-
-// module
-exports.push([module.i, ".queue {\n  margin-top: 10px;\n}", "", {"version":3,"sources":["/Users/Basters/dev/firestitch/fs-file/image-file-manipulation.component.css"],"names":[],"mappings":"AAAA;EACE,iBAAA;CACD","file":"image-file-manipulation.component.css","sourcesContent":[".queue {\n  margin-top: 10px;\n}\n"],"sourceRoot":""}]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "../node_modules/css-loader/index.js?{\"sourceMap\":true}!../node_modules/postcss-loader/lib/index.js?{\"sourceMap\":true}!../node_modules/resolve-url-loader/index.js?{\"sourceMap\":true}!./app/components/multiple-file-select/multiple-file-select.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")(true);
-// imports
-
-
-// module
-exports.push([module.i, ".queue {\n  margin-top: 15px;\n}", "", {"version":3,"sources":["/Users/Basters/dev/firestitch/fs-file/multiple-file-select.component.css"],"names":[],"mappings":"AAAA;EACE,iBAAA;CACD","file":"multiple-file-select.component.css","sourcesContent":[".queue {\n  margin-top: 15px;\n}\n"],"sourceRoot":""}]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "../node_modules/css-loader/index.js?{\"sourceMap\":true}!../node_modules/postcss-loader/lib/index.js?{\"sourceMap\":true}!../node_modules/resolve-url-loader/index.js?{\"sourceMap\":true}!./app/components/single-file-select/single-file-select.component.css":
+/***/ "../node_modules/css-loader/index.js??ref--2-1!../node_modules/postcss-loader/lib/index.js??ref--2-2!../node_modules/resolve-url-loader/index.js??ref--2-3!./app/components/single-file-select/single-file-select.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")(true);
@@ -99,6 +54,51 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 // module
 exports.push([module.i, "", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"single-file-select.component.css","sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "../node_modules/css-loader/index.js??ref--3-1!../node_modules/postcss-loader/lib/index.js??ref--3-2!../node_modules/resolve-url-loader/index.js??ref--3-3!../node_modules/sass-loader/lib/loader.js??ref--3-4!../src/components/fs-file-picker/fs-file-picker.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")(true);
+// imports
+
+
+// module
+exports.push([module.i, ":host.dragover .select {\n  border: 2px #07a8e6 dashed;\n  color: #07a8e6;\n}\n\n:host.dragover .select button {\n  display: none;\n}\n\n:host.dragover .select .mat-icon {\n  color: #07a8e6;\n}\n\n:host.dragover ::ng-deep .preview-container:after {\n  content: \"\";\n  width: 98%;\n  display: block;\n  height: 98%;\n  position: absolute;\n  left: 0;\n  top: 0;\n  border: 2px #07a8e6 dashed;\n  background: #07a8e6;\n  opacity: 0.4;\n}\n\n.select {\n  text-align: center;\n  border: 1px solid #ddd;\n  border-radius: 3px;\n  width: 150px;\n  height: 150px;\n  display: table-cell;\n  vertical-align: middle;\n  padding: 10px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n\n.select mat-icon {\n  -webkit-transform: scale(1.8);\n          transform: scale(1.8);\n  color: #ddd;\n}\n\n.instruction {\n  font-size: 12px;\n  padding: 8px 0;\n}\n\n.label {\n  -webkit-transform: scale(0.75) translateZ(0.001px);\n          transform: scale(0.75) translateZ(0.001px);\n  -webkit-transform-origin: 0 0;\n          transform-origin: 0 0;\n}\n\n", "", {"version":3,"sources":["C:/Projects/fs-file/src/components/fs-file-picker/C:/Projects/fs-file/src/components/fs-file-picker/src/components/fs-file-picker/fs-file-picker.component.scss","C:/Projects/fs-file/src/components/fs-file-picker/C:/Projects/fs-file/fs-file-picker.component.scss"],"names":[],"mappings":"AAAA;EAGM,2BAAA;EACA,eAAA;CCDL;;ADHD;EAOQ,cAAA;CCAP;;ADPD;EAWQ,eAAA;CCAP;;ADXD;EAiBU,YAAA;EACA,WAAA;EACA,eAAA;EACA,YAAA;EACA,mBAAA;EACA,QAAA;EACA,OAAA;EACA,2BAAA;EACA,oBAAA;EACA,aAAA;CCFT;;ADSD;EACE,mBAAA;EACA,uBAAA;EACA,mBAAA;EACA,aAAA;EACA,cAAA;EACA,oBAAA;EACA,uBAAA;EACA,cAAA;EACA,yBAAA;MAAA,sBAAA;UAAA,wBAAA;EACA,6BAAA;EAAA,8BAAA;MAAA,2BAAA;UAAA,uBAAA;EACA,+BAAA;UAAA,uBAAA;CCND;;ADLD;EAeI,8BAAA;UAAA,sBAAA;EACA,YAAA;CCNH;;ADUD;EACE,gBAAA;EACA,eAAA;CCPD;;ADUD;EACE,mDAAA;UAAA,2CAAA;EACA,8BAAA;UAAA,sBAAA;CCPD","file":"fs-file-picker.component.scss","sourcesContent":[":host {\r\n  &.dragover {\r\n    .select {\r\n      border: 2px #07a8e6 dashed;\r\n      color: #07a8e6;\r\n\r\n      button {\r\n        display: none;\r\n      }\r\n\r\n      .mat-icon {\r\n        color: #07a8e6;\r\n      }\r\n    }\r\n    ::ng-deep {\r\n      .preview-container {\r\n        &:after {\r\n          content: \"\";\r\n          width: 98%;\r\n          display: block;\r\n          height: 98%;\r\n          position: absolute;\r\n          left: 0;\r\n          top: 0;\r\n          border: 2px #07a8e6 dashed;\r\n          background: #07a8e6;\r\n          opacity: 0.4;\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\n.select {\r\n  text-align: center;\r\n  border: 1px solid #ddd;\r\n  border-radius: 3px;\r\n  width: 150px;\r\n  height: 150px;\r\n  display: table-cell;\r\n  vertical-align: middle;\r\n  padding: 10px;\r\n  justify-content: center;\r\n  flex-direction: column;\r\n  box-sizing: border-box;\r\n\r\n\r\n  mat-icon {\r\n    transform: scale(1.8);\r\n    color: #ddd;\r\n  }\r\n}\r\n\r\n.instruction {\r\n  font-size: 12px;\r\n  padding: 8px 0;\r\n}\r\n\r\n.label {\r\n  transform: scale(.75) translateZ(.001px);\r\n  transform-origin: 0 0;\r\n}\r\n",":host.dragover .select {\n  border: 2px #07a8e6 dashed;\n  color: #07a8e6;\n}\n\n:host.dragover .select button {\n  display: none;\n}\n\n:host.dragover .select .mat-icon {\n  color: #07a8e6;\n}\n\n:host.dragover ::ng-deep .preview-container:after {\n  content: \"\";\n  width: 98%;\n  display: block;\n  height: 98%;\n  position: absolute;\n  left: 0;\n  top: 0;\n  border: 2px #07a8e6 dashed;\n  background: #07a8e6;\n  opacity: 0.4;\n}\n\n.select {\n  text-align: center;\n  border: 1px solid #ddd;\n  border-radius: 3px;\n  width: 150px;\n  height: 150px;\n  display: table-cell;\n  vertical-align: middle;\n  padding: 10px;\n  justify-content: center;\n  flex-direction: column;\n  box-sizing: border-box;\n}\n\n.select mat-icon {\n  transform: scale(1.8);\n  color: #ddd;\n}\n\n.instruction {\n  font-size: 12px;\n  padding: 8px 0;\n}\n\n.label {\n  transform: scale(0.75) translateZ(0.001px);\n  transform-origin: 0 0;\n}\n\n"],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "../node_modules/css-loader/index.js??ref--3-1!../node_modules/postcss-loader/lib/index.js??ref--3-2!../node_modules/resolve-url-loader/index.js??ref--3-3!../node_modules/sass-loader/lib/loader.js??ref--3-4!../src/components/fs-file-preview/fs-file-preview.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")(true);
+// imports
+
+
+// module
+exports.push([module.i, ".file-ext {\n  font-weight: bold;\n  text-align: center;\n  text-transform: uppercase;\n  padding: 15px 0;\n  font-size: 25px;\n}\n\n.file-name {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  padding: 0 5px;\n  font-size: 12px;\n  text-align: center;\n}\n\n.actions {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n}\n\n@media only screen and (max-width: 767.98px) {\n  .actions {\n    display: block;\n  }\n}\n\n@media only screen and (min-width: 768px) {\n  .actions {\n    display: none;\n    background: rgba(0, 0, 0, .5);\n  }\n}\n\n.actions .action {\n  position: absolute;\n  cursor: pointer;\n}\n\n.actions .action.top-left {\n  top: 5%;\n  right: 5%;\n}\n\n.actions .action.top-right {\n  top: 5%;\n  right: 5%;\n}\n\n.actions .action.bottom-left {\n  bottom: 5%;\n  left: 5%;\n}\n\n.actions .action.bottom-right {\n  bottom: 5%;\n  right: 5%;\n}\n\n.actions .action.mat-mini-fab {\n  width: 22%;\n  height: 22%;\n  min-width: 30px;\n  min-height: 30px;\n  max-width: 42px;\n  max-height: 42px;\n  line-height: 15px !important;\n}\n\n.actions .action.mat-mini-fab .mat-button-wrapper {\n  padding: 4px 0;\n  line-height: 15px !important;\n}\n\n:host:hover .file-name {\n  overflow: visible;\n  white-space: normal;\n  word-wrap: break-word;\n}\n\n:host.preview {\n  display: inline-block;\n  position: relative;\n  margin-right: 10px;\n  border: 1px #DDD solid;\n  vertical-align: top;\n  border-radius: 3px;\n}\n\n:host.preview:last-child {\n  margin-right: 0;\n}\n\n:host.preview:hover .actions,\n:host.preview:focus .actions {\n  display: block;\n}\n\n:host.preview img {\n  display: block;\n  border-radius: 3px;\n}\n\n:host ::ng-deep .mat-button-wrapper {\n  padding: 0;\n  line-height: 15px !important;\n}\n\n:host ::ng-deep .spinner {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin-left: -25%;\n  margin-top: -25%;\n}\n\n@media only screen and (max-width: 550px) {\n  .actions {\n    display: block;\n    background: none;\n  }\n}\n\n", "", {"version":3,"sources":["C:/Projects/fs-file/src/components/fs-file-preview/C:/Projects/fs-file/src/components/fs-file-preview/src/components/fs-file-preview/fs-file-preview.component.scss","C:/Projects/fs-file/src/components/fs-file-preview/C:/Projects/fs-file/fs-file-preview.component.scss","C:/Projects/fs-file/src/components/fs-file-preview/C:/Projects/fs-file/src/components/fs-file-preview/src/styles/_mixins.scss"],"names":[],"mappings":"AAEA;EACE,kBAAA;EACA,mBAAA;EACA,0BAAA;EACA,gBAAA;EACA,gBAAA;CCDD;;ADID;EACE,oBAAA;EACA,iBAAA;EACA,wBAAA;EACA,eAAA;EACA,gBAAA;EACA,mBAAA;CCDD;;ADID;EACE,mBAAA;EAWA,YAAA;EACA,aAAA;EACA,OAAA;EACA,QAAA;CCXD;;ACSC;EFbF;IAII,eAAA;GCKD;CACF;;ACGC;EFbF;IAQI,cAAA;IACA,8BAAA;GCOD;CACF;;ADjBD;EAmBI,mBAAA;EACA,gBAAA;CCEH;;ADLC;EAMI,QAAA;EACA,UAAA;CCGL;;AD3BD;EA4BM,QAAA;EACA,UAAA;CCGL;;ADhCD;EAiCM,WAAA;EACA,SAAA;CCGL;;ADrCD;EAsCM,WAAA;EACA,UAAA;CCGL;;AD1CD;EA2CM,WAAA;EACA,YAAA;EACA,gBAAA;EACA,iBAAA;EACA,gBAAA;EACA,iBAAA;EACA,6BAAA;CCGL;;ADDK;EACE,eAAA;EACA,6BAAA;CCIP;;ADED;EAEI,kBAAA;EACA,oBAAA;EACA,sBAAA;CCAH;;ADGC;EACE,sBAAA;EACA,mBAAA;EACA,mBAAA;EACA,uBAAA;EACA,oBAAA;EACA,mBAAA;CCAH;;ADbD;EAgBM,gBAAA;CCCL;;ADjBD;;EAqBQ,eAAA;CCCP;;ADGG;EACE,eAAA;EACA,mBAAA;CCAL;;ADMD;EAEI,WAAA;EACA,6BAAA;CCJH;;ADCD;EAOI,mBAAA;EACA,SAAA;EACA,UAAA;EACA,kBAAA;EACA,iBAAA;CCJH;;ADQD;EACE;IACI,eAAA;IACA,iBAAA;GCLH;CACF","file":"fs-file-preview.component.scss","sourcesContent":["@import \"../../styles/mixins\";\r\n\r\n.file-ext {\r\n  font-weight: bold;\r\n  text-align: center;\r\n  text-transform: uppercase;\r\n  padding: 15px 0;\r\n  font-size: 25px;\r\n}\r\n\r\n.file-name {\r\n  white-space: nowrap;\r\n  overflow: hidden;\r\n  text-overflow: ellipsis;\r\n  padding: 0 5px;\r\n  font-size: 12px;\r\n  text-align: center;\r\n}\r\n\r\n.actions {\r\n  position: absolute;\r\n\r\n  @include apply-to(less-than, phone) {\r\n    display: block;\r\n  }\r\n\r\n  @include apply-to(greater-than, phone) {\r\n    display: none;\r\n    background: rgba(0, 0, 0, 0.5);\r\n  }\r\n\r\n  width: 100%;\r\n  height: 100%;\r\n  top: 0;\r\n  left: 0;\r\n\r\n  .action {\r\n\r\n    position: absolute;\r\n    cursor: pointer;\r\n\r\n    &.top-left {\r\n      top: 5%;\r\n      right: 5%;\r\n    }\r\n\r\n    &.top-right {\r\n      top: 5%;\r\n      right: 5%;\r\n    }\r\n\r\n    &.bottom-left {\r\n      bottom: 5%;\r\n      left: 5%;\r\n    }\r\n\r\n    &.bottom-right {\r\n      bottom: 5%;\r\n      right: 5%;\r\n    }\r\n\r\n    &.mat-mini-fab {\r\n      width: 22%;\r\n      height: 22%;\r\n      min-width: 30px;\r\n      min-height: 30px;\r\n      max-width: 42px;\r\n      max-height: 42px;\r\n      line-height: 15px !important;\r\n\r\n      .mat-button-wrapper {\r\n        padding: 4px 0;\r\n        line-height: 15px !important;\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\n:host {\r\n  &:hover .file-name {\r\n    overflow: visible;\r\n    white-space: normal;\r\n    word-wrap: break-word;\r\n  }\r\n\r\n  &.preview {\r\n    display: inline-block;\r\n    position: relative;\r\n    margin-right: 10px;\r\n    border: 1px #DDD solid;\r\n    vertical-align: top;\r\n    border-radius: 3px;\r\n\r\n    &:last-child {\r\n      margin-right: 0;\r\n    }\r\n\r\n    &:hover, &:focus {\r\n      .actions {\r\n        display: block;\r\n      }\r\n    }\r\n\r\n    img {\r\n      display: block;\r\n      border-radius: 3px;\r\n    }\r\n  }\r\n\r\n}\r\n\r\n:host ::ng-deep {\r\n  .mat-button-wrapper {\r\n    padding: 0;\r\n    line-height: 15px !important;\r\n  }\r\n\r\n  .spinner {\r\n    position: absolute;\r\n    top: 50%;\r\n    left: 50%;\r\n    margin-left: -25%;\r\n    margin-top: -25%;\r\n  }\r\n}\r\n\r\n@media only screen and (max-width: 550px) {\r\n  .actions {\r\n      display: block;\r\n      background: none;\r\n  }\r\n}\r\n",".file-ext {\n  font-weight: bold;\n  text-align: center;\n  text-transform: uppercase;\n  padding: 15px 0;\n  font-size: 25px;\n}\n\n.file-name {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  padding: 0 5px;\n  font-size: 12px;\n  text-align: center;\n}\n\n.actions {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n}\n\n@media only screen and (max-width: 767.98px) {\n  .actions {\n    display: block;\n  }\n}\n\n@media only screen and (min-width: 768px) {\n  .actions {\n    display: none;\n    background: rgba(0, 0, 0, 0.5);\n  }\n}\n\n.actions .action {\n  position: absolute;\n  cursor: pointer;\n}\n\n.actions .action.top-left {\n  top: 5%;\n  right: 5%;\n}\n\n.actions .action.top-right {\n  top: 5%;\n  right: 5%;\n}\n\n.actions .action.bottom-left {\n  bottom: 5%;\n  left: 5%;\n}\n\n.actions .action.bottom-right {\n  bottom: 5%;\n  right: 5%;\n}\n\n.actions .action.mat-mini-fab {\n  width: 22%;\n  height: 22%;\n  min-width: 30px;\n  min-height: 30px;\n  max-width: 42px;\n  max-height: 42px;\n  line-height: 15px !important;\n}\n\n.actions .action.mat-mini-fab .mat-button-wrapper {\n  padding: 4px 0;\n  line-height: 15px !important;\n}\n\n:host:hover .file-name {\n  overflow: visible;\n  white-space: normal;\n  word-wrap: break-word;\n}\n\n:host.preview {\n  display: inline-block;\n  position: relative;\n  margin-right: 10px;\n  border: 1px #DDD solid;\n  vertical-align: top;\n  border-radius: 3px;\n}\n\n:host.preview:last-child {\n  margin-right: 0;\n}\n\n:host.preview:hover .actions,\n:host.preview:focus .actions {\n  display: block;\n}\n\n:host.preview img {\n  display: block;\n  border-radius: 3px;\n}\n\n:host ::ng-deep .mat-button-wrapper {\n  padding: 0;\n  line-height: 15px !important;\n}\n\n:host ::ng-deep .spinner {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin-left: -25%;\n  margin-top: -25%;\n}\n\n@media only screen and (max-width: 550px) {\n  .actions {\n    display: block;\n    background: none;\n  }\n}\n\n","@import \"variables\";\r\n\r\n\r\n@mixin apply-to($ltgt, $device) {\r\n  $extrema: null;\r\n  $boundary-target: null;\r\n  $delta: null;\r\n\r\n  @if $ltgt == less-than {\r\n    $extrema: max;\r\n    $delta: -1;\r\n  } @else if $ltgt == greater-than {\r\n    $extrema: min;\r\n    $delta: +1;\r\n  }\r\n\r\n  @if $device == phone {\r\n    @if $ltgt == less-than {\r\n      $boundary-target: $phone-width-max;\r\n    } @else if $ltgt == greater-than {\r\n      $boundary-target: $tablet-width-min;\r\n    }\r\n  } @else if $device == tablet {\r\n    @if $ltgt == less-than {\r\n      $boundary-target: $tablet-width-min;\r\n    } @else if $ltgt == greater-than {\r\n      $boundary-target: $tablet-width-max;\r\n    }\r\n  } @else if $device == desktop {\r\n    $boundary-target: $desktop-width-min;\r\n  }\r\n\r\n  @media only screen and (#{$extrema}-width: $boundary-target) {\r\n    @content;\r\n  }\r\n}\r\n\r\n@mixin phone {\r\n  @media only screen and (max-width: #{$phone-width-max}) {\r\n    @content;\r\n  }\r\n}\r\n\r\n@mixin tablet {\r\n  @media only screen and (min-width: #{$tablet-width-min}) and (max-width: #{$tablet-width-max}) {\r\n    @content;\r\n  }\r\n}\r\n\r\n@mixin desktop {\r\n  @media only screen and (min-width: #{$desktop-width-min}) {\r\n    @content;\r\n  }\r\n}\r\n"],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "../node_modules/css-loader/index.js??ref--3-1!../node_modules/postcss-loader/lib/index.js??ref--3-2!../node_modules/resolve-url-loader/index.js??ref--3-3!../node_modules/sass-loader/lib/loader.js??ref--3-4!../src/components/fs-file-previews/fs-file-previews.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/css-base.js")(true);
+// imports
+
+
+// module
+exports.push([module.i, ".queue {\n  position: relative;\n  display: block;\n}\n\n", "", {"version":3,"sources":["C:/Projects/fs-file/src/components/fs-file-previews/C:/Projects/fs-file/src/components/fs-file-previews/src/components/fs-file-previews/fs-file-previews.component.scss","C:/Projects/fs-file/src/components/fs-file-previews/C:/Projects/fs-file/fs-file-previews.component.scss"],"names":[],"mappings":"AAAA;EACE,mBAAA;EACA,eAAA;CCCD","file":"fs-file-previews.component.scss","sourcesContent":[".queue {\r\n  position: relative;\r\n  display: block;\r\n}\r\n",".queue {\n  position: relative;\n  display: block;\n}\n\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -199,7 +199,7 @@ __export(__webpack_require__("../src/components/fs-file-drag-base/fs-file-drag-b
 /***/ "../src/components/fs-file-picker/fs-file-picker.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"label\"\n     [ngStyle]=\"{'width.px': previewWidth || 150}\">\n  <ng-content select=\"[fs-file-label]\"></ng-content>\n</div>\n<fs-file-preview class=\"preview\"\n                 *ngIf=\"file; else preview\"\n                 (remove)=\"removeFile($event)\"\n                 [file]=\"file\"\n                 [previewWidth]=\"previewWidth\"\n                 [previewHeight]=\"previewHeight\">\n  <ng-template fs-file-preview-action placement=\"bottom-left\" action=\"remove\" tooltip=\"Remove\">\n    <mat-icon>close</mat-icon>\n  </ng-template>\n  <ng-template fs-file-preview-action placement=\"bottom-right\" tooltip=\"Reupload\" (click)=\"fileInput.click()\">\n    <mat-icon>cloud_upload</mat-icon>\n  </ng-template>\n</fs-file-preview>\n\n<ng-template #preview>\n  <div class=\"select\" (click)=\"fileInput.click()\">\n    <mat-icon>cloud_upload</mat-icon>\n    <div class=\"instruction\">{{instruction}}</div>\n    <button mat-raised-button color=\"primary\">Upload</button>\n  </div>\n</ng-template>\n\n<input type=\"file\"\n       [hidden]=\"true\"\n       [disabled]=\"fsFile.disabled\"\n       [multiple]=\"fsFile.multiple\"\n       [attr.accept]=\"fsFile.accept\"\n       #fileInput\n>\n\n"
+module.exports = "<div class=\"label\"\r\n     [ngStyle]=\"{'width.px': previewWidth || 150}\">\r\n  <ng-content select=\"[fs-file-label]\"></ng-content>\r\n</div>\r\n<fs-file-preview class=\"preview\"\r\n                 *ngIf=\"file; else preview\"\r\n                 (remove)=\"removeFile($event)\"\r\n                 [file]=\"file\"\r\n                 [previewWidth]=\"previewWidth\"\r\n                 [previewHeight]=\"previewHeight\">\r\n  <ng-template fs-file-preview-action placement=\"bottom-left\" action=\"remove\" tooltip=\"Remove\">\r\n    <mat-icon>close</mat-icon>\r\n  </ng-template>\r\n  <ng-template fs-file-preview-action placement=\"bottom-right\" tooltip=\"Reupload\" (click)=\"fileInput.click()\">\r\n    <mat-icon>cloud_upload</mat-icon>\r\n  </ng-template>\r\n</fs-file-preview>\r\n\r\n<ng-template #preview>\r\n  <div class=\"select\" (click)=\"fileInput.click()\">\r\n    <mat-icon>cloud_upload</mat-icon>\r\n    <div class=\"instruction\">{{instruction}}</div>\r\n    <button mat-raised-button color=\"primary\">Upload</button>\r\n  </div>\r\n</ng-template>\r\n\r\n<input type=\"file\"\r\n       [hidden]=\"true\"\r\n       [disabled]=\"fsFile.disabled\"\r\n       [multiple]=\"fsFile.multiple\"\r\n       [attr.accept]=\"fsFile.accept\"\r\n       #fileInput\r\n>\r\n\r\n"
 
 /***/ }),
 
@@ -207,7 +207,7 @@ module.exports = "<div class=\"label\"\n     [ngStyle]=\"{'width.px': previewWid
 /***/ (function(module, exports, __webpack_require__) {
 
 
-        var result = __webpack_require__("../node_modules/css-loader/index.js?{\"sourceMap\":true}!../node_modules/postcss-loader/lib/index.js?{\"sourceMap\":true}!../node_modules/resolve-url-loader/index.js?{\"sourceMap\":true}!../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../src/components/fs-file-picker/fs-file-picker.component.scss");
+        var result = __webpack_require__("../node_modules/css-loader/index.js??ref--3-1!../node_modules/postcss-loader/lib/index.js??ref--3-2!../node_modules/resolve-url-loader/index.js??ref--3-3!../node_modules/sass-loader/lib/loader.js??ref--3-4!../src/components/fs-file-picker/fs-file-picker.component.scss");
 
         if (typeof result === "string") {
             module.exports = result;
@@ -511,7 +511,7 @@ __export(__webpack_require__("../src/components/fs-file-preview-base/fs-file-pre
 /***/ "../src/components/fs-file-preview/fs-file-preview.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div [style.width.px]=\"previewWidth\" [style.height.px]=\"previewHeight\" class=\"preview-container\">\n\n  <!-- Progress container -->\n  <ng-container *ngIf=\"file.progress; else elsePreview\">\n    <mat-spinner class=\"spinner\" [diameter]=\"previewWidth/2\"></mat-spinner>\n  </ng-container>\n\n  <!-- Image container -->\n  <ng-template #elsePreview>\n    <ng-container *ngIf=\"file.typeImage; else nonImage\">\n      <img [src]=\"preview\">\n    </ng-container>\n\n    <!-- Non image container -->\n    <ng-template #nonImage>\n        <div class=\"file-ext\">{{file.extension}}</div>\n        <div class=\"file-name\" [matTooltip]=\"file.name\">{{file.name}}</div>\n    </ng-template>\n  </ng-template>\n</div>\n\n<!-- Actions -->\n<div class=\"actions\">\n  <button class=\"action\" mat-mini-fab color=\"primary\"\n          *ngFor=\"let action of filteredActions\"\n          [ngClass]=\"getActionClasses(action)\"\n          [matTooltip]=\"action.tooltip\"\n          (click)=\"callAction(action)\">\n    <ng-template [ngTemplateOutlet]=\"actionsTemplate[action.index]\"></ng-template>\n  </button>\n</div>\n"
+module.exports = "<div [style.width.px]=\"previewWidth\" [style.height.px]=\"previewHeight\" class=\"preview-container\">\r\n\r\n  <!-- Progress container -->\r\n  <ng-container *ngIf=\"file.progress; else elsePreview\">\r\n    <mat-spinner class=\"spinner\" [diameter]=\"previewWidth/2\"></mat-spinner>\r\n  </ng-container>\r\n\r\n  <!-- Image container -->\r\n  <ng-template #elsePreview>\r\n    <ng-container *ngIf=\"file.typeImage; else nonImage\">\r\n      <img [src]=\"preview\">\r\n    </ng-container>\r\n\r\n    <!-- Non image container -->\r\n    <ng-template #nonImage>\r\n        <div class=\"file-ext\">{{file.extension}}</div>\r\n        <div class=\"file-name\" [matTooltip]=\"file.name\">{{file.name}}</div>\r\n    </ng-template>\r\n  </ng-template>\r\n</div>\r\n\r\n<!-- Actions -->\r\n<div class=\"actions\">\r\n  <button class=\"action\" mat-mini-fab color=\"primary\"\r\n          *ngFor=\"let action of filteredActions\"\r\n          [ngClass]=\"getActionClasses(action)\"\r\n          [matTooltip]=\"action.tooltip\"\r\n          (click)=\"callAction(action)\">\r\n    <ng-template [ngTemplateOutlet]=\"actionsTemplate[action.index]\"></ng-template>\r\n  </button>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -519,7 +519,7 @@ module.exports = "<div [style.width.px]=\"previewWidth\" [style.height.px]=\"pre
 /***/ (function(module, exports, __webpack_require__) {
 
 
-        var result = __webpack_require__("../node_modules/css-loader/index.js?{\"sourceMap\":true}!../node_modules/postcss-loader/lib/index.js?{\"sourceMap\":true}!../node_modules/resolve-url-loader/index.js?{\"sourceMap\":true}!../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../src/components/fs-file-preview/fs-file-preview.component.scss");
+        var result = __webpack_require__("../node_modules/css-loader/index.js??ref--3-1!../node_modules/postcss-loader/lib/index.js??ref--3-2!../node_modules/resolve-url-loader/index.js??ref--3-3!../node_modules/sass-loader/lib/loader.js??ref--3-4!../src/components/fs-file-preview/fs-file-preview.component.scss");
 
         if (typeof result === "string") {
             module.exports = result;
@@ -729,7 +729,7 @@ __export(__webpack_require__("../src/components/fs-file-preview/fs-file-preview.
 /***/ "../src/components/fs-file-previews/fs-file-previews.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<fs-file-preview\n  *ngFor=\"let file of files\"\n  [file]=\"file\"\n  [_actions]=\"actions\"\n  [_actionsTemplate]=\"actionsTemplate\"\n  [previewWidth]=\"previewWidth\"\n  [previewHeight]=\"previewHeight\"\n  (remove)=\"removeFile($event)\"\n  class=\"preview\">\n</fs-file-preview>\n"
+module.exports = "<fs-file-preview\r\n  *ngFor=\"let file of files\"\r\n  [file]=\"file\"\r\n  [_actions]=\"actions\"\r\n  [_actionsTemplate]=\"actionsTemplate\"\r\n  [previewWidth]=\"previewWidth\"\r\n  [previewHeight]=\"previewHeight\"\r\n  (remove)=\"removeFile($event)\"\r\n  class=\"preview\">\r\n</fs-file-preview>\r\n"
 
 /***/ }),
 
@@ -737,7 +737,7 @@ module.exports = "<fs-file-preview\n  *ngFor=\"let file of files\"\n  [file]=\"f
 /***/ (function(module, exports, __webpack_require__) {
 
 
-        var result = __webpack_require__("../node_modules/css-loader/index.js?{\"sourceMap\":true}!../node_modules/postcss-loader/lib/index.js?{\"sourceMap\":true}!../node_modules/resolve-url-loader/index.js?{\"sourceMap\":true}!../node_modules/sass-loader/lib/loader.js?{\"sourceMap\":true}!../src/components/fs-file-previews/fs-file-previews.component.scss");
+        var result = __webpack_require__("../node_modules/css-loader/index.js??ref--3-1!../node_modules/postcss-loader/lib/index.js??ref--3-2!../node_modules/resolve-url-loader/index.js??ref--3-3!../node_modules/sass-loader/lib/loader.js??ref--3-4!../src/components/fs-file-previews/fs-file-previews.component.scss");
 
         if (typeof result === "string") {
             module.exports = result;
@@ -841,7 +841,7 @@ __export(__webpack_require__("../src/components/fs-file-previews/fs-file-preview
 /***/ "../src/components/fs-file/fs-file.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<label (click)=\"fileInput.click()\">\n  <ng-content></ng-content>\n</label>\n<input type=\"file\"\n       [hidden]=\"true\"\n       [disabled]=\"fsFile.disabled\"\n       [multiple]=\"fsFile.multiple\"\n       [attr.accept]=\"fsFile.accept\"\n       #fileInput\n>\n"
+module.exports = "<label (click)=\"fileInput.click()\">\r\n  <ng-content></ng-content>\r\n</label>\r\n<input type=\"file\"\r\n       [hidden]=\"true\"\r\n       [disabled]=\"fsFile.disabled\"\r\n       [multiple]=\"fsFile.multiple\"\r\n       [attr.accept]=\"fsFile.accept\"\r\n       #fileInput\r\n>\r\n"
 
 /***/ }),
 
@@ -1136,7 +1136,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("../node_modules/@angular/core/esm2015/core.js");
 var common_1 = __webpack_require__("../node_modules/@angular/common/esm2015/common.js");
 var material_1 = __webpack_require__("../node_modules/@angular/material/esm2015/material.js");
-var common_2 = __webpack_require__("../node_modules/@firestitch/common/common.umd.js");
+var common_2 = __webpack_require__("../node_modules/@firestitch/common/package/index.js");
 var components_1 = __webpack_require__("../src/components/index.ts");
 var directives_1 = __webpack_require__("../src/directives/index.ts");
 var FsFileModule = (function () {
@@ -1721,7 +1721,7 @@ webpackEmptyAsyncContext.id = "../tools lazy recursive";
 /***/ "../tools/components/examples/examples.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"example-title\">{{title}}</div>\n<mat-tab-group>\n  <mat-tab label=\"Examples\">\n      <div class=\"examples-body\">\n        <ng-content></ng-content>\n      </div>\n  </mat-tab>\n  <mat-tab label=\"Docs\" *ngIf=\"loaded\">\n    <div class=\"iframe-container\">\n      <iframe class=\"iframe-example ng-star-inserted\" [src]=\"submoduleUrl\"></iframe>\n    </div>\n  </mat-tab>\n</mat-tab-group>\n"
+module.exports = "<div class=\"example-title\">{{title}}</div>\r\n<mat-tab-group>\r\n  <mat-tab label=\"Examples\">\r\n      <div class=\"examples-body\">\r\n        <ng-content></ng-content>\r\n      </div>\r\n  </mat-tab>\r\n  <mat-tab label=\"Docs\" *ngIf=\"loaded\">\r\n    <div class=\"iframe-container\">\r\n      <iframe class=\"iframe-example ng-star-inserted\" [src]=\"submoduleUrl\"></iframe>\r\n    </div>\r\n  </mat-tab>\r\n</mat-tab-group>\r\n"
 
 /***/ }),
 
@@ -1821,7 +1821,7 @@ exports.AppComponent = AppComponent;
 /***/ (function(module, exports, __webpack_require__) {
 
 
-        var result = __webpack_require__("../node_modules/css-loader/index.js?{\"sourceMap\":true}!../node_modules/postcss-loader/lib/index.js?{\"sourceMap\":true}!../node_modules/resolve-url-loader/index.js?{\"sourceMap\":true}!./app/components/file-picker/file-picker.component.css");
+        var result = __webpack_require__("../node_modules/css-loader/index.js??ref--2-1!../node_modules/postcss-loader/lib/index.js??ref--2-2!../node_modules/resolve-url-loader/index.js??ref--2-3!./app/components/file-picker/file-picker.component.css");
 
         if (typeof result === "string") {
             module.exports = result;
@@ -1835,7 +1835,7 @@ exports.AppComponent = AppComponent;
 /***/ "./app/components/file-picker/file-picker.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<fs-file-picker (select)=\"select($event)\">\n    <div fs-file-label>File Picker Label</div>\n</fs-file-picker>\n\n<fieldset *ngIf=\"file\">\n  <legend>File</legend>\n  <pre>{{ file | json }}</pre>\n</fieldset>\n"
+module.exports = "<fs-file-picker (select)=\"select($event)\">\r\n    <div fs-file-label>File Picker Label</div>\r\n</fs-file-picker>\r\n\r\n<fieldset *ngIf=\"file\">\r\n  <legend>File</legend>\r\n  <pre>{{ file | json }}</pre>\r\n</fieldset>\r\n"
 
 /***/ }),
 
@@ -1890,7 +1890,7 @@ __export(__webpack_require__("./app/components/file-picker/file-picker.component
 /***/ (function(module, exports, __webpack_require__) {
 
 
-        var result = __webpack_require__("../node_modules/css-loader/index.js?{\"sourceMap\":true}!../node_modules/postcss-loader/lib/index.js?{\"sourceMap\":true}!../node_modules/resolve-url-loader/index.js?{\"sourceMap\":true}!./app/components/image-file-manipulation/image-file-manipulation.component.css");
+        var result = __webpack_require__("../node_modules/css-loader/index.js??ref--2-1!../node_modules/postcss-loader/lib/index.js??ref--2-2!../node_modules/resolve-url-loader/index.js??ref--2-3!./app/components/image-file-manipulation/image-file-manipulation.component.css");
 
         if (typeof result === "string") {
             module.exports = result;
@@ -1904,7 +1904,7 @@ __export(__webpack_require__("./app/components/file-picker/file-picker.component
 /***/ "./app/components/image-file-manipulation/image-file-manipulation.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "Options/restrictions:\n<ul>\n  <li>Accept: <b>image/*</b></li>\n  <li>Multiple: <b>true</b></li>\n  <li>Reduce quality to: <b>0.1</b></li>\n  <li>Resample max width: <b>2500</b></li>\n  <li>Resample max height: <b>2500</b></li>\n  <li>Preview: <b>200x200</b></li>\n</ul>\n<fs-file (select)=\"select($event)\"\n         accept=\"image/*\"\n         multiple=\"true\"\n         imageQuality=\".1\"\n         imageMaxWidth=\"2500\"\n         imageMaxHeight=\"2500\"\n>\n  <button mat-raised-button color=\"primary\">Select File</button>\n</fs-file>\n\n<fs-file-previews [files]=\"files\" width=\"200\" height=\"200\">\n  <ng-template fs-file-preview-action placement=\"top-right\" action=\"remove\" tooltip=\"Remove\">\n    <mat-icon>close</mat-icon>\n  </ng-template>\n  <ng-template fs-file-preview-action\n               placement=\"bottom-right\"\n               (click)=\"enhance($event)\"\n               tooltip=\"Enhance\"\n               for-types=\"image/*\">\n    <mat-icon>brush</mat-icon>\n  </ng-template>\n  <ng-template fs-file-preview-action placement=\"bottom-left\" action=\"zoom\" tooltip=\"Zoom\" for-types=\"image/*\">\n    <mat-icon>search</mat-icon>\n  </ng-template>\n</fs-file-previews>\n\n<fieldset *ngIf=\"files.length > 0\">\n  <legend>Files</legend>\n  <pre>{{ files | json }}</pre>\n</fieldset>\n"
+module.exports = "Options/restrictions:\r\n<ul>\r\n  <li>Accept: <b>image/*</b></li>\r\n  <li>Multiple: <b>true</b></li>\r\n  <li>Reduce quality to: <b>0.1</b></li>\r\n  <li>Resample max width: <b>2500</b></li>\r\n  <li>Resample max height: <b>2500</b></li>\r\n  <li>Preview: <b>200x200</b></li>\r\n</ul>\r\n<fs-file (select)=\"select($event)\"\r\n         accept=\"image/*\"\r\n         multiple=\"true\"\r\n         imageQuality=\".1\"\r\n         imageMaxWidth=\"2500\"\r\n         imageMaxHeight=\"2500\"\r\n>\r\n  <button mat-raised-button color=\"primary\">Select File</button>\r\n</fs-file>\r\n\r\n<fs-file-previews [files]=\"files\" width=\"200\" height=\"200\">\r\n  <ng-template fs-file-preview-action placement=\"top-right\" action=\"remove\" tooltip=\"Remove\">\r\n    <mat-icon>close</mat-icon>\r\n  </ng-template>\r\n  <ng-template fs-file-preview-action\r\n               placement=\"bottom-right\"\r\n               (click)=\"enhance($event)\"\r\n               tooltip=\"Enhance\"\r\n               for-types=\"image/*\">\r\n    <mat-icon>brush</mat-icon>\r\n  </ng-template>\r\n  <ng-template fs-file-preview-action placement=\"bottom-left\" action=\"zoom\" tooltip=\"Zoom\" for-types=\"image/*\">\r\n    <mat-icon>search</mat-icon>\r\n  </ng-template>\r\n</fs-file-previews>\r\n\r\n<fieldset *ngIf=\"files.length > 0\">\r\n  <legend>Files</legend>\r\n  <pre>{{ files | json }}</pre>\r\n</fieldset>\r\n"
 
 /***/ }),
 
@@ -1996,7 +1996,7 @@ __export(__webpack_require__("./app/components/multiple-file-select/multiple-fil
 /***/ (function(module, exports, __webpack_require__) {
 
 
-        var result = __webpack_require__("../node_modules/css-loader/index.js?{\"sourceMap\":true}!../node_modules/postcss-loader/lib/index.js?{\"sourceMap\":true}!../node_modules/resolve-url-loader/index.js?{\"sourceMap\":true}!./app/components/multiple-file-select/multiple-file-select.component.css");
+        var result = __webpack_require__("../node_modules/css-loader/index.js??ref--2-1!../node_modules/postcss-loader/lib/index.js??ref--2-2!../node_modules/resolve-url-loader/index.js??ref--2-3!./app/components/multiple-file-select/multiple-file-select.component.css");
 
         if (typeof result === "string") {
             module.exports = result;
@@ -2068,7 +2068,7 @@ __export(__webpack_require__("./app/components/single-file-select/single-file-se
 /***/ (function(module, exports, __webpack_require__) {
 
 
-        var result = __webpack_require__("../node_modules/css-loader/index.js?{\"sourceMap\":true}!../node_modules/postcss-loader/lib/index.js?{\"sourceMap\":true}!../node_modules/resolve-url-loader/index.js?{\"sourceMap\":true}!./app/components/single-file-select/single-file-select.component.css");
+        var result = __webpack_require__("../node_modules/css-loader/index.js??ref--2-1!../node_modules/postcss-loader/lib/index.js??ref--2-2!../node_modules/resolve-url-loader/index.js??ref--2-3!./app/components/single-file-select/single-file-select.component.css");
 
         if (typeof result === "string") {
             module.exports = result;
