@@ -15,12 +15,17 @@
 
 .actions {
   position: absolute;
-  display: none;
   width: 100%;
   height: 100%;
   top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.5); }
+  left: 0; }
+  @media only screen and (max-width: 767.98px) {
+    .actions {
+      display: block; } }
+  @media only screen and (min-width: 768px) {
+    .actions {
+      display: none;
+      background: rgba(0, 0, 0, 0.5); } }
   .actions .action {
     position: absolute;
     cursor: pointer; }
@@ -62,7 +67,7 @@
   border-radius: 3px; }
   :host.preview:last-child {
     margin-right: 0; }
-  :host.preview:hover .actions {
+  :host.preview:hover .actions, :host.preview:focus .actions {
     display: block; }
   :host.preview img {
     display: block;
