@@ -1,1 +1,1 @@
-[{"__symbolic":"module","version":4,"metadata":{},"exports":[{"from":"./fs-component.module"},{"from":"./components"},{"from":"./services"},{"from":"./directives"}]}]
+[{"__symbolic":"module","version":4,"metadata":{},"exports":[{"from":"./fs-file.module"},{"from":"./components"},{"from":"./services"},{"from":"./directives"}]}]

@@ -269,7 +269,8 @@ var FsFileDragBaseComponent = (function () {
     ], FsFileDragBaseComponent.prototype, "onDragOver", null);
     FsFileDragBaseComponent = __decorate([
         core_1.Component({
-            selector: 'fs-file-drag-base'
+            selector: 'fs-file-drag-base',
+            template: ''
         }),
         __metadata("design:paramtypes", [core_1.ElementRef])
     ], FsFileDragBaseComponent);
@@ -581,7 +582,8 @@ var FsFilePreviewsBaseComponent = (function () {
     ], FsFilePreviewsBaseComponent.prototype, "actionsTemplateRefs", null);
     FsFilePreviewsBaseComponent = __decorate([
         core_1.Component({
-            selector: 'fs-file-previews-base'
+            selector: 'fs-file-previews-base',
+            template: ''
         }),
         __metadata("design:paramtypes", [])
     ], FsFilePreviewsBaseComponent);
@@ -1148,6 +1150,8 @@ __export(__webpack_require__("./components/fs-file/index.ts"));
 __export(__webpack_require__("./components/fs-file-previews/index.ts"));
 __export(__webpack_require__("./components/fs-file-preview/index.ts"));
 __export(__webpack_require__("./components/fs-file-picker/index.ts"));
+__export(__webpack_require__("./components/fs-file-drag-base/index.ts"));
+__export(__webpack_require__("./components/fs-file-preview-base/index.ts"));
 
 
 /***/ }),
@@ -1219,7 +1223,7 @@ __export(__webpack_require__("./directives/fs-file-preview-action.directive.ts")
 
 /***/ }),
 
-/***/ "./fs-component.module.ts":
+/***/ "./fs-file.module.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1270,6 +1274,8 @@ var FsFileModule = (function () {
                 components_1.FsFilePreviewsComponent,
                 components_1.FsFilePreviewComponent,
                 directives_1.FsFilePreviewActionDirective,
+                components_1.FsFileDragBaseComponent,
+                components_1.FsFilePreviewsBaseComponent,
                 components_1.FsFilePickerComponent
             ],
             providers: [],
@@ -1292,7 +1298,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__("./fs-component.module.ts"));
+__export(__webpack_require__("./fs-file.module.ts"));
 __export(__webpack_require__("./components/index.ts"));
 __export(__webpack_require__("./services/index.ts"));
 __export(__webpack_require__("./directives/index.ts"));

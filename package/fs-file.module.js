@@ -45,6 +45,8 @@ var FsFileModule = (function () {
                 components_1.FsFilePreviewsComponent,
                 components_1.FsFilePreviewComponent,
                 directives_1.FsFilePreviewActionDirective,
+                components_1.FsFileDragBaseComponent,
+                components_1.FsFilePreviewsBaseComponent,
                 components_1.FsFilePickerComponent
             ],
             providers: [],
@@ -54,4 +56,4 @@ var FsFileModule = (function () {
     var FsFileModule_1;
 }());
 exports.FsFileModule = FsFileModule;
-//# sourceMappingURL=fs-component.module.js.map
+//# sourceMappingURL=fs-file.module.js.map

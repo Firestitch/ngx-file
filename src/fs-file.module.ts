@@ -8,7 +8,9 @@ import {
   FsFileComponent,
   FsFilePreviewsComponent,
   FsFilePreviewComponent,
-  FsFilePickerComponent
+  FsFilePickerComponent,
+  FsFilePreviewsBaseComponent,
+  FsFileDragBaseComponent,
 } from './components';
 import { FsFilePreviewActionDirective } from './directives';
 
@@ -36,6 +38,8 @@ import { FsFilePreviewActionDirective } from './directives';
     FsFilePreviewsComponent,
     FsFilePreviewComponent,
     FsFilePreviewActionDirective,
+    FsFileDragBaseComponent,
+    FsFilePreviewsBaseComponent,
     FsFilePickerComponent
   ],
   providers: [

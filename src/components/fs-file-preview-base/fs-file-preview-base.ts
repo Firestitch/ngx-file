@@ -7,7 +7,8 @@ import {
 import { FsFilePreviewActionDirective } from '../../directives';
 
 @Component({
-  selector: 'fs-file-previews-base'
+  selector: 'fs-file-previews-base',
+  template: ''
 })
 export class FsFilePreviewsBaseComponent {
 

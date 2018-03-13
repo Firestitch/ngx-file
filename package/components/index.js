@@ -7,4 +7,6 @@ __export(require("./fs-file"));
 __export(require("./fs-file-previews"));
 __export(require("./fs-file-preview"));
 __export(require("./fs-file-picker"));
+__export(require("./fs-file-drag-base"));
+__export(require("./fs-file-preview-base"));
 //# sourceMappingURL=index.js.map

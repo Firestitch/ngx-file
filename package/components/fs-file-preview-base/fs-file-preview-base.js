@@ -52,7 +52,8 @@ var FsFilePreviewsBaseComponent = (function () {
     ], FsFilePreviewsBaseComponent.prototype, "actionsTemplateRefs", null);
     FsFilePreviewsBaseComponent = __decorate([
         core_1.Component({
-            selector: 'fs-file-previews-base'
+            selector: 'fs-file-previews-base',
+            template: ''
         }),
         __metadata("design:paramtypes", [])
     ], FsFilePreviewsBaseComponent);

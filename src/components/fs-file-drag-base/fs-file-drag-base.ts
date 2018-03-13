@@ -1,7 +1,8 @@
 import {Component, ElementRef, HostBinding, HostListener} from '@angular/core';
 
 @Component({
-  selector: 'fs-file-drag-base'
+  selector: 'fs-file-drag-base',
+  template: ''
 })
 export class FsFileDragBaseComponent {
 

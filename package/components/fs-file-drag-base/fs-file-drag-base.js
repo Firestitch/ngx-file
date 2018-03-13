@@ -60,7 +60,8 @@ var FsFileDragBaseComponent = (function () {
     ], FsFileDragBaseComponent.prototype, "onDragOver", null);
     FsFileDragBaseComponent = __decorate([
         core_1.Component({
-            selector: 'fs-file-drag-base'
+            selector: 'fs-file-drag-base',
+            template: ''
         }),
         __metadata("design:paramtypes", [core_1.ElementRef])
     ], FsFileDragBaseComponent);
