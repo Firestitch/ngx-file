@@ -21,7 +21,7 @@
 
 <!-- Actions -->
 <div class="actions">
-  <button class="action" mat-mini-fab color="primary"
+  <button type="button" class="action" mat-mini-fab color="primary"
           *ngFor="let action of filteredActions"
           [ngClass]="getActionClasses(action)"
           [matTooltip]="action.tooltip"
