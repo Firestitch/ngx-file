@@ -1,4 +1,5 @@
 import { ElementRef, EventEmitter } from '@angular/core';
+import 'fileapi/plugins/FileAPI.exif.js';
 export declare class FsFileService {
     containerEl: any;
     el: any;
@@ -14,6 +15,7 @@ export declare class FsFileService {
     imageQuality: any;
     imageFormat: any;
     disabled: boolean;
+    autoOrientation: boolean;
     /**
      * Initialize service for target element
      * @param el
@@ -52,30 +54,19 @@ export declare class FsFileService {
      */
     private checkSize(file);
     /**
-     * Change image format
-     * @param originFile
-     * @returns {Promise<any>}
-     */
-    private changeImageFormat(originFile);
-    /**
      * Retrun information about image (width/height)
      * @param {FsFile} originFile
      * @returns {Promise<any>}
      */
     private getImageInfo(originFile);
+    private transformFile(originFile, transformOptions);
     /**
-     * Change image quality
-     * @param originFile
-     * @returns {Promise<any>}
-     */
-    private changeQuality(originFile);
-    /**
-     * Process image file by sequence of available processors
+     * Process image file
      * @param file
-     * @param processorsIter
      * @param resolve
      * @param reject
      */
-    private applyProcessors(file, processorsIter, resolve, reject);
+    private applyTransforms(file, resolve, reject);
+    private generateTransformParams(file);
     private alertImageProcessingError(file);
 }

@@ -13,6 +13,7 @@ import {
   FsFileDragBaseComponent,
 } from './components';
 import { FsFilePreviewActionDirective } from './directives';
+import {FsFileService} from "./services";
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { FsFilePreviewActionDirective } from './directives';
     FsFilePickerComponent
   ],
   providers: [
+    FsFileService,
   ],
 })
 export class FsFileModule {

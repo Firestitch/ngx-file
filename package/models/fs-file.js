@@ -3,15 +3,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var FsFile = (function () {
     function FsFile(file) {
         this.progress = false;
+        this.exifInfo = {};
         this.file = file;
-        this.name = file.name;
-        this.size = file.size;
-        this.type = file.type;
-        var parts = this.file.name.split('.');
-        if (parts.length > 1) {
-            this.extension = parts[parts.length - 1];
-        }
     }
+    Object.defineProperty(FsFile.prototype, "file", {
+        get: function () {
+            return this._file;
+        },
+        set: function (value) {
+            this._file = value;
+            this.name = value.name;
+            this.size = value.size;
+            this.type = value.type;
+            var parts = value.name.split('.');
+            if (parts.length > 1) {
+                this.extension = parts[parts.length - 1];
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(FsFile.prototype, "typeImage", {
         get: function () {
             return !!this.type
@@ -23,6 +34,7 @@ var FsFile = (function () {
     FsFile.prototype.parseInfo = function (info) {
         this.imageWidth = info.width;
         this.imageHeight = info.height;
+        this.exifInfo = info.exif;
     };
     FsFile.prototype.toObject = function () {
         return {

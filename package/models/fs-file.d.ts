@@ -2,12 +2,15 @@ export declare class FsFile {
     progress: boolean;
     imageWidth: number;
     imageHeight: number;
-    file: File;
+    rotate: number;
+    exifInfo: any;
     extension: string;
     name: string;
     type: string;
     size: number;
+    private _file;
     constructor(file: File);
+    file: File;
     readonly typeImage: any;
     parseInfo(info: any): void;
     toObject(): {

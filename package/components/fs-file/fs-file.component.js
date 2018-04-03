@@ -96,6 +96,13 @@ var FsFileComponent = (function (_super) {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(FsFileComponent.prototype, "autoOrientation", {
+        set: function (value) {
+            this.fsFile.autoOrientation = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     FsFileComponent.prototype.ngOnInit = function () {
         this.fsFile.initForElement(this.fileInput);
         this.fsFile.initDragNDropForElement(this.el);
@@ -147,6 +154,11 @@ var FsFileComponent = (function (_super) {
     ], FsFileComponent.prototype, "disabled", null);
     __decorate([
         core_1.Input(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], FsFileComponent.prototype, "autoOrientation", null);
+    __decorate([
+        core_1.Input(),
         __metadata("design:type", Object)
     ], FsFileComponent.prototype, "imageFixOrientation", void 0);
     __decorate([
@@ -160,7 +172,6 @@ var FsFileComponent = (function (_super) {
     FsFileComponent = __decorate([
         core_1.Component({
             selector: 'fs-file',
-            providers: [services_1.FsFileService],
             templateUrl: './fs-file.component.html'
         }),
         __metadata("design:paramtypes", [services_1.FsFileService, core_1.ElementRef])

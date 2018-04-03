@@ -8,6 +8,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __generator = (this && this.__generator) || function (thisArg, body) {
     var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
     return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
@@ -38,33 +46,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var FileAPI = require("fileapi");
+require("fileapi/plugins/FileAPI.exif.js");
 var fs_file_1 = require("../models/fs-file");
-var PROCESSORS = {
-    0: 'imageInfo',
-    1: 'imageType',
-    2: 'imageQuality',
-};
-function processors(list) {
-    var _i, list_1, item;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _i = 0, list_1 = list;
-                _a.label = 1;
-            case 1:
-                if (!(_i < list_1.length)) return [3 /*break*/, 4];
-                item = list_1[_i];
-                return [4 /*yield*/, item];
-            case 2:
-                _a.sent();
-                _a.label = 3;
-            case 3:
-                _i++;
-                return [3 /*break*/, 1];
-            case 4: return [2 /*return*/];
-        }
-    });
-}
 var FsFileService = (function () {
     function FsFileService() {
         this.select = new core_1.EventEmitter();
@@ -79,6 +62,7 @@ var FsFileService = (function () {
             imageMaxHeight: void 0,
             imageQuality: void 0,
             imageFormat: void 0,
+            autoOrientation: true,
         };
     }
     Object.defineProperty(FsFileService.prototype, "multiple", {
@@ -171,6 +155,16 @@ var FsFileService = (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(FsFileService.prototype, "autoOrientation", {
+        get: function () {
+            return this._options.autoOrientation;
+        },
+        set: function (value) {
+            this._options.autoOrientation = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * Initialize service for target element
      * @param el
@@ -225,15 +219,15 @@ var FsFileService = (function () {
             return new fs_file_1.FsFile(f);
         });
         this.select.next(this._options.multiple ? files : files[0]);
-        var processedFiles = [];
         files.forEach(function (file) {
             if (file.typeImage) {
-                var processorsIter_1 = processors(Object.keys(PROCESSORS));
                 var resFilePromise = new Promise(function (resolve, reject) {
-                    _this.applyProcessors(file, processorsIter_1, resolve, reject);
+                    _this.applyTransforms(file, resolve, reject);
                 });
                 resFilePromise.then(function () { }, function (error) {
-                    _this.alertImageProcessingError(error.file);
+                    if (error && error.originFile) {
+                        _this.alertImageProcessingError(error.originFile.file);
+                    }
                 });
             }
         });
@@ -290,29 +284,6 @@ var FsFileService = (function () {
             && (this._options.maxSize !== void 0 ? file.size <= (this._options.maxSize * FileAPI.KB) : true);
     };
     /**
-     * Change image format
-     * @param originFile
-     * @returns {Promise<any>}
-     */
-    FsFileService.prototype.changeImageFormat = function (originFile) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            var image = FileAPI.Image(originFile.file);
-            var fileType = (_this._options.imageFormat) ? 'image/' + _this._options.imageFormat : originFile.type;
-            image.get(function (err, img) {
-                if (!err) {
-                    img.toDataUrl(function (blob) {
-                        originFile.file = new File([blob], originFile.name, { type: fileType });
-                        resolve(originFile);
-                    }, fileType, _this._options.imageQuality || 1);
-                }
-                else {
-                    reject(err);
-                }
-            });
-        });
-    };
-    /**
      * Retrun information about image (width/height)
      * @param {FsFile} originFile
      * @returns {Promise<any>}
@@ -329,85 +300,76 @@ var FsFileService = (function () {
             });
         });
     };
-    /**
-     * Change image quality
-     * @param originFile
-     * @returns {Promise<any>}
-     */
-    FsFileService.prototype.changeQuality = function (originFile) {
-        var _this = this;
-        return new Promise(function (resolve, reject) {
-            var image = FileAPI.Image(originFile.file);
-            image.get(function (err, img) {
-                if (!err) {
-                    img.toBlob(function (blob) {
-                        originFile.file = new File([blob], originFile.name, { type: originFile.type });
-                        resolve(originFile);
-                    }, originFile.type, _this._options.imageQuality || 1);
-                }
-                else {
-                    reject(err);
-                }
+    FsFileService.prototype.transformFile = function (originFile, transformOptions) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (resolve, reject) {
+                        FileAPI.Image.transform(originFile.file, [transformOptions], _this._options.autoOrientation, function (err, images) {
+                            if (!err && images[0]) {
+                                images[0].toBlob(function (blob) {
+                                    originFile.file = new File([blob], originFile.name, { type: originFile.type });
+                                    resolve(originFile);
+                                    _this.getImageInfo(originFile).then(function (result) {
+                                        originFile.parseInfo(result);
+                                        resolve(originFile);
+                                    }).catch(function (error) {
+                                        reject({ error: error, originFile: originFile });
+                                    });
+                                }, transformOptions.type, images[0].quality);
+                            }
+                            else {
+                                reject(err);
+                            }
+                        });
+                    })];
             });
         });
     };
     /**
-     * Process image file by sequence of available processors
+     * Process image file
      * @param file
-     * @param processorsIter
      * @param resolve
      * @param reject
      */
-    FsFileService.prototype.applyProcessors = function (file, processorsIter, resolve, reject) {
-        var _this = this;
-        var nextValue = processorsIter.next();
-        if (!nextValue.done) {
-            file.progress = true;
-            switch (+nextValue.value) {
-                case 0:
-                    {
-                        this.getImageInfo(file).then(function (result) {
-                            file.parseInfo(result);
-                            _this.applyProcessors(file, processorsIter, resolve, reject);
-                        }).catch(function (error) {
-                            reject({ error: error, file: file });
-                        });
-                    }
-                    break;
-                case 1:
-                    {
-                        if (this._options.imageQuality !== void 0) {
-                            this.changeQuality(file).then(function (resultFile) {
-                                _this.applyProcessors(resultFile, processorsIter, resolve, reject);
-                            }).catch(function (error) {
-                                reject({ error: error, file: file });
-                            });
-                        }
-                        else {
-                            this.applyProcessors(file, processorsIter, resolve, reject);
-                        }
-                    }
-                    break;
-                case 2:
-                    {
-                        if (this._options.imageFormat !== void 0) {
-                            this.changeImageFormat(file).then(function (resultFile) {
-                                _this.applyProcessors(resultFile, processorsIter, resolve, reject);
-                            }).catch(function (error) {
-                                reject({ error: error, file: file });
-                            });
-                        }
-                        else {
-                            this.applyProcessors(file, processorsIter, resolve, reject);
-                        }
-                    }
-                    break;
-            }
+    FsFileService.prototype.applyTransforms = function (file, resolve, reject) {
+        return __awaiter(this, void 0, void 0, function () {
+            var fileInfo, params, resultFile, err_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        file.progress = this._options.preview;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 4, , 5]);
+                        return [4 /*yield*/, this.getImageInfo(file)];
+                    case 2:
+                        fileInfo = _a.sent();
+                        file.parseInfo(fileInfo);
+                        params = this.generateTransformParams(file);
+                        return [4 /*yield*/, this.transformFile(file, params)];
+                    case 3:
+                        resultFile = _a.sent();
+                        resolve(resultFile);
+                        return [3 /*break*/, 5];
+                    case 4:
+                        err_1 = _a.sent();
+                        reject(err_1);
+                        return [3 /*break*/, 5];
+                    case 5: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    FsFileService.prototype.generateTransformParams = function (file) {
+        var transformParams = {};
+        // Type for result image
+        transformParams.type = (this._options.imageFormat) ? 'image/' + this._options.imageFormat : file.type;
+        // Quality for result image
+        if (this._options.imageQuality !== void 0) {
+            transformParams.quality = this._options.imageQuality || 1;
         }
-        else {
-            file.progress = this._options.preview;
-            resolve(file);
-        }
+        return transformParams;
     };
     FsFileService.prototype.alertImageProcessingError = function (file) {
         alert("File " + file.name + " can't be processed as image. File was rejected");

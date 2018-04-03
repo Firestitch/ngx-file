@@ -23,10 +23,13 @@ var core_1 = require("@angular/core");
 var FileAPI = require("fileapi");
 var fs_file_1 = require("../../models/fs-file");
 var fs_file_preview_base_1 = require("../fs-file-preview-base");
+var services_1 = require("../../services");
+var helpers_1 = require("../../helpers");
 var FsFilePreviewComponent = (function (_super) {
     __extends(FsFilePreviewComponent, _super);
-    function FsFilePreviewComponent() {
+    function FsFilePreviewComponent(_fileService) {
         var _this = _super.call(this) || this;
+        _this._fileService = _fileService;
         _this.previewWidth = 150;
         _this.previewHeight = 150;
         _this.remove = new core_1.EventEmitter();
@@ -92,25 +95,19 @@ var FsFilePreviewComponent = (function (_super) {
             return;
         }
         file.progress = true;
-        FileAPI.Image(file.file)
-            .preview(this.previewWidth, this.previewHeight)
-            .get(function (err, img) {
-            FileAPI.readAsDataURL(img, function (event) {
-                switch (event.type) {
-                    case 'load':
-                        {
-                            _this.preview = event.result;
-                            file.progress = false;
-                        }
-                        break;
-                    case 'error':
-                        {
-                            alert("Image preview error for file " + file.name);
-                            file.progress = false;
-                        }
-                        break;
-                }
-            });
+        FileAPI.Image.transform(file.file, [{
+                maxWidth: this.previewWidth,
+                maxHeight: this.previewHeight
+            }], this._fileService.autoOrientation, function (err, images) {
+            if (!err && images[0]) {
+                var scaledCanvasImage = helpers_1.ScaleExifImage(images[0], file.exifInfo.Orientation, _this.previewWidth, _this.previewHeight);
+                _this.preview = scaledCanvasImage.toDataURL(file.type);
+                file.progress = false;
+            }
+            else {
+                alert("Image preview error for file " + file.name);
+                file.progress = false;
+            }
         });
     };
     FsFilePreviewComponent.prototype.cleanActions = function () {
@@ -167,7 +164,7 @@ var FsFilePreviewComponent = (function (_super) {
             templateUrl: 'fs-file-preview.component.html',
             styleUrls: ['fs-file-preview.component.css']
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [services_1.FsFileService])
     ], FsFilePreviewComponent);
     return FsFilePreviewComponent;
 }(fs_file_preview_base_1.FsFilePreviewsBaseComponent));

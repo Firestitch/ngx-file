@@ -13,6 +13,7 @@ export declare class FsFileComponent extends FsFileDragBaseComponent implements 
     imageQuality: any;
     imageFormat: any;
     disabled: any;
+    autoOrientation: any;
     imageFixOrientation: boolean;
     select: EventEmitter<any>;
     fileInput: any;

@@ -12,7 +12,6 @@ import { FsFileDragBaseComponent } from '../fs-file-drag-base';
 
 @Component({
   selector: 'fs-file',
-  providers: [FsFileService],
   templateUrl: './fs-file.component.html'
 })
 export class FsFileComponent extends FsFileDragBaseComponent implements OnInit {
