@@ -62,6 +62,11 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit {
     this.fsFile.disabled = value;
   }
 
+  @Input()
+  set autoOrientation(value) {
+    this.fsFile.autoOrientation = value;
+  }
+
   @Input() imageFixOrientation = true;
 
   @Output('select') public select: EventEmitter<any>;

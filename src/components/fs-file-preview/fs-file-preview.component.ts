@@ -5,9 +5,13 @@ import {
   Output,
   AfterViewInit,
 } from '@angular/core';
+
 import * as FileAPI from 'fileapi';
+
 import { FsFile } from '../../models/fs-file';
 import { FsFilePreviewsBaseComponent } from '../fs-file-preview-base';
+import { FsFileService } from '../../services';
+import { ScaleExifImage } from '../../helpers';
 
 @Component({
   selector: 'fs-file-preview',
@@ -36,7 +40,7 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
 
   public filteredActions = [];
 
-  constructor() {
+  constructor(private _fileService: FsFileService) {
     super();
   }
 
@@ -73,24 +77,22 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
     if (!this.file.typeImage) {
       return;
     }
-    file.progress = true;
-    FileAPI.Image(file.file)
-      .preview(this.previewWidth, this.previewHeight)
-      .get((err, img) => {
-        FileAPI.readAsDataURL(img, (event) => {
-          switch (event.type) {
-            case 'load': {
-              this.preview = event.result;
-              file.progress = false;
-            } break;
 
-            case 'error': {
-              alert(`Image preview error for file ${file.name}`);
-              file.progress = false;
-            } break;
-          }
-        });
-      });
+    file.progress = true;
+
+    FileAPI.Image.transform(file.file, [{
+      maxWidth: this.previewWidth,
+      maxHeight: this.previewHeight
+    }], this._fileService.autoOrientation, (err, images) => {
+      if (!err && images[0]) {
+        const scaledCanvasImage = ScaleExifImage(images[0], file.exifInfo.Orientation, this.previewWidth, this.previewHeight);
+        this.preview = scaledCanvasImage.toDataURL(file.type);
+        file.progress = false;
+      } else {
+        alert(`Image preview error for file ${file.name}`);
+        file.progress = false;
+      }
+    });
   }
 
   private cleanActions() {

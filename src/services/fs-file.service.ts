@@ -1,19 +1,9 @@
-import {ElementRef, EventEmitter, Injectable} from '@angular/core';
+import { ElementRef, EventEmitter, Injectable } from '@angular/core';
 import * as FileAPI from 'fileapi';
+import 'fileapi/plugins/FileAPI.exif.js';
 import { Subject } from 'rxjs/Subject';
-import {FsFile} from '../models/fs-file';
+import { FsFile } from '../models/fs-file';
 
-const PROCESSORS = {
-  0: 'imageInfo',
-  1: 'imageType',
-  2: 'imageQuality',
-};
-
-function* processors(list) {
-  for (const item of list) {
-    yield item;
-  }
-}
 
 @Injectable()
 export class FsFileService {
@@ -33,6 +23,7 @@ export class FsFileService {
     imageMaxHeight: void 0,
     imageQuality: void 0,
     imageFormat: void 0,
+    autoOrientation: true,
   };
 
   constructor() {
@@ -103,6 +94,14 @@ export class FsFileService {
     return this._options.disabled;
   }
 
+  set autoOrientation(value) {
+    this._options.autoOrientation = value;
+  }
+
+  get autoOrientation() {
+    return this._options.autoOrientation;
+  }
+
   /**
    * Initialize service for target element
    * @param el
@@ -165,19 +164,18 @@ export class FsFileService {
 
     this.select.next(this._options.multiple ? files : files[0]);
 
-    const processedFiles = [];
-
     files.forEach((file: FsFile) => {
 
       if (file.typeImage) {
-        const processorsIter = processors(Object.keys(PROCESSORS));
         const resFilePromise = new Promise((resolve, reject) => {
-          this.applyProcessors(file, processorsIter, resolve, reject);
+          this.applyTransforms(file, resolve, reject);
         });
         resFilePromise.then(
           () => {},
           (error) => {
-            this.alertImageProcessingError(error.file);
+            if (error && error.originFile) {
+              this.alertImageProcessingError(error.originFile.file);
+            }
           }
         );
       }
@@ -236,28 +234,6 @@ export class FsFileService {
   }
 
   /**
-   * Change image format
-   * @param originFile
-   * @returns {Promise<any>}
-   */
-  private changeImageFormat(originFile: FsFile) {
-    return new Promise((resolve, reject) => {
-      const image = FileAPI.Image(originFile.file);
-      const fileType = (this._options.imageFormat) ? 'image/' + this._options.imageFormat : originFile.type;
-      image.get((err, img) => {
-        if (!err) {
-          img.toDataUrl((blob) => {
-            originFile.file = new File([blob], originFile.name, { type: fileType });
-            resolve(originFile);
-          }, fileType, this._options.imageQuality || 1)
-        } else {
-          reject(err);
-        }
-      });
-    });
-  }
-
-  /**
    * Retrun information about image (width/height)
    * @param {FsFile} originFile
    * @returns {Promise<any>}
@@ -274,76 +250,66 @@ export class FsFileService {
     });
   }
 
-  /**
-   * Change image quality
-   * @param originFile
-   * @returns {Promise<any>}
-   */
-  private changeQuality(originFile: FsFile) {
+  private async transformFile(originFile: FsFile, transformOptions: any) {
     return new Promise((resolve, reject) => {
-      const image = FileAPI.Image(originFile.file);
-      image.get((err, img) => {
-        if (!err) {
-          img.toBlob((blob) => {
-            originFile.file = new File([blob], originFile.name, { type: originFile.type });
-            resolve(originFile);
-          }, originFile.type, this._options.imageQuality || 1)
-        } else {
-          reject(err);
-        }
+      FileAPI.Image.transform(
+        originFile.file,
+        [transformOptions],
+        this._options.autoOrientation,
+        (err, images) => {
+          if (!err && images[0]) {
+            images[0].toBlob((blob) => {
+              originFile.file = new File([blob], originFile.name, { type: originFile.type });
+              resolve(originFile);
+              this.getImageInfo(originFile).then((result) => {
+                originFile.parseInfo(result);
+
+                resolve(originFile);
+              }).catch((error) => {
+                reject({ error, originFile });
+              });
+            }, transformOptions.type, images[0].quality)
+          } else {
+            reject(err);
+          }
       });
     });
   }
 
   /**
-   * Process image file by sequence of available processors
+   * Process image file
    * @param file
-   * @param processorsIter
    * @param resolve
    * @param reject
    */
-  private applyProcessors(file: FsFile, processorsIter, resolve, reject) {
-    const nextValue = processorsIter.next();
-    if (!nextValue.done) {
-      file.progress = true;
-      switch (+nextValue.value) {
-        case 0: {
-          this.getImageInfo(file).then((result) => {
-            file.parseInfo(result);
-            this.applyProcessors(file, processorsIter, resolve, reject);
-          }).catch((error) => {
-            reject({ error, file });
-          })
-        } break;
+  private async applyTransforms(file: FsFile, resolve, reject) {
+    file.progress = this._options.preview;
 
-        case 1: {
-          if (this._options.imageQuality !== void 0) {
-            this.changeQuality(file).then((resultFile: FsFile) => {
-              this.applyProcessors(resultFile, processorsIter, resolve, reject);
-            }).catch((error) => {
-              reject({ error, file });
-            })
-          } else {
-            this.applyProcessors(file, processorsIter, resolve, reject);
-          }
-        } break;
+    try {
+      const fileInfo = await this.getImageInfo(file);
+      file.parseInfo(fileInfo);
 
-        case 2: {
-          if (this._options.imageFormat !== void 0) {
-            this.changeImageFormat(file).then((resultFile: FsFile) => {
-              this.applyProcessors(resultFile, processorsIter, resolve, reject);
-            }).catch((error) => {
-              reject({ error, file });
-            })
-          } else {
-            this.applyProcessors(file, processorsIter, resolve, reject);
-          }
-        } break;
-      }
-    } else {
-      file.progress = this._options.preview;
-      resolve(file);
+      const params = this.generateTransformParams(file);
+      const resultFile = await this.transformFile(file, params);
+
+      resolve(resultFile);
+    } catch (err) {
+      reject(err);
     }
+  }
+
+  private generateTransformParams(file) {
+    const transformParams: any = {};
+
+    // Type for result image
+    transformParams.type = (this._options.imageFormat) ? 'image/' + this._options.imageFormat : file.type;
+
+    // Quality for result image
+    if (this._options.imageQuality !== void 0) {
+      transformParams.quality = this._options.imageQuality || 1;
+    }
+
+    return transformParams;
   }
 
   private alertImageProcessingError(file) {
