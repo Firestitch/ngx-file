@@ -3,6 +3,8 @@ import * as FileAPI from 'fileapi';
 import 'fileapi/plugins/FileAPI.exif.js';
 import { Subject } from 'rxjs/Subject';
 import { FsFile } from '../models/fs-file';
+import { ScaleExifImage } from '../helpers';
+import { FsFileOptions } from '../interfaces';
 
 
 @Injectable()
@@ -12,7 +14,7 @@ export class FsFileService {
   public el: any;
   public select  = new EventEmitter();
 
-  private _options = {
+  private _options: FsFileOptions = {
     disabled: false,
     multiple: false,
     preview: false,
@@ -159,7 +161,7 @@ export class FsFileService {
   private processFiles(files) {
 
     files = files.map((f) => {
-      return new FsFile(f);
+      return new FsFile(f, this._options);
     });
 
     this.select.next(this._options.multiple ? files : files[0]);
@@ -171,7 +173,7 @@ export class FsFileService {
           this.applyTransforms(file, resolve, reject);
         });
         resFilePromise.then(
-          () => {},
+          () => {console.log(files)},
           (error) => {
             if (error && error.originFile) {
               this.alertImageProcessingError(error.originFile.file);
@@ -252,23 +254,37 @@ export class FsFileService {
 
   private async transformFile(originFile: FsFile, transformOptions: any) {
     return new Promise((resolve, reject) => {
+      // Transform image by options and rotate if needed
       FileAPI.Image.transform(
         originFile.file,
         [transformOptions],
         this._options.autoOrientation,
         (err, images) => {
+          // Process transformed files
           if (!err && images[0]) {
-            images[0].toBlob((blob) => {
+            let canvasImage;
+
+            // Check orientation (scale)
+            if (this._options.autoOrientation) {
+              canvasImage = ScaleExifImage(images[0], originFile.exifInfo.Orientation);
+            } else {
+              canvasImage = images[0];
+            }
+
+            // Convert to blob for create File object
+            canvasImage.toBlob((blob) => {
+              // Save as file to FsFile
               originFile.file = new File([blob], originFile.name, { type: originFile.type });
-              resolve(originFile);
+
+              // Update FsFile info
+
               this.getImageInfo(originFile).then((result) => {
                 originFile.parseInfo(result);
-
                 resolve(originFile);
               }).catch((error) => {
                 reject({ error, originFile });
               });
-            }, transformOptions.type, images[0].quality)
+            }, transformOptions.type, canvasImage.quality)
           } else {
             reject(err);
           }

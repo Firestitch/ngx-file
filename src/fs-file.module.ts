@@ -1,6 +1,11 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatButtonModule, MatIconModule, MatProgressSpinnerModule, MatTooltipModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatIconModule,
+  MatProgressSpinnerModule,
+  MatTooltipModule,
+} from '@angular/material';
 
 import { FsCommonModule } from '@firestitch/common';
 
@@ -13,7 +18,6 @@ import {
   FsFileDragBaseComponent,
 } from './components';
 import { FsFilePreviewActionDirective } from './directives';
-import {FsFileService} from "./services";
 
 
 @NgModule({
@@ -44,7 +48,6 @@ import {FsFileService} from "./services";
     FsFilePickerComponent
   ],
   providers: [
-    FsFileService,
   ],
 })
 export class FsFileModule {

@@ -10,7 +10,6 @@ import * as FileAPI from 'fileapi';
 
 import { FsFile } from '../../models/fs-file';
 import { FsFilePreviewsBaseComponent } from '../fs-file-preview-base';
-import { FsFileService } from '../../services';
 import { ScaleExifImage } from '../../helpers';
 
 @Component({
@@ -40,7 +39,7 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
 
   public filteredActions = [];
 
-  constructor(private _fileService: FsFileService) {
+  constructor() {
     super();
   }
 
@@ -83,10 +82,15 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
     FileAPI.Image.transform(file.file, [{
       maxWidth: this.previewWidth,
       maxHeight: this.previewHeight
-    }], this._fileService.autoOrientation, (err, images) => {
+    }], file.fileOptions.autoOrientation, (err, images) => {
       if (!err && images[0]) {
-        const scaledCanvasImage = ScaleExifImage(images[0], file.exifInfo.Orientation, this.previewWidth, this.previewHeight);
-        this.preview = scaledCanvasImage.toDataURL(file.type);
+        if (file.fileOptions.autoOrientation) {
+          const scaledCanvasImage = ScaleExifImage(images[0], file.exifInfo.Orientation, this.previewWidth, this.previewHeight);
+          this.preview = scaledCanvasImage.toDataURL(file.type);
+        } else {
+          this.preview = images[0].toDataURL(file.type);
+        }
+
         file.progress = false;
       } else {
         alert(`Image preview error for file ${file.name}`);

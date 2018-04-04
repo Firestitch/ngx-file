@@ -1,3 +1,5 @@
+import { FsFileOptions } from '../interfaces';
+
 export class FsFile {
 
   public progress = false;
@@ -10,13 +12,19 @@ export class FsFile {
   public type: string;
   public size: number;
   private _file: File;
+  private _fileOptions: FsFileOptions;
 
-  constructor(file: File) {
+  constructor(file: File, options: FsFileOptions) {
     this.file = file;
+    this._fileOptions = Object.assign({}, options);
   }
 
   get file() {
     return this._file;
+  }
+
+  get fileOptions() {
+    return this._fileOptions;
   }
 
   set file(value) {
