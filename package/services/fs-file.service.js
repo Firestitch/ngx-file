@@ -48,6 +48,7 @@ var core_1 = require("@angular/core");
 var FileAPI = require("fileapi");
 require("fileapi/plugins/FileAPI.exif.js");
 var fs_file_1 = require("../models/fs-file");
+var helpers_1 = require("../helpers");
 var FsFileService = (function () {
     function FsFileService() {
         this.select = new core_1.EventEmitter();
@@ -216,7 +217,7 @@ var FsFileService = (function () {
     FsFileService.prototype.processFiles = function (files) {
         var _this = this;
         files = files.map(function (f) {
-            return new fs_file_1.FsFile(f);
+            return new fs_file_1.FsFile(f, _this._options);
         });
         this.select.next(this._options.multiple ? files : files[0]);
         files.forEach(function (file) {
@@ -224,7 +225,7 @@ var FsFileService = (function () {
                 var resFilePromise = new Promise(function (resolve, reject) {
                     _this.applyTransforms(file, resolve, reject);
                 });
-                resFilePromise.then(function () { }, function (error) {
+                resFilePromise.then(function () { console.log(files); }, function (error) {
                     if (error && error.originFile) {
                         _this.alertImageProcessingError(error.originFile.file);
                     }
@@ -305,18 +306,30 @@ var FsFileService = (function () {
             var _this = this;
             return __generator(this, function (_a) {
                 return [2 /*return*/, new Promise(function (resolve, reject) {
+                        // Transform image by options and rotate if needed
                         FileAPI.Image.transform(originFile.file, [transformOptions], _this._options.autoOrientation, function (err, images) {
+                            // Process transformed files
                             if (!err && images[0]) {
-                                images[0].toBlob(function (blob) {
+                                var canvasImage = void 0;
+                                // Check orientation (scale)
+                                if (_this._options.autoOrientation) {
+                                    canvasImage = helpers_1.ScaleExifImage(images[0], originFile.exifInfo.Orientation);
+                                }
+                                else {
+                                    canvasImage = images[0];
+                                }
+                                // Convert to blob for create File object
+                                canvasImage.toBlob(function (blob) {
+                                    // Save as file to FsFile
                                     originFile.file = new File([blob], originFile.name, { type: originFile.type });
-                                    resolve(originFile);
+                                    // Update FsFile info
                                     _this.getImageInfo(originFile).then(function (result) {
                                         originFile.parseInfo(result);
                                         resolve(originFile);
                                     }).catch(function (error) {
                                         reject({ error: error, originFile: originFile });
                                     });
-                                }, transformOptions.type, images[0].quality);
+                                }, transformOptions.type, canvasImage.quality);
                             }
                             else {
                                 reject(err);

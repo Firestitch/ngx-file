@@ -172,7 +172,10 @@ var FsFileComponent = (function (_super) {
     FsFileComponent = __decorate([
         core_1.Component({
             selector: 'fs-file',
-            templateUrl: './fs-file.component.html'
+            templateUrl: './fs-file.component.html',
+            providers: [
+                services_1.FsFileService,
+            ]
         }),
         __metadata("design:paramtypes", [services_1.FsFileService, core_1.ElementRef])
     ], FsFileComponent);

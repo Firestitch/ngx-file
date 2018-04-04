@@ -12,7 +12,6 @@ var material_1 = require("@angular/material");
 var common_2 = require("@firestitch/common");
 var components_1 = require("./components");
 var directives_1 = require("./directives");
-var services_1 = require("./services");
 var FsFileModule = (function () {
     function FsFileModule() {
     }
@@ -50,9 +49,7 @@ var FsFileModule = (function () {
                 components_1.FsFilePreviewsBaseComponent,
                 components_1.FsFilePickerComponent
             ],
-            providers: [
-                services_1.FsFileService,
-            ],
+            providers: [],
         })
     ], FsFileModule);
     return FsFileModule;

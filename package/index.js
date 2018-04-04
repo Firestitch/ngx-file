@@ -659,13 +659,11 @@ var core_1 = __webpack_require__("@angular/core");
 var FileAPI = __webpack_require__("fileapi");
 var fs_file_1 = __webpack_require__("./models/fs-file.ts");
 var fs_file_preview_base_1 = __webpack_require__("./components/fs-file-preview-base/index.ts");
-var services_1 = __webpack_require__("./services/index.ts");
 var helpers_1 = __webpack_require__("./helpers/index.ts");
 var FsFilePreviewComponent = (function (_super) {
     __extends(FsFilePreviewComponent, _super);
-    function FsFilePreviewComponent(_fileService) {
+    function FsFilePreviewComponent() {
         var _this = _super.call(this) || this;
-        _this._fileService = _fileService;
         _this.previewWidth = 150;
         _this.previewHeight = 150;
         _this.remove = new core_1.EventEmitter();
@@ -734,10 +732,15 @@ var FsFilePreviewComponent = (function (_super) {
         FileAPI.Image.transform(file.file, [{
                 maxWidth: this.previewWidth,
                 maxHeight: this.previewHeight
-            }], this._fileService.autoOrientation, function (err, images) {
+            }], file.fileOptions.autoOrientation, function (err, images) {
             if (!err && images[0]) {
-                var scaledCanvasImage = helpers_1.ScaleExifImage(images[0], file.exifInfo.Orientation, _this.previewWidth, _this.previewHeight);
-                _this.preview = scaledCanvasImage.toDataURL(file.type);
+                if (file.fileOptions.autoOrientation) {
+                    var scaledCanvasImage = helpers_1.ScaleExifImage(images[0], file.exifInfo.Orientation, _this.previewWidth, _this.previewHeight);
+                    _this.preview = scaledCanvasImage.toDataURL(file.type);
+                }
+                else {
+                    _this.preview = images[0].toDataURL(file.type);
+                }
                 file.progress = false;
             }
             else {
@@ -800,7 +803,7 @@ var FsFilePreviewComponent = (function (_super) {
             template: __webpack_require__("./components/fs-file-preview/fs-file-preview.component.html"),
             styles: [__webpack_require__("./components/fs-file-preview/fs-file-preview.component.scss")]
         }),
-        __metadata("design:paramtypes", [services_1.FsFileService])
+        __metadata("design:paramtypes", [])
     ], FsFilePreviewComponent);
     return FsFilePreviewComponent;
 }(fs_file_preview_base_1.FsFilePreviewsBaseComponent));
@@ -1120,7 +1123,10 @@ var FsFileComponent = (function (_super) {
     FsFileComponent = __decorate([
         core_1.Component({
             selector: 'fs-file',
-            template: __webpack_require__("./components/fs-file/fs-file.component.html")
+            template: __webpack_require__("./components/fs-file/fs-file.component.html"),
+            providers: [
+                services_1.FsFileService,
+            ]
         }),
         __metadata("design:paramtypes", [services_1.FsFileService, core_1.ElementRef])
     ], FsFileComponent);
@@ -1249,7 +1255,6 @@ var material_1 = __webpack_require__("@angular/material");
 var common_2 = __webpack_require__("@firestitch/common");
 var components_1 = __webpack_require__("./components/index.ts");
 var directives_1 = __webpack_require__("./directives/index.ts");
-var services_1 = __webpack_require__("./services/index.ts");
 var FsFileModule = (function () {
     function FsFileModule() {
     }
@@ -1287,9 +1292,7 @@ var FsFileModule = (function () {
                 components_1.FsFilePreviewsBaseComponent,
                 components_1.FsFilePickerComponent
             ],
-            providers: [
-                services_1.FsFileService,
-            ],
+            providers: [],
         })
     ], FsFileModule);
     return FsFileModule;
@@ -1380,10 +1383,11 @@ __export(__webpack_require__("./directives/index.ts"));
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var FsFile = (function () {
-    function FsFile(file) {
+    function FsFile(file, options) {
         this.progress = false;
         this.exifInfo = {};
         this.file = file;
+        this._fileOptions = Object.assign({}, options);
     }
     Object.defineProperty(FsFile.prototype, "file", {
         get: function () {
@@ -1398,6 +1402,13 @@ var FsFile = (function () {
             if (parts.length > 1) {
                 this.extension = parts[parts.length - 1];
             }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(FsFile.prototype, "fileOptions", {
+        get: function () {
+            return this._fileOptions;
         },
         enumerable: true,
         configurable: true
@@ -1488,6 +1499,7 @@ var core_1 = __webpack_require__("@angular/core");
 var FileAPI = __webpack_require__("fileapi");
 __webpack_require__("fileapi/plugins/FileAPI.exif.js");
 var fs_file_1 = __webpack_require__("./models/fs-file.ts");
+var helpers_1 = __webpack_require__("./helpers/index.ts");
 var FsFileService = (function () {
     function FsFileService() {
         this.select = new core_1.EventEmitter();
@@ -1656,7 +1668,7 @@ var FsFileService = (function () {
     FsFileService.prototype.processFiles = function (files) {
         var _this = this;
         files = files.map(function (f) {
-            return new fs_file_1.FsFile(f);
+            return new fs_file_1.FsFile(f, _this._options);
         });
         this.select.next(this._options.multiple ? files : files[0]);
         files.forEach(function (file) {
@@ -1664,7 +1676,7 @@ var FsFileService = (function () {
                 var resFilePromise = new Promise(function (resolve, reject) {
                     _this.applyTransforms(file, resolve, reject);
                 });
-                resFilePromise.then(function () { }, function (error) {
+                resFilePromise.then(function () { console.log(files); }, function (error) {
                     if (error && error.originFile) {
                         _this.alertImageProcessingError(error.originFile.file);
                     }
@@ -1745,18 +1757,30 @@ var FsFileService = (function () {
             var _this = this;
             return __generator(this, function (_a) {
                 return [2 /*return*/, new Promise(function (resolve, reject) {
+                        // Transform image by options and rotate if needed
                         FileAPI.Image.transform(originFile.file, [transformOptions], _this._options.autoOrientation, function (err, images) {
+                            // Process transformed files
                             if (!err && images[0]) {
-                                images[0].toBlob(function (blob) {
+                                var canvasImage = void 0;
+                                // Check orientation (scale)
+                                if (_this._options.autoOrientation) {
+                                    canvasImage = helpers_1.ScaleExifImage(images[0], originFile.exifInfo.Orientation);
+                                }
+                                else {
+                                    canvasImage = images[0];
+                                }
+                                // Convert to blob for create File object
+                                canvasImage.toBlob(function (blob) {
+                                    // Save as file to FsFile
                                     originFile.file = new File([blob], originFile.name, { type: originFile.type });
-                                    resolve(originFile);
+                                    // Update FsFile info
                                     _this.getImageInfo(originFile).then(function (result) {
                                         originFile.parseInfo(result);
                                         resolve(originFile);
                                     }).catch(function (error) {
                                         reject({ error: error, originFile: originFile });
                                     });
-                                }, transformOptions.type, images[0].quality);
+                                }, transformOptions.type, canvasImage.quality);
                             }
                             else {
                                 reject(err);

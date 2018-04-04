@@ -1,10 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var FsFile = (function () {
-    function FsFile(file) {
+    function FsFile(file, options) {
         this.progress = false;
         this.exifInfo = {};
         this.file = file;
+        this._fileOptions = Object.assign({}, options);
     }
     Object.defineProperty(FsFile.prototype, "file", {
         get: function () {
@@ -19,6 +20,13 @@ var FsFile = (function () {
             if (parts.length > 1) {
                 this.extension = parts[parts.length - 1];
             }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(FsFile.prototype, "fileOptions", {
+        get: function () {
+            return this._fileOptions;
         },
         enumerable: true,
         configurable: true
