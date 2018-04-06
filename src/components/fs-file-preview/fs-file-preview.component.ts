@@ -80,8 +80,9 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
     file.progress = true;
 
     FileAPI.Image.transform(file.file, [{
-      maxWidth: this.previewWidth,
-      maxHeight: this.previewHeight
+      width: this.previewWidth,
+      height: this.previewHeight,
+      preview: true
     }], file.fileOptions.autoOrientation, (err, images) => {
       if (!err && images[0]) {
         if (file.fileOptions.autoOrientation) {
