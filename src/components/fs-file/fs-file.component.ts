@@ -40,6 +40,11 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit {
   }
 
   @Input()
+  set resize(value) {
+    this.fsFile.resize = value
+  }
+
+  @Input()
   set imageMaxWidth(value) {
     this.fsFile.imageMaxWidth = value
   }

@@ -3,6 +3,7 @@ export interface FsFileOptions {
   multiple?:        boolean;
   preview?:         boolean;
   autoOrientation?: boolean;
+  resize?:          boolean;
   minSize?:         number | undefined;
   maxSize?:         number | undefined,
   imageMaxWidth?:   number | undefined;

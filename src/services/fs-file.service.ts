@@ -3,7 +3,7 @@ import * as FileAPI from 'fileapi';
 import 'fileapi/plugins/FileAPI.exif.js';
 import { Subject } from 'rxjs/Subject';
 import { FsFile } from '../models/fs-file';
-import { ScaleExifImage } from '../helpers';
+import { isImageType, ScaleExifImage } from '../helpers';
 import { FsFileOptions } from '../interfaces';
 
 
@@ -26,6 +26,7 @@ export class FsFileService {
     imageQuality: void 0,
     imageFormat: void 0,
     autoOrientation: true,
+    resize: true,
   };
 
   constructor() {
@@ -104,6 +105,18 @@ export class FsFileService {
     return this._options.autoOrientation;
   }
 
+  set resize(value) {
+    if (typeof(value) === 'boolean') {
+      this._options.resize = value;
+    } else {
+      this._options.resize = value === 'true';
+    }
+  }
+
+  get resize() {
+    return this._options.resize;
+  }
+
   /**
    * Initialize service for target element
    * @param el
@@ -164,24 +177,35 @@ export class FsFileService {
       return new FsFile(f, this._options);
     });
 
-    this.select.next(this._options.multiple ? files : files[0]);
-
+    const processedFiles = [];
     files.forEach((file: FsFile) => {
 
       if (file.typeImage) {
         const resFilePromise = new Promise((resolve, reject) => {
           this.applyTransforms(file, resolve, reject);
         });
+        processedFiles.push(resFilePromise);
+
         resFilePromise.then(
-          () => {console.log(files)},
+          () => {},
           (error) => {
             if (error && error.originFile) {
               this.alertImageProcessingError(error.originFile.file);
             }
           }
         );
+      } else {
+        processedFiles.push(file);
       }
     });
+
+    Promise.all(processedFiles).then((resultFiles) => {
+      this.select.next(this._options.multiple ? resultFiles : resultFiles[0]);
+    }, (error) => {
+      if (error && error.originFile) {
+        this.alertImageProcessingError(error.originFile.file);
+      }
+    })
   }
 
   /**
@@ -193,7 +217,8 @@ export class FsFileService {
     return new Promise((resolve) => {
       FileAPI.filterFiles(rawFiles, (file, info) => {
         let sizeRule = void 0;
-        if (file.typeImage) {
+
+        if (isImageType(file.type) && !this.resize) {
           sizeRule = this.checkResolutionRule(info);
         } else {
           sizeRule = true;
@@ -319,6 +344,12 @@ export class FsFileService {
 
     // Type for result image
     transformParams.type = (this._options.imageFormat) ? 'image/' + this._options.imageFormat : file.type;
+
+    // Resize
+    if (this.resize) {
+      transformParams.maxWidth = this._options.imageMaxWidth;
+      transformParams.maxHeight = this._options.imageMaxHeight;
+    }
 
     // Quality for result image
     if (this._options.imageQuality !== void 0) {

@@ -1,4 +1,5 @@
 import { FsFileOptions } from '../interfaces';
+import { isImageType } from '../helpers';
 
 export class FsFile {
 
@@ -39,8 +40,7 @@ export class FsFile {
   }
 
   get typeImage(): any {
-    return !!this.type
-      .match(/^image\/(gif|jpeg|pjpeg|png|svg\+xml|tiff|vnd\.microsoft\.icon|vnd\.wap\.wbmp|webp)/i);
+    return isImageType(this.type);
   }
 
   public parseInfo(info) {
