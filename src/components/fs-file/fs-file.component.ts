@@ -7,86 +7,63 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
-import { FsFileService } from '../../services';
 import { FsFileDragBaseComponent } from '../fs-file-drag-base';
+import { InputProcessor } from '../../classes';
 
 @Component({
   selector: 'fs-file',
   templateUrl: './fs-file.component.html',
-  providers: [
-    FsFileService,
-  ]
 })
 export class FsFileComponent extends FsFileDragBaseComponent implements OnInit {
 
+  private _processor = new InputProcessor();
+  private _multiple: boolean;
+  private _accept = [];
+  private _disabled: boolean;
+
   @Input()
   set multiple(value) {
-    this.fsFile.multiple = value;
+    if (typeof(value) === 'boolean') {
+      this._multiple = value;
+    } else {
+      this._multiple = value === 'true';
+    }
+  }
+
+  get multiple() {
+    return this._multiple;
   }
 
   @Input()
   set accept(value) {
-    this.fsFile.accept = value;
+    this._accept = this._accept.concat(value.split(','));
   }
 
-  @Input()
-  set minSize(value) {
-    this.fsFile.minSize = value;
-  };
-
-  @Input()
-  set maxSize(value) {
-    this.fsFile.maxSize = value
-  }
-
-  @Input()
-  set resize(value) {
-    this.fsFile.resize = value
-  }
-
-  @Input()
-  set imageMaxWidth(value) {
-    this.fsFile.imageMaxWidth = value
-  }
-
-  @Input()
-  set imageMaxHeight(value) {
-    this.fsFile.imageMaxHeight = value
-  }
-
-  @Input()
-  set imageQuality(value) {
-    this.fsFile.imageQuality = value;
-  }
-
-  @Input()
-  set imageFormat(value) {
-    this.fsFile.imageFormat = value;
+  get accept() {
+    return this._accept.join(', ') || '*';
   }
 
   @Input()
   set disabled(value) {
-    this.fsFile.disabled = value;
+    this._disabled = value;
   }
 
-  @Input()
-  set autoOrientation(value) {
-    this.fsFile.autoOrientation = value;
+  get disabled() {
+    return this._disabled;
   }
-
-  @Input() imageFixOrientation = true;
 
   @Output('select') public select: EventEmitter<any>;
 
   @ViewChild('fileInput') public fileInput: any;
 
-  constructor(public fsFile: FsFileService, public el: ElementRef) {
+  constructor(public el: ElementRef) {
     super(el);
-    this.select = this.fsFile.select;
+    this.select = this._processor.select;
+    // this.select = this.fsFile.select;
   }
 
   public ngOnInit() {
-    this.fsFile.initForElement(this.fileInput);
-    this.fsFile.initDragNDropForElement(this.el);
+    this._processor.initForElement(this.fileInput);
+    this._processor.initDragNDropForElement(this.el);
   }
 }
