@@ -1,21 +1,15 @@
 <div [style.width.px]="previewWidth" [style.height.px]="previewHeight" class="preview-container">
 
-  <!-- Progress container -->
-  <ng-container *ngIf="file.progress; else elsePreview">
-    <mat-spinner class="spinner" [diameter]="previewWidth/2"></mat-spinner>
+  <!-- Image container -->
+  <ng-container *ngIf="file.typeImage; else nonImage">
+    <img [src]="preview" *ngIf="preview">
+    <mat-spinner class="spinner" *ngIf="file.progress" [diameter]="previewWidth/2"></mat-spinner>
   </ng-container>
 
-  <!-- Image container -->
-  <ng-template #elsePreview>
-    <ng-container *ngIf="file.typeImage; else nonImage">
-      <img [src]="preview">
-    </ng-container>
-
-    <!-- Non image container -->
-    <ng-template #nonImage>
-        <div class="file-ext">{{file.extension}}</div>
-        <div class="file-name" [matTooltip]="file.name">{{file.name}}</div>
-    </ng-template>
+  <!-- Non image container -->
+  <ng-template #nonImage>
+    <div class="file-ext">{{file.extension}}</div>
+    <div class="file-name" [matTooltip]="file.name">{{file.name}}</div>
   </ng-template>
 </div>
 

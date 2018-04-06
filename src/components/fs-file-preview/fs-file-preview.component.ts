@@ -82,7 +82,8 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
     FileAPI.Image.transform(file.file, [{
       width: this.previewWidth,
       height: this.previewHeight,
-      preview: true
+      preview: true,
+      quality: file.fileOptions.imageQuality
     }], file.fileOptions.autoOrientation, (err, images) => {
       if (!err && images[0]) {
         if (file.fileOptions.autoOrientation) {
