@@ -17,7 +17,7 @@ export class ImageFileManipulationComponent {
   public select(files) {
     this.files.push(files);
 
-    this._fileProcessor.processFiles(this.files, {
+    this._fileProcessor.process(this.files, {
       quality: .1,
       width: 2500,
       height: 2500

@@ -17,7 +17,7 @@ export class FileProcessor {
    * @param files
    * @param config
    */
-  public processFiles(files, config: FsFileConfig) {
+  public process(files, config: FsFileConfig) {
     let multiple = true;
 
     const processConfig = new ProcessConfig(config);
