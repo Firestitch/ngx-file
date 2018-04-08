@@ -8,7 +8,10 @@ import {
   ViewChild
 } from '@angular/core';
 import { FsFileDragBaseComponent } from '../fs-file-drag-base';
-import { InputProcessor } from '../../classes';
+import { FileProcessor, InputProcessor } from '../../classes';
+import { switchMap } from 'rxjs/operators';
+import { of } from 'rxjs/observable/of';
+
 
 @Component({
   selector: 'fs-file',
@@ -16,10 +19,18 @@ import { InputProcessor } from '../../classes';
 })
 export class FsFileComponent extends FsFileDragBaseComponent implements OnInit {
 
-  private _processor = new InputProcessor();
+  private _inputProcessor = new InputProcessor();
   private _multiple: boolean;
   private _accept = [];
   private _disabled: boolean;
+
+  private _processOptions = {
+    width: void 0,
+    height: void 0,
+    quality: 1,
+  };
+
+  private _autoProcess = false;
 
   @Input()
   set multiple(value) {
@@ -52,18 +63,54 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit {
     return this._disabled;
   }
 
+  @Input()
+  set imageWidth(value) {
+    if (value !== void 0) {
+      this._processOptions.width = +value;
+      this._autoProcess = true;
+    }
+  }
+
+  @Input()
+  set imageHeight(value) {
+    if (value !== void 0) {
+      this._processOptions.height = +value;
+      this._autoProcess = true;
+    }
+  }
+
+  @Input()
+  set imageQuality(value) {
+    const val = parseFloat(value);
+    if (!isNaN(val)) {
+      this._processOptions.quality = val;
+      this._autoProcess = true;
+    }
+  }
+
   @Output('select') public select: EventEmitter<any>;
 
   @ViewChild('fileInput') public fileInput: any;
 
   constructor(public el: ElementRef) {
     super(el);
-    this.select = this._processor.select;
+
+    const filePorcessor = new FileProcessor();
+
+    this.select = this._inputProcessor.select.pipe(
+      switchMap((files) => {
+        if (this._autoProcess) {
+          return filePorcessor.process(files, this._processOptions);
+        } else {
+          return of(files);
+        }
+      })
+    ) as any;
     // this.select = this.fsFile.select;
   }
 
   public ngOnInit() {
-    this._processor.initForElement(this.fileInput);
-    this._processor.initDragNDropForElement(this.el);
+    this._inputProcessor.initForElement(this.fileInput);
+    this._inputProcessor.initDragNDropForElement(this.el);
   }
 }

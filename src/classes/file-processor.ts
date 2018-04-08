@@ -7,6 +7,7 @@ import { switchMap } from 'rxjs/operators';
 import { ProcessConfig, FsFile } from '../models';
 import { ScaleExifImage } from '../helpers';
 import { FsFileConfig } from '../interfaces';
+import { of } from 'rxjs/observable/of';
 
 export class FileProcessor {
 
@@ -42,9 +43,9 @@ export class FileProcessor {
 
     return fromPromise(Promise.all(processedFiles)).pipe(
       switchMap((resultFiles) => {
-        if (!multiple && resultFiles[0]) { return resultFiles[0] }
+        if (!multiple && resultFiles[0]) { return of(resultFiles[0]) }
 
-        return resultFiles;
+        return of(resultFiles);
       })
     );
   }
