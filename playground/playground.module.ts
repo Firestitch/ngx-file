@@ -13,6 +13,8 @@ import {
   MultipleFileSelectComponent,
   ImageFileManipulationComponent,
   FilePickerComponent,
+  FilePickerExistingFileComponent,
+  FilePickerExistingUrlComponent,
 } from './app/components';
 
 import { FsExamplesComponent } from '../tools/components/examples/examples.component';
@@ -36,7 +38,9 @@ import { FsExamplesComponent } from '../tools/components/examples/examples.compo
     SingleFileSelectComponent,
     MultipleFileSelectComponent,
     ImageFileManipulationComponent,
-    FilePickerComponent
+    FilePickerComponent,
+    FilePickerExistingFileComponent,
+    FilePickerExistingUrlComponent
   ],
   providers: [
   ],

@@ -73,6 +73,12 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
    * @param {FsFile} file
    */
   private generateFilePreview(file: FsFile) {
+
+    if (file.url) {
+      this.preview = file.url;
+      return;
+    }
+
     if (!this.file.typeImage) {
       return;
     }

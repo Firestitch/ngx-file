@@ -1,4 +1,12 @@
-<fs-file-picker (select)="select($event)">
+<ul>
+  <li>Reduce quality to: <b>0.8</b></li>
+  <li>Resample max width: <b>500</b></li>
+  <li>Resample max height: <b>500</b></li>
+</ul>
+<fs-file-picker (select)="select($event)"
+                imageQuality=".8"
+                imageWidth="500"
+                imageHeight="500">
     <div fs-file-label>File Picker Label</div>
 </fs-file-picker>
 

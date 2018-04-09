@@ -15,12 +15,12 @@ export class ImageFileManipulationComponent {
   }
 
   public select(files) {
-    this.files.push(files);
+    this.files = this.files.concat(files);
 
     this._fileProcessor.process(this.files, {
-      quality: .1,
-      width: 2500,
-      height: 2500
+      quality: .8,
+      width: 1000,
+      height: 1000
     }).subscribe((resFiles) => {
       console.log(resFiles);
     })
