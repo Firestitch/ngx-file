@@ -11,24 +11,25 @@
   <ng-template fs-file-preview-action placement="bottom-left" action="remove" tooltip="Remove">
     <mat-icon>close</mat-icon>
   </ng-template>
-  <ng-template fs-file-preview-action placement="bottom-right" tooltip="Reupload" (click)="fileInput.click()">
-    <mat-icon>cloud_upload</mat-icon>
+  <ng-template fs-file-preview-action placement="bottom-right" tooltip="Reupload">
+      <fs-file  (select)="selectFile($event)"
+                [imageWidth]="imageWidth"
+                [imageHeight]="imageHeight"
+                [imageQuality]="imageQuality">
+        <mat-icon>cloud_upload</mat-icon></fs-file>
   </ng-template>
 </fs-file-preview>
 
 <ng-template #preview>
-  <div class="select" (click)="fileInput.click()">
-    <mat-icon>cloud_upload</mat-icon>
-    <div class="instruction">{{instruction}}</div>
-    <button mat-raised-button type="button" color="primary">Upload</button>
-  </div>
+    <fs-file  (select)="selectFile($event)"
+              [imageWidth]="imageWidth"
+              [imageHeight]="imageHeight"
+              [imageQuality]="imageQuality">
+    <div class="select">
+      <mat-icon>cloud_upload</mat-icon>
+      <div class="instruction">{{instruction}}</div>
+      <div class="mat-raised-button mat-primary">Upload</div>
+    </div>
+  </fs-file>
 </ng-template>
-
-<input type="file"
-       [hidden]="true"
-       [disabled]="disabled"
-       [multiple]="multiple"
-       [attr.accept]="accept"
-       #fileInput
->
 

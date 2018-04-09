@@ -9,5 +9,6 @@ export class FilePickerComponent {
   public file = void 0;
 
   public select(file) {
+    this.file = file;
   }
 }

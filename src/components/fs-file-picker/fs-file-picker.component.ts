@@ -8,8 +8,9 @@ import {
   ViewChild
 } from '@angular/core';
 
-import {FsFileDragBaseComponent} from '../fs-file-drag-base';
+import { FsFileDragBaseComponent } from '../fs-file-drag-base';
 import { InputProcessor } from '../../classes';
+import { FsFile } from '../../models';
 
 @Component({
   selector: 'fs-file-picker',
@@ -19,21 +20,19 @@ import { InputProcessor } from '../../classes';
 export class FsFilePickerComponent extends FsFileDragBaseComponent implements OnInit {
 
   private _processor = new InputProcessor();
-  private _multiple: boolean;
   private _accept = [];
   private _disabled: boolean;
 
-  @Input()
-  set multiple(value) {
-    if (typeof(value) === 'boolean') {
-      this._multiple = value;
-    } else {
-      this._multiple = value === 'true';
-    }
+  @Input() public imageWidth;
+  @Input() public imageHeight;
+  @Input() public imageQuality;
+
+  @Input('previewUrl') set previewUrl(url) {
+    this.file = new FsFile(new File([''], url));
   }
 
-  get multiple() {
-    return this._multiple;
+  @Input('name') set name(name) {
+    this.file = new FsFile(new File([''], name));
   }
 
   @Input()
@@ -57,7 +56,8 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
   @Input() public previewWidth = 150;
   @Input() public previewHeight = 150;
 
-  @Output('select') public select = new EventEmitter<any>();
+  @Output() public select = new EventEmitter<any>();
+  @Output() public remove = new EventEmitter();
 
   @ViewChild('fileInput') public fileInput: any;
 
@@ -69,16 +69,22 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
   }
 
   public ngOnInit() {
-    this._processor.initForElement(this.fileInput);
-    this._processor.initDragNDropForElement(this.el);
+    // this._processor.initForElement(this.fileInput);
+    // this._processor.initDragNDropForElement(this.el);
 
-    this._processor.select.subscribe((file) => {
-      this.file = file;
-      this.select.emit(file);
-    });
+    // this._processor.select.subscribe((file) => {
+    //   this.file = file;
+    //   this.select.emit(file);
+    // });
+  }
+
+  public selectFile(file) {
+    this.file = file;
+    this.select.emit(file);
   }
 
   public removeFile(file) {
     this.file = void 0;
+    this.remove.emit(this.file);
   }
 }

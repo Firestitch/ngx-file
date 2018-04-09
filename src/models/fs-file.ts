@@ -9,10 +9,11 @@ export class FsFile {
   public rotate: number;
   public exifInfo: any = {};
   public extension: string;
-  public name: string;
   public type: string;
+  public url: string;
   public size: number;
   private _file: File;
+  private _name: string;
   private _fileOptions: FsFileConfig;
 
   constructor(file: File, options?: FsFileConfig) {
@@ -26,6 +27,10 @@ export class FsFile {
     return this._file;
   }
 
+  get name() {
+    return this._name;
+  }
+
   set fileOptions(value) {
     this._fileOptions = value;
   }
@@ -36,17 +41,29 @@ export class FsFile {
 
   set file(value) {
     this._file = value;
-    this.name = value.name;
     this.size = value.size;
-    this.type = value.type;
-    const parts = value.name.split('.');
-    if (parts.length > 1) {
-      this.extension = parts[parts.length - 1];
+    if (value.name.match(/^http/)) {
+      this.url = value.name;
+      const match = value.name.match(/(jpe?g|png|gif|tiff?)$/i);
+      if (match) {
+        this.type = 'image/' + match[1];
+      }
+    } else {
+      this.name = value.name;
+      this.type = value.type;
     }
   }
 
   get typeImage(): any {
     return isImageType(this.type);
+  }
+
+  set name(name) {
+    this._name = name;
+    const parts = name.split('.');
+    if (parts.length > 1) {
+      this.extension = parts[parts.length - 1];
+    }
   }
 
   public parseInfo(info) {
@@ -57,7 +74,7 @@ export class FsFile {
 
   public toObject() {
     return {
-      name: this.name,
+      name: this._name,
       type: this.type,
       size: this.size,
       progress: this.progress,
@@ -67,5 +84,4 @@ export class FsFile {
       imageHeight: this.imageHeight
     }
   }
-
 }

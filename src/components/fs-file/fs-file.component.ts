@@ -11,11 +11,13 @@ import { FsFileDragBaseComponent } from '../fs-file-drag-base';
 import { FileProcessor, InputProcessor } from '../../classes';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
+import { isArray } from 'lodash';
 
 
 @Component({
   selector: 'fs-file',
   templateUrl: './fs-file.component.html',
+  styles: [':host label { cursor: pointer }']
 })
 export class FsFileComponent extends FsFileDragBaseComponent implements OnInit {
 
@@ -34,6 +36,7 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit {
 
   @Input()
   set multiple(value) {
+    // TODO This should be a helper function in @firestitch/common
     if (typeof(value) === 'boolean') {
       this._multiple = value;
     } else {
@@ -95,12 +98,16 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit {
   constructor(public el: ElementRef) {
     super(el);
 
-    const filePorcessor = new FileProcessor();
+    const fileProcessor = new FileProcessor();
 
     this.select = this._inputProcessor.select.pipe(
       switchMap((files) => {
+        if (this._multiple && !isArray(files)) {
+            files = [files];
+        }
+
         if (this._autoProcess) {
-          return filePorcessor.process(files, this._processOptions);
+          return fileProcessor.process(files, this._processOptions);
         } else {
           return of(files);
         }

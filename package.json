@@ -119,6 +119,7 @@
     "@firestitch/common": "^0.1.26",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4",
-    "fileapi": "^2.0.25"
+    "fileapi": "^2.0.25",
+    "lodash": "^4.17.5"
   }
 }
