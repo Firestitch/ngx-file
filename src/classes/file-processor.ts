@@ -1,13 +1,15 @@
 import * as FileAPI from 'fileapi';
 import 'fileapi/plugins/FileAPI.exif.js';
 
-import { fromPromise } from 'rxjs/observable/fromPromise'
-import { switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs/Observable';
+import { switchMap } from 'rxjs/operators/switchMap';
+import { of } from 'rxjs/observable/of';
+import 'rxjs/add/observable/fromPromise';
 
 import { ProcessConfig, FsFile } from '../models';
 import { ScaleExifImage } from '../helpers';
 import { FsFileConfig } from '../interfaces';
-import { of } from 'rxjs/observable/of';
+
 
 export class FileProcessor {
 
@@ -41,7 +43,7 @@ export class FileProcessor {
       }
     });
 
-    return fromPromise(Promise.all(processedFiles)).pipe(
+    return Observable.fromPromise(Promise.all(processedFiles)).pipe(
       switchMap((resultFiles) => {
         if (!multiple && resultFiles[0]) { return of(resultFiles[0]) }
 
