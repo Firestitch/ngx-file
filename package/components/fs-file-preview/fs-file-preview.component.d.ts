@@ -1,5 +1,5 @@
 import { EventEmitter, AfterViewInit } from '@angular/core';
-import { FsFile } from '../../models/fs-file';
+import { FsFile } from '../../models';
 import { FsFilePreviewsBaseComponent } from '../fs-file-preview-base';
 export declare class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implements AfterViewInit {
     file: FsFile;

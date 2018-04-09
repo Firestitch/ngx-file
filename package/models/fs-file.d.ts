@@ -1,4 +1,4 @@
-import { FsFileOptions } from '../interfaces';
+import { FsFileConfig } from '../interfaces';
 export declare class FsFile {
     progress: boolean;
     imageWidth: number;
@@ -11,9 +11,9 @@ export declare class FsFile {
     size: number;
     private _file;
     private _fileOptions;
-    constructor(file: File, options: FsFileOptions);
+    constructor(file: File, options?: FsFileConfig);
     file: File;
-    readonly fileOptions: FsFileOptions;
+    fileOptions: FsFileConfig;
     readonly typeImage: any;
     parseInfo(info: any): void;
     toObject(): {

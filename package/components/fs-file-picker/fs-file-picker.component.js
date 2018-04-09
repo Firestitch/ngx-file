@@ -20,14 +20,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var services_1 = require("../../services");
 var fs_file_drag_base_1 = require("../fs-file-drag-base");
+var classes_1 = require("../../classes");
 var FsFilePickerComponent = (function (_super) {
     __extends(FsFilePickerComponent, _super);
-    function FsFilePickerComponent(fsFile, el) {
+    function FsFilePickerComponent(el) {
         var _this = _super.call(this, el) || this;
-        _this.fsFile = fsFile;
         _this.el = el;
+        _this._processor = new classes_1.InputProcessor();
+        _this._accept = [];
         _this.previewWidth = 150;
         _this.previewHeight = 150;
         _this.select = new core_1.EventEmitter();
@@ -35,74 +36,45 @@ var FsFilePickerComponent = (function (_super) {
         return _this;
     }
     Object.defineProperty(FsFilePickerComponent.prototype, "multiple", {
+        get: function () {
+            return this._multiple;
+        },
         set: function (value) {
-            this.fsFile.multiple = value;
+            if (typeof (value) === 'boolean') {
+                this._multiple = value;
+            }
+            else {
+                this._multiple = value === 'true';
+            }
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(FsFilePickerComponent.prototype, "accept", {
-        set: function (value) {
-            this.fsFile.accept = value;
+        get: function () {
+            return this._accept.join(', ') || '*';
         },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(FsFilePickerComponent.prototype, "minSize", {
         set: function (value) {
-            this.fsFile.minSize = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    ;
-    Object.defineProperty(FsFilePickerComponent.prototype, "maxSize", {
-        set: function (value) {
-            this.fsFile.maxSize = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(FsFilePickerComponent.prototype, "imageMaxWidth", {
-        set: function (value) {
-            this.fsFile.imageMaxWidth = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(FsFilePickerComponent.prototype, "imageMaxHeight", {
-        set: function (value) {
-            this.fsFile.imageMaxHeight = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(FsFilePickerComponent.prototype, "imageQuality", {
-        set: function (value) {
-            this.fsFile.imageQuality = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(FsFilePickerComponent.prototype, "imageFormat", {
-        set: function (value) {
-            this.fsFile.imageFormat = value;
+            this._accept = this._accept.concat(value.split(','));
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(FsFilePickerComponent.prototype, "disabled", {
+        get: function () {
+            return this._disabled;
+        },
         set: function (value) {
-            this.fsFile.disabled = value;
+            this._disabled = value;
         },
         enumerable: true,
         configurable: true
     });
     FsFilePickerComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.fsFile.initForElement(this.fileInput);
-        this.fsFile.initDragNDropForElement(this.el);
-        this.fsFile.select.subscribe(function (file) {
+        this._processor.initForElement(this.fileInput);
+        this._processor.initDragNDropForElement(this.el);
+        this._processor.select.subscribe(function (file) {
             _this.file = file;
             _this.select.emit(file);
         });
@@ -120,36 +92,6 @@ var FsFilePickerComponent = (function (_super) {
         __metadata("design:type", Object),
         __metadata("design:paramtypes", [Object])
     ], FsFilePickerComponent.prototype, "accept", null);
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Object),
-        __metadata("design:paramtypes", [Object])
-    ], FsFilePickerComponent.prototype, "minSize", null);
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Object),
-        __metadata("design:paramtypes", [Object])
-    ], FsFilePickerComponent.prototype, "maxSize", null);
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Object),
-        __metadata("design:paramtypes", [Object])
-    ], FsFilePickerComponent.prototype, "imageMaxWidth", null);
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Object),
-        __metadata("design:paramtypes", [Object])
-    ], FsFilePickerComponent.prototype, "imageMaxHeight", null);
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Object),
-        __metadata("design:paramtypes", [Object])
-    ], FsFilePickerComponent.prototype, "imageQuality", null);
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Object),
-        __metadata("design:paramtypes", [Object])
-    ], FsFilePickerComponent.prototype, "imageFormat", null);
     __decorate([
         core_1.Input(),
         __metadata("design:type", Object),
@@ -176,9 +118,8 @@ var FsFilePickerComponent = (function (_super) {
             selector: 'fs-file-picker',
             templateUrl: 'fs-file-picker.component.html',
             styleUrls: ['fs-file-picker.component.css'],
-            providers: [services_1.FsFileService]
         }),
-        __metadata("design:paramtypes", [services_1.FsFileService, core_1.ElementRef])
+        __metadata("design:paramtypes", [core_1.ElementRef])
     ], FsFilePickerComponent);
     return FsFilePickerComponent;
 }(fs_file_drag_base_1.FsFileDragBaseComponent));

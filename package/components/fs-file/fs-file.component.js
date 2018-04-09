@@ -20,92 +20,104 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var services_1 = require("../../services");
 var fs_file_drag_base_1 = require("../fs-file-drag-base");
+var classes_1 = require("../../classes");
+var operators_1 = require("rxjs/operators");
+var of_1 = require("rxjs/observable/of");
 var FsFileComponent = (function (_super) {
     __extends(FsFileComponent, _super);
-    function FsFileComponent(fsFile, el) {
+    function FsFileComponent(el) {
         var _this = _super.call(this, el) || this;
-        _this.fsFile = fsFile;
         _this.el = el;
-        _this.imageFixOrientation = true;
-        _this.select = _this.fsFile.select;
+        _this._inputProcessor = new classes_1.InputProcessor();
+        _this._accept = [];
+        _this._processOptions = {
+            width: void 0,
+            height: void 0,
+            quality: 1,
+        };
+        _this._autoProcess = false;
+        var filePorcessor = new classes_1.FileProcessor();
+        _this.select = _this._inputProcessor.select.pipe(operators_1.switchMap(function (files) {
+            if (_this._autoProcess) {
+                return filePorcessor.process(files, _this._processOptions);
+            }
+            else {
+                return of_1.of(files);
+            }
+        }));
         return _this;
+        // this.select = this.fsFile.select;
     }
     Object.defineProperty(FsFileComponent.prototype, "multiple", {
+        get: function () {
+            return this._multiple;
+        },
         set: function (value) {
-            this.fsFile.multiple = value;
+            if (typeof (value) === 'boolean') {
+                this._multiple = value;
+            }
+            else {
+                this._multiple = value === 'true';
+            }
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(FsFileComponent.prototype, "accept", {
+        get: function () {
+            return this._accept.join(', ') || '*';
+        },
         set: function (value) {
-            this.fsFile.accept = value;
+            this._accept = this._accept.concat(value.split(','));
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(FsFileComponent.prototype, "minSize", {
+    Object.defineProperty(FsFileComponent.prototype, "disabled", {
+        get: function () {
+            return this._disabled;
+        },
         set: function (value) {
-            this.fsFile.minSize = value;
+            this._disabled = value;
         },
         enumerable: true,
         configurable: true
     });
-    ;
-    Object.defineProperty(FsFileComponent.prototype, "maxSize", {
+    Object.defineProperty(FsFileComponent.prototype, "imageWidth", {
         set: function (value) {
-            this.fsFile.maxSize = value;
+            if (value !== void 0) {
+                this._processOptions.width = +value;
+                this._autoProcess = true;
+            }
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(FsFileComponent.prototype, "imageMaxWidth", {
+    Object.defineProperty(FsFileComponent.prototype, "imageHeight", {
         set: function (value) {
-            this.fsFile.imageMaxWidth = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(FsFileComponent.prototype, "imageMaxHeight", {
-        set: function (value) {
-            this.fsFile.imageMaxHeight = value;
+            if (value !== void 0) {
+                this._processOptions.height = +value;
+                this._autoProcess = true;
+            }
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(FsFileComponent.prototype, "imageQuality", {
         set: function (value) {
-            this.fsFile.imageQuality = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(FsFileComponent.prototype, "imageFormat", {
-        set: function (value) {
-            this.fsFile.imageFormat = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(FsFileComponent.prototype, "disabled", {
-        set: function (value) {
-            this.fsFile.disabled = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(FsFileComponent.prototype, "autoOrientation", {
-        set: function (value) {
-            this.fsFile.autoOrientation = value;
+            var val = parseFloat(value);
+            if (!isNaN(val)) {
+                this._processOptions.quality = val;
+                this._autoProcess = true;
+            }
         },
         enumerable: true,
         configurable: true
     });
     FsFileComponent.prototype.ngOnInit = function () {
-        this.fsFile.initForElement(this.fileInput);
-        this.fsFile.initDragNDropForElement(this.el);
+        this._inputProcessor.initForElement(this.fileInput);
+        this._inputProcessor.initDragNDropForElement(this.el);
     };
     __decorate([
         core_1.Input(),
@@ -121,46 +133,22 @@ var FsFileComponent = (function (_super) {
         core_1.Input(),
         __metadata("design:type", Object),
         __metadata("design:paramtypes", [Object])
-    ], FsFileComponent.prototype, "minSize", null);
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Object),
-        __metadata("design:paramtypes", [Object])
-    ], FsFileComponent.prototype, "maxSize", null);
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Object),
-        __metadata("design:paramtypes", [Object])
-    ], FsFileComponent.prototype, "imageMaxWidth", null);
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Object),
-        __metadata("design:paramtypes", [Object])
-    ], FsFileComponent.prototype, "imageMaxHeight", null);
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Object),
-        __metadata("design:paramtypes", [Object])
-    ], FsFileComponent.prototype, "imageQuality", null);
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Object),
-        __metadata("design:paramtypes", [Object])
-    ], FsFileComponent.prototype, "imageFormat", null);
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Object),
-        __metadata("design:paramtypes", [Object])
     ], FsFileComponent.prototype, "disabled", null);
     __decorate([
         core_1.Input(),
         __metadata("design:type", Object),
         __metadata("design:paramtypes", [Object])
-    ], FsFileComponent.prototype, "autoOrientation", null);
+    ], FsFileComponent.prototype, "imageWidth", null);
     __decorate([
         core_1.Input(),
-        __metadata("design:type", Object)
-    ], FsFileComponent.prototype, "imageFixOrientation", void 0);
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], FsFileComponent.prototype, "imageHeight", null);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], FsFileComponent.prototype, "imageQuality", null);
     __decorate([
         core_1.Output('select'),
         __metadata("design:type", core_1.EventEmitter)
@@ -173,11 +161,8 @@ var FsFileComponent = (function (_super) {
         core_1.Component({
             selector: 'fs-file',
             templateUrl: './fs-file.component.html',
-            providers: [
-                services_1.FsFileService,
-            ]
         }),
-        __metadata("design:paramtypes", [services_1.FsFileService, core_1.ElementRef])
+        __metadata("design:paramtypes", [core_1.ElementRef])
     ], FsFileComponent);
     return FsFileComponent;
 }(fs_file_drag_base_1.FsFileDragBaseComponent));

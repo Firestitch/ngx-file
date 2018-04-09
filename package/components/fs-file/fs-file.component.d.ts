@@ -1,22 +1,21 @@
 import { ElementRef, EventEmitter, OnInit } from '@angular/core';
-import { FsFileService } from '../../services';
 import { FsFileDragBaseComponent } from '../fs-file-drag-base';
 export declare class FsFileComponent extends FsFileDragBaseComponent implements OnInit {
-    fsFile: FsFileService;
     el: ElementRef;
-    multiple: any;
-    accept: any;
-    minSize: any;
-    maxSize: any;
-    imageMaxWidth: any;
-    imageMaxHeight: any;
+    private _inputProcessor;
+    private _multiple;
+    private _accept;
+    private _disabled;
+    private _processOptions;
+    private _autoProcess;
+    multiple: boolean;
+    accept: string;
+    disabled: boolean;
+    imageWidth: any;
+    imageHeight: any;
     imageQuality: any;
-    imageFormat: any;
-    disabled: any;
-    autoOrientation: any;
-    imageFixOrientation: boolean;
     select: EventEmitter<any>;
     fileInput: any;
-    constructor(fsFile: FsFileService, el: ElementRef);
+    constructor(el: ElementRef);
     ngOnInit(): void;
 }

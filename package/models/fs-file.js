@@ -1,11 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var helpers_1 = require("../helpers");
 var FsFile = (function () {
     function FsFile(file, options) {
         this.progress = false;
         this.exifInfo = {};
         this.file = file;
-        this._fileOptions = Object.assign({}, options);
+        if (options) {
+            this.fileOptions = Object.assign({}, options);
+        }
     }
     Object.defineProperty(FsFile.prototype, "file", {
         get: function () {
@@ -28,13 +31,15 @@ var FsFile = (function () {
         get: function () {
             return this._fileOptions;
         },
+        set: function (value) {
+            this._fileOptions = value;
+        },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(FsFile.prototype, "typeImage", {
         get: function () {
-            return !!this.type
-                .match(/^image\/(gif|jpeg|pjpeg|png|svg\+xml|tiff|vnd\.microsoft\.icon|vnd\.wap\.wbmp|webp)/i);
+            return helpers_1.isImageType(this.type);
         },
         enumerable: true,
         configurable: true

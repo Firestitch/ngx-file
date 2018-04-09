@@ -21,7 +21,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var FileAPI = require("fileapi");
-var fs_file_1 = require("../../models/fs-file");
+var models_1 = require("../../models");
 var fs_file_preview_base_1 = require("../fs-file-preview-base");
 var helpers_1 = require("../../helpers");
 var FsFilePreviewComponent = (function (_super) {
@@ -94,17 +94,13 @@ var FsFilePreviewComponent = (function (_super) {
         }
         file.progress = true;
         FileAPI.Image.transform(file.file, [{
-                maxWidth: this.previewWidth,
-                maxHeight: this.previewHeight
-            }], file.fileOptions.autoOrientation, function (err, images) {
+                width: this.previewWidth,
+                height: this.previewHeight,
+                preview: true,
+            }], true, function (err, images) {
             if (!err && images[0]) {
-                if (file.fileOptions.autoOrientation) {
-                    var scaledCanvasImage = helpers_1.ScaleExifImage(images[0], file.exifInfo.Orientation, _this.previewWidth, _this.previewHeight);
-                    _this.preview = scaledCanvasImage.toDataURL(file.type);
-                }
-                else {
-                    _this.preview = images[0].toDataURL(file.type);
-                }
+                var scaledCanvasImage = helpers_1.ScaleExifImage(images[0], file.exifInfo.Orientation, _this.previewWidth, _this.previewHeight);
+                _this.preview = scaledCanvasImage.toDataURL(file.type);
                 file.progress = false;
             }
             else {
@@ -154,8 +150,8 @@ var FsFilePreviewComponent = (function (_super) {
     ], FsFilePreviewComponent.prototype, "previewHeight", void 0);
     __decorate([
         core_1.Input('file'),
-        __metadata("design:type", fs_file_1.FsFile),
-        __metadata("design:paramtypes", [fs_file_1.FsFile])
+        __metadata("design:type", models_1.FsFile),
+        __metadata("design:paramtypes", [models_1.FsFile])
     ], FsFilePreviewComponent.prototype, "_file", null);
     __decorate([
         core_1.Output(),
