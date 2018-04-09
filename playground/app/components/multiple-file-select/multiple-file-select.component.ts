@@ -10,6 +10,7 @@ export class MultipleFileSelectComponent {
   public filesJsonInfo = [];
 
   public select(files) {
+    console.log(files);
     this.files.push(...files);
   }
 }

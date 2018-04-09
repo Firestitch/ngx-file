@@ -8,7 +8,7 @@ import {
 
 import * as FileAPI from 'fileapi';
 
-import { FsFile } from '../../models/fs-file';
+import { FsFile } from '../../models';
 import { FsFilePreviewsBaseComponent } from '../fs-file-preview-base';
 import { ScaleExifImage } from '../../helpers';
 
@@ -83,15 +83,11 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
       width: this.previewWidth,
       height: this.previewHeight,
       preview: true,
-      quality: file.fileOptions.imageQuality
-    }], file.fileOptions.autoOrientation, (err, images) => {
+      // quality: file.fileOptions.imageQuality
+    }], true, (err, images) => {
       if (!err && images[0]) {
-        if (file.fileOptions.autoOrientation) {
-          const scaledCanvasImage = ScaleExifImage(images[0], file.exifInfo.Orientation, this.previewWidth, this.previewHeight);
-          this.preview = scaledCanvasImage.toDataURL(file.type);
-        } else {
-          this.preview = images[0].toDataURL(file.type);
-        }
+        const scaledCanvasImage = ScaleExifImage(images[0], file.exifInfo.Orientation, this.previewWidth, this.previewHeight);
+        this.preview = scaledCanvasImage.toDataURL(file.type);
 
         file.progress = false;
       } else {

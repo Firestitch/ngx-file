@@ -1,4 +1,4 @@
-import { FsFileOptions } from '../interfaces';
+import { FsFileConfig } from '../interfaces';
 import { isImageType } from '../helpers';
 
 export class FsFile {
@@ -13,15 +13,21 @@ export class FsFile {
   public type: string;
   public size: number;
   private _file: File;
-  private _fileOptions: FsFileOptions;
+  private _fileOptions: FsFileConfig;
 
-  constructor(file: File, options: FsFileOptions) {
+  constructor(file: File, options?: FsFileConfig) {
     this.file = file;
-    this._fileOptions = Object.assign({}, options);
+    if (options) {
+      this.fileOptions = Object.assign({}, options);
+    }
   }
 
   get file() {
     return this._file;
+  }
+
+  set fileOptions(value) {
+    this._fileOptions = value;
   }
 
   get fileOptions() {

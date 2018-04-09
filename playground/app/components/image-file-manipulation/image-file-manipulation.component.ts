@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FileProcessor } from '../../../../src/classes';
 
 @Component({
   selector: 'image-file-manipulation',
@@ -7,10 +8,22 @@ import { Component } from '@angular/core';
 })
 export class ImageFileManipulationComponent {
   public files = [];
-  public filesJsonInfo = [];
+
+  private _fileProcessor = new FileProcessor();
+
+  constructor() {
+  }
 
   public select(files) {
-    this.files.push(...files);
+    this.files.push(files);
+
+    this._fileProcessor.process(this.files, {
+      quality: .1,
+      width: 2500,
+      height: 2500
+    }).subscribe((resFiles) => {
+      console.log(resFiles);
+    })
   }
 
   public enhance(file) {
