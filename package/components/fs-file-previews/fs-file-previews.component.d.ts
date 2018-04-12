@@ -1,5 +1,5 @@
 import { OnInit } from '@angular/core';
-import { FsFilePreviewsBaseComponent } from "../fs-file-preview-base";
+import { FsFilePreviewsBaseComponent } from '../fs-file-preview-base';
 export declare class FsFilePreviewsComponent extends FsFilePreviewsBaseComponent implements OnInit {
     files: any;
     previewWidth: number;

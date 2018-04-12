@@ -6,13 +6,15 @@ export declare class FsFile {
     rotate: number;
     exifInfo: any;
     extension: string;
-    name: string;
     type: string;
+    url: string;
     size: number;
     private _file;
+    private _name;
     private _fileOptions;
     constructor(file: File, options?: FsFileConfig);
     file: File;
+    name: string;
     fileOptions: FsFileConfig;
     readonly typeImage: any;
     parseInfo(info: any): void;

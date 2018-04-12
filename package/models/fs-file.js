@@ -16,10 +16,29 @@ var FsFile = (function () {
         },
         set: function (value) {
             this._file = value;
-            this.name = value.name;
             this.size = value.size;
-            this.type = value.type;
-            var parts = value.name.split('.');
+            if (value.name.match(/^http/)) {
+                this.url = value.name;
+                var match = value.name.match(/(jpe?g|png|gif|tiff?)$/i);
+                if (match) {
+                    this.type = 'image/' + match[1];
+                }
+            }
+            else {
+                this.name = value.name;
+                this.type = value.type;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(FsFile.prototype, "name", {
+        get: function () {
+            return this._name;
+        },
+        set: function (name) {
+            this._name = name;
+            var parts = name.split('.');
             if (parts.length > 1) {
                 this.extension = parts[parts.length - 1];
             }
@@ -51,7 +70,7 @@ var FsFile = (function () {
     };
     FsFile.prototype.toObject = function () {
         return {
-            name: this.name,
+            name: this._name,
             type: this.type,
             size: this.size,
             progress: this.progress,

@@ -9,7 +9,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FsFilePreviewActionDirective } from '../../directives';
-import {FsFilePreviewsBaseComponent} from "../fs-file-preview-base";
+import {FsFilePreviewsBaseComponent} from '../fs-file-preview-base';
 
 @Component({
   selector: 'fs-file-previews',

@@ -56,15 +56,13 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
   }
 
   public callAction(action) {
-    switch (action.action) {
-      case 'remove': {
-        this.remove.emit(this.file);
-      } break;
-      default: {
-        if (action.click) {
-          action.click.emit(this.file);
-        }
-      }
+
+    if (action.click) {
+      action.click.emit(this.file);
+    }
+
+    if (action.action == 'remove') {
+      this.remove.emit(this.file);
     }
   }
 

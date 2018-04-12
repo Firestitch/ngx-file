@@ -22,6 +22,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var fs_file_drag_base_1 = require("../fs-file-drag-base");
 var classes_1 = require("../../classes");
+var models_1 = require("../../models");
 var FsFilePickerComponent = (function (_super) {
     __extends(FsFilePickerComponent, _super);
     function FsFilePickerComponent(el) {
@@ -32,20 +33,20 @@ var FsFilePickerComponent = (function (_super) {
         _this.previewWidth = 150;
         _this.previewHeight = 150;
         _this.select = new core_1.EventEmitter();
+        _this.remove = new core_1.EventEmitter();
         _this.instruction = 'Drag & Drop your file or use the button below';
         return _this;
     }
-    Object.defineProperty(FsFilePickerComponent.prototype, "multiple", {
-        get: function () {
-            return this._multiple;
+    Object.defineProperty(FsFilePickerComponent.prototype, "previewUrl", {
+        set: function (url) {
+            this.file = new models_1.FsFile(new File([''], url));
         },
-        set: function (value) {
-            if (typeof (value) === 'boolean') {
-                this._multiple = value;
-            }
-            else {
-                this._multiple = value === 'true';
-            }
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(FsFilePickerComponent.prototype, "name", {
+        set: function (name) {
+            this.file = new models_1.FsFile(new File([''], name));
         },
         enumerable: true,
         configurable: true
@@ -71,22 +72,43 @@ var FsFilePickerComponent = (function (_super) {
         configurable: true
     });
     FsFilePickerComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this._processor.initForElement(this.fileInput);
-        this._processor.initDragNDropForElement(this.el);
-        this._processor.select.subscribe(function (file) {
-            _this.file = file;
-            _this.select.emit(file);
-        });
+        // this._processor.initForElement(this.fileInput);
+        // this._processor.initDragNDropForElement(this.el);
+        // this._processor.select.subscribe((file) => {
+        //   this.file = file;
+        //   this.select.emit(file);
+        // });
+    };
+    FsFilePickerComponent.prototype.selectFile = function (file) {
+        this.file = file;
+        this.select.emit(file);
     };
     FsFilePickerComponent.prototype.removeFile = function (file) {
         this.file = void 0;
+        this.remove.emit(this.file);
     };
     __decorate([
         core_1.Input(),
+        __metadata("design:type", Object)
+    ], FsFilePickerComponent.prototype, "imageWidth", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object)
+    ], FsFilePickerComponent.prototype, "imageHeight", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object)
+    ], FsFilePickerComponent.prototype, "imageQuality", void 0);
+    __decorate([
+        core_1.Input('previewUrl'),
         __metadata("design:type", Object),
         __metadata("design:paramtypes", [Object])
-    ], FsFilePickerComponent.prototype, "multiple", null);
+    ], FsFilePickerComponent.prototype, "previewUrl", null);
+    __decorate([
+        core_1.Input('name'),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], FsFilePickerComponent.prototype, "name", null);
     __decorate([
         core_1.Input(),
         __metadata("design:type", Object),
@@ -106,9 +128,13 @@ var FsFilePickerComponent = (function (_super) {
         __metadata("design:type", Object)
     ], FsFilePickerComponent.prototype, "previewHeight", void 0);
     __decorate([
-        core_1.Output('select'),
+        core_1.Output(),
         __metadata("design:type", Object)
     ], FsFilePickerComponent.prototype, "select", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], FsFilePickerComponent.prototype, "remove", void 0);
     __decorate([
         core_1.ViewChild('fileInput'),
         __metadata("design:type", Object)

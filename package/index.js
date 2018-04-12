@@ -83,7 +83,7 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, ":host.dragover .select {\n  border: 2px #07a8e6 dashed;\n  color: #07a8e6;\n}\n\n:host.dragover .select button {\n  display: none;\n}\n\n:host.dragover .select .mat-icon {\n  color: #07a8e6;\n}\n\n:host.dragover ::ng-deep .preview-container:after {\n  content: \"\";\n  width: 98%;\n  display: block;\n  height: 98%;\n  position: absolute;\n  left: 0;\n  top: 0;\n  border: 2px #07a8e6 dashed;\n  background: #07a8e6;\n  opacity: 0.4;\n}\n\n.select {\n  text-align: center;\n  border: 1px solid #ddd;\n  border-radius: 3px;\n  width: 150px;\n  height: 150px;\n  display: table-cell;\n  vertical-align: middle;\n  padding: 10px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n\n.select mat-icon {\n  -webkit-transform: scale(1.8);\n          transform: scale(1.8);\n  color: #ddd;\n}\n\n.instruction {\n  font-size: 12px;\n  padding: 8px 0;\n}\n\n.label {\n  -webkit-transform: scale(0.75) translateZ(0.001px);\n          transform: scale(0.75) translateZ(0.001px);\n  -webkit-transform-origin: 0 0;\n          transform-origin: 0 0;\n}\n\n", "", {"version":3,"sources":["/Users/Basters/dev/firestitch/fs-file/src/components/fs-file-picker/src/components/fs-file-picker/fs-file-picker.component.scss","/Users/Basters/dev/firestitch/fs-file/fs-file-picker.component.scss"],"names":[],"mappings":"AAAA;EAGM,2BAAA;EACA,eAAA;CCDL;;ADHD;EAOQ,cAAA;CCAP;;ADPD;EAWQ,eAAA;CCAP;;ADXD;EAiBU,YAAA;EACA,WAAA;EACA,eAAA;EACA,YAAA;EACA,mBAAA;EACA,QAAA;EACA,OAAA;EACA,2BAAA;EACA,oBAAA;EACA,aAAA;CCFT;;ADSD;EACE,mBAAA;EACA,uBAAA;EACA,mBAAA;EACA,aAAA;EACA,cAAA;EACA,oBAAA;EACA,uBAAA;EACA,cAAA;EACA,yBAAA;MAAA,sBAAA;UAAA,wBAAA;EACA,6BAAA;EAAA,8BAAA;MAAA,2BAAA;UAAA,uBAAA;EACA,+BAAA;UAAA,uBAAA;CCND;;ADLD;EAeI,8BAAA;UAAA,sBAAA;EACA,YAAA;CCNH;;ADUD;EACE,gBAAA;EACA,eAAA;CCPD;;ADUD;EACE,mDAAA;UAAA,2CAAA;EACA,8BAAA;UAAA,sBAAA;CCPD","file":"fs-file-picker.component.scss","sourcesContent":[":host {\n  &.dragover {\n    .select {\n      border: 2px #07a8e6 dashed;\n      color: #07a8e6;\n\n      button {\n        display: none;\n      }\n\n      .mat-icon {\n        color: #07a8e6;\n      }\n    }\n    ::ng-deep {\n      .preview-container {\n        &:after {\n          content: \"\";\n          width: 98%;\n          display: block;\n          height: 98%;\n          position: absolute;\n          left: 0;\n          top: 0;\n          border: 2px #07a8e6 dashed;\n          background: #07a8e6;\n          opacity: 0.4;\n        }\n      }\n    }\n  }\n}\n\n.select {\n  text-align: center;\n  border: 1px solid #ddd;\n  border-radius: 3px;\n  width: 150px;\n  height: 150px;\n  display: table-cell;\n  vertical-align: middle;\n  padding: 10px;\n  justify-content: center;\n  flex-direction: column;\n  box-sizing: border-box;\n\n\n  mat-icon {\n    transform: scale(1.8);\n    color: #ddd;\n  }\n}\n\n.instruction {\n  font-size: 12px;\n  padding: 8px 0;\n}\n\n.label {\n  transform: scale(.75) translateZ(.001px);\n  transform-origin: 0 0;\n}\n",":host.dragover .select {\n  border: 2px #07a8e6 dashed;\n  color: #07a8e6;\n}\n\n:host.dragover .select button {\n  display: none;\n}\n\n:host.dragover .select .mat-icon {\n  color: #07a8e6;\n}\n\n:host.dragover ::ng-deep .preview-container:after {\n  content: \"\";\n  width: 98%;\n  display: block;\n  height: 98%;\n  position: absolute;\n  left: 0;\n  top: 0;\n  border: 2px #07a8e6 dashed;\n  background: #07a8e6;\n  opacity: 0.4;\n}\n\n.select {\n  text-align: center;\n  border: 1px solid #ddd;\n  border-radius: 3px;\n  width: 150px;\n  height: 150px;\n  display: table-cell;\n  vertical-align: middle;\n  padding: 10px;\n  justify-content: center;\n  flex-direction: column;\n  box-sizing: border-box;\n}\n\n.select mat-icon {\n  transform: scale(1.8);\n  color: #ddd;\n}\n\n.instruction {\n  font-size: 12px;\n  padding: 8px 0;\n}\n\n.label {\n  transform: scale(0.75) translateZ(0.001px);\n  transform-origin: 0 0;\n}\n\n"],"sourceRoot":""}]);
+exports.push([module.i, ":host.dragover .select {\n  border: 2px #07a8e6 dashed;\n  color: #07a8e6;\n}\n\n:host.dragover .select button {\n  display: none;\n}\n\n:host.dragover .select .mat-icon {\n  color: #07a8e6;\n}\n\n:host.dragover ::ng-deep .preview-container:after {\n  content: \"\";\n  width: 98%;\n  display: block;\n  height: 98%;\n  position: absolute;\n  left: 0;\n  top: 0;\n  border: 2px #07a8e6 dashed;\n  background: #07a8e6;\n  opacity: 0.4;\n}\n\n.select {\n  text-align: center;\n  border: 1px solid #ddd;\n  border-radius: 3px;\n  width: 150px;\n  height: 150px;\n  display: table-cell;\n  vertical-align: middle;\n  padding: 10px;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n\n.select mat-icon {\n  -webkit-transform: scale(1.8);\n          transform: scale(1.8);\n  color: #ddd;\n}\n\n.instruction {\n  font-size: 12px;\n  padding: 8px 0;\n}\n\n.label {\n  -webkit-transform: scale(0.75) translateZ(0.001px);\n          transform: scale(0.75) translateZ(0.001px);\n  -webkit-transform-origin: 0 0;\n          transform-origin: 0 0;\n}\n\n", "", {"version":3,"sources":["C:/Projects/fs-file/src/components/fs-file-picker/C:/Projects/fs-file/src/components/fs-file-picker/src/components/fs-file-picker/fs-file-picker.component.scss","C:/Projects/fs-file/src/components/fs-file-picker/C:/Projects/fs-file/fs-file-picker.component.scss"],"names":[],"mappings":"AAAA;EAGM,2BAAA;EACA,eAAA;CCDL;;ADHD;EAOQ,cAAA;CCAP;;ADPD;EAWQ,eAAA;CCAP;;ADXD;EAiBU,YAAA;EACA,WAAA;EACA,eAAA;EACA,YAAA;EACA,mBAAA;EACA,QAAA;EACA,OAAA;EACA,2BAAA;EACA,oBAAA;EACA,aAAA;CCFT;;ADSD;EACE,mBAAA;EACA,uBAAA;EACA,mBAAA;EACA,aAAA;EACA,cAAA;EACA,oBAAA;EACA,uBAAA;EACA,cAAA;EACA,yBAAA;MAAA,sBAAA;UAAA,wBAAA;EACA,6BAAA;EAAA,8BAAA;MAAA,2BAAA;UAAA,uBAAA;EACA,+BAAA;UAAA,uBAAA;CCND;;ADLD;EAeI,8BAAA;UAAA,sBAAA;EACA,YAAA;CCNH;;ADUD;EACE,gBAAA;EACA,eAAA;CCPD;;ADUD;EACE,mDAAA;UAAA,2CAAA;EACA,8BAAA;UAAA,sBAAA;CCPD","file":"fs-file-picker.component.scss","sourcesContent":[":host {\r\n  &.dragover {\r\n    .select {\r\n      border: 2px #07a8e6 dashed;\r\n      color: #07a8e6;\r\n\r\n      button {\r\n        display: none;\r\n      }\r\n\r\n      .mat-icon {\r\n        color: #07a8e6;\r\n      }\r\n    }\r\n    ::ng-deep {\r\n      .preview-container {\r\n        &:after {\r\n          content: \"\";\r\n          width: 98%;\r\n          display: block;\r\n          height: 98%;\r\n          position: absolute;\r\n          left: 0;\r\n          top: 0;\r\n          border: 2px #07a8e6 dashed;\r\n          background: #07a8e6;\r\n          opacity: 0.4;\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\n.select {\r\n  text-align: center;\r\n  border: 1px solid #ddd;\r\n  border-radius: 3px;\r\n  width: 150px;\r\n  height: 150px;\r\n  display: table-cell;\r\n  vertical-align: middle;\r\n  padding: 10px;\r\n  justify-content: center;\r\n  flex-direction: column;\r\n  box-sizing: border-box;\r\n\r\n\r\n  mat-icon {\r\n    transform: scale(1.8);\r\n    color: #ddd;\r\n  }\r\n}\r\n\r\n.instruction {\r\n  font-size: 12px;\r\n  padding: 8px 0;\r\n}\r\n\r\n.label {\r\n  transform: scale(.75) translateZ(.001px);\r\n  transform-origin: 0 0;\r\n}\r\n",":host.dragover .select {\n  border: 2px #07a8e6 dashed;\n  color: #07a8e6;\n}\n\n:host.dragover .select button {\n  display: none;\n}\n\n:host.dragover .select .mat-icon {\n  color: #07a8e6;\n}\n\n:host.dragover ::ng-deep .preview-container:after {\n  content: \"\";\n  width: 98%;\n  display: block;\n  height: 98%;\n  position: absolute;\n  left: 0;\n  top: 0;\n  border: 2px #07a8e6 dashed;\n  background: #07a8e6;\n  opacity: 0.4;\n}\n\n.select {\n  text-align: center;\n  border: 1px solid #ddd;\n  border-radius: 3px;\n  width: 150px;\n  height: 150px;\n  display: table-cell;\n  vertical-align: middle;\n  padding: 10px;\n  justify-content: center;\n  flex-direction: column;\n  box-sizing: border-box;\n}\n\n.select mat-icon {\n  transform: scale(1.8);\n  color: #ddd;\n}\n\n.instruction {\n  font-size: 12px;\n  padding: 8px 0;\n}\n\n.label {\n  transform: scale(0.75) translateZ(0.001px);\n  transform-origin: 0 0;\n}\n\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -98,7 +98,7 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, ".file-ext {\n  font-weight: bold;\n  text-align: center;\n  text-transform: uppercase;\n  padding: 15px 0;\n  font-size: 25px;\n}\n\n.file-name {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  padding: 0 5px;\n  font-size: 12px;\n  text-align: center;\n}\n\n.actions {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n}\n\n@media only screen and (max-width: 767.98px) {\n  .actions {\n    display: block;\n  }\n}\n\n@media only screen and (min-width: 768px) {\n  .actions {\n    display: none;\n    background: rgba(0, 0, 0, .5);\n  }\n}\n\n.actions .action {\n  position: absolute;\n  cursor: pointer;\n}\n\n.actions .action.top-left {\n  top: 5%;\n  right: 5%;\n}\n\n.actions .action.top-right {\n  top: 5%;\n  right: 5%;\n}\n\n.actions .action.bottom-left {\n  bottom: 5%;\n  left: 5%;\n}\n\n.actions .action.bottom-right {\n  bottom: 5%;\n  right: 5%;\n}\n\n.actions .action.mat-mini-fab {\n  width: 22%;\n  height: 22%;\n  min-width: 30px;\n  min-height: 30px;\n  max-width: 42px;\n  max-height: 42px;\n  line-height: 15px !important;\n}\n\n.actions .action.mat-mini-fab .mat-button-wrapper {\n  padding: 4px 0;\n  line-height: 15px !important;\n}\n\n:host:hover .file-name {\n  overflow: visible;\n  white-space: normal;\n  word-wrap: break-word;\n}\n\n:host.preview {\n  display: inline-block;\n  position: relative;\n  margin-right: 10px;\n  border: 1px #DDD solid;\n  vertical-align: top;\n  border-radius: 3px;\n}\n\n:host.preview:last-child {\n  margin-right: 0;\n}\n\n:host.preview:hover .actions,\n:host.preview:focus .actions {\n  display: block;\n}\n\n:host.preview img {\n  display: block;\n  border-radius: 3px;\n}\n\n:host ::ng-deep .mat-button-wrapper {\n  padding: 0;\n  line-height: 15px !important;\n}\n\n:host ::ng-deep .spinner {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin-left: -25%;\n  margin-top: -25%;\n}\n\n@media only screen and (max-width: 550px) {\n  .actions {\n    display: block;\n    background: none;\n  }\n}\n\n", "", {"version":3,"sources":["/Users/Basters/dev/firestitch/fs-file/src/components/fs-file-preview/src/components/fs-file-preview/fs-file-preview.component.scss","/Users/Basters/dev/firestitch/fs-file/fs-file-preview.component.scss","/Users/Basters/dev/firestitch/fs-file/src/components/fs-file-preview/src/styles/_mixins.scss"],"names":[],"mappings":"AAEA;EACE,kBAAA;EACA,mBAAA;EACA,0BAAA;EACA,gBAAA;EACA,gBAAA;CCDD;;ADID;EACE,oBAAA;EACA,iBAAA;EACA,wBAAA;EACA,eAAA;EACA,gBAAA;EACA,mBAAA;CCDD;;ADID;EACE,mBAAA;EAWA,YAAA;EACA,aAAA;EACA,OAAA;EACA,QAAA;CCXD;;ACSC;EFbF;IAII,eAAA;GCKD;CACF;;ACGC;EFbF;IAQI,cAAA;IACA,8BAAA;GCOD;CACF;;ADjBD;EAmBI,mBAAA;EACA,gBAAA;CCEH;;ADLC;EAMI,QAAA;EACA,UAAA;CCGL;;AD3BD;EA4BM,QAAA;EACA,UAAA;CCGL;;ADhCD;EAiCM,WAAA;EACA,SAAA;CCGL;;ADrCD;EAsCM,WAAA;EACA,UAAA;CCGL;;AD1CD;EA2CM,WAAA;EACA,YAAA;EACA,gBAAA;EACA,iBAAA;EACA,gBAAA;EACA,iBAAA;EACA,6BAAA;CCGL;;ADDK;EACE,eAAA;EACA,6BAAA;CCIP;;ADED;EAEI,kBAAA;EACA,oBAAA;EACA,sBAAA;CCAH;;ADGC;EACE,sBAAA;EACA,mBAAA;EACA,mBAAA;EACA,uBAAA;EACA,oBAAA;EACA,mBAAA;CCAH;;ADbD;EAgBM,gBAAA;CCCL;;ADjBD;;EAqBQ,eAAA;CCCP;;ADGG;EACE,eAAA;EACA,mBAAA;CCAL;;ADMD;EAEI,WAAA;EACA,6BAAA;CCJH;;ADCD;EAOI,mBAAA;EACA,SAAA;EACA,UAAA;EACA,kBAAA;EACA,iBAAA;CCJH;;ADQD;EACE;IACI,eAAA;IACA,iBAAA;GCLH;CACF","file":"fs-file-preview.component.scss","sourcesContent":["@import \"../../styles/mixins\";\n\n.file-ext {\n  font-weight: bold;\n  text-align: center;\n  text-transform: uppercase;\n  padding: 15px 0;\n  font-size: 25px;\n}\n\n.file-name {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  padding: 0 5px;\n  font-size: 12px;\n  text-align: center;\n}\n\n.actions {\n  position: absolute;\n\n  @include apply-to(less-than, phone) {\n    display: block;\n  }\n\n  @include apply-to(greater-than, phone) {\n    display: none;\n    background: rgba(0, 0, 0, 0.5);\n  }\n\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n\n  .action {\n\n    position: absolute;\n    cursor: pointer;\n\n    &.top-left {\n      top: 5%;\n      right: 5%;\n    }\n\n    &.top-right {\n      top: 5%;\n      right: 5%;\n    }\n\n    &.bottom-left {\n      bottom: 5%;\n      left: 5%;\n    }\n\n    &.bottom-right {\n      bottom: 5%;\n      right: 5%;\n    }\n\n    &.mat-mini-fab {\n      width: 22%;\n      height: 22%;\n      min-width: 30px;\n      min-height: 30px;\n      max-width: 42px;\n      max-height: 42px;\n      line-height: 15px !important;\n\n      .mat-button-wrapper {\n        padding: 4px 0;\n        line-height: 15px !important;\n      }\n    }\n  }\n}\n\n:host {\n  &:hover .file-name {\n    overflow: visible;\n    white-space: normal;\n    word-wrap: break-word;\n  }\n\n  &.preview {\n    display: inline-block;\n    position: relative;\n    margin-right: 10px;\n    border: 1px #DDD solid;\n    vertical-align: top;\n    border-radius: 3px;\n\n    &:last-child {\n      margin-right: 0;\n    }\n\n    &:hover, &:focus {\n      .actions {\n        display: block;\n      }\n    }\n\n    img {\n      display: block;\n      border-radius: 3px;\n    }\n  }\n\n}\n\n:host ::ng-deep {\n  .mat-button-wrapper {\n    padding: 0;\n    line-height: 15px !important;\n  }\n\n  .spinner {\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    margin-left: -25%;\n    margin-top: -25%;\n  }\n}\n\n@media only screen and (max-width: 550px) {\n  .actions {\n      display: block;\n      background: none;\n  }\n}\n",".file-ext {\n  font-weight: bold;\n  text-align: center;\n  text-transform: uppercase;\n  padding: 15px 0;\n  font-size: 25px;\n}\n\n.file-name {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  padding: 0 5px;\n  font-size: 12px;\n  text-align: center;\n}\n\n.actions {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n}\n\n@media only screen and (max-width: 767.98px) {\n  .actions {\n    display: block;\n  }\n}\n\n@media only screen and (min-width: 768px) {\n  .actions {\n    display: none;\n    background: rgba(0, 0, 0, 0.5);\n  }\n}\n\n.actions .action {\n  position: absolute;\n  cursor: pointer;\n}\n\n.actions .action.top-left {\n  top: 5%;\n  right: 5%;\n}\n\n.actions .action.top-right {\n  top: 5%;\n  right: 5%;\n}\n\n.actions .action.bottom-left {\n  bottom: 5%;\n  left: 5%;\n}\n\n.actions .action.bottom-right {\n  bottom: 5%;\n  right: 5%;\n}\n\n.actions .action.mat-mini-fab {\n  width: 22%;\n  height: 22%;\n  min-width: 30px;\n  min-height: 30px;\n  max-width: 42px;\n  max-height: 42px;\n  line-height: 15px !important;\n}\n\n.actions .action.mat-mini-fab .mat-button-wrapper {\n  padding: 4px 0;\n  line-height: 15px !important;\n}\n\n:host:hover .file-name {\n  overflow: visible;\n  white-space: normal;\n  word-wrap: break-word;\n}\n\n:host.preview {\n  display: inline-block;\n  position: relative;\n  margin-right: 10px;\n  border: 1px #DDD solid;\n  vertical-align: top;\n  border-radius: 3px;\n}\n\n:host.preview:last-child {\n  margin-right: 0;\n}\n\n:host.preview:hover .actions,\n:host.preview:focus .actions {\n  display: block;\n}\n\n:host.preview img {\n  display: block;\n  border-radius: 3px;\n}\n\n:host ::ng-deep .mat-button-wrapper {\n  padding: 0;\n  line-height: 15px !important;\n}\n\n:host ::ng-deep .spinner {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin-left: -25%;\n  margin-top: -25%;\n}\n\n@media only screen and (max-width: 550px) {\n  .actions {\n    display: block;\n    background: none;\n  }\n}\n\n","@import \"variables\";\n\n\n@mixin apply-to($ltgt, $device) {\n  $extrema: null;\n  $boundary-target: null;\n  $delta: null;\n\n  @if $ltgt == less-than {\n    $extrema: max;\n    $delta: -1;\n  } @else if $ltgt == greater-than {\n    $extrema: min;\n    $delta: +1;\n  }\n\n  @if $device == phone {\n    @if $ltgt == less-than {\n      $boundary-target: $phone-width-max;\n    } @else if $ltgt == greater-than {\n      $boundary-target: $tablet-width-min;\n    }\n  } @else if $device == tablet {\n    @if $ltgt == less-than {\n      $boundary-target: $tablet-width-min;\n    } @else if $ltgt == greater-than {\n      $boundary-target: $tablet-width-max;\n    }\n  } @else if $device == desktop {\n    $boundary-target: $desktop-width-min;\n  }\n\n  @media only screen and (#{$extrema}-width: $boundary-target) {\n    @content;\n  }\n}\n\n@mixin phone {\n  @media only screen and (max-width: #{$phone-width-max}) {\n    @content;\n  }\n}\n\n@mixin tablet {\n  @media only screen and (min-width: #{$tablet-width-min}) and (max-width: #{$tablet-width-max}) {\n    @content;\n  }\n}\n\n@mixin desktop {\n  @media only screen and (min-width: #{$desktop-width-min}) {\n    @content;\n  }\n}\n"],"sourceRoot":""}]);
+exports.push([module.i, ".file-ext {\n  font-weight: bold;\n  text-align: center;\n  text-transform: uppercase;\n  padding: 15px 0;\n  font-size: 25px;\n}\n\n.file-name {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  padding: 0 5px;\n  font-size: 12px;\n  text-align: center;\n}\n\n.actions {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n}\n\n@media only screen and (max-width: 767.98px) {\n  .actions {\n    display: block;\n  }\n}\n\n@media only screen and (min-width: 768px) {\n  .actions {\n    display: none;\n    background: rgba(0, 0, 0, .5);\n  }\n}\n\n.actions .action {\n  position: absolute;\n  cursor: pointer;\n}\n\n.actions .action.top-left {\n  top: 5%;\n  right: 5%;\n}\n\n.actions .action.top-right {\n  top: 5%;\n  right: 5%;\n}\n\n.actions .action.bottom-left {\n  bottom: 5%;\n  left: 5%;\n}\n\n.actions .action.bottom-right {\n  bottom: 5%;\n  right: 5%;\n}\n\n.actions .action.mat-mini-fab {\n  width: 22%;\n  height: 22%;\n  min-width: 30px;\n  min-height: 30px;\n  max-width: 42px;\n  max-height: 42px;\n  line-height: 15px !important;\n}\n\n.actions .action.mat-mini-fab .mat-button-wrapper {\n  padding: 4px 0;\n  line-height: 15px !important;\n}\n\n:host:hover .file-name {\n  overflow: visible;\n  white-space: normal;\n  word-wrap: break-word;\n}\n\n:host.preview {\n  display: inline-block;\n  position: relative;\n  margin-right: 10px;\n  border: 1px #DDD solid;\n  vertical-align: top;\n  border-radius: 3px;\n}\n\n:host.preview:last-child {\n  margin-right: 0;\n}\n\n:host.preview:hover .actions,\n:host.preview:focus .actions {\n  display: block;\n}\n\n:host.preview img {\n  display: block;\n  border-radius: 3px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  width: 100%;\n  height: 100%;\n}\n\n:host ::ng-deep .mat-button-wrapper {\n  padding: 0;\n  line-height: 15px !important;\n}\n\n:host ::ng-deep .spinner {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin-left: -25%;\n  margin-top: -25%;\n}\n\n@media only screen and (max-width: 550px) {\n  .actions {\n    display: block;\n    background: none;\n  }\n}\n\n", "", {"version":3,"sources":["C:/Projects/fs-file/src/components/fs-file-preview/C:/Projects/fs-file/src/components/fs-file-preview/src/components/fs-file-preview/fs-file-preview.component.scss","C:/Projects/fs-file/src/components/fs-file-preview/C:/Projects/fs-file/fs-file-preview.component.scss","C:/Projects/fs-file/src/components/fs-file-preview/C:/Projects/fs-file/src/components/fs-file-preview/src/styles/_mixins.scss"],"names":[],"mappings":"AAEA;EACE,kBAAA;EACA,mBAAA;EACA,0BAAA;EACA,gBAAA;EACA,gBAAA;CCDD;;ADID;EACE,oBAAA;EACA,iBAAA;EACA,wBAAA;EACA,eAAA;EACA,gBAAA;EACA,mBAAA;CCDD;;ADID;EACE,mBAAA;EAWA,YAAA;EACA,aAAA;EACA,OAAA;EACA,QAAA;CCXD;;ACSC;EFbF;IAII,eAAA;GCKD;CACF;;ACGC;EFbF;IAQI,cAAA;IACA,8BAAA;GCOD;CACF;;ADAC;EAEE,mBAAA;EACA,gBAAA;CCEH;;ADtBD;EAuBM,QAAA;EACA,UAAA;CCGL;;ADVC;EAWI,QAAA;EACA,UAAA;CCGL;;ADfC;EAgBI,WAAA;EACA,SAAA;CCGL;;ADrCD;EAsCM,WAAA;EACA,UAAA;CCGL;;AD1CD;EA2CM,WAAA;EACA,YAAA;EACA,gBAAA;EACA,iBAAA;EACA,gBAAA;EACA,iBAAA;EACA,6BAAA;CCGL;;ADDK;EACE,eAAA;EACA,6BAAA;CCIP;;ADGS;EACN,kBAAA;EACA,oBAAA;EACA,sBAAA;CCAH;;ADGC;EACE,sBAAA;EACA,mBAAA;EACA,mBAAA;EACA,uBAAA;EACA,oBAAA;EACA,mBAAA;CCAH;;ADEG;EACE,gBAAA;CCCL;;ADjBD;;EAqBQ,eAAA;CCCP;;ADGG;EACE,eAAA;EACA,mBAAA;EACA,qBAAA;KAAA,kBAAA;EACA,YAAA;EACA,aAAA;CCAL;;ADMD;EAEI,WAAA;EACA,6BAAA;CCJH;;ADOC;EACE,mBAAA;EACA,SAAA;EACA,UAAA;EACA,kBAAA;EACA,iBAAA;CCJH;;ADQD;EACE;IACI,eAAA;IACA,iBAAA;GCLH;CACF","file":"fs-file-preview.component.scss","sourcesContent":["@import \"../../styles/mixins\";\r\n\r\n.file-ext {\r\n  font-weight: bold;\r\n  text-align: center;\r\n  text-transform: uppercase;\r\n  padding: 15px 0;\r\n  font-size: 25px;\r\n}\r\n\r\n.file-name {\r\n  white-space: nowrap;\r\n  overflow: hidden;\r\n  text-overflow: ellipsis;\r\n  padding: 0 5px;\r\n  font-size: 12px;\r\n  text-align: center;\r\n}\r\n\r\n.actions {\r\n  position: absolute;\r\n\r\n  @include apply-to(less-than, phone) {\r\n    display: block;\r\n  }\r\n\r\n  @include apply-to(greater-than, phone) {\r\n    display: none;\r\n    background: rgba(0, 0, 0, 0.5);\r\n  }\r\n\r\n  width: 100%;\r\n  height: 100%;\r\n  top: 0;\r\n  left: 0;\r\n\r\n  .action {\r\n\r\n    position: absolute;\r\n    cursor: pointer;\r\n\r\n    &.top-left {\r\n      top: 5%;\r\n      right: 5%;\r\n    }\r\n\r\n    &.top-right {\r\n      top: 5%;\r\n      right: 5%;\r\n    }\r\n\r\n    &.bottom-left {\r\n      bottom: 5%;\r\n      left: 5%;\r\n    }\r\n\r\n    &.bottom-right {\r\n      bottom: 5%;\r\n      right: 5%;\r\n    }\r\n\r\n    &.mat-mini-fab {\r\n      width: 22%;\r\n      height: 22%;\r\n      min-width: 30px;\r\n      min-height: 30px;\r\n      max-width: 42px;\r\n      max-height: 42px;\r\n      line-height: 15px !important;\r\n\r\n      .mat-button-wrapper {\r\n        padding: 4px 0;\r\n        line-height: 15px !important;\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\n:host {\r\n  &:hover .file-name {\r\n    overflow: visible;\r\n    white-space: normal;\r\n    word-wrap: break-word;\r\n  }\r\n\r\n  &.preview {\r\n    display: inline-block;\r\n    position: relative;\r\n    margin-right: 10px;\r\n    border: 1px #DDD solid;\r\n    vertical-align: top;\r\n    border-radius: 3px;\r\n\r\n    &:last-child {\r\n      margin-right: 0;\r\n    }\r\n\r\n    &:hover, &:focus {\r\n      .actions {\r\n        display: block;\r\n      }\r\n    }\r\n\r\n    img {\r\n      display: block;\r\n      border-radius: 3px;\r\n      object-fit: cover;\r\n      width: 100%;\r\n      height: 100%;\r\n    }\r\n  }\r\n\r\n}\r\n\r\n:host ::ng-deep {\r\n  .mat-button-wrapper {\r\n    padding: 0;\r\n    line-height: 15px !important;\r\n  }\r\n\r\n  .spinner {\r\n    position: absolute;\r\n    top: 50%;\r\n    left: 50%;\r\n    margin-left: -25%;\r\n    margin-top: -25%;\r\n  }\r\n}\r\n\r\n@media only screen and (max-width: 550px) {\r\n  .actions {\r\n      display: block;\r\n      background: none;\r\n  }\r\n}\r\n",".file-ext {\n  font-weight: bold;\n  text-align: center;\n  text-transform: uppercase;\n  padding: 15px 0;\n  font-size: 25px;\n}\n\n.file-name {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  padding: 0 5px;\n  font-size: 12px;\n  text-align: center;\n}\n\n.actions {\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n}\n\n@media only screen and (max-width: 767.98px) {\n  .actions {\n    display: block;\n  }\n}\n\n@media only screen and (min-width: 768px) {\n  .actions {\n    display: none;\n    background: rgba(0, 0, 0, 0.5);\n  }\n}\n\n.actions .action {\n  position: absolute;\n  cursor: pointer;\n}\n\n.actions .action.top-left {\n  top: 5%;\n  right: 5%;\n}\n\n.actions .action.top-right {\n  top: 5%;\n  right: 5%;\n}\n\n.actions .action.bottom-left {\n  bottom: 5%;\n  left: 5%;\n}\n\n.actions .action.bottom-right {\n  bottom: 5%;\n  right: 5%;\n}\n\n.actions .action.mat-mini-fab {\n  width: 22%;\n  height: 22%;\n  min-width: 30px;\n  min-height: 30px;\n  max-width: 42px;\n  max-height: 42px;\n  line-height: 15px !important;\n}\n\n.actions .action.mat-mini-fab .mat-button-wrapper {\n  padding: 4px 0;\n  line-height: 15px !important;\n}\n\n:host:hover .file-name {\n  overflow: visible;\n  white-space: normal;\n  word-wrap: break-word;\n}\n\n:host.preview {\n  display: inline-block;\n  position: relative;\n  margin-right: 10px;\n  border: 1px #DDD solid;\n  vertical-align: top;\n  border-radius: 3px;\n}\n\n:host.preview:last-child {\n  margin-right: 0;\n}\n\n:host.preview:hover .actions,\n:host.preview:focus .actions {\n  display: block;\n}\n\n:host.preview img {\n  display: block;\n  border-radius: 3px;\n  object-fit: cover;\n  width: 100%;\n  height: 100%;\n}\n\n:host ::ng-deep .mat-button-wrapper {\n  padding: 0;\n  line-height: 15px !important;\n}\n\n:host ::ng-deep .spinner {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  margin-left: -25%;\n  margin-top: -25%;\n}\n\n@media only screen and (max-width: 550px) {\n  .actions {\n    display: block;\n    background: none;\n  }\n}\n\n","@import \"variables\";\r\n\r\n\r\n@mixin apply-to($ltgt, $device) {\r\n  $extrema: null;\r\n  $boundary-target: null;\r\n  $delta: null;\r\n\r\n  @if $ltgt == less-than {\r\n    $extrema: max;\r\n    $delta: -1;\r\n  } @else if $ltgt == greater-than {\r\n    $extrema: min;\r\n    $delta: +1;\r\n  }\r\n\r\n  @if $device == phone {\r\n    @if $ltgt == less-than {\r\n      $boundary-target: $phone-width-max;\r\n    } @else if $ltgt == greater-than {\r\n      $boundary-target: $tablet-width-min;\r\n    }\r\n  } @else if $device == tablet {\r\n    @if $ltgt == less-than {\r\n      $boundary-target: $tablet-width-min;\r\n    } @else if $ltgt == greater-than {\r\n      $boundary-target: $tablet-width-max;\r\n    }\r\n  } @else if $device == desktop {\r\n    $boundary-target: $desktop-width-min;\r\n  }\r\n\r\n  @media only screen and (#{$extrema}-width: $boundary-target) {\r\n    @content;\r\n  }\r\n}\r\n\r\n@mixin phone {\r\n  @media only screen and (max-width: #{$phone-width-max}) {\r\n    @content;\r\n  }\r\n}\r\n\r\n@mixin tablet {\r\n  @media only screen and (min-width: #{$tablet-width-min}) and (max-width: #{$tablet-width-max}) {\r\n    @content;\r\n  }\r\n}\r\n\r\n@mixin desktop {\r\n  @media only screen and (min-width: #{$desktop-width-min}) {\r\n    @content;\r\n  }\r\n}\r\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -113,7 +113,7 @@ exports = module.exports = __webpack_require__("../node_modules/css-loader/lib/c
 
 
 // module
-exports.push([module.i, ".queue {\n  position: relative;\n  display: block;\n}\n\n", "", {"version":3,"sources":["/Users/Basters/dev/firestitch/fs-file/src/components/fs-file-previews/src/components/fs-file-previews/fs-file-previews.component.scss","/Users/Basters/dev/firestitch/fs-file/fs-file-previews.component.scss"],"names":[],"mappings":"AAAA;EACE,mBAAA;EACA,eAAA;CCCD","file":"fs-file-previews.component.scss","sourcesContent":[".queue {\n  position: relative;\n  display: block;\n}\n",".queue {\n  position: relative;\n  display: block;\n}\n\n"],"sourceRoot":""}]);
+exports.push([module.i, ".queue {\n  position: relative;\n  display: block;\n}\n\n", "", {"version":3,"sources":["C:/Projects/fs-file/src/components/fs-file-previews/C:/Projects/fs-file/src/components/fs-file-previews/src/components/fs-file-previews/fs-file-previews.component.scss","C:/Projects/fs-file/src/components/fs-file-previews/C:/Projects/fs-file/fs-file-previews.component.scss"],"names":[],"mappings":"AAAA;EACE,mBAAA;EACA,eAAA;CCCD","file":"fs-file-previews.component.scss","sourcesContent":[".queue {\r\n  position: relative;\r\n  display: block;\r\n}\r\n",".queue {\n  position: relative;\n  display: block;\n}\n\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -586,7 +586,7 @@ __export(__webpack_require__("./components/fs-file-drag-base/fs-file-drag-base.t
 /***/ "./components/fs-file-picker/fs-file-picker.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"label\"\n     [ngStyle]=\"{'width.px': previewWidth || 150}\">\n  <ng-content select=\"[fs-file-label]\"></ng-content>\n</div>\n<fs-file-preview class=\"preview\"\n                 *ngIf=\"file; else preview\"\n                 (remove)=\"removeFile($event)\"\n                 [file]=\"file\"\n                 [previewWidth]=\"previewWidth\"\n                 [previewHeight]=\"previewHeight\">\n  <ng-template fs-file-preview-action placement=\"bottom-left\" action=\"remove\" tooltip=\"Remove\">\n    <mat-icon>close</mat-icon>\n  </ng-template>\n  <ng-template fs-file-preview-action placement=\"bottom-right\" tooltip=\"Reupload\" (click)=\"fileInput.click()\">\n    <mat-icon>cloud_upload</mat-icon>\n  </ng-template>\n</fs-file-preview>\n\n<ng-template #preview>\n  <div class=\"select\" (click)=\"fileInput.click()\">\n    <mat-icon>cloud_upload</mat-icon>\n    <div class=\"instruction\">{{instruction}}</div>\n    <button mat-raised-button type=\"button\" color=\"primary\">Upload</button>\n  </div>\n</ng-template>\n\n<input type=\"file\"\n       [hidden]=\"true\"\n       [disabled]=\"disabled\"\n       [multiple]=\"multiple\"\n       [attr.accept]=\"accept\"\n       #fileInput\n>\n\n"
+module.exports = "<div class=\"label\"\r\n     [ngStyle]=\"{'width.px': previewWidth || 150}\">\r\n  <ng-content select=\"[fs-file-label]\"></ng-content>\r\n</div>\r\n<fs-file-preview class=\"preview\"\r\n                 *ngIf=\"file; else preview\"\r\n                 (remove)=\"removeFile($event)\"\r\n                 [file]=\"file\"\r\n                 [previewWidth]=\"previewWidth\"\r\n                 [previewHeight]=\"previewHeight\">\r\n  <ng-template fs-file-preview-action placement=\"bottom-left\" action=\"remove\" tooltip=\"Remove\">\r\n    <mat-icon>close</mat-icon>\r\n  </ng-template>\r\n  <ng-template fs-file-preview-action placement=\"bottom-right\" tooltip=\"Reupload\">\r\n      <fs-file  (select)=\"selectFile($event)\"\r\n                [imageWidth]=\"imageWidth\"\r\n                [imageHeight]=\"imageHeight\"\r\n                [imageQuality]=\"imageQuality\">\r\n        <mat-icon>cloud_upload</mat-icon></fs-file>\r\n  </ng-template>\r\n</fs-file-preview>\r\n\r\n<ng-template #preview>\r\n    <fs-file  (select)=\"selectFile($event)\"\r\n              [imageWidth]=\"imageWidth\"\r\n              [imageHeight]=\"imageHeight\"\r\n              [imageQuality]=\"imageQuality\">\r\n    <div class=\"select\">\r\n      <mat-icon>cloud_upload</mat-icon>\r\n      <div class=\"instruction\">{{instruction}}</div>\r\n      <div class=\"mat-raised-button mat-primary\">Upload</div>\r\n    </div>\r\n  </fs-file>\r\n</ng-template>\r\n\r\n"
 
 /***/ }),
 
@@ -633,6 +633,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__("@angular/core");
 var fs_file_drag_base_1 = __webpack_require__("./components/fs-file-drag-base/index.ts");
 var classes_1 = __webpack_require__("./classes/index.ts");
+var models_1 = __webpack_require__("./models/index.ts");
 var FsFilePickerComponent = (function (_super) {
     __extends(FsFilePickerComponent, _super);
     function FsFilePickerComponent(el) {
@@ -643,20 +644,20 @@ var FsFilePickerComponent = (function (_super) {
         _this.previewWidth = 150;
         _this.previewHeight = 150;
         _this.select = new core_1.EventEmitter();
+        _this.remove = new core_1.EventEmitter();
         _this.instruction = 'Drag & Drop your file or use the button below';
         return _this;
     }
-    Object.defineProperty(FsFilePickerComponent.prototype, "multiple", {
-        get: function () {
-            return this._multiple;
+    Object.defineProperty(FsFilePickerComponent.prototype, "previewUrl", {
+        set: function (url) {
+            this.file = new models_1.FsFile(new File([''], url));
         },
-        set: function (value) {
-            if (typeof (value) === 'boolean') {
-                this._multiple = value;
-            }
-            else {
-                this._multiple = value === 'true';
-            }
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(FsFilePickerComponent.prototype, "name", {
+        set: function (name) {
+            this.file = new models_1.FsFile(new File([''], name));
         },
         enumerable: true,
         configurable: true
@@ -682,22 +683,43 @@ var FsFilePickerComponent = (function (_super) {
         configurable: true
     });
     FsFilePickerComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this._processor.initForElement(this.fileInput);
-        this._processor.initDragNDropForElement(this.el);
-        this._processor.select.subscribe(function (file) {
-            _this.file = file;
-            _this.select.emit(file);
-        });
+        // this._processor.initForElement(this.fileInput);
+        // this._processor.initDragNDropForElement(this.el);
+        // this._processor.select.subscribe((file) => {
+        //   this.file = file;
+        //   this.select.emit(file);
+        // });
+    };
+    FsFilePickerComponent.prototype.selectFile = function (file) {
+        this.file = file;
+        this.select.emit(file);
     };
     FsFilePickerComponent.prototype.removeFile = function (file) {
         this.file = void 0;
+        this.remove.emit(this.file);
     };
     __decorate([
         core_1.Input(),
+        __metadata("design:type", Object)
+    ], FsFilePickerComponent.prototype, "imageWidth", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object)
+    ], FsFilePickerComponent.prototype, "imageHeight", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object)
+    ], FsFilePickerComponent.prototype, "imageQuality", void 0);
+    __decorate([
+        core_1.Input('previewUrl'),
         __metadata("design:type", Object),
         __metadata("design:paramtypes", [Object])
-    ], FsFilePickerComponent.prototype, "multiple", null);
+    ], FsFilePickerComponent.prototype, "previewUrl", null);
+    __decorate([
+        core_1.Input('name'),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], FsFilePickerComponent.prototype, "name", null);
     __decorate([
         core_1.Input(),
         __metadata("design:type", Object),
@@ -717,9 +739,13 @@ var FsFilePickerComponent = (function (_super) {
         __metadata("design:type", Object)
     ], FsFilePickerComponent.prototype, "previewHeight", void 0);
     __decorate([
-        core_1.Output('select'),
+        core_1.Output(),
         __metadata("design:type", Object)
     ], FsFilePickerComponent.prototype, "select", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], FsFilePickerComponent.prototype, "remove", void 0);
     __decorate([
         core_1.ViewChild('fileInput'),
         __metadata("design:type", Object)
@@ -935,17 +961,11 @@ var FsFilePreviewComponent = (function (_super) {
         }
     };
     FsFilePreviewComponent.prototype.callAction = function (action) {
-        switch (action.action) {
-            case 'remove':
-                {
-                    this.remove.emit(this.file);
-                }
-                break;
-            default: {
-                if (action.click) {
-                    action.click.emit(this.file);
-                }
-            }
+        if (action.click) {
+            action.click.emit(this.file);
+        }
+        if (action.action == 'remove') {
+            this.remove.emit(this.file);
         }
     };
     /**
@@ -954,6 +974,10 @@ var FsFilePreviewComponent = (function (_super) {
      */
     FsFilePreviewComponent.prototype.generateFilePreview = function (file) {
         var _this = this;
+        if (file.url) {
+            this.preview = file.url;
+            return;
+        }
         if (!this.file.typeImage) {
             return;
         }
@@ -1166,7 +1190,7 @@ __export(__webpack_require__("./components/fs-file-previews/fs-file-previews.com
 /***/ "./components/fs-file/fs-file.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<label (click)=\"fileInput.click()\">\n  <ng-content></ng-content>\n</label>\n<input type=\"file\"\n       [hidden]=\"true\"\n       [disabled]=\"disabled\"\n       [multiple]=\"multiple\"\n       [attr.accept]=\"accept\"\n       #fileInput\n>\n"
+module.exports = "<label (click)=\"fileInput.click()\">\r\n  <ng-content></ng-content>\r\n</label>\r\n<input type=\"file\"\r\n       [hidden]=\"true\"\r\n       [disabled]=\"disabled\"\r\n       [multiple]=\"multiple\"\r\n       [attr.accept]=\"accept\"\r\n       #fileInput\r\n>\r\n"
 
 /***/ }),
 
@@ -1200,6 +1224,7 @@ var fs_file_drag_base_1 = __webpack_require__("./components/fs-file-drag-base/in
 var classes_1 = __webpack_require__("./classes/index.ts");
 var operators_1 = __webpack_require__("rxjs/operators");
 var of_1 = __webpack_require__("rxjs/observable/of");
+var lodash_1 = __webpack_require__("lodash");
 var FsFileComponent = (function (_super) {
     __extends(FsFileComponent, _super);
     function FsFileComponent(el) {
@@ -1213,10 +1238,13 @@ var FsFileComponent = (function (_super) {
             quality: 1,
         };
         _this._autoProcess = false;
-        var filePorcessor = new classes_1.FileProcessor();
+        var fileProcessor = new classes_1.FileProcessor();
         _this.select = _this._inputProcessor.select.pipe(operators_1.switchMap(function (files) {
+            if (_this._multiple && !lodash_1.isArray(files)) {
+                files = [files];
+            }
             if (_this._autoProcess) {
-                return filePorcessor.process(files, _this._processOptions);
+                return fileProcessor.process(files, _this._processOptions);
             }
             else {
                 return of_1.of(files);
@@ -1230,6 +1258,7 @@ var FsFileComponent = (function (_super) {
             return this._multiple;
         },
         set: function (value) {
+            // TODO This should be a helper function in @firestitch/common
             if (typeof (value) === 'boolean') {
                 this._multiple = value;
             }
@@ -1337,6 +1366,7 @@ var FsFileComponent = (function (_super) {
         core_1.Component({
             selector: 'fs-file',
             template: __webpack_require__("./components/fs-file/fs-file.component.html"),
+            styles: [':host label { cursor: pointer }']
         }),
         __metadata("design:paramtypes", [core_1.ElementRef])
     ], FsFileComponent);
@@ -1536,7 +1566,7 @@ __export(__webpack_require__("./helpers/is-image-type.ts"));
 Object.defineProperty(exports, "__esModule", { value: true });
 function isImageType(type) {
     return type
-        .match(/^image\/(gif|jpeg|pjpeg|png|svg\+xml|tiff|vnd\.microsoft\.icon|vnd\.wap\.wbmp|webp)/i);
+        .match(/^image\/(gif|jpe?g|pjpeg|png|svg\+xml|tiff|vnd\.microsoft\.icon|vnd\.wap\.wbmp|webp)/i);
 }
 exports.isImageType = isImageType;
 
@@ -1596,7 +1626,7 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(__webpack_require__("./fs-file.module.ts"));
 __export(__webpack_require__("./components/index.ts"));
-// export * from './services';
+__export(__webpack_require__("./classes/index.ts"));
 __export(__webpack_require__("./directives/index.ts"));
 
 
@@ -1624,10 +1654,29 @@ var FsFile = (function () {
         },
         set: function (value) {
             this._file = value;
-            this.name = value.name;
             this.size = value.size;
-            this.type = value.type;
-            var parts = value.name.split('.');
+            if (value.name.match(/^http/)) {
+                this.url = value.name;
+                var match = value.name.match(/(jpe?g|png|gif|tiff?)$/i);
+                if (match) {
+                    this.type = 'image/' + match[1];
+                }
+            }
+            else {
+                this.name = value.name;
+                this.type = value.type;
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(FsFile.prototype, "name", {
+        get: function () {
+            return this._name;
+        },
+        set: function (name) {
+            this._name = name;
+            var parts = name.split('.');
             if (parts.length > 1) {
                 this.extension = parts[parts.length - 1];
             }
@@ -1659,7 +1708,7 @@ var FsFile = (function () {
     };
     FsFile.prototype.toObject = function () {
         return {
-            name: this.name,
+            name: this._name,
             type: this.type,
             size: this.size,
             progress: this.progress,
@@ -1838,6 +1887,13 @@ module.exports = require("fileapi");
 /***/ (function(module, exports) {
 
 module.exports = require("fileapi/plugins/FileAPI.exif.js");
+
+/***/ }),
+
+/***/ "lodash":
+/***/ (function(module, exports) {
+
+module.exports = require("lodash");
 
 /***/ }),
 

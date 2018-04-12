@@ -3,19 +3,24 @@ import { FsFileDragBaseComponent } from '../fs-file-drag-base';
 export declare class FsFilePickerComponent extends FsFileDragBaseComponent implements OnInit {
     el: ElementRef;
     private _processor;
-    private _multiple;
     private _accept;
     private _disabled;
-    multiple: boolean;
+    imageWidth: any;
+    imageHeight: any;
+    imageQuality: any;
+    previewUrl: any;
+    name: any;
     accept: string;
     disabled: boolean;
     previewWidth: number;
     previewHeight: number;
     select: EventEmitter<any>;
+    remove: EventEmitter<{}>;
     fileInput: any;
     instruction: string;
     file: any;
     constructor(el: ElementRef);
     ngOnInit(): void;
+    selectFile(file: any): void;
     removeFile(file: any): void;
 }

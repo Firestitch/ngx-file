@@ -24,6 +24,7 @@ var fs_file_drag_base_1 = require("../fs-file-drag-base");
 var classes_1 = require("../../classes");
 var operators_1 = require("rxjs/operators");
 var of_1 = require("rxjs/observable/of");
+var lodash_1 = require("lodash");
 var FsFileComponent = (function (_super) {
     __extends(FsFileComponent, _super);
     function FsFileComponent(el) {
@@ -37,10 +38,13 @@ var FsFileComponent = (function (_super) {
             quality: 1,
         };
         _this._autoProcess = false;
-        var filePorcessor = new classes_1.FileProcessor();
+        var fileProcessor = new classes_1.FileProcessor();
         _this.select = _this._inputProcessor.select.pipe(operators_1.switchMap(function (files) {
+            if (_this._multiple && !lodash_1.isArray(files)) {
+                files = [files];
+            }
             if (_this._autoProcess) {
-                return filePorcessor.process(files, _this._processOptions);
+                return fileProcessor.process(files, _this._processOptions);
             }
             else {
                 return of_1.of(files);
@@ -54,6 +58,7 @@ var FsFileComponent = (function (_super) {
             return this._multiple;
         },
         set: function (value) {
+            // TODO This should be a helper function in @firestitch/common
             if (typeof (value) === 'boolean') {
                 this._multiple = value;
             }
@@ -161,6 +166,7 @@ var FsFileComponent = (function (_super) {
         core_1.Component({
             selector: 'fs-file',
             templateUrl: './fs-file.component.html',
+            styles: [':host label { cursor: pointer }']
         }),
         __metadata("design:paramtypes", [core_1.ElementRef])
     ], FsFileComponent);

@@ -70,17 +70,11 @@ var FsFilePreviewComponent = (function (_super) {
         }
     };
     FsFilePreviewComponent.prototype.callAction = function (action) {
-        switch (action.action) {
-            case 'remove':
-                {
-                    this.remove.emit(this.file);
-                }
-                break;
-            default: {
-                if (action.click) {
-                    action.click.emit(this.file);
-                }
-            }
+        if (action.click) {
+            action.click.emit(this.file);
+        }
+        if (action.action == 'remove') {
+            this.remove.emit(this.file);
         }
     };
     /**
@@ -89,6 +83,10 @@ var FsFilePreviewComponent = (function (_super) {
      */
     FsFilePreviewComponent.prototype.generateFilePreview = function (file) {
         var _this = this;
+        if (file.url) {
+            this.preview = file.url;
+            return;
+        }
         if (!this.file.typeImage) {
             return;
         }

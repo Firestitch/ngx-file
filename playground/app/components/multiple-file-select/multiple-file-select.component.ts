@@ -13,4 +13,8 @@ export class MultipleFileSelectComponent {
     console.log(files);
     this.files.push(...files);
   }
+
+  public removed(fsFile) {
+    console.log('Removed', fsFile);
+  }
 }

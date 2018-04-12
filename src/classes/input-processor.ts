@@ -2,7 +2,6 @@ import { ElementRef, EventEmitter } from '@angular/core';
 import * as FileAPI from 'fileapi';
 import { FsFile } from '../models/fs-file';
 
-
 export class InputProcessor {
   public containerEl: any;
   public inputEl: any;
