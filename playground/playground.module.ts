@@ -17,7 +17,6 @@ import {
   FilePickerExistingUrlComponent,
 } from './app/components';
 
-import { FsExamplesComponent } from '../tools/components/examples/examples.component';
 
 @NgModule({
   bootstrap: [ AppComponent ],
@@ -32,8 +31,6 @@ import { FsExamplesComponent } from '../tools/components/examples/examples.compo
   entryComponents: [
   ],
   declarations: [
-    FsExamplesComponent,
-
     AppComponent,
     SingleFileSelectComponent,
     MultipleFileSelectComponent,
