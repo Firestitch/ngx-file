@@ -8,6 +8,7 @@ import { FsFileModule } from '../src';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './app/material.module';
 import { FsExampleModule } from '@firestitch/example';
+import { FlexLayoutModule } from "@angular/flex-layout";
 import {
   SingleFileSelectComponent,
   MultipleFileSelectComponent,
@@ -15,6 +16,7 @@ import {
   FilePickerComponent,
   FilePickerExistingFileComponent,
   FilePickerExistingUrlComponent,
+  CaptureComponent
 } from './app/components';
 
 
@@ -26,7 +28,8 @@ import {
     BrowserAnimationsModule,
     AppMaterialModule,
     FormsModule,
-    FsExampleModule
+    FsExampleModule,
+    FlexLayoutModule
   ],
   entryComponents: [
   ],
@@ -37,10 +40,26 @@ import {
     ImageFileManipulationComponent,
     FilePickerComponent,
     FilePickerExistingFileComponent,
-    FilePickerExistingUrlComponent
+    FilePickerExistingUrlComponent,
+    CaptureComponent
   ],
   providers: [
   ],
 })
 export class PlaygroundModule {
+
+  constructor() {
+    document.addEventListener('deviceready', function() {
+
+      if ((<any>navigator).splashscreen) {
+        setTimeout(function() {
+          (<any>navigator).splashscreen.hide();
+        }, 200);
+      }
+
+      if ((<any>window).StatusBar) {
+        (<any>window).StatusBar.overlaysWebView(false);
+      }
+    }, false);
+  }
 }

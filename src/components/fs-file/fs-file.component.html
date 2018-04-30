@@ -1,10 +1,10 @@
-<label (click)="fileInput.click()">
+<label #fileLabel>
   <ng-content></ng-content>
 </label>
-<input type="file"
-       [hidden]="true"
-       [disabled]="disabled"
-       [multiple]="multiple"
-       [attr.accept]="accept"
-       #fileInput
->
+<input  type="file"
+        [hidden]="true"
+        [disabled]="inputProcessor.disabled"
+        [multiple]="inputProcessor.multiple"
+        [attr.accept]="inputProcessor.accept"
+        [attr.capture]="inputProcessor.capture"
+        #fileInput>

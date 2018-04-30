@@ -7,7 +7,7 @@ import { of } from 'rxjs/observable/of';
 import 'rxjs/add/observable/fromPromise';
 
 import { ProcessConfig, FsFile } from '../models';
-import { ScaleExifImage } from '../helpers';
+import { ScaleExifImage, createFile } from '../helpers';
 import { FsFileConfig } from '../interfaces';
 
 
@@ -86,7 +86,7 @@ export class FileProcessor {
             // Convert to blob for create File object
             canvasImage.toBlob((blob) => {
               // Save as file to FsFile
-              originFile.file = new File([blob], originFile.name, { type: originFile.type });
+              originFile.file = createFile([blob], originFile.name, originFile.type);
 
               // Update FsFile info
 

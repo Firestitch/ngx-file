@@ -1,0 +1,26 @@
+<div fxLayout="row" fxLayoutGap="10px">
+  <div>
+    <fs-file (select)="select($event)" accept="image/*" capture="capture">
+      <button mat-raised-button color="primary">Take a Photo</button>
+    </fs-file>
+  </div>
+  <div>
+    <fs-file (select)="select($event)" accept="video/*" capture="capture">
+      <button mat-raised-button color="primary">Take a Video</button>
+    </fs-file>
+  </div>
+  <div>
+    <fs-file (select)="select($event)" capture="library">
+      <button mat-raised-button color="primary">Select From Library</button>  
+      <div>
+        <mat-hint>Requires Cordova camera and file plugins</mat-hint>
+      </div>
+    </fs-file>
+  </div>
+</div>
+
+<fieldset *ngIf="file">
+  <legend>File</legend>
+  <pre>{{ file | json }}</pre>
+  <fs-file-preview [file]="file"></fs-file-preview>
+</fieldset>

@@ -1,4 +1,4 @@
-<div [style.width.px]="previewWidth" [style.height.px]="previewHeight" class="preview-container">
+<div [style.width.px]="previewWidth" [style.height.px]="previewHeight" class="preview-container" [ngClass]="{ 'has-actions': !!actions.length }">
 
   <!-- Image container -->
   <ng-container *ngIf="file.typeImage; else nonImage">
@@ -11,15 +11,15 @@
     <div class="file-ext">{{file.extension}}</div>
     <div class="file-name" [matTooltip]="file.name">{{file.name}}</div>
   </ng-template>
-</div>
 
-<!-- Actions -->
-<div class="actions">
-  <button type="button" class="action" mat-mini-fab color="primary"
-          *ngFor="let action of filteredActions"
-          [ngClass]="getActionClasses(action)"
-          [matTooltip]="action.tooltip"
-          (click)="callAction(action)">
-    <ng-template [ngTemplateOutlet]="actionsTemplate[action.index]"></ng-template>
-  </button>
+  <!-- Actions -->
+  <div class="actions">
+    <button type="button" class="action" mat-mini-fab color="primary"
+            *ngFor="let action of filteredActions"
+            [ngClass]="getActionClasses(action)"
+            [matTooltip]="action.tooltip"
+            (click)="callAction(action)">
+      <ng-template [ngTemplateOutlet]="actionsTemplate[action.index]"></ng-template>
+    </button>
+  </div>
 </div>
