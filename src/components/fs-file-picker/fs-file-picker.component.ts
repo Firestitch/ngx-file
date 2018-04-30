@@ -3,7 +3,6 @@ import {
   EventEmitter,
   Component,
   Input,
-  OnInit,
   Output,
   ViewChild
 } from '@angular/core';
@@ -11,28 +10,36 @@ import {
 import { FsFileDragBaseComponent } from '../fs-file-drag-base';
 import { InputProcessor } from '../../classes';
 import { FsFile } from '../../models';
+import { CordovaService } from '../../services';
+import { createFile } from '../../helpers';
 
 @Component({
   selector: 'fs-file-picker',
   templateUrl: 'fs-file-picker.component.html',
   styleUrls: [ 'fs-file-picker.component.scss' ],
 })
-export class FsFilePickerComponent extends FsFileDragBaseComponent implements OnInit {
+export class FsFilePickerComponent extends FsFileDragBaseComponent {
 
-  private _processor = new InputProcessor();
+
+  private _processor = null;
   private _accept = [];
   private _disabled: boolean;
+
+  constructor(cordovaService: CordovaService, public el: ElementRef) {
+    super(el);
+    this._processor = new InputProcessor(cordovaService);
+  }
 
   @Input() public imageWidth;
   @Input() public imageHeight;
   @Input() public imageQuality;
 
   @Input('previewUrl') set previewUrl(url) {
-    this.file = new FsFile(new File([''], url));
+    this.file = new FsFile(createFile([''], url));
   }
 
   @Input('name') set name(name) {
-    this.file = new FsFile(new File([''], name));
+    this.file = new FsFile(createFile([''], name));
   }
 
   @Input()
@@ -63,20 +70,6 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
 
   public instruction = 'Drag & Drop your file or use the button below';
   public file;
-
-  constructor(public el: ElementRef) {
-    super(el);
-  }
-
-  public ngOnInit() {
-    // this._processor.initForElement(this.fileInput);
-    // this._processor.initDragNDropForElement(this.el);
-
-    // this._processor.select.subscribe((file) => {
-    //   this.file = file;
-    //   this.select.emit(file);
-    // });
-  }
 
   public selectFile(file) {
     this.file = file;

@@ -18,7 +18,7 @@ import {
   FsFileDragBaseComponent,
 } from './components';
 import { FsFilePreviewActionDirective } from './directives';
-
+import { CordovaService } from './services';
 
 @NgModule({
   imports: [
@@ -48,6 +48,7 @@ import { FsFilePreviewActionDirective } from './directives';
     FsFilePickerComponent
   ],
   providers: [
+    CordovaService
   ],
 })
 export class FsFileModule {
