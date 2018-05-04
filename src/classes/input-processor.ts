@@ -50,7 +50,6 @@ export class InputProcessor {
     FileAPI.event.on(this.containerEl, 'drop', (event) => {
       const files = FileAPI.getFiles(event);
 
-      // Clear input value
       this.inputEl.value = null;
 
       this.selectFiles(files);
@@ -71,6 +70,10 @@ export class InputProcessor {
     });
   }
 
+  public cordovaCleanup() {
+    this.cordovaCamera.cleanup();
+  }
+
   public selectCordovaLibrary() {
 
     const options: any = {  destinationType: this.cordovaCamera.DestinationType.FILE_URI,
@@ -81,11 +84,9 @@ export class InputProcessor {
       const video = filter(this.accept,(value) => { return value.match(/video/i); }).length;
       const image = filter(this.accept,(value) => { return value.match(/image/i); }).length;
       
-      if (video && image) {
-        options.mediaType = this.cordovaCamera.MediaType.ALLMEDIA;
-      } else if(video) {
+      if(video && !image) {
         options.mediaType = this.cordovaCamera.MediaType.VIDEO;
-      } else if(image) {
+      } else if(image && !video) {
         options.mediaType = this.cordovaCamera.MediaType.PICURE;
       }                  
     }
@@ -94,7 +95,7 @@ export class InputProcessor {
       
       (<any>window).resolveLocalFileSystemURL(data, fileEntry => {
 
-        fileEntry.file( file => {
+        fileEntry.file(file => {
 
           if(isImageType(file.type)) {
 
@@ -112,25 +113,26 @@ export class InputProcessor {
               const blob = <any>(new Blob([u8arr], { type:file.type }));
               blob.name = file.name;
               this.selectFiles([blob]);
+              this.cordovaCleanup();
             };
 
             reader.readAsDataURL(file);
           
           } else {
             this.selectFiles([file]);
-            this.cordovaCamera.cleanup();   
+            this.cordovaCleanup();
           }
         
         }, (error) => {              
-          this.cordovaCamera.cleanup();
+          this.cordovaCleanup();
         });
       },
-      (error) => {
-
+      (error) => { 
+        this.cordovaCleanup();
       });
 
-    }, (error) => {
-
+    }, (error) => { 
+      this.cordovaCleanup();
     }, options);
   }
 

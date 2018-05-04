@@ -1,1 +1,0 @@
-[{"__symbolic":"module","version":4,"metadata":{"ProcessConfig":{"__symbolic":"class","members":{"__ctor__":[{"__symbolic":"constructor","parameters":[{"__symbolic":"reference","module":"../interfaces","name":"FsFileConfig","line":12,"character":22}]}],"parseConfig":[{"__symbolic":"method"}]}}}}]

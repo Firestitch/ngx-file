@@ -1,16 +1,16 @@
-<div fxLayout="row" fxLayoutGap="10px">
+<div fxLayout="row wrap" fxLayoutGap="10px">
   <div>
-    <fs-file (select)="select($event)" accept="image/*" capture="capture">
+    <fs-file (select)="select($event)" accept="image/*" capture="camera">
       <button mat-raised-button color="primary">Take a Photo</button>
     </fs-file>
   </div>
   <div>
-    <fs-file (select)="select($event)" accept="video/*" capture="capture">
+    <fs-file (select)="select($event)" accept="video/*" capture="camera">
       <button mat-raised-button color="primary">Take a Video</button>
     </fs-file>
   </div>
   <div>
-    <fs-file (select)="select($event)" capture="library">
+    <fs-file (select)="select($event)" accept="video/*;image/*" capture="library">
       <button mat-raised-button color="primary">Select From Library</button>  
       <div>
         <mat-hint>Requires Cordova camera and file plugins</mat-hint>
