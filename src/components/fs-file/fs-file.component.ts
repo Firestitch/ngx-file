@@ -12,7 +12,6 @@ import { FileProcessor, InputProcessor } from '../../classes';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 import { isArray } from 'lodash';
-import { getCordovaCamera } from '../../helpers';
 import { CordovaService } from '../../services';
 
 @Component({
@@ -29,7 +28,7 @@ export class FsFileComponent extends FsFileDragBaseComponent implements AfterVie
     width: void 0,
     height: void 0,
     quality: 1,
-  };  
+  };
 
 
 
@@ -46,7 +45,7 @@ export class FsFileComponent extends FsFileDragBaseComponent implements AfterVie
   get multiple() {
     return this.inputProcessor.multiple;
   }
-  
+
   @Input()
   set capture(value) {
     this.inputProcessor.capture = value;

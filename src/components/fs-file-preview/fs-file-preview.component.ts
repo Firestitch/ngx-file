@@ -90,7 +90,12 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
       // quality: file.fileOptions.imageQuality
     }], true, (err, images) => {
       if (!err && images[0]) {
-        const scaledCanvasImage = ScaleExifImage(images[0], file.exifInfo.Orientation, this.previewWidth, this.previewHeight);
+        const scaledCanvasImage = ScaleExifImage(
+          images[0],
+          file.exifInfo.Orientation,
+          this.previewWidth,
+          this.previewHeight
+        );
         this.preview = scaledCanvasImage.toDataURL(file.type);
 
         file.progress = false;

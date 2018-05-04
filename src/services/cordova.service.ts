@@ -22,7 +22,7 @@ export class CordovaService {
       if (this.ready === null) {
         this.deviceReady.subscribe(() => {
           this.ready = true;
-          observer.next();          
+          observer.next();
         })
       } else {
         observer.next();

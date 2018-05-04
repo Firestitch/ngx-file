@@ -1,5 +1,6 @@
 import {Directive, EventEmitter, Input, Output} from '@angular/core';
 
+
 @Directive({
   selector: '[fs-file-preview-action]'
 })

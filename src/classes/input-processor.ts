@@ -1,27 +1,27 @@
-import { ElementRef, EventEmitter, Optional, Inject } from '@angular/core';
+import { ElementRef, EventEmitter } from '@angular/core';
 import * as FileAPI from 'fileapi';
-import { FsFile } from '../models/fs-file';
+import { FsFile } from '../models';
 import { getCordovaCamera, isImageType } from '../helpers';
 import { filter } from 'lodash';
 import { CordovaService } from '../services';
+
 
 export class InputProcessor {
   public containerEl: any;
   public inputEl: any;
   public cordovaCamera = null;
-  public fileSelectApi = 'browser';
   public accept = [];
-  public multiple: boolean = false;
+  public multiple = false;
   public capture: string = null;
   public disabled;
 
-  public select  = new EventEmitter();
+  public select = new EventEmitter();
 
   constructor(private cordovaService: CordovaService) {
 
     cordovaService.isReady().subscribe(() => {
       this.cordovaCamera = getCordovaCamera();
-    });    
+    });
   }
 
   /**
@@ -29,7 +29,9 @@ export class InputProcessor {
    * @param el
    */
   public registerInput(el: ElementRef) {
-    if (!el) { return }
+    if (!el) {
+      return
+    }
 
     this.inputEl = el.nativeElement;
 
@@ -44,7 +46,9 @@ export class InputProcessor {
   }
 
   public registerDrop(el: ElementRef) {
-    if (!el) { return }
+    if (!el) {
+      return
+    }
 
     this.containerEl = el.nativeElement;
     FileAPI.event.on(this.containerEl, 'drop', (event) => {
@@ -58,9 +62,11 @@ export class InputProcessor {
 
   public registerLabel(el: ElementRef) {
 
-    if (!el) { return }    
+    if (!el) {
+      return
+    }
 
-    FileAPI.event.on(el.nativeElement, 'click', (event) => {
+    FileAPI.event.on(el.nativeElement, 'click', () => {
 
       if (this.capture === 'library' && this.cordovaCamera && (<any>window).resolveLocalFileSystemURL) {
         this.selectCordovaLibrary();
@@ -76,62 +82,68 @@ export class InputProcessor {
 
   public selectCordovaLibrary() {
 
-    const options: any = {  destinationType: this.cordovaCamera.DestinationType.FILE_URI,
-                            sourceType: this.cordovaCamera.PictureSourceType.PHOTOLIBRARY,
-                            mediaType: this.cordovaCamera.MediaType.ALLMEDIA };
-  
+    const options: any = {
+      destinationType: this.cordovaCamera.DestinationType.FILE_URI,
+      sourceType: this.cordovaCamera.PictureSourceType.PHOTOLIBRARY,
+      mediaType: this.cordovaCamera.MediaType.ALLMEDIA
+    };
+
     if (this.accept.length) {
-      const video = filter(this.accept,(value) => { return value.match(/video/i); }).length;
-      const image = filter(this.accept,(value) => { return value.match(/image/i); }).length;
-      
-      if(video && !image) {
+      const video = filter(this.accept, (value) => {
+        return value.match(/video/i);
+      }).length;
+      const image = filter(this.accept, (value) => {
+        return value.match(/image/i);
+      }).length;
+
+      if (video && !image) {
         options.mediaType = this.cordovaCamera.MediaType.VIDEO;
-      } else if(image && !video) {
+      } else if (image && !video) {
         options.mediaType = this.cordovaCamera.MediaType.PICURE;
-      }                  
+      }
     }
 
     this.cordovaCamera.getPicture(data => {
-      
+
       (<any>window).resolveLocalFileSystemURL(data, fileEntry => {
 
-        fileEntry.file(file => {
+          fileEntry.file(file => {
 
-          if(isImageType(file.type)) {
+            if (isImageType(file.type)) {
 
-            const reader = new FileReader();
-            reader.onloadend = (encodedFile) => {
-              const data = (<any>encodedFile.target).result.split("base64,").pop();
-              const byteString = atob(data);                  
-              let n = byteString.length;
-              const u8arr = new Uint8Array(n);
+              const reader = new FileReader();
+              reader.onloadend = (encodedFile) => {
+                const fileData = (<any>encodedFile.target).result.split('base64,').pop();
+                const byteString = atob(fileData);
+                let n = byteString.length;
+                const u8arr = new Uint8Array(n);
 
-              while (n--) {
-                u8arr[n] = byteString.charCodeAt(n);
-              }
+                while (n--) {
+                  u8arr[n] = byteString.charCodeAt(n);
+                }
 
-              const blob = <any>(new Blob([u8arr], { type:file.type }));
-              blob.name = file.name;
-              this.selectFiles([blob]);
+                const blob = <any>(new Blob([u8arr], { type: file.type }));
+                blob.name = file.name;
+                this.selectFiles([blob]);
+                this.cordovaCleanup();
+              };
+
+              reader.readAsDataURL(file);
+
+            } else {
+              this.selectFiles([file]);
               this.cordovaCleanup();
-            };
+            }
 
-            reader.readAsDataURL(file);
-          
-          } else {
-            this.selectFiles([file]);
+          }, () => {
             this.cordovaCleanup();
-          }
-        
-        }, (error) => {              
+          });
+        },
+        () => {
           this.cordovaCleanup();
         });
-      },
-      (error) => { 
-        this.cordovaCleanup();
-      });
 
-    }, (error) => { 
+    }, () => {
       this.cordovaCleanup();
     }, options);
   }
