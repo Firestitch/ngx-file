@@ -14,6 +14,7 @@ import { of } from 'rxjs/observable/of';
 import { isArray } from 'lodash';
 import { CordovaService } from '../../services';
 
+
 @Component({
   selector: 'fs-file',
   templateUrl: './fs-file.component.html',
@@ -21,7 +22,7 @@ import { CordovaService } from '../../services';
 })
 export class FsFileComponent extends FsFileDragBaseComponent implements AfterViewInit {
 
-  private inputProcessor = null;
+  private inputProcessor: InputProcessor = null;
   private autoProcess = false;
 
   private processOptions = {
@@ -57,11 +58,11 @@ export class FsFileComponent extends FsFileDragBaseComponent implements AfterVie
 
   @Input()
   set accept(value) {
-    this.inputProcessor.accept = this.inputProcessor.accept.concat(value.split(','));
+    this.inputProcessor.accept = value;
   }
 
   get accept() {
-    return this.inputProcessor.accept.join(', ') || '*';
+    return this.inputProcessor.accept || '*';
   }
 
   @Input()

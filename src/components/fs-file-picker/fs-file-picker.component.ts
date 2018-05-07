@@ -13,6 +13,7 @@ import { FsFile } from '../../models';
 import { CordovaService } from '../../services';
 import { createFile } from '../../helpers';
 
+
 @Component({
   selector: 'fs-file-picker',
   templateUrl: 'fs-file-picker.component.html',
@@ -20,15 +21,6 @@ import { createFile } from '../../helpers';
 })
 export class FsFilePickerComponent extends FsFileDragBaseComponent {
 
-
-  private _processor = null;
-  private _accept = [];
-  private _disabled: boolean;
-
-  constructor(cordovaService: CordovaService, public el: ElementRef) {
-    super(el);
-    this._processor = new InputProcessor(cordovaService);
-  }
 
   @Input() public imageWidth;
   @Input() public imageHeight;
@@ -67,6 +59,17 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent {
   @Output() public remove = new EventEmitter();
 
   @ViewChild('fileInput') public fileInput: any;
+
+
+  public inputProcessor = null;
+  private _accept = [];
+  private _disabled: boolean;
+
+
+  constructor(cordovaService: CordovaService, public el: ElementRef) {
+    super(el);
+    this.inputProcessor = new InputProcessor(cordovaService);
+  }
 
   public instruction = 'Drag & Drop your file or use the button below';
   public file;

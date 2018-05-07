@@ -10,7 +10,7 @@ export class InputProcessor {
   public containerEl: any;
   public inputEl: any;
   public cordovaCamera = null;
-  public accept = [];
+  public accept = '*';
   public multiple = false;
   public capture: string = null;
   public disabled;
@@ -89,12 +89,8 @@ export class InputProcessor {
     };
 
     if (this.accept.length) {
-      const video = filter(this.accept, (value) => {
-        return value.match(/video/i);
-      }).length;
-      const image = filter(this.accept, (value) => {
-        return value.match(/image/i);
-      }).length;
+      const video = this.accept.match(/video/i);
+      const image = this.accept.match(/image/i);
 
       if (video && !image) {
         options.mediaType = this.cordovaCamera.MediaType.VIDEO;
