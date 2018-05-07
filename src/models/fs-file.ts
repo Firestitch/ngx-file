@@ -3,7 +3,15 @@ import { isImageType } from '../helpers';
 
 export class FsFile {
 
-  public progress = false;
+  private _progress = false;
+  set progress(value) {
+    debugger;
+    this._progress = value;
+  }
+  get progress() {
+    return this._progress;
+  }
+  public uploading = false;
   public imageWidth: number;
   public imageHeight: number;
   public rotate: number;
