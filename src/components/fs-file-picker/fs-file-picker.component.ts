@@ -62,7 +62,6 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent {
 
 
   public inputProcessor = null;
-  private _accept = [];
   private _disabled: boolean;
 
 

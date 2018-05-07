@@ -22,7 +22,7 @@ import { CordovaService } from '../../services';
 })
 export class FsFileComponent extends FsFileDragBaseComponent implements AfterViewInit {
 
-  private inputProcessor: InputProcessor = null;
+  public inputProcessor: InputProcessor = null;
   private autoProcess = false;
 
   private processOptions = {
