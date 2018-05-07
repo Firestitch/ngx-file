@@ -36,11 +36,11 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent {
 
   @Input()
   set accept(value) {
-    this._accept = this._accept.concat(value.split(','));
+    this.inputProcessor.accept = value;
   }
 
   get accept() {
-    return this._accept.join(', ') || '*';
+    return this.inputProcessor.accept || '*';
   }
 
   @Input()

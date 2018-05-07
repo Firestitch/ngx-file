@@ -22,6 +22,7 @@
 
 <ng-template #preview>
     <fs-file  (select)="selectFile($event)"
+              [accept]="accept"
               [imageWidth]="imageWidth"
               [imageHeight]="imageHeight"
               [imageQuality]="imageQuality">
