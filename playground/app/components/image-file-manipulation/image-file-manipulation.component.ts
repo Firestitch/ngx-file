@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FileProcessor } from '../../../../src/classes';
 
+
 @Component({
   selector: 'image-file-manipulation',
   templateUrl: 'image-file-manipulation.component.html',

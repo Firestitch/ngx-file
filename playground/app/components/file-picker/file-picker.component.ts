@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
+
 @Component({
   selector: 'file-picker',
   templateUrl: 'file-picker.component.html',
