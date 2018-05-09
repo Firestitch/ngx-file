@@ -81,7 +81,7 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
       return;
     }
 
-    file.progress = true;
+    const process = file.process();
 
     FileAPI.Image.transform(file.file, [{
       width: this.previewWidth,
@@ -98,10 +98,10 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
         );
         this.preview = scaledCanvasImage.toDataURL(file.type);
 
-        file.progress = false;
+        process.complete();
       } else {
         alert(`Image preview error for file ${file.name}`);
-        file.progress = false;
+        process.complete();
       }
     });
   }

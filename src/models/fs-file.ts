@@ -1,16 +1,17 @@
 import { FsFileConfig } from '../interfaces';
 import { isImageType } from '../helpers';
+import { FsFileProcess } from './fs-file-process';
+
 
 export class FsFile {
 
-  private _progress = false;
-  set progress(value) {
-    debugger;
-    this._progress = value;
+  process() {
+    const process = new FsFileProcess(this);
+    this.processes.push(process);
+    return process;
   }
-  get progress() {
-    return this._progress;
-  }
+
+  public processes = [];
   public uploading = false;
   public imageWidth: number;
   public imageHeight: number;
@@ -23,6 +24,16 @@ export class FsFile {
   private _file: File;
   private _name: string;
   private _fileOptions: FsFileConfig;
+
+  toJSON() {
+    return {  name: this._name,
+              type: this.type,
+              size: this.size,
+              extension: this.extension,
+              typeImage: this.typeImage,
+              imageWidth: this.imageWidth,
+              imageHeight: this.imageHeight};
+  }
 
   constructor(file: File, options?: FsFileConfig) {
     this.file = file;
@@ -78,18 +89,5 @@ export class FsFile {
     this.imageWidth = info.width;
     this.imageHeight = info.height;
     this.exifInfo = info.exif;
-  }
-
-  public toObject() {
-    return {
-      name: this._name,
-      type: this.type,
-      size: this.size,
-      progress: this.progress,
-      extension: this.extension,
-      typeImage: this.typeImage,
-      imageWidth: this.imageWidth,
-      imageHeight: this.imageHeight
-    }
   }
 }

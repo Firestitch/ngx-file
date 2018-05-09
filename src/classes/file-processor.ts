@@ -34,9 +34,16 @@ export class FileProcessor {
     files.forEach((file: FsFile) => {
 
       if (file.typeImage) {
+
+        const process = file.process();
         const resFilePromise = new Promise((resolve, reject) => {
           this.applyTransforms(file, resolve, reject, processConfig);
         });
+
+        resFilePromise.then(() => {
+          process.complete();
+        });
+
         processedFiles.push(resFilePromise);
       } else {
         processedFiles.push(file);

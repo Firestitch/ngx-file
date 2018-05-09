@@ -19,11 +19,6 @@ export class ImageFileManipulationComponent {
 
   public select(files) {
     this.files = this.files.concat(files);
-    this.files[0].uploading = true;
-    setTimeout(() => {
-      this.files[0].uploading = false;
-    }, 10000);
-
     // of([1, 2, 3]).
     //   pipe(
     //     delay(10000)
@@ -31,13 +26,20 @@ export class ImageFileManipulationComponent {
     //   console.log('test');
     // })
 
-    // this._fileProcessor.process(this.files, {
-    //   quality: .8,
-    //   width: 1000,
-    //   height: 1000
-    // }).subscribe((resFiles) => {
-    //   console.log(resFiles);
-    // })
+    this._fileProcessor.process(files, {
+       quality: .8,
+       width: 1000,
+       height: 1000
+    }).subscribe((resFiles) => {
+
+      resFiles.forEach((file) => {
+        const process = file.process();
+        setTimeout(() => {
+        process.complete();
+        }, 3000);
+      });
+
+    })
   }
 
   public enhance(file) {
