@@ -19,12 +19,6 @@ export class ImageFileManipulationComponent {
 
   public select(files) {
     this.files = this.files.concat(files);
-    // of([1, 2, 3]).
-    //   pipe(
-    //     delay(10000)
-    // ).subscribe(() => {
-    //   console.log('test');
-    // })
 
     this._fileProcessor.process(files, {
        quality: .8,
@@ -33,9 +27,10 @@ export class ImageFileManipulationComponent {
     }).subscribe((resFiles) => {
 
       resFiles.forEach((file) => {
-        const process = file.process();
+        const process = file.process('uploading');
+
         setTimeout(() => {
-        process.complete();
+          process.complete();
         }, 3000);
       });
 

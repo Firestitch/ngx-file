@@ -5,14 +5,7 @@ import { FsFileProcess } from './fs-file-process';
 
 export class FsFile {
 
-  process() {
-    const process = new FsFileProcess(this);
-    this.processes.push(process);
-    return process;
-  }
-
   public processes = [];
-  public uploading = false;
   public imageWidth: number;
   public imageHeight: number;
   public rotate: number;
@@ -89,5 +82,22 @@ export class FsFile {
     this.imageWidth = info.width;
     this.imageHeight = info.height;
     this.exifInfo = info.exif;
+  }
+
+  public process(name = '') {
+    const process = new FsFileProcess(this, name);
+    this.processes.push(process);
+
+    return process;
+  }
+
+  public stopProcess(name) {
+    const processIndex = this.processes.findIndex((proc) => proc.name === name);
+
+    this.processes.splice(processIndex, 1);
+  }
+
+  public stopAllProcesses() {
+    this.processes.length = 0;
   }
 }

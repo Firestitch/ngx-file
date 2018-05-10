@@ -1,16 +1,17 @@
 import { FsFile } from './fs-file';
 
-export class FsFileProcess {
-  private fsFile: FsFile;
 
-  constructor(fsFile: FsFile) {
-    this.fsFile = fsFile;
+export class FsFileProcess {
+  private _fileRef: FsFile;
+
+  constructor(fileRef: FsFile, public name: string) {
+    this._fileRef = fileRef;
   }
 
   complete() {
-    const index = this.fsFile.processes.indexOf(this);
+    const index = this._fileRef.processes.indexOf(this);
     if (index >= 0) {
-      this.fsFile.processes.splice(index, 1);
+      this._fileRef.processes.splice(index, 1);
     }
   }
 }

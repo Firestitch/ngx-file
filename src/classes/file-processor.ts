@@ -35,7 +35,7 @@ export class FileProcessor {
 
       if (file.typeImage) {
 
-        const process = file.process();
+        const process = file.process('file-processor');
         const resFilePromise = new Promise((resolve, reject) => {
           this.applyTransforms(file, resolve, reject, processConfig);
         });
