@@ -18,16 +18,6 @@ export class FsFile {
   private _name: string;
   private _fileOptions: FsFileConfig;
 
-  toJSON() {
-    return {  name: this._name,
-              type: this.type,
-              size: this.size,
-              extension: this.extension,
-              typeImage: this.typeImage,
-              imageWidth: this.imageWidth,
-              imageHeight: this.imageHeight};
-  }
-
   constructor(file: File, options?: FsFileConfig) {
     this.file = file;
     if (options) {
@@ -99,5 +89,15 @@ export class FsFile {
 
   public stopAllProcesses() {
     this.processes.length = 0;
+  }
+
+  public toJSON() {
+    return {  name: this._name,
+      type: this.type,
+      size: this.size,
+      extension: this.extension,
+      typeImage: this.typeImage,
+      imageWidth: this.imageWidth,
+      imageHeight: this.imageHeight};
   }
 }
