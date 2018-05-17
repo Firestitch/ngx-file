@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { FsFile } from '../../../../src';
 
 @Component({
   selector: 'file-picker-existing-url',
@@ -7,8 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: [ 'file-picker-existing-url.component.css' ]
 })
 export class FilePickerExistingUrlComponent {
-  public file;
-  public previewUrl = 'https://www.autocar.co.uk/sites/autocar.co.uk/files/styles/gallery_slide/public/images/car-reviews/first-drives/legacy/lamboextra-1234.jpg';
+
+  public previewUrl = 'https://www.topgear.com/sites/default/files/styles/16x9_1280w/public/images/cars-road-test/2016/02/41ae14b2673874e7e212502954b88910/lp610_4_white_005.jpg';
+  public file = new FsFile(this.previewUrl);
 
   public select(file) {
     this.file = file;

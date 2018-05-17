@@ -21,17 +21,18 @@ import { createFile } from '../../helpers';
 })
 export class FsFilePickerComponent extends FsFileDragBaseComponent {
 
+  public inputProcessor = null;
+  private _disabled: boolean;
+  public instruction = 'Drag & Drop your file or use the button below';
+  public _file: FsFile;
+
 
   @Input() public imageWidth;
   @Input() public imageHeight;
   @Input() public imageQuality;
 
-  @Input('previewUrl') set previewUrl(url) {
-    this.file = new FsFile(createFile([''], url));
-  }
-
-  @Input('name') set name(name) {
-    this.file = new FsFile(createFile([''], name));
+  @Input('file') set file(file) {
+    this._file = file;
   }
 
   @Input()
@@ -54,6 +55,9 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent {
 
   @Input() public previewWidth = 150;
   @Input() public previewHeight = 150;
+  @Input() public allowDownload = true;
+  @Input() public allowReupload = true;
+  @Input() public allowRemove = true;
 
   @Output() public select = new EventEmitter<any>();
   @Output() public remove = new EventEmitter();
@@ -61,25 +65,18 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent {
   @ViewChild('fileInput') public fileInput: any;
 
 
-  public inputProcessor = null;
-  private _disabled: boolean;
-
-
   constructor(cordovaService: CordovaService, public el: ElementRef) {
     super(el);
     this.inputProcessor = new InputProcessor(cordovaService);
   }
 
-  public instruction = 'Drag & Drop your file or use the button below';
-  public file;
-
   public selectFile(file) {
-    this.file = file;
+    this._file = file;
     this.select.emit(file);
   }
 
   public removeFile(file) {
-    this.file = void 0;
-    this.remove.emit(this.file);
+    this._file = void 0;
+    this.remove.emit(this._file);
   }
 }

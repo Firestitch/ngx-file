@@ -62,12 +62,12 @@
 
     <edit-config target="NSPhotoLibraryAddUsageDescription" file="*-Info.plist" mode="overwrite">
       <string>Firestitch needs photo library access to save pictures there</string>
-    </edit-config>    
+    </edit-config>
 
     <edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="overwrite">
       <string>Firestitch needs location access to find things nearby</string>
     </edit-config>
-     
+
   </platform>
 
   <platform name="android">
@@ -104,6 +104,7 @@
   <plugin name="cordova-plugin-splashscreen" />
   <plugin name="cordova-plugin-ionic-webview" />
   <plugin name="cordova-plugin-camera" spec="4.0.2" />
+  <plugin name="cordova-plugin-media-capture" />
   <plugin name="cordova-plugin-file" />
   <plugin spec="https://github.com/Firestitch/webview-debug.git" source="git" />
   <plugin name="cordova-android-support-gradle-release" spec="1.3.0">

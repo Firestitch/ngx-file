@@ -1,23 +1,26 @@
 <div class="label"
-     [ngStyle]="{'width.px': previewWidth || 150}">
+     [ngStyle]="{'width.px': previewWidth}">
   <ng-content select="[fs-file-label]"></ng-content>
 </div>
 <fs-file-preview class="preview"
-                 *ngIf="file; else preview"
+                 *ngIf="_file; else preview"
                  (remove)="removeFile($event)"
-                 [file]="file"
+                 [file]="_file"
                  [previewWidth]="previewWidth"
                  [previewHeight]="previewHeight">
-  <ng-template fs-file-preview-action placement="top-right" action="remove" tooltip="Remove">
+  <ng-template fs-file-preview-action placement="top-right" action="remove" tooltip="Remove" *ngIf="allowRemove">
     <mat-icon>close</mat-icon>
   </ng-template>
-  <ng-template fs-file-preview-action placement="bottom-right" tooltip="Reupload">
+  <ng-template fs-file-preview-action placement="bottom-right" tooltip="Reupload" *ngIf="allowReupload">
       <fs-file  (select)="selectFile($event)"
                 [imageWidth]="imageWidth"
                 [imageHeight]="imageHeight"
                 [imageQuality]="imageQuality">
         <mat-icon>cloud_upload</mat-icon></fs-file>
   </ng-template>
+  <ng-template fs-file-preview-action placement="bottom-left" action="download" tooltip="Download" *ngIf="allowDownload && _file.url">
+      <a [href]="_file.url" target="_blank" class="download"><mat-icon>cloud_download</mat-icon></a>
+    </ng-template>
 </fs-file-preview>
 
 <ng-template #preview>

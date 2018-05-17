@@ -1,5 +1,5 @@
 import { FsFileConfig } from '../interfaces';
-import { isImageType } from '../helpers';
+import { isImageType, createFile } from '../helpers';
 
 export class FsFile {
 
@@ -16,10 +16,30 @@ export class FsFile {
   private _name: string;
   private _fileOptions: FsFileConfig;
 
-  constructor(file: File, options?: FsFileConfig) {
-    this.file = file;
-    if (options) {
-      this.fileOptions = Object.assign({}, options);
+  constructor(obj?: File|any, name?: string, type?: string) {
+    if (obj instanceof File) {
+      this.file = obj;
+
+    } else {
+
+      const filename = name || obj;
+
+      if (!type) {
+        const match = filename.match(/(jpe?g|png|gif|tiff?)$/i);
+        if (match) {
+          type = match[1];
+        }
+      }
+
+      if (type) {
+        type = 'image/' + type;
+      }
+
+      const file = <any>(new Blob([''], { type: type }));
+      file.name = String(name);
+      this.url = obj;
+
+      this.file = file;
     }
   }
 
@@ -42,16 +62,8 @@ export class FsFile {
   set file(value) {
     this._file = value;
     this.size = value.size;
-    if (value.name.match(/^http/)) {
-      this.url = value.name;
-      const match = value.name.match(/(jpe?g|png|gif|tiff?)$/i);
-      if (match) {
-        this.type = 'image/' + match[1];
-      }
-    } else {
-      this.name = value.name;
-      this.type = value.type;
-    }
+    this.name = value.name;
+    this.type = value.type;
   }
 
   get typeImage(): any {

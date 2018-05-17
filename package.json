@@ -1,6 +1,6 @@
 {
   "name": "@firestitch/file",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/Firestitch/fs-file"
@@ -19,28 +19,10 @@
   "main": "package/index.js",
   "typings": "package/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "clean:build": "rimraf build",
-    "clean:demo": "rimraf demo",
-    "clean:package": "rimraf package",
-    "copy:build": "cpx -v \"src/**/*\" \"build\"",
-    "copy:styles": "cpx -v \"build/**/*.css\" \"package\"",
-    "copy:templates": "cpx -v \"build/**/*.html\" \"package\"",
-    "package": "npm-run-all -s clean:build clean:package copy:build build:sass package:replace-scss package:aot package:build copy:styles copy:templates package:minify clean:build",
-    "package:aot": "ngc -p tsconfig.aot.json",
-    "package:replace-scss": "node ./tools/replace-scss.js",
-    "package:dev": "webpack --config=tools/webpack.dev.js --progress --profile --watch",
-    "package:minify": "uglifyjs package/index.js --source-map --compress --mangle --screw-ie8 --output package/index.min.js",
-    "package:build": "webpack --config=tools/webpack.package.js --progress --profile",
-    "demo:build": "npm-run-all -s clean:demo compodoc demo:webpack",
-    "demo:zip": "webpack --config=tools/webpack.demo.zip.js --progress --profile",
-    "demo:webpack": "webpack --config=tools/webpack.demo.js --progress --profile",
-    "demo:serve": "http-server ./demo",
-    "build:sass": "node-sass -r build/ -o build/ || true",
-    "serve": "webpack-dev-server --config=tools/webpack.playground.js --progress --profile --watch",
-    "lint": "tslint 'src/**/*.ts' -p ./tslint.json",
-    "compodoc": "./node_modules/.bin/compodoc src --disableInternal --disablePrivate --disableGraph --disableSourceCode --hideGenerator --output docs --tsconfig tsconfig.compodoc.json",
-    "postinstall": "npm rebuild node-sass"
+    "package": "cd tools && npm run package",
+    "package:publish": "cd tools && npm run package:publish",
+    "demo:build": "cd tools && npm run demo:build",
+    "serve": "cd tools && npm run serve"
   },
   "devDependencies": {
     "@angular/animations": ">=5.0.0",
@@ -57,7 +39,7 @@
     "@angular/platform-browser-dynamic": "^5.1.1",
     "@compodoc/compodoc": "^1.0.5",
     "@firestitch/common": "^0.1.26",
-    "@firestitch/example": "^0.2.1",
+    "@firestitch/example": "^0.2.18",
     "@firestitch/iframe": "^0.1.5",
     "@types/node": "^6.0.94",
     "highlight.js": "^9.9.0",
@@ -113,7 +95,9 @@
     "webpack-merge": "^4.1.1",
     "webpack-node-externals": "^1.6.0",
     "zone.js": "^0.8.14",
-    "zip-webpack-plugin": "3.0.0"
+    "zip-webpack-plugin": "3.0.0",
+    "filemanager-webpack-plugin": "^1.0.26",
+    "replace-in-file": "^3.4.0"
   },
   "engines": {
     "node": ">=6.0.0"

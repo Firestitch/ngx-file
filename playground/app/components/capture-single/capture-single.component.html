@@ -11,7 +11,7 @@
   </div>
   <div>
     <fs-file (select)="select($event)" accept="video/*;image/*" capture="library">
-      <button mat-raised-button color="primary">Select From Library</button>  
+      <button mat-raised-button color="primary">Select From Library</button>
       <div>
         <mat-hint>Requires Cordova camera and file plugins</mat-hint>
       </div>
@@ -21,6 +21,6 @@
 
 <fieldset *ngIf="file">
   <legend>File</legend>
-  <pre>{{ file | json }}</pre>
   <fs-file-preview [file]="file"></fs-file-preview>
+  <pre>{{ file | json }}</pre>
 </fieldset>

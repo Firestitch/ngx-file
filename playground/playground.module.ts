@@ -16,7 +16,8 @@ import {
   FilePickerComponent,
   FilePickerExistingFileComponent,
   FilePickerExistingUrlComponent,
-  CaptureComponent
+  CaptureSingleComponent,
+  CaptureMultipleComponent
 } from './app/components';
 
 
@@ -41,7 +42,8 @@ import {
     FilePickerComponent,
     FilePickerExistingFileComponent,
     FilePickerExistingUrlComponent,
-    CaptureComponent
+    CaptureSingleComponent,
+    CaptureMultipleComponent
   ],
   providers: [
   ],
