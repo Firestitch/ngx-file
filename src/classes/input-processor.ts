@@ -12,12 +12,16 @@ export class InputProcessor {
   public cordova = {  camera: null,
                       capture: null,
                       resolveLocalFileSystemURL: null };
-  public accept = '*';
+
   public multiple = false;
   public capture: string = null;
   public disabled;
 
   public select = new EventEmitter();
+
+  private _accept = '*';
+  private _acceptableTypes = new Map();
+  private _acceptableExts = new Set();
 
   constructor(private cordovaService: CordovaService) {
 
@@ -28,6 +32,16 @@ export class InputProcessor {
     });
   }
 
+  get accept() {
+    return this._accept;
+  }
+
+  set accept(value) {
+    this._acceptableTypes.clear();
+    this._acceptableExts.clear();
+    this.parseAcceptTypes(value);
+    this._accept = value.trim();
+  }
   /**
    * Initialize service for target element
    * @param el
@@ -40,12 +54,24 @@ export class InputProcessor {
     this.inputEl = el.nativeElement;
 
     FileAPI.event.on(this.inputEl, 'change', (event) => {
-      const files = FileAPI.getFiles(event);
+      const files = FileAPI.getFiles(event)
+        .filter(file => {
+          const nameParts = file.name.split('.');
+          let ext;
+          if (nameParts && Array.isArray(nameParts)) {
+            ext = nameParts[nameParts.length - 1];
+          }
 
-      // Clear input value
-      this.inputEl.value = null;
+          return this.checkAcceptableTypes(file.type, ext)
+        });
 
-      this.selectFiles(files);
+
+      if (files && files.length > 0) {
+        // Clear input value
+        this.inputEl.value = null;
+
+        this.selectFiles(files);
+      }
     });
   }
 
@@ -56,11 +82,22 @@ export class InputProcessor {
 
     this.containerEl = el.nativeElement;
     FileAPI.event.on(this.containerEl, 'drop', (event) => {
-      const files = FileAPI.getFiles(event);
+      const files = FileAPI.getFiles(event)
+        .filter(file => {
+          const nameParts = file.name.split('.');
+          let ext;
+          if (nameParts && Array.isArray(nameParts)) {
+            ext = nameParts[nameParts.length - 1];
+          }
 
-      this.inputEl.value = null;
+          return this.checkAcceptableTypes(file.type, ext)
+        });
 
-      this.selectFiles(files);
+      if (files && files.length > 0) {
+        this.inputEl.value = null;
+
+        this.selectFiles(files);
+      }
     });
   }
 
@@ -222,5 +259,57 @@ export class InputProcessor {
     }
 
     this.select.emit(files);
+  }
+
+  /**
+   * Check if file mimetype or extention is acceptable by @accept field
+   * @param targetType
+   * @param targetExt
+   * @returns {boolean}
+   */
+  private checkAcceptableTypes(targetType, targetExt) {
+    targetType = targetType.trim();
+    const [ type, ext ] = targetType.split('/');
+    const acceptableType = this._acceptableTypes.get(type);
+
+    return this.accept === '*'
+      || (!!acceptableType && (acceptableType.has('*') || acceptableType.has(ext)))
+      || this._acceptableExts.has(`.${targetExt}`);
+  }
+
+  /**
+   * Parset and store acceptable types for feature filter
+   * @param types
+   */
+  private parseAcceptTypes(types) {
+    if (typeof types !== 'string' && types.length === 0) { return }
+
+    const parts = types.split(',').map(type => type.trim());
+
+    parts.forEach((part) => {
+      const hasSlash = part.indexOf('/') > -1;
+      const hasDot = part.indexOf('.') === 0;
+
+      if (hasSlash) {
+        const [ type, ext ] = part.split('/');
+        if (this._acceptableTypes.has(type)) {
+          const existedType = this._acceptableTypes.get(type);
+
+          if (!existedType.has(ext)) {
+            existedType.add(ext);
+          }
+        } else {
+          const extensions = new Set();
+          this._acceptableTypes.set(type, extensions);
+          extensions.add(ext);
+        }
+      }
+
+      if (hasDot) {
+        if (!this._acceptableExts.has(part)) {
+          this._acceptableExts.add(part);
+        }
+      }
+    })
   }
 }
