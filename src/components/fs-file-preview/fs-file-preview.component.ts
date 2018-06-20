@@ -100,7 +100,7 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
 
         file.progress = false;
       } else {
-        alert(`Image preview error for file ${file.name}`);
+        console.log(`FsFilePreview: Image preview error for file ${file.name}`);
         file.progress = false;
       }
     });
