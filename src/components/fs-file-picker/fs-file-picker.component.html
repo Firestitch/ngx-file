@@ -12,11 +12,13 @@
     <mat-icon>close</mat-icon>
   </ng-template>
   <ng-template fs-file-preview-action placement="bottom-right" tooltip="Reupload" *ngIf="allowReupload">
-      <fs-file  (select)="selectFile($event)"
+      <fs-file  [accept]="accept"
+                (select)="selectFile($event)"
                 [imageWidth]="imageWidth"
                 [imageHeight]="imageHeight"
                 [imageQuality]="imageQuality">
-        <mat-icon>cloud_upload</mat-icon></fs-file>
+        <mat-icon>cloud_upload</mat-icon>
+      </fs-file>
   </ng-template>
   <ng-template fs-file-preview-action placement="bottom-left" action="download" tooltip="Download" *ngIf="allowDownload && _file.url">
       <a [href]="_file.url" target="_blank" class="download"><mat-icon>cloud_download</mat-icon></a>
@@ -24,7 +26,7 @@
 </fs-file-preview>
 
 <ng-template #preview>
-    <fs-file  (select)="selectFile($event)"
+  <fs-file  (select)="selectFile($event)"
               [accept]="accept"
               [imageWidth]="imageWidth"
               [imageHeight]="imageHeight"
