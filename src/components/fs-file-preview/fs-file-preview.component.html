@@ -10,6 +10,7 @@
   <ng-template #nonImage>
     <div class="file-ext">{{file.extension}}</div>
     <div class="file-name" [matTooltip]="file.name">{{file.name}}</div>
+    <mat-spinner class="spinner" *ngIf="file.progress" [diameter]="previewWidth/2"></mat-spinner>
   </ng-template>
 
   <!-- Actions -->
