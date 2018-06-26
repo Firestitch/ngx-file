@@ -19,6 +19,9 @@ import {
 } from './components';
 import { FsFilePreviewActionDirective } from './directives';
 import { CordovaService } from './services';
+import { FS_FILE_MODULE_CONFIG } from './fs-file.providers';
+import { FsFileModuleConfig } from './interfaces/module-config.interface';
+
 
 @NgModule({
   imports: [
@@ -52,10 +55,18 @@ import { CordovaService } from './services';
   ],
 })
 export class FsFileModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(config: FsFileModuleConfig = null): ModuleWithProviders {
     return {
       ngModule: FsFileModule,
-      providers: []
+      providers: [
+        {
+          provide: FS_FILE_MODULE_CONFIG,
+          useValue: config || {
+            allowDownload: true,
+            allowRemove: true,
+          }
+        }
+      ]
     };
   }
 }

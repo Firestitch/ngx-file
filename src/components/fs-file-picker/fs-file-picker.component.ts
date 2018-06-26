@@ -4,14 +4,14 @@ import {
   Component,
   Input,
   Output,
-  ViewChild
+  ViewChild, Inject, Optional, OnInit
 } from '@angular/core';
 
 import { FsFileDragBaseComponent } from '../fs-file-drag-base';
 import { InputProcessor } from '../../classes';
 import { FsFile } from '../../models';
 import { CordovaService } from '../../services';
-import { createFile } from '../../helpers';
+import { FS_FILE_MODULE_CONFIG } from '../../fs-file.providers';
 
 
 @Component({
@@ -19,7 +19,7 @@ import { createFile } from '../../helpers';
   templateUrl: 'fs-file-picker.component.html',
   styleUrls: [ 'fs-file-picker.component.scss' ],
 })
-export class FsFilePickerComponent extends FsFileDragBaseComponent {
+export class FsFilePickerComponent extends FsFileDragBaseComponent implements OnInit {
 
   public inputProcessor = null;
   private _disabled: boolean;
@@ -55,9 +55,9 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent {
 
   @Input() public previewWidth = 150;
   @Input() public previewHeight = 150;
-  @Input() public allowDownload = true;
+  @Input() public allowDownload;
   @Input() public allowReupload = true;
-  @Input() public allowRemove = true;
+  @Input() public allowRemove;
 
   @Output() public select = new EventEmitter<any>();
   @Output() public remove = new EventEmitter();
@@ -65,9 +65,24 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent {
   @ViewChild('fileInput') public fileInput: any;
 
 
-  constructor(cordovaService: CordovaService, public el: ElementRef) {
+  constructor(public el: ElementRef,
+              @Optional() @Inject(FS_FILE_MODULE_CONFIG) public moduleConfig,
+              cordovaService: CordovaService) {
     super(el);
     this.inputProcessor = new InputProcessor(cordovaService);
+  }
+
+  public ngOnInit() {
+    // Setup module default config
+    if (this.moduleConfig) {
+      if (this.allowDownload === void 0) {
+        this.allowDownload = this.moduleConfig.allowDownload
+      }
+
+      if (this.allowRemove === void 0) {
+        this.allowRemove = this.moduleConfig.allowRemove
+      }
+    }
   }
 
   public selectFile(file) {

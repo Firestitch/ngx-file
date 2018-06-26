@@ -8,7 +8,7 @@ import { FsFileModule } from '../src';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './app/material.module';
 import { FsExampleModule } from '@firestitch/example';
-import { FlexLayoutModule } from "@angular/flex-layout";
+import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   SingleFileSelectComponent,
   MultipleFileSelectComponent,
@@ -25,7 +25,10 @@ import {
   bootstrap: [ AppComponent ],
   imports: [
     BrowserModule,
-    FsFileModule,
+    FsFileModule.forRoot({
+      allowDownload: true,
+      allowRemove: true
+    }),
     BrowserAnimationsModule,
     AppMaterialModule,
     FormsModule,
