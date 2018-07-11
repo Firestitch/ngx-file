@@ -1,5 +1,6 @@
 import { FsFileConfig } from '../interfaces';
-import { isImageType, createFile } from '../helpers';
+import { isImageType, createBlob } from '../helpers';
+
 
 export class FsFile {
 
@@ -12,12 +13,12 @@ export class FsFile {
   public type: string;
   public url: string;
   public size: number;
-  private _file: File;
+  private _file: any;
   private _name: string;
   private _fileOptions: FsFileConfig;
 
-  constructor(obj?: File|any, name?: string, type?: string) {
-    if (obj instanceof File) {
+  constructor(obj?: any, name?: string, type?: string) {
+    if (obj instanceof File || obj instanceof Blob) {
       this.file = obj;
 
     } else {
@@ -35,8 +36,7 @@ export class FsFile {
         type = 'image/' + type;
       }
 
-      const file = <any>(new Blob([''], { type: type }));
-      file.name = String(name);
+      const file = createBlob([''], name, type);
       this.url = obj;
 
       this.file = file;
@@ -72,7 +72,7 @@ export class FsFile {
 
   set name(name) {
     this._name = name;
-    const parts = name.split('.');
+    const parts = String(name).split('.');
     if (parts.length > 1) {
       this.extension = parts[parts.length - 1];
     }

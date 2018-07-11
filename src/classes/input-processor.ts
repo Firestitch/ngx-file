@@ -1,8 +1,7 @@
 import { ElementRef, EventEmitter } from '@angular/core';
 import * as FileAPI from 'fileapi';
 import { FsFile } from '../models';
-import { getCordovaCamera, isImageType, getCordovaCapture } from '../helpers';
-import { filter } from 'lodash';
+import { getCordovaCamera, isImageType, getCordovaCapture, createBlob } from '../helpers';
 import { CordovaService } from '../services';
 
 
@@ -220,8 +219,7 @@ export class InputProcessor {
                 u8arr[n] = byteString.charCodeAt(n);
               }
 
-              const blob = <any>(new Blob([u8arr], { type: file.type }));
-              blob.name = file.name;
+              const blob = createBlob([u8arr], file.name, file.type);
               resolve(blob);
             };
 
