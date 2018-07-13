@@ -1,7 +1,14 @@
-import { ElementRef, EventEmitter } from '@angular/core';
+import { ElementRef, EventEmitter, NgZone } from '@angular/core';
 import * as FileAPI from 'fileapi';
 import { FsFile } from '../models';
-import { getCordovaCamera, isImageType, getCordovaCapture, createBlob } from '../helpers';
+import {  getCordovaCamera,
+          isImageType,
+          getCordovaCapture,
+          createBlob,
+          getCordovaResolveLocalFileSystemURL,
+          hasCordovaCameraSupport,
+          hasCordovaCaptureSupport
+         } from '../helpers';
 import { CordovaService } from '../services';
 
 
@@ -13,6 +20,7 @@ export class InputProcessor {
                       resolveLocalFileSystemURL: null };
 
   public multiple = false;
+  public api: 'html5' | 'any' | 'cordova' = null;
   public capture: string = null;
   public disabled;
 
@@ -22,12 +30,12 @@ export class InputProcessor {
   private _acceptableTypes = new Map();
   private _acceptableExts = new Set();
 
-  constructor(private cordovaService: CordovaService) {
+  constructor(private cordovaService: CordovaService, private ngZone: NgZone) {
 
     cordovaService.isReady().subscribe(() => {
       this.cordova.camera = getCordovaCamera();
       this.cordova.capture = getCordovaCapture();
-      this.cordova.resolveLocalFileSystemURL = (<any>window).resolveLocalFileSystemURL;
+      this.cordova.resolveLocalFileSystemURL = getCordovaResolveLocalFileSystemURL();
     });
   }
 
@@ -108,12 +116,13 @@ export class InputProcessor {
 
     FileAPI.event.on(el.nativeElement, 'click', () => {
 
-      if (this.cordova.resolveLocalFileSystemURL) {
-        if (this.capture === 'library' && this.cordova.camera) {
+      if (this.api === 'cordova' || !this.api) {
+
+        if (this.capture === 'library' && hasCordovaCameraSupport()) {
           return this.selectCordovaCameraLibrary();
         }
 
-        if (this.capture !== null && this.cordova.capture) {
+        if (this.capture !== null && hasCordovaCaptureSupport()) {
 
           if (this.isAcceptVideo()) {
             return this.selectCordovaCaptureVideo();
@@ -152,7 +161,9 @@ export class InputProcessor {
     files.forEach((captureFile) => {
       this.getCordovaFile('file://' + captureFile.fullPath)
       .then((file) => {
-        this.selectFiles([file]);
+        this.ngZone.run(() => {
+          this.selectFiles([file]);
+        });
       }).catch(error => {
         console.log(error);
       })
@@ -186,7 +197,9 @@ export class InputProcessor {
 
       this.getCordovaFile(data)
       .then((file) => {
-        this.selectFiles([file]);
+        this.ngZone.run(() => {
+          this.selectFiles([file]);
+        });
         this.cordovaCameraCleanup();
       }).catch(error => {
         console.log(error);
@@ -206,28 +219,22 @@ export class InputProcessor {
 
         fileEntry.file(file => {
 
-          if (isImageType(file.type)) {
+          const reader = new FileReader();
+          reader.onloadend = (encodedFile) => {
+            const fileData = (<any>encodedFile.target).result.split('base64,').pop();
+            const byteString = atob(fileData);
+            let n = byteString.length;
+            const u8arr = new Uint8Array(n);
 
-            const reader = new FileReader();
-            reader.onloadend = (encodedFile) => {
-              const fileData = (<any>encodedFile.target).result.split('base64,').pop();
-              const byteString = atob(fileData);
-              let n = byteString.length;
-              const u8arr = new Uint8Array(n);
+            while (n--) {
+              u8arr[n] = byteString.charCodeAt(n);
+            }
 
-              while (n--) {
-                u8arr[n] = byteString.charCodeAt(n);
-              }
+            const blob = createBlob([u8arr], file.name, file.type);
+            resolve(blob);
+          };
 
-              const blob = createBlob([u8arr], file.name, file.type);
-              resolve(blob);
-            };
-
-            reader.readAsDataURL(file);
-
-          } else {
-            resolve(file);
-          }
+          reader.readAsDataURL(file);
         },
         (error) => {
           reject(error);

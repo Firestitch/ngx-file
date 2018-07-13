@@ -1,4 +1,5 @@
 import './../tools/assets/playground.scss';
+import './styles.scss';
 
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -8,7 +9,12 @@ import { FsFileModule } from '../src';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './app/material.module';
 import { FsExampleModule } from '@firestitch/example';
+import { FsApiModule, FS_API_RESPONSE_HANDLER } from '@firestitch/api';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ResponseHandler } from './app/handlers/response.handler';
+import { FsMessageModule } from '@firestitch/message';
+import { ToastrModule } from 'ngx-toastr'
+
 import {
   SingleFileSelectComponent,
   MultipleFileSelectComponent,
@@ -17,7 +23,8 @@ import {
   FilePickerExistingFileComponent,
   FilePickerExistingUrlComponent,
   CaptureSingleComponent,
-  CaptureMultipleComponent
+  CaptureMultipleComponent,
+  CaptureCordovaComponent
 } from './app/components';
 
 
@@ -29,11 +36,14 @@ import {
       allowDownload: true,
       allowRemove: true
     }),
+    FsApiModule,
     BrowserAnimationsModule,
     AppMaterialModule,
     FormsModule,
     FsExampleModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    FsMessageModule.forRoot(),
+    ToastrModule.forRoot({ preventDuplicates: true }),
   ],
   entryComponents: [
   ],
@@ -46,9 +56,11 @@ import {
     FilePickerExistingFileComponent,
     FilePickerExistingUrlComponent,
     CaptureSingleComponent,
-    CaptureMultipleComponent
+    CaptureMultipleComponent,
+    CaptureCordovaComponent
   ],
   providers: [
+    { provide: FS_API_RESPONSE_HANDLER, useClass: ResponseHandler },
   ],
 })
 export class PlaygroundModule {

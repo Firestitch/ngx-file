@@ -22,7 +22,6 @@ export class FileProcessor {
    */
   public process(files, config: FsFileConfig) {
     let multiple = true;
-
     const processConfig = new ProcessConfig(config);
 
     if (!Array.isArray(files)) {

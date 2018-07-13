@@ -1,0 +1,16 @@
+.unsupported {
+  color: red;
+}
+
+.supported {
+  color: green;
+}
+
+
+.supported, .unsupported {
+  line-height: 24px;
+}
+
+.supported, .unsupported mat-icon {
+  vertical-align: top;
+}

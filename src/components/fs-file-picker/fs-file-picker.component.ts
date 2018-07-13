@@ -4,7 +4,11 @@ import {
   Component,
   Input,
   Output,
-  ViewChild, Inject, Optional, OnInit
+  ViewChild,
+  Inject,
+  Optional,
+  OnInit,
+  NgZone
 } from '@angular/core';
 
 import { FsFileDragBaseComponent } from '../fs-file-drag-base';
@@ -67,9 +71,10 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
 
   constructor(public el: ElementRef,
               @Optional() @Inject(FS_FILE_MODULE_CONFIG) public moduleConfig,
-              cordovaService: CordovaService) {
+              cordovaService: CordovaService,
+              ngZone: NgZone) {
     super(el);
-    this.inputProcessor = new InputProcessor(cordovaService);
+    this.inputProcessor = new InputProcessor(cordovaService, ngZone);
   }
 
   public ngOnInit() {

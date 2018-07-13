@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromEvent';
+import { fromEvent } from 'rxjs/observable/fromEvent';
 import { tap } from 'rxjs/operators';
 
 
@@ -10,23 +10,33 @@ export class CordovaService {
   ready = null;
 
   constructor() {
+    this.deviceReady = fromEvent(document, 'deviceready');
+  }
 
-    this.deviceReady = Observable.fromEvent(document, 'deviceready')
-        .pipe( tap(() => {
-            this.ready = true;
-        }));
+  public onReady(func) {
+    this.isReady()
+    .subscribe(func);
   }
 
   public isReady() {
+
     return new Observable((observer) => {
-      if (this.ready === null) {
-        this.deviceReady.subscribe(() => {
-          this.ready = true;
-          observer.next();
-        })
-      } else {
-        observer.next();
+
+      if ((<any>window).cordova) {
+        this.ready = true;
       }
+
+      if (this.ready) {
+        observer.next();
+        observer.complete();
+        return;
+      }
+
+      this.deviceReady.subscribe(() => {
+        this.ready = true;
+        observer.next();
+        observer.complete();
+      });
     })
   }
 }

@@ -5,7 +5,8 @@ import {
   Input,
   AfterViewInit,
   Output,
-  ViewChild
+  ViewChild,
+  NgZone
 } from '@angular/core';
 import { FsFileDragBaseComponent } from '../fs-file-drag-base';
 import { FileProcessor, InputProcessor } from '../../classes';
@@ -45,6 +46,10 @@ export class FsFileComponent extends FsFileDragBaseComponent implements AfterVie
 
   get multiple() {
     return this.inputProcessor.multiple;
+  }
+
+  get api() {
+    return this.inputProcessor.api;
   }
 
   @Input()
@@ -104,9 +109,9 @@ export class FsFileComponent extends FsFileDragBaseComponent implements AfterVie
   @ViewChild('fileInput') public fileInput: any;
   @ViewChild('fileLabel') public fileLabel: any;
 
-  constructor(cordovaService: CordovaService, public el: ElementRef) {
+  constructor(cordovaService: CordovaService, public el: ElementRef, ngZone: NgZone) {
     super(el);
-    this.inputProcessor = new InputProcessor(cordovaService);
+    this.inputProcessor = new InputProcessor(cordovaService, ngZone);
 
     const fileProcessor = new FileProcessor();
 

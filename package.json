@@ -1,6 +1,6 @@
 {
   "name": "@firestitch/file",
-  "version": "0.3.15",
+  "version": "0.3.21",
   "repository": {
     "type": "git",
     "url": "https://github.com/Firestitch/fs-file"
@@ -19,7 +19,7 @@
   "main": "package/index.js",
   "typings": "package/index.d.ts",
   "scripts": {
-    "package": "cd tools && npm run package",
+    "package": "cd tools && npm run package && npm run package:functions",
     "package:publish": "cd tools && npm run package:publish",
     "demo:build": "cd tools && npm run demo:build",
     "serve": "cd tools && npm run serve"
@@ -41,7 +41,11 @@
     "@firestitch/common": "^0.1.26",
     "@firestitch/example": "^0.2.21",
     "@firestitch/iframe": "^0.1.5",
+    "@firestitch/api": "^0.1.15",
+    "@firestitch/message": "^0.1.19",
+    "ngx-toastr": "^8.4.0",
     "@types/node": "^6.0.94",
+    "moment-timezone": "^0.5.21",
     "angular-in-memory-web-api": "^0.3.2",
     "angular-router-loader": "^0.8.2",
     "angular2-template-loader": "^0.6.2",
@@ -97,7 +101,8 @@
     "webpack-merge": "^4.1.1",
     "webpack-node-externals": "^1.6.0",
     "zip-webpack-plugin": "3.0.0",
-    "zone.js": "^0.8.14"
+    "zone.js": "^0.8.14",
+    "bestzip": "^1.1.4"
   },
   "engines": {
     "node": ">=6.0.0"
