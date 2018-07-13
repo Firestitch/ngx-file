@@ -9,11 +9,6 @@
       <button mat-raised-button color="primary">Take a Video</button>
     </fs-file>
   </div>
-  <div>
-    <fs-file (select)="select($event)" accept="video/*;image/*" capture="library" api="html5">
-      <button mat-raised-button color="primary">Select From Library</button>
-    </fs-file>
-  </div>
 </div>
 
 <fieldset *ngIf="file">
