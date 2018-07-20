@@ -118,18 +118,22 @@ export class InputProcessor {
 
       if (this.api === 'cordova' || !this.api) {
 
-        if (this.capture === 'library' && hasCordovaCameraSupport()) {
-          return this.selectCordovaCameraLibrary();
-        }
-
-        if (this.capture !== null && hasCordovaCaptureSupport()) {
-
-          if (this.isAcceptVideo()) {
-            return this.selectCordovaCaptureVideo();
+        if (hasCordovaCameraSupport()) {
+          if (this.capture === 'library') {
+            return this.selectCordovaCameraLibrary();
           }
 
           if (this.isAcceptImage()) {
-            return this.selectCordovaCaptureImage();
+            return this.selectCordovaCameraPicture();
+          }
+        }
+
+        if (hasCordovaCaptureSupport()) {
+
+          if (this.capture !== null) {
+            if (this.isAcceptVideo()) {
+              return this.selectCordovaCaptureVideo();
+            }
           }
         }
       }
@@ -146,20 +150,21 @@ export class InputProcessor {
     this.cordova.capture.captureImage((files) => {
       this.successCaptureFiles(files);
     },
-    this.errorCaptureFiles, { limit: this.multiple ? 999 : 1 });
+    this.errorCaptureFiles, { limit: 1 });
   }
 
   public selectCordovaCaptureVideo() {
     this.cordova.capture.captureVideo((files) => {
       this.successCaptureFiles(files);
     },
-    this.errorCaptureFiles, { limit: this.multiple ? 999 : 1 });
+    this.errorCaptureFiles, { limit: 1 });
   }
 
   public successCaptureFiles(files) {
 
     files.forEach((captureFile) => {
-      this.getCordovaFile('file://' + captureFile.fullPath)
+
+      this.getCordovaFile(captureFile.fullPath)
       .then((file) => {
         this.ngZone.run(() => {
           this.selectFiles([file]);
@@ -175,11 +180,24 @@ export class InputProcessor {
   }
 
   public selectCordovaCameraLibrary() {
+    return this.selectCordovaCamera(this.cordova.camera.PictureSourceType.PHOTOLIBRARY,
+                                    this.cordova.camera.MediaType.ALLMEDIA);
+  }
+
+  public selectCordovaCameraPicture() {
+    return this.selectCordovaCamera(this.cordova.camera.PictureSourceType.CAMERA,
+                                    this.cordova.camera.MediaType.PICTURE);
+  }
+
+  public selectCordovaCamera(sourceType, mediaType) {
 
     const options: any = {
       destinationType: this.cordova.camera.DestinationType.FILE_URI,
-      sourceType: this.cordova.camera.PictureSourceType.PHOTOLIBRARY,
-      mediaType: this.cordova.camera.MediaType.ALLMEDIA
+      encodingType: this.cordova.camera.DestinationType.JPEG,
+      sourceType: sourceType,
+      mediaType: mediaType,
+      quality: 100,
+      correctOrientation: false
     };
 
     if (this.accept.length) {
@@ -189,7 +207,7 @@ export class InputProcessor {
       if (video && !image) {
         options.mediaType = this.cordova.camera.MediaType.VIDEO;
       } else if (image && !video) {
-        options.mediaType = this.cordova.camera.MediaType.PICURE;
+        options.mediaType = this.cordova.camera.MediaType.PICTURE;
       }
     }
 
@@ -211,11 +229,15 @@ export class InputProcessor {
     }, options);
   }
 
-  private getCordovaFile(data) {
+  private getCordovaFile(path) {
+
+    if (!path.match(/^file:/)) {
+      path = 'file://'.concat(path);
+    }
 
     return new Promise((resolve, reject) => {
 
-      this.cordova.resolveLocalFileSystemURL(data, fileEntry => {
+      this.cordova.resolveLocalFileSystemURL(path, fileEntry => {
 
         fileEntry.file(file => {
 
