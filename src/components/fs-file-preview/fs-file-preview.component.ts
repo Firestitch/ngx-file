@@ -108,23 +108,25 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
 
   private cleanActions() {
     for (const action in this.actions) {
-      if (this.actions.hasOwnProperty(action) && this.actions[action].forTypes) {
-        // save original type
-        const [originalFileType, originalContentType] = this.file.type.split('/');
-        const types = this.actions[action].forTypes;
+      if (this.actions.hasOwnProperty(action)) {
+        if (this.actions[action].forTypes) {
+          // save original type
+          const [originalFileType, originalContentType] = this.file.type.split('/');
+          const types = this.actions[action].forTypes;
 
-        // Looking for allowed type
-        for (let i = 0; i < types.length; i++) {
-          const [fileType, contentType] = types[i].split('/');
-          const allowed = fileType === originalFileType && (contentType === originalContentType || contentType === '*');
+          // Looking for allowed type
+          for (let i = 0; i < types.length; i++) {
+            const [fileType, contentType] = types[i].split('/');
+            const allowed = fileType === originalFileType && (contentType === originalContentType || contentType === '*');
 
-          if (allowed) {
-            this.filteredActions.push(this.actions[action]);
-            break;
+            if (allowed) {
+              this.filteredActions.push(this.actions[action]);
+              break;
+            }
           }
+        } else {
+          this.filteredActions.push(this.actions[action]);
         }
-      } else {
-        this.filteredActions.push(this.actions[action]);
       }
     }
   }

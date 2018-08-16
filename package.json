@@ -1,6 +1,6 @@
 {
   "name": "@firestitch/file",
-  "version": "0.3.27",
+  "version": "0.3.28",
   "repository": {
     "type": "git",
     "url": "https://github.com/Firestitch/fs-file"
@@ -19,7 +19,7 @@
   "main": "package/index.js",
   "typings": "package/index.d.ts",
   "scripts": {
-    "package": "cd tools && npm run package && npm run package:functions",
+    "package": "cd tools && npm run package",
     "package:publish": "cd tools && npm run package:publish",
     "demo:build": "cd tools && npm run demo:build",
     "serve": "cd tools && npm run serve"
@@ -38,20 +38,20 @@
     "@angular/platform-browser": "^5.1.1",
     "@angular/platform-browser-dynamic": "^5.1.1",
     "@compodoc/compodoc": "^1.0.5",
+    "@firestitch/api": "^0.1.15",
+    "@firestitch/app": "^0.1.2",
     "@firestitch/common": "^0.1.26",
     "@firestitch/example": "^0.2.21",
     "@firestitch/iframe": "^0.1.5",
-    "@firestitch/api": "^0.1.15",
     "@firestitch/message": "^0.1.19",
-    "@firestitch/app": "^0.1.2",
-    "ngx-toastr": "^8.4.0",
+    "@types/bluebird": "^3.5.5",
     "@types/node": "^6.0.94",
-    "moment-timezone": "^0.5.21",
     "angular-in-memory-web-api": "^0.3.2",
     "angular-router-loader": "^0.8.2",
     "angular2-template-loader": "^0.6.2",
     "awesome-typescript-loader": "^3.4.1",
     "babel-core": "^6.26.0",
+    "bestzip": "^1.1.4",
     "codelyzer": "~3.2.0",
     "concurrently": "^3.4.0",
     "copy-webpack-plugin": "^4.3.1",
@@ -75,6 +75,8 @@
     "karma-jasmine": "^1.1.1",
     "karma-jasmine-html-reporter": "^0.2.2",
     "lite-server": "^2.3.0",
+    "moment-timezone": "^0.5.21",
+    "ngx-toastr": "^8.4.0",
     "node-sass": "^4.5.2",
     "node-sass-tilde-importer": "^1.0.0",
     "node-watch": "^0.5.2",
@@ -102,8 +104,7 @@
     "webpack-merge": "^4.1.1",
     "webpack-node-externals": "^1.6.0",
     "zip-webpack-plugin": "3.0.0",
-    "zone.js": "^0.8.14",
-    "bestzip": "^1.1.4"
+    "zone.js": "^0.8.14"
   },
   "engines": {
     "node": ">=6.0.0"
@@ -114,5 +115,6 @@
     "fileapi": ">=2.0.25",
     "lodash": ">=4.17.5",
     "@firestitch/app": ">=0.1.2"
-  }
+  },
+  "dependencies": {}
 }
