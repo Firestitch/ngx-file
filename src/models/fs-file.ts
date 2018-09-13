@@ -17,28 +17,25 @@ export class FsFile {
   private _name: string;
   private _fileOptions: FsFileConfig;
 
-  constructor(obj?: any, name?: string, type?: string) {
+  constructor(obj?: any, filename?: string) {
     if (obj instanceof File || obj instanceof Blob) {
       this.file = obj;
 
     } else {
+      
+      const name = filename || obj;
+      let type = '';
 
-      const filename = name || obj;
+      if (name) {
+        const match = name.toLowerCase().match(/([^\.]+)$/);
+        this.extension = match ? match[1] : '';
 
-      if (!type) {
-        const match = filename.match(/(jpe?g|png|gif|tiff?)$/i);
-        if (match) {
-          type = match[1];
-        }
+        const mime = this.extension.match(/(jpe?g|png|gif|tiff?|bmp)/) ? 'image' : 'application';
+        type = mime + '/' + this.extension;
       }
-
-      if (type) {
-        type = 'image/' + type;
-      }
-
-      const file = createBlob([''], name, type);
+      
+      const file = createBlob([''], filename, type);
       this.url = obj;
-
       this.file = file;
     }
   }

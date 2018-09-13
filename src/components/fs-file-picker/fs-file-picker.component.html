@@ -5,6 +5,7 @@
                  *ngIf="_file; else preview"
                  (remove)="removeFile($event)"
                  [file]="_file"
+                 [showFilename]="showFilename"
                  [previewWidth]="previewWidth"
                  [previewHeight]="previewHeight">
   <ng-template fs-file-preview-action placement="top-right" action="remove" tooltip="Remove" *ngIf="allowRemove">

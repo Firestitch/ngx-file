@@ -8,8 +8,14 @@
 
   <!-- Non image container -->
   <ng-template #nonImage>
-    <div class="file-ext">{{file.extension}}</div>
-    <div class="file-name" [matTooltip]="file.name">{{file.name}}</div>
+    <div class="file-details">
+
+      <div class="file-icon">
+        <div class="file-ext">{{file.extension}}</div>
+        <mat-icon>insert_drive_file</mat-icon>
+      </div>
+      <div class="file-name" [matTooltip]="file.name" *ngIf="showFilename && file.name">{{file.name}}</div>
+    </div>
     <mat-spinner class="spinner" *ngIf="file.progress" [diameter]="previewWidth/2"></mat-spinner>
   </ng-template>
 

@@ -34,6 +34,7 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
   @Input() public imageWidth;
   @Input() public imageHeight;
   @Input() public imageQuality;
+  @Input() public showFilename = true;
 
   @Input('file') set file(file) {
     this._file = file;

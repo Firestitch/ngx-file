@@ -1,6 +1,6 @@
 {
   "name": "@firestitch/file",
-  "version": "0.3.30",
+  "version": "0.3.33",
   "repository": {
     "type": "git",
     "url": "https://github.com/Firestitch/fs-file"
@@ -25,7 +25,7 @@
     "serve": "cd tools && npm run serve"
   },
   "devDependencies": {
-    "@angular/animations": ">=5.0.0",
+    "@angular/animations": "^5.0.0",
     "@angular/cdk": "^5.0.0",
     "@angular/common": "^5.1.1",
     "@angular/compiler": "^5.1.1",
@@ -41,7 +41,7 @@
     "@firestitch/api": "^0.1.15",
     "@firestitch/app": "^0.1.2",
     "@firestitch/common": "^0.1.26",
-    "@firestitch/example": "^0.2.21",
+    "@firestitch/example": "^0.3.0",
     "@firestitch/iframe": "^0.1.5",
     "@firestitch/message": "^0.1.19",
     "@types/bluebird": "^3.5.5",
@@ -112,10 +112,10 @@
   },
   "peerDependencies": {
     "@firestitch/common": ">=0.1.26",
+    "@firestitch/app": ">=0.1.2",
     "rxjs": ">=5.1.0",
     "fileapi": ">=2.0.25",
-    "lodash": ">=4.17.5",
-    "@firestitch/app": ">=0.1.2"
+    "lodash": ">=4.17.5"
   },
   "dependencies": {}
 }

@@ -22,6 +22,8 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
   public file: FsFile;
   public preview: string;
 
+  @Input() showFilename = true;
+
   @Input() set _actions(value) {
     this.actions.push(...value);
   }
