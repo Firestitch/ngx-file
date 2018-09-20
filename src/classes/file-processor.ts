@@ -4,7 +4,9 @@ import 'fileapi/plugins/FileAPI.exif.js';
 import { Observable } from 'rxjs/Observable';
 import { switchMap } from 'rxjs/operators/switchMap';
 import { of } from 'rxjs/observable/of';
-import 'rxjs/add/observable/fromPromise';
+
+import { fromPromise } from 'rxjs/observable/fromPromise';
+
 
 import { ProcessConfig, FsFile } from '../models';
 import { ScaleExifImage, createBlob } from '../helpers';
@@ -20,7 +22,7 @@ export class FileProcessor {
    * @param files
    * @param config
    */
-  public process(files, config: FsFileConfig) {
+  public process(files, config: FsFileConfig): Observable<any> {
     let multiple = true;
     const processConfig = new ProcessConfig(config);
 
@@ -42,7 +44,7 @@ export class FileProcessor {
       }
     });
 
-    return Observable.fromPromise(Promise.all(processedFiles)).pipe(
+    return fromPromise(Promise.all(processedFiles)).pipe(
       switchMap((resultFiles) => {
         if (!multiple && resultFiles[0]) { return of(resultFiles[0]) }
 
