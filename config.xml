@@ -103,7 +103,7 @@
   <plugin name="cordova-plugin-device" spec="~1.1.1" />
   <plugin name="cordova-plugin-splashscreen" />
   <plugin name="cordova-plugin-ionic-webview" />
-  <plugin name="cordova-plugin-camera" spec="4.0.2" />
+  <plugin name="cordova-plugin-camera"/>
   <plugin name="cordova-plugin-media-capture" />
   <plugin name="cordova-plugin-file" />
   <plugin spec="https://github.com/Firestitch/webview-debug.git" source="git" />

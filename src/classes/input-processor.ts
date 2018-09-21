@@ -2,7 +2,6 @@ import { ElementRef, EventEmitter, NgZone } from '@angular/core';
 import * as FileAPI from 'fileapi';
 import { FsFile } from '../models';
 import {  getCordovaCamera,
-          isImageType,
           getCordovaCapture,
           createBlob,
           getCordovaResolveLocalFileSystemURL,
@@ -36,6 +35,8 @@ export class InputProcessor {
       this.cordova.camera = getCordovaCamera();
       this.cordova.capture = getCordovaCapture();
       this.cordova.resolveLocalFileSystemURL = getCordovaResolveLocalFileSystemURL();
+
+      console.log(this.cordova);
     });
   }
 
@@ -116,7 +117,7 @@ export class InputProcessor {
 
     FileAPI.event.on(el.nativeElement, 'click', () => {
 
-      if (this.api === 'cordova' || !this.api) {
+      if (this.api!=='html5' && (this.capture==='camera' || this.capture==='library')) {
 
         if (hasCordovaCameraSupport()) {
           if (this.capture === 'library') {
@@ -130,10 +131,8 @@ export class InputProcessor {
 
         if (hasCordovaCaptureSupport()) {
 
-          if (this.capture !== null) {
-            if (this.isAcceptVideo()) {
-              return this.selectCordovaCaptureVideo();
-            }
+          if (this.isAcceptVideo()) {
+            return this.selectCordovaCaptureVideo();
           }
         }
       }
