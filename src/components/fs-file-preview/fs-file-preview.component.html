@@ -25,7 +25,7 @@
      Used label instead of button because FireFox doesn't work properly with click event on button.
      If we have action with <input type="file"> inside button
     -->
-    <label class="action mat-mini-fab mat-primary"
+    <div class="action mat-mini-fab mat-primary"
             *ngFor="let action of filteredActions"
             [ngClass]="getActionClasses(action)"
             [matTooltip]="action.tooltip"
@@ -33,6 +33,6 @@
       <span class="mat-button-wrapper">
         <ng-template [ngTemplateOutlet]="actionsTemplate[action.index]"></ng-template>
       </span>
-    </label>
+    </div>
   </div>
 </div>

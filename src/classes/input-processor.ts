@@ -1,13 +1,14 @@
 import { ElementRef, EventEmitter, NgZone } from '@angular/core';
 import * as FileAPI from 'fileapi';
 import { FsFile } from '../models';
-import {  getCordovaCamera,
-          getCordovaCapture,
-          createBlob,
-          getCordovaResolveLocalFileSystemURL,
-          hasCordovaCameraSupport,
-          hasCordovaCaptureSupport
-         } from '../helpers';
+import {
+  getCordovaCamera,
+  getCordovaCapture,
+  createBlob,
+  getCordovaResolveLocalFileSystemURL,
+  hasCordovaCameraSupport,
+  hasCordovaCaptureSupport,
+} from '../helpers';
 import { CordovaService } from '../services';
 
 
