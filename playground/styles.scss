@@ -1,1 +1,7 @@
 @import '../tools/assets/playground.scss';
+
+pre {
+  word-break: break-all;
+  white-space: pre-wrap;
+  font-size: 14px;
+}
