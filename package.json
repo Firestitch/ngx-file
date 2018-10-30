@@ -48,7 +48,6 @@
     "@firestitch/app": "^0.1.2",
     "@firestitch/common": "^0.1.26",
     "@firestitch/example": "^0.3.1",
-    "@firestitch/iframe": "^0.1.5",
     "@firestitch/message": "^0.1.19",
     "@types/bluebird": "^3.5.5",
     "@types/node": "^6.0.94",
