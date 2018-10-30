@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { FsFile } from '../../../../src';
+
+import { FsFile } from 'fs-file';
+
 
 @Component({
   selector: 'file-picker-existing-url',

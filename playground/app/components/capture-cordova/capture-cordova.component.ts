@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { hasCordovaCaptureSupport, hasCordovaCameraSupport } from '../../../../src/helpers';
-import { CordovaService } from '../../../../src/services';
-import { FileProcessor } from '../../../../src';
+
 import { FsApi } from '@firestitch/api';
 import { FsMessage } from '@firestitch/message';
+
+import { hasCordovaCaptureSupport, hasCordovaCameraSupport } from 'fs-file';
+import { CordovaService } from 'fs-file';
+import { FileProcessor } from 'fs-file';
 
 
 @Component({

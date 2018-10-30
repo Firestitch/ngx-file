@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { FileProcessor } from '../../../../src/classes';
+
+import { FileProcessor } from 'fs-file';
 
 
 @Component({
