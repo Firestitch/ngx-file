@@ -19,15 +19,11 @@
     <mat-spinner class="spinner" *ngIf="file.progress" [diameter]="previewWidth/2"></mat-spinner>
   </ng-template>
 
-  <!-- Actions -->
   <div class="actions">
-    <!--
-     Used label instead of button because FireFox doesn't work properly with click event on button.
-     If we have action with <input type="file"> inside button
-    -->
+
     <div class="action mat-mini-fab mat-primary"
             *ngFor="let action of filteredActions"
-            [ngClass]="getActionClasses(action)"
+            [ngClass]="action.placement"
             [matTooltip]="action.tooltip"
             (click)="callAction(action)">
       <span class="mat-button-wrapper">

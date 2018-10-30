@@ -16,7 +16,7 @@
   .file-ext {
     font-weight: bold;
     text-align: center;
-    text-transform: uppercase;    
+    text-transform: uppercase;
     font-size: 25px;
     position: absolute;
     width: 100%;
@@ -29,7 +29,7 @@
     width: 90px;
     height: 90px;
     color: #ccc;
-    
+
   }
 
   .file-name {
@@ -69,24 +69,28 @@
     position: absolute;
     cursor: pointer;
 
+    &.top-left, &.top-right, &.bottom-left, &.bottom-right {
+      transition: top .3s, bottom .3s, left .3s, right .3s;
+    }
+
     &.top-left {
-      top: 5%;
-      right: 5%;
+      top: -35px;
+      right: -35px;
     }
 
     &.top-right {
-      top: 5%;
-      right: 5%;
+      top: -35px;
+      right: -35px;
     }
 
     &.bottom-left {
-      bottom: 5%;
-      left: 5%;
+      bottom: -35px;
+      left: -35px;
     }
 
     &.bottom-right {
-      bottom: 5%;
-      right: 5%;
+      bottom: -35px;
+      right: -35px;
     }
 
     &.mat-mini-fab {
@@ -113,6 +117,7 @@
   border: 1px #DDD solid;
   vertical-align: top;
   border-radius: 3px;
+  overflow: hidden;
 
   &:hover .file-name {
     overflow: visible;
@@ -124,6 +129,29 @@
   &:focus .has-actions {
     .actions {
       display: block;
+
+      .action {
+
+        &.top-left {
+          top: 5%;
+          right: 5%;
+        }
+
+        &.top-right {
+          top: 5%;
+          right: 5%;
+        }
+
+        &.bottom-left {
+          bottom: 5%;
+          left: 5%;
+        }
+
+        &.bottom-right {
+          bottom: 5%;
+          right: 5%;
+        }
+      }
     }
   }
 

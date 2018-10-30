@@ -49,14 +49,6 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
     this.cleanActions();
   }
 
-  public getActionClasses(action) {
-    if (action.placement) {
-      return [action.placement];
-    } else {
-      return [];
-    }
-  }
-
   public callAction(action) {
 
     if (action.click) {

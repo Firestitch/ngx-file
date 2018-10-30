@@ -1,9 +1,9 @@
 {
   "name": "@firestitch/file",
-  "version": "0.3.35",
+  "version": "0.3.37",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Firestitch/fs-file"
+    "url": "https://github.com/Firestitch/ngx-file"
   },
   "author": {
     "name": "Firestitch",
@@ -14,7 +14,7 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Firestitch/fs-file/issues"
+    "url": "https://github.com/Firestitch/ngx-file/issues"
   },
   "main": "package/index.js",
   "typings": "package/index.d.ts",
