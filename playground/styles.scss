@@ -1,7 +1,9 @@
 @import '../tools/assets/playground.scss';
+@import '~@firestitch/core/styles.scss';
 
 pre {
   word-break: break-all;
   white-space: pre-wrap;
   font-size: 14px;
 }
+

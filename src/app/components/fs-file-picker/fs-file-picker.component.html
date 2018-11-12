@@ -1,5 +1,6 @@
-<div class="mat-form-field-label fs-form-field-label">
-  <ng-content select="[fs-file-label]"></ng-content>
+<div class="mat-form-field-label fs-label">
+  <!-- Support Legacy format -->
+  <ng-content select="[fsFileLabel]"></ng-content>
 </div>
 <fs-file-preview class="preview"
                  *ngIf="_file; else preview"

@@ -74,3 +74,14 @@
     right: 5%;
   }
 }
+
+@mixin fs-label {
+  display: block !important;
+  top: auto !important;
+  position: relative !important;
+  -webkit-transform: scale(0.75) !important;
+  transform: scale(0.75) !important;
+  -webkit-transform-origin: 0 0 !important;
+  transform-origin: 0 0 !important;
+  white-space: normal !important;
+}
