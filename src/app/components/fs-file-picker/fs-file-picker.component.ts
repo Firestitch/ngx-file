@@ -30,11 +30,14 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
   public instruction = 'Drag & Drop your file or use the button below';
   public _file: FsFile;
 
-
   @Input() public imageWidth;
   @Input() public imageHeight;
   @Input() public imageQuality;
   @Input() public showFilename = true;
+
+  @Input('url') set url(url) {
+    this._file = new FsFile(url);
+  }
 
   @Input('file') set file(file) {
     this._file = file;

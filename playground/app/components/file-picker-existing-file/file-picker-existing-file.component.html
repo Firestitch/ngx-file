@@ -11,6 +11,12 @@
                   [showFilename]="false">
       <div fsFileLabel>File Picker with hidden filename</div>
   </fs-file-picker>
+
+  <fs-file-picker (select)="select($event)"
+                  (remove)="remove()"
+                  [url]="url">
+      <div fsFileLabel>File Picker From URL</div>
+  </fs-file-picker>
 </div>
 
 <fieldset *ngIf="file">
