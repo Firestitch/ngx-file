@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-
 import { FsFile } from 'fs-file';
+import { FsMessage } from '@firestitch/message';
 
 
 @Component({
@@ -12,11 +12,13 @@ export class FilePickerExistingFileComponent {
   public url = 'https://cdn.hipwallpaper.com/i/30/77/AKPMDF.jpg';
   public file = new FsFile('http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf', 'Document.pdf');
 
+  public constructor(private fsMessage: FsMessage) {}
+
   public select(file) {
     this.file = file;
   }
 
   public remove() {
-    alert('File was removed');
+    this.fsMessage.success('File was removed');
   }
 }

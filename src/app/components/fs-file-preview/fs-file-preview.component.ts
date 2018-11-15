@@ -15,8 +15,7 @@ import { ScaleExifImage } from '../../helpers';
 
 @Component({
   selector: 'fs-file-preview',
-  templateUrl: 'fs-file-preview.component.html',
-  styleUrls: [ 'fs-file-preview.component.scss' ]
+  templateUrl: 'fs-file-preview.component.html'
 })
 export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implements AfterViewInit {
 
@@ -50,14 +49,14 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
     this.cleanActions();
   }
 
-  public callAction(action) {
+  public callAction($event: Event, action) {
 
     if (action.click) {
-      action.click.emit(this.file);
+      action.click.emit({ event: $event, file: this.file });
     }
 
     if (action.action == 'remove') {
-      this.remove.emit(this.file);
+      this.remove.emit({ event: $event, file: this.file });
     }
   }
 

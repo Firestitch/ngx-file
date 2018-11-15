@@ -2,11 +2,13 @@
   <button mat-raised-button color="primary">Select File</button>
 </fs-file>
 
-<fs-file-previews [files]="files">
-  <ng-template fs-file-preview-action placement="top-right" action="remove" tooltip="Remove" (click)="removed($event)">
-    <mat-icon>close</mat-icon>
-  </ng-template>
-</fs-file-previews>
+<p>
+  <fs-file-previews [files]="files">
+    <ng-template fs-file-preview-action placement="top-right" action="remove" tooltip="Remove" (click)="removed($event)">
+      <mat-icon>close</mat-icon>
+    </ng-template>
+  </fs-file-previews>
+</p>
 
 <fieldset *ngIf="filesJsonInfo.length > 0">
   <legend>Files</legend>

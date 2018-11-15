@@ -1,41 +1,63 @@
-import {Component, ElementRef, HostBinding, HostListener} from '@angular/core';
+import {Component, HostBinding, HostListener, OnDestroy} from '@angular/core';
 
 @Component({
   selector: 'fs-file-drag-base',
   template: ''
 })
-export class FsFileDragBaseComponent {
-
-  constructor(public el: ElementRef) {
-  }
+export class FsFileDragBaseComponent implements OnDestroy {
+  private dragging = 0;
+  private dragover = null;
+  private drop = null;
 
   @HostBinding('class.dragover') public fileOverTarget = false;
 
   @HostListener('dragenter', ['$event'])
   public onDragOverElement(event) {
-    if (this.el.nativeElement.contains(event.target)) {
-      this.fileOverTarget = true;
+
+    if (!this.dragover && !this.drop) {
+      this.dragover = this.onWindowDragOver.bind(this);
+      this.drop = this.onWindowDrop.bind(this);
+      window.addEventListener('dragover',this.dragover);
+      window.addEventListener('drop',this.drop);
     }
+
+    this.dragging++;
+    this.fileOverTarget = true;
   }
 
-  @HostListener('window:drop', ['$event'])
-  public onDrop(event) {
-    if (this.fileOverTarget) {
-      event.preventDefault();
-      event.stopPropagation();
+  @HostListener('dragleave', ['$event'])
+  public onDragLeaveElement(event) {
+    this.dragging--;
+    if (this.dragging===0) {
       this.fileOverTarget = false;
     }
   }
 
-  @HostListener('window:dragover', ['$event'])
-  public onDragOver(event) {
-    if (this.fileOverTarget) {
-      event.preventDefault();
-      event.stopPropagation();
+  @HostListener('drop', ['$event'])
+  public onDropElement(event: Event) {
+    this.fileOverTarget = false;
+  }
 
-      if (!this.el.nativeElement.contains(event.target)) {
-        this.fileOverTarget = false;
-      }
-    }
+  // // Disable dropping files into th browser window ie file://...
+  public onWindowDrop(event: Event) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.ngOnDestroy();
+    this.dragging = 0;
+    return false;
+  }
+
+  // // Disable dropping files into th browser window ie file://...
+  public onWindowDragOver(event: Event) {
+    event.stopPropagation();
+    event.preventDefault();
+    return false;
+  }
+
+  public ngOnDestroy() {
+    window.removeEventListener('dragover',this.dragover);
+    window.removeEventListener('drop',this.drop);
+    this.drop = null;
+    this.dragover = null;
   }
 }

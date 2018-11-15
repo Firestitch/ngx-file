@@ -1,42 +1,36 @@
 <div class="mat-form-field-label fs-label">
-  <!-- Support Legacy format -->
   <ng-content select="[fsFileLabel]"></ng-content>
 </div>
-<fs-file-preview class="preview"
-                 *ngIf="_file; else preview"
-                 (remove)="removeFile($event)"
-                 [file]="_file"
-                 [showFilename]="showFilename"
-                 [previewWidth]="previewWidth"
-                 [previewHeight]="previewHeight">
-  <ng-template fs-file-preview-action placement="top-right" action="remove" tooltip="Remove" *ngIf="allowRemove">
-    <mat-icon>close</mat-icon>
-  </ng-template>
-  <ng-template fs-file-preview-action placement="bottom-right" tooltip="Reupload" *ngIf="allowReupload">
-      <fs-file  [accept]="accept"
-                (select)="selectFile($event)"
-                [imageWidth]="imageWidth"
-                [imageHeight]="imageHeight"
-                [imageQuality]="imageQuality">
+<fs-file  [accept]="accept"
+          (select)="selectFile($event)"
+          [imageWidth]="imageWidth"
+          [imageHeight]="imageHeight"
+          [imageQuality]="imageQuality">
+  <div class="wrap">
+    <fs-file-preview class="preview"
+                    *ngIf="_file; else preview"
+                    (remove)="removeFile()"
+                    [file]="_file"
+                    [showFilename]="showFilename"
+                    [previewWidth]="previewWidth"
+                    [previewHeight]="previewHeight">
+      <ng-template fs-file-preview-action placement="top-right" action="remove" tooltip="Remove" *ngIf="allowRemove" (click)="actionClick($event)">
+        <mat-icon>close</mat-icon>
+      </ng-template>
+      <ng-template fs-file-preview-action placement="bottom-right" tooltip="Reupload" *ngIf="allowReupload">
+          <mat-icon>cloud_upload</mat-icon>
+      </ng-template>
+      <ng-template fs-file-preview-action placement="bottom-left" action="download" tooltip="Download" [hide]="!(allowDownload && _file.url)" (click)="actionClick($event)">
+        <a [href]="_file.url" target="_blank" class="download"><mat-icon>cloud_download</mat-icon></a>
+        </ng-template>
+    </fs-file-preview>
+
+    <ng-template #preview>
+      <div class="select">
         <mat-icon>cloud_upload</mat-icon>
-      </fs-file>
-  </ng-template>
-  <ng-template fs-file-preview-action placement="bottom-left" action="download" tooltip="Download" *ngIf="allowDownload && _file.url">
-      <a [href]="_file.url" target="_blank" class="download"><mat-icon>cloud_download</mat-icon></a>
+        <div class="instruction">{{instruction}}</div>
+        <div class="mat-raised-button mat-primary">Upload</div>
+      </div>
     </ng-template>
-</fs-file-preview>
-
-<ng-template #preview>
-  <fs-file  (select)="selectFile($event)"
-              [accept]="accept"
-              [imageWidth]="imageWidth"
-              [imageHeight]="imageHeight"
-              [imageQuality]="imageQuality">
-    <div class="select">
-      <mat-icon>cloud_upload</mat-icon>
-      <div class="instruction">{{instruction}}</div>
-      <div class="mat-raised-button mat-primary">Upload</div>
-    </div>
-  </fs-file>
-</ng-template>
-
+  </div>
+</fs-file>

@@ -1,22 +1,24 @@
 import { FsApiResponseHandler } from '@firestitch/api';
+import { FsMessage } from '@firestitch/message';
+
 
 export class ResponseHandler extends FsApiResponseHandler {
-  constructor() {
+  public constructor(private fsMessage: FsMessage) {
     super();
   }
 
   public success(event, config) {
     super.success(event, config);
 
-    console.log('Success', event);
+    this.fsMessage.success('Success', event);
   }
 
   public error(err, config) {
-    alert(err.statusText);
+    this.fsMessage.error(err.statusText);
     console.log('Error', event);
   }
 
   public complete(config) {
-    console.log('Complete');
+    this.fsMessage.info('Complete');
   }
 }

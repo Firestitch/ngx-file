@@ -11,8 +11,9 @@ export class FsFile {
   public exifInfo: any = {};
   public extension: string;
   public type: string;
-  public url: string;
+  public url: string = '';
   public size: number;
+  public typeImage: boolean;
   private _file: any;
   private _name: string;
   private _fileOptions: FsFileConfig;
@@ -22,7 +23,7 @@ export class FsFile {
       this.file = obj;
 
     } else {
-      
+
       const name = filename || obj;
       let type = '';
 
@@ -33,7 +34,7 @@ export class FsFile {
         const mime = this.extension.match(/(jpe?g|png|gif|tiff?|bmp)/) ? 'image' : 'application';
         type = mime + '/' + this.extension;
       }
-      
+
       const file = createBlob([''], filename, type);
       this.url = obj;
       this.file = file;
@@ -61,10 +62,7 @@ export class FsFile {
     this.size = value.size;
     this.name = value.name;
     this.type = value.type;
-  }
-
-  get typeImage(): any {
-    return isImageType(this.type);
+    this.typeImage = isImageType(this.type);
   }
 
   set name(name) {

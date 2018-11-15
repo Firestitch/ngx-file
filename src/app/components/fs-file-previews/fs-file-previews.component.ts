@@ -2,8 +2,7 @@ import {
   Component,
   HostBinding,
   Input,
-  OnInit,
-  ViewEncapsulation,
+  OnInit
 } from '@angular/core';
 
 import { FsFilePreviewsBaseComponent } from '../fs-file-preview-base/fs-file-preview-base';
@@ -11,11 +10,9 @@ import { FsFilePreviewsBaseComponent } from '../fs-file-preview-base/fs-file-pre
 
 @Component({
   selector: 'fs-file-previews',
-  templateUrl: 'fs-file-previews.component.html',
-  styleUrls: [ 'fs-file-previews.component.scss' ],
-  encapsulation: ViewEncapsulation.None
+  templateUrl: 'fs-file-previews.component.html'
 })
-export class FsFilePreviewsComponent extends FsFilePreviewsBaseComponent implements OnInit {
+export class FsFilePreviewsComponent extends FsFilePreviewsBaseComponent {
 
   @Input() public files;
   @Input() public previewWidth = 150;
@@ -23,15 +20,8 @@ export class FsFilePreviewsComponent extends FsFilePreviewsBaseComponent impleme
 
   @HostBinding('class.queue') queue = true;
 
-  constructor() {
-    super();
-  }
-
-  public ngOnInit() {
-  }
-
-  public removeFile(file) {
-    const index = this.files.indexOf(file);
+  public removeFile(data) {
+    const index = this.files.indexOf(data.file);
     if (index > -1) {
       this.files.splice(index, 1);
     }

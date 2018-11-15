@@ -23,6 +23,8 @@ export class InputProcessor {
   public api: 'html5' | 'any' | 'cordova' = null;
   public capture: string = null;
   public disabled;
+  public allowClick = true;
+  public allowDrop = true;
 
   public select = new EventEmitter();
 
@@ -56,6 +58,7 @@ export class InputProcessor {
    * @param el
    */
   public registerInput(el: ElementRef) {
+
     if (!el) {
       return
     }
@@ -63,6 +66,11 @@ export class InputProcessor {
     this.inputEl = el.nativeElement;
 
     FileAPI.event.on(this.inputEl, 'change', (event) => {
+
+      if (!this.allowClick) {
+        return;
+      }
+
       const files = FileAPI.getFiles(event)
         .filter(file => {
           const nameParts = file.name.split('.');
@@ -85,12 +93,18 @@ export class InputProcessor {
   }
 
   public registerDrop(el: ElementRef) {
+
     if (!el) {
       return
     }
 
     this.containerEl = el.nativeElement;
     FileAPI.event.on(this.containerEl, 'drop', (event) => {
+
+      if (!this.allowDrop) {
+        return;
+      }
+
       const files = FileAPI.getFiles(event)
         .filter(file => {
           const nameParts = file.name.split('.');
@@ -116,7 +130,11 @@ export class InputProcessor {
       return
     }
 
-    FileAPI.event.on(el.nativeElement, 'click', () => {
+    FileAPI.event.on(el.nativeElement, 'click', (el) => {
+
+      if (!this.allowClick) {
+        return;
+      }
 
       if (this.api!=='html5' && (this.capture==='camera' || this.capture==='library')) {
 

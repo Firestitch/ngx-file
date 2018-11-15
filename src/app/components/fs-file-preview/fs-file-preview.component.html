@@ -1,4 +1,4 @@
-<div [style.width.px]="previewWidth" [style.height.px]="previewHeight" class="preview-container" [ngClass]="{ 'has-actions': !!actions.length }">
+<div [style.width.px]="previewWidth" [style.height.px]="previewHeight" class="preview-container" [ngClass]="{ 'has-actions': !!actions.length, 'type-image': file.typeImage }">
 
   <!-- Image container -->
   <ng-container *ngIf="file.typeImage; else nonImage">
@@ -9,7 +9,6 @@
   <!-- Non image container -->
   <ng-template #nonImage>
     <div class="file-details">
-
       <div class="file-icon">
         <div class="file-ext">{{file.extension}}</div>
         <mat-icon>insert_drive_file</mat-icon>
@@ -20,12 +19,12 @@
   </ng-template>
 
   <div class="actions">
-
     <div class="action mat-mini-fab mat-primary"
             *ngFor="let action of filteredActions"
-            [ngClass]="action.placement"
+            [ngClass]="{ hide: action.hide }"
+            [class]="action.placement"
             [matTooltip]="action.tooltip"
-            (click)="callAction(action)">
+            (click)="callAction($event,action)">
       <span class="mat-button-wrapper">
         <ng-template [ngTemplateOutlet]="actionsTemplate[action.index]"></ng-template>
       </span>

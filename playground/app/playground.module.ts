@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { FsExampleModule } from '@firestitch/example';
-import { FsMessageModule } from '@firestitch/message';
+import { FsMessageModule, FsMessage } from '@firestitch/message';
 import { FsApiModule, FS_API_RESPONSE_HANDLER } from '@firestitch/api';
 
 import { ToastrModule } from 'ngx-toastr'
@@ -60,7 +60,7 @@ import {
     CaptureCordovaComponent
   ],
   providers: [
-    { provide: FS_API_RESPONSE_HANDLER, useClass: ResponseHandler },
+    { provide: FS_API_RESPONSE_HANDLER, useClass: ResponseHandler, deps: [FsMessage] },
   ],
 })
 export class PlaygroundModule {

@@ -18,7 +18,7 @@ export class FsFilePreviewsBaseComponent {
   @ContentChildren(FsFilePreviewActionDirective)
   private set actionsParams(val: QueryList<FsFilePreviewActionDirective>) {
     const actions = val.toArray().map((action, index) => {
-      const newAction = Object.assign({}, action);
+      const newAction = action;
       newAction.index = index;
       if (newAction.forTypes && !Array.isArray(newAction.forTypes)) {
         newAction.forTypes = newAction.forTypes.split(',').map((type) => type.trim());

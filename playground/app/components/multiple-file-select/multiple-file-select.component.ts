@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FsMessage } from '@firestitch/message';
 
 
 @Component({
@@ -10,12 +11,13 @@ export class MultipleFileSelectComponent {
   public files = [];
   public filesJsonInfo = [];
 
+  public constructor(private fsMessage: FsMessage) {}
+
   public select(files) {
-    console.log(files);
     this.files.push(...files);
   }
 
-  public removed(fsFile) {
-    console.log('Removed', fsFile);
+  public removed() {
+    this.fsMessage.success('Removed');
   }
 }

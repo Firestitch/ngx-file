@@ -1,9 +1,15 @@
 @import '../tools/assets/playground.scss';
 @import '~@firestitch/core/styles.scss';
+@import '~@firestitch/message/styles.css';
+@import '../src/app/styles.scss';
+@import '~@angular/material/theming';
+
+@include fs-file($mat-blue);
 
 pre {
   word-break: break-all;
   white-space: pre-wrap;
   font-size: 14px;
+  margin: 0;
 }
 

@@ -59,6 +59,16 @@ export class FsFileComponent extends FsFileDragBaseComponent implements AfterVie
     this.inputProcessor.capture = value;
   }
 
+  @Input()
+  set allowClick(value) {
+    this.inputProcessor.allowClick = value;
+  }
+
+  @Input()
+  set allowDrop(value) {
+    this.inputProcessor.allowDrop = value;
+  }
+
   get capture() {
     return this.inputProcessor.capture;
   }
@@ -112,7 +122,7 @@ export class FsFileComponent extends FsFileDragBaseComponent implements AfterVie
   @ViewChild('fileLabel') public fileLabel: any;
 
   constructor(cordovaService: CordovaService, public el: ElementRef, ngZone: NgZone) {
-    super(el);
+    super();
     this.inputProcessor = new InputProcessor(cordovaService, ngZone);
 
     const fileProcessor = new FileProcessor();

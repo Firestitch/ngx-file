@@ -1,5 +1,4 @@
 import {
-  ElementRef,
   EventEmitter,
   Component,
   Input,
@@ -20,8 +19,7 @@ import { FS_FILE_MODULE_CONFIG } from '../../fs-file.providers';
 
 @Component({
   selector: 'fs-file-picker',
-  templateUrl: 'fs-file-picker.component.html',
-  styleUrls: [ 'fs-file-picker.component.scss' ],
+  templateUrl: 'fs-file-picker.component.html'
 })
 export class FsFilePickerComponent extends FsFileDragBaseComponent implements OnInit {
 
@@ -73,11 +71,10 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
   @ViewChild('fileInput') public fileInput: any;
 
 
-  constructor(public el: ElementRef,
-              @Optional() @Inject(FS_FILE_MODULE_CONFIG) public moduleConfig,
+  constructor(@Optional() @Inject(FS_FILE_MODULE_CONFIG) public moduleConfig,
               cordovaService: CordovaService,
               ngZone: NgZone) {
-    super(el);
+    super();
     this.inputProcessor = new InputProcessor(cordovaService, ngZone);
   }
 
@@ -99,8 +96,12 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
     this.select.emit(file);
   }
 
-  public removeFile(file) {
+  public removeFile() {
     this._file = void 0;
     this.remove.emit(this._file);
+  }
+
+  public actionClick(data) {
+    data.event.stopPropagation();
   }
 }
