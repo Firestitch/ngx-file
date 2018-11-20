@@ -17,7 +17,7 @@ export class MultipleFileSelectComponent {
     this.files.push(...files);
   }
 
-  public removed() {
+  public removed(event: MouseEvent) {
     this.fsMessage.success('Removed');
   }
 }
