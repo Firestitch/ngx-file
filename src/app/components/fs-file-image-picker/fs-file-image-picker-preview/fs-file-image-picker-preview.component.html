@@ -17,6 +17,6 @@
            [imageQuality]="imageQuality"
            accept="image/*"
            multiple="false">
-    <div class="update-action"> Update </div>
+    <div class="update-action"> {{file ? 'Update' : 'Upload '}} </div>
   </fs-file>
 </div>

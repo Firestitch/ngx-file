@@ -31,12 +31,15 @@ export class FsFileImagePickerPreviewComponent {
     this.generateFilePreview(file);
   }
 
+  @Output() public select = new EventEmitter<any>();
+
   constructor() {
 
   }
 
   public selectFile(file) {
     this._file = file;
+    this.select.emit(file);
   }
 
   /**
