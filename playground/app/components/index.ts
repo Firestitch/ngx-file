@@ -7,3 +7,4 @@ export * from './file-picker-existing-url';
 export * from './capture-single';
 export * from './capture-multiple';
 export * from './capture-cordova';
+export * from './file-image-picker';

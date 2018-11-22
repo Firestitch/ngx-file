@@ -13,6 +13,8 @@ import { FsFilePreviewComponent, } from './components/fs-file-preview/fs-file-pr
 import { FsFilePickerComponent, } from './components/fs-file-picker/fs-file-picker.component';
 import { FsFilePreviewsBaseComponent, } from './components/fs-file-preview-base/fs-file-preview-base';
 import { FsFileDragBaseComponent, } from './components/fs-file-drag-base/fs-file-drag-base';
+import { FsFileImagePickerComponent } from './components/fs-file-image-picker/fs-file-image-picker.component';
+import { FsFileImagePickerPreviewComponent } from './components/fs-file-image-picker/fs-file-image-picker-preview/fs-file-image-picker-preview.component';
 
 import { FsFilePreviewActionDirective } from './directives/fs-file-preview-action.directive';
 
@@ -34,7 +36,9 @@ import { FsFileModuleConfig } from './interfaces/module-config.interface';
     FsFilePreviewsComponent,
     FsFilePreviewComponent,
     FsFilePreviewActionDirective,
-    FsFilePickerComponent
+    FsFilePickerComponent,
+    FsFileImagePickerComponent,
+    FsFileImagePickerPreviewComponent
   ],
   entryComponents: [
   ],
@@ -45,7 +49,9 @@ import { FsFileModuleConfig } from './interfaces/module-config.interface';
     FsFilePreviewActionDirective,
     FsFileDragBaseComponent,
     FsFilePreviewsBaseComponent,
-    FsFilePickerComponent
+    FsFilePickerComponent,
+    FsFileImagePickerComponent,
+    FsFileImagePickerPreviewComponent
   ],
   providers: [
     CordovaService

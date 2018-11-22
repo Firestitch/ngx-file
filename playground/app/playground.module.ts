@@ -24,7 +24,8 @@ import {
   FilePickerExistingUrlComponent,
   CaptureSingleComponent,
   CaptureMultipleComponent,
-  CaptureCordovaComponent
+  CaptureCordovaComponent,
+  FileImagePickerComponent,
 } from './components';
 
 
@@ -57,7 +58,8 @@ import {
     FilePickerExistingUrlComponent,
     CaptureSingleComponent,
     CaptureMultipleComponent,
-    CaptureCordovaComponent
+    CaptureCordovaComponent,
+    FileImagePickerComponent,
   ],
   providers: [
     { provide: FS_API_RESPONSE_HANDLER, useClass: ResponseHandler, deps: [FsMessage] },
