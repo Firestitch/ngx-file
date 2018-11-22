@@ -3,6 +3,7 @@ import {
   Component,
   Input,
   Output,
+  OnInit,
 } from '@angular/core';
 
 import * as FileAPI from 'fileapi';
@@ -16,10 +17,11 @@ import { ScaleExifImage } from '../../../helpers';
   templateUrl: 'fs-file-image-picker-preview.component.html',
   styleUrls: ['./fs-file-image-picker-preview.component.scss']
 })
-export class FsFileImagePickerPreviewComponent {
+export class FsFileImagePickerPreviewComponent implements OnInit {
 
   public file: FsFile;
   public preview: string;
+  public updateStyle;
 
   @Input() public imageWidth = 500;
   @Input() public imageHeight = 500;
@@ -33,13 +35,26 @@ export class FsFileImagePickerPreviewComponent {
 
   @Output() public select = new EventEmitter<any>();
 
-  constructor() {
-
-  }
+  constructor() {}
 
   public selectFile(file) {
     this._file = file;
     this.select.emit(file);
+  }
+
+  public ngOnInit() {
+
+    let fontSize = this.previewDiameter/100;
+
+    if (fontSize<.5) {
+      fontSize = .5;
+    }
+
+    if (fontSize>1.5) {
+      fontSize = 1;
+    }
+
+    this.updateStyle = { fontSize: (fontSize * 12) + 'px' };
   }
 
   /**
@@ -76,7 +91,6 @@ export class FsFileImagePickerPreviewComponent {
 
         file.progress = false;
       } else {
-        console.log(`FsFilePreview: Image preview error for file ${file.name}`);
         file.progress = false;
       }
     });

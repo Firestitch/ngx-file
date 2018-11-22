@@ -4,9 +4,19 @@
   imageQuality=".8"
   imageWidth="500"
   imageHeight="500"
-  previewDiameter="50">
-  <div fsFileLabel>File Image Picker Label</div>
+  previewDiameter="75">
 </fs-file-image-picker>
+
+
+<fs-file-image-picker
+  (select)="select($event)"
+  [url]="url"
+  imageQuality=".8"
+  imageWidth="500"
+  imageHeight="500"
+  previewDiameter="120">
+</fs-file-image-picker>
+
 
 <fieldset *ngIf="file">
   <legend>File</legend>
