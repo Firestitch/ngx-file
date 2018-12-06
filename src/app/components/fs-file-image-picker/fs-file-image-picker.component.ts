@@ -6,6 +6,7 @@ import { CordovaService } from '../../services/cordova.service';
 @Component({
   selector: 'fs-file-image-picker',
   templateUrl: './fs-file-image-picker.component.html',
+  styleUrls: ['./fs-file-image-picker.component.scss']
 })
 export class FsFileImagePickerComponent {
   @Input() public imageQuality: number;
