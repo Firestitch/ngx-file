@@ -16,6 +16,7 @@ export class FsFileImagePickerComponent {
 
   @Input('url') set url(url) {
     this._file = new FsFile(url);
+    this._previousFile = new FsFile(url);
   }
 
   @Output() public select = new EventEmitter<any>();
@@ -23,6 +24,8 @@ export class FsFileImagePickerComponent {
   public inputProcessor = null;
   public _file: FsFile;
   public preview: string;
+
+  private _previousFile: FsFile;
 
   constructor(private _cordovaService: CordovaService,
               private _ngZone: NgZone) {
@@ -32,6 +35,10 @@ export class FsFileImagePickerComponent {
   public selectFile(file) {
     this._file = file;
     this.select.emit(file);
+  }
+
+  public cancel() {
+    this._file = this._previousFile;
   }
 
 }

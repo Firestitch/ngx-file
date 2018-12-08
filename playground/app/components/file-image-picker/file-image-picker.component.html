@@ -9,6 +9,7 @@
 
 
 <fs-file-image-picker
+  #imagePicker
   (select)="select($event)"
   [url]="url"
   imageQuality=".8"
@@ -17,6 +18,7 @@
   previewDiameter="120">
 </fs-file-image-picker>
 
+<button mat-button (click)="cancel()">Cancel changing</button>
 
 <fieldset *ngIf="file">
   <legend>File</legend>

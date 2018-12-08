@@ -6,7 +6,10 @@
 
   <!-- Non image container -->
   <ng-template #noImage>
-    <div class="image-preview" [style.background]="'#f2f2f2'" [style.width.px]="previewDiameter" [style.height.px]="previewDiameter"></div>
+    <div class="image-preview"
+         [style.background]="'#f2f2f2'"
+         [style.width.px]="previewDiameter"
+         [style.height.px]="previewDiameter"></div>
     <mat-spinner class="spinner" *ngIf="file.progress" [diameter]="previewDiameter/2"></mat-spinner>
   </ng-template>
 
