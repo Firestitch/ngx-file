@@ -21,8 +21,8 @@
           <mat-icon>cloud_upload</mat-icon>
       </ng-template>
       <ng-template fs-file-preview-action placement="bottom-left" action="download" tooltip="Download" [hide]="!(allowDownload && _file.url)" (click)="actionClick($event)">
-        <a [href]="_file.url" target="_blank" class="download"><mat-icon>cloud_download</mat-icon></a>
-        </ng-template>
+        <a [href]="_file.url" target="_blank" tabindex="-1" class="download"><mat-icon>cloud_download</mat-icon></a>
+      </ng-template>
     </fs-file-preview>
 
     <ng-template #preview>
