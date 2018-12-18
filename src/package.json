@@ -1,6 +1,6 @@
 {
   "name": "@firestitch/file",
-  "version": "0.4.15",
+  "version": "0.5.0",
   "peerDependencies": {
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
@@ -8,6 +8,7 @@
     "@angular/cdk": "^6.0.0",
     "rxjs": ">=5.1.0",
     "fileapi": ">=2.0.25",
-    "lodash": ">=4.0.0"
+    "lodash": ">=4.0.0",
+    "@firestitch/label": ">=0.1.3"
   }
 }

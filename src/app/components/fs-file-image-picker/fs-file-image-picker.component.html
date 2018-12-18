@@ -1,13 +1,12 @@
-<div class="mat-form-field-label fs-label fs-image-label">
-  <ng-content select="[fsFileLabel]"></ng-content>
-</div>
+<fs-label-field class="fs-image-label">
+  <fs-label><ng-content select="[fsFileLabel]"></ng-content></fs-label>
+  <fs-file-image-picker-preview
+    [file]="_file"
+    [imageWidth]="imageWidth"
+    [imageHeight]="imageHeight"
+    [previewDiameter]="previewDiameter"
+    [imageQuality]="imageQuality"
+    (select)="selectFile($event)">
+  </fs-file-image-picker-preview>
+</fs-label-field>
 
-<fs-file-image-picker-preview
-  [file]="_file"
-  [imageWidth]="imageWidth"
-  [imageHeight]="imageHeight"
-  [previewDiameter]="previewDiameter"
-  [imageQuality]="imageQuality"
-  (select)="selectFile($event)">
-
-</fs-file-image-picker-preview>

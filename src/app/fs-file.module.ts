@@ -22,6 +22,8 @@ import { CordovaService } from './services/cordova.service';
 import { FS_FILE_MODULE_CONFIG } from './fs-file.providers';
 import { FsFileModuleConfig } from './interfaces/module-config.interface';
 
+import { FsLabelModule } from '@firestitch/label';
+
 
 @NgModule({
   imports: [
@@ -30,6 +32,7 @@ import { FsFileModuleConfig } from './interfaces/module-config.interface';
     MatTooltipModule,
     MatProgressSpinnerModule,
     MatButtonModule,
+    FsLabelModule
   ],
   exports: [
     FsFileComponent,
