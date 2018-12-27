@@ -36,7 +36,7 @@ export class CaptureCordovaComponent {
       width: 2048,
       height: 2048
     }).subscribe(fsFiles => {
-       this.fsApi.post('https://ngxboilerplate.firestitch.com/api/dummy/upload', { file: fsFiles[0].file })
+       this.fsApi.post('https://boilerplate.firestitch.com/api/dummy/upload', { file: fsFiles[0].file })
       .subscribe(event => {
         this.fsMessage.success('Successfully uploaded the file');
       });

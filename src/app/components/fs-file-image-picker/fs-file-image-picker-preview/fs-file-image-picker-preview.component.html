@@ -1,25 +1,26 @@
 <div class="wrap" [style.width.px]="previewDiameter" [style.height.px]="previewDiameter">
-  <ng-container *ngIf="file.typeImage; else noImage">
-    <img class="image-preview" [src]="preview">
-    <mat-spinner class="spinner" *ngIf="file.progress" [diameter]="previewDiameter/2"></mat-spinner>
-  </ng-container>
-
-  <!-- Non image container -->
-  <ng-template #noImage>
-    <div class="image-preview"
-         [style.background]="'#f2f2f2'"
-         [style.width.px]="previewDiameter"
-         [style.height.px]="previewDiameter"></div>
-    <mat-spinner class="spinner" *ngIf="file.progress" [diameter]="previewDiameter/2"></mat-spinner>
-  </ng-template>
-
 
   <fs-file (select)="selectFile($event)"
-           [imageWidth]="imageWidth"
-           [imageHeight]="imageHeight"
-           [imageQuality]="imageQuality"
-           accept="image/*"
-           multiple="false">
+            [imageWidth]="imageWidth"
+            [imageHeight]="imageHeight"
+            [imageQuality]="imageQuality"
+            accept="image/*"
+            multiple="false">
+
+    <ng-container *ngIf="file.typeImage; else noImage">
+      <img class="image-preview" [src]="preview">
+      <mat-spinner class="spinner" *ngIf="file.progress" [diameter]="previewDiameter/2"></mat-spinner>
+    </ng-container>
+
+    <!-- Non image container -->
+    <ng-template #noImage>
+      <div class="image-preview"
+          [style.background]="'#f2f2f2'"
+          [style.width.px]="previewDiameter"
+          [style.height.px]="previewDiameter"></div>
+      <mat-spinner class="spinner" *ngIf="file.progress" [diameter]="previewDiameter/2"></mat-spinner>
+    </ng-template>
+
     <div class="update-action" [ngStyle]="updateStyle"> {{file ? 'Update' : 'Upload '}} </div>
   </fs-file>
 </div>
