@@ -1,0 +1,15 @@
+:host {
+  .dragover-message {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    flex-direction: column;
+    align-items: center;
+    .content {
+      color: #fff;
+      padding: 16px 20px;
+      border-radius: 2px;
+    }
+  }
+}

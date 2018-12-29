@@ -35,7 +35,8 @@ import {
     BrowserModule,
     FsFileModule.forRoot({
       allowDownload: true,
-      allowRemove: true
+      allowRemove: true,
+      dragoverMessage: true
     }),
     FsApiModule,
     BrowserAnimationsModule,

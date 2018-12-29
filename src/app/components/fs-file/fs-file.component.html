@@ -8,3 +8,5 @@
         [attr.accept]="inputProcessor.accept"
         [attr.capture]="inputProcessor.capture"
         #fileInput>
+
+<fs-file-dragover-message *ngIf="moduleConfig.dragoverMessage"></fs-file-dragover-message>

@@ -3,8 +3,10 @@ import {
   ElementRef,
   EventEmitter,
   Input,
+  Inject,
   AfterViewInit,
   Output,
+  Optional,
   ViewChild,
   NgZone
 } from '@angular/core';
@@ -16,6 +18,7 @@ import { isArray } from 'lodash';
 import { FsFileDragBaseComponent } from '../fs-file-drag-base/fs-file-drag-base';
 import { CordovaService } from '../../services/cordova.service';
 import { FileProcessor, InputProcessor } from '../../classes';
+import { FS_FILE_MODULE_CONFIG } from '../../fs-file.providers';
 
 
 @Component({
@@ -33,8 +36,6 @@ export class FsFileComponent extends FsFileDragBaseComponent implements AfterVie
     height: void 0,
     quality: 1,
   };
-
-
 
   @Input()
   set multiple(value) {
@@ -121,7 +122,12 @@ export class FsFileComponent extends FsFileDragBaseComponent implements AfterVie
   @ViewChild('fileInput') public fileInput: any;
   @ViewChild('fileLabel') public fileLabel: any;
 
-  constructor(cordovaService: CordovaService, public el: ElementRef, ngZone: NgZone) {
+  constructor(
+    cordovaService: CordovaService,
+    public el: ElementRef,
+    ngZone: NgZone,
+    @Optional() @Inject(FS_FILE_MODULE_CONFIG) public moduleConfig,
+  ) {
     super();
     this.inputProcessor = new InputProcessor(cordovaService, ngZone);
 

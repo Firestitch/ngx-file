@@ -15,6 +15,8 @@ import { FsFilePreviewsBaseComponent, } from './components/fs-file-preview-base/
 import { FsFileDragBaseComponent, } from './components/fs-file-drag-base/fs-file-drag-base';
 import { FsFileImagePickerComponent } from './components/fs-file-image-picker/fs-file-image-picker.component';
 import { FsFileImagePickerPreviewComponent } from './components/fs-file-image-picker/fs-file-image-picker-preview/fs-file-image-picker-preview.component';
+import { FsFileBouncingIconComponent } from './components/fs-file-bouncing-icon/fs-file-bouncing-icon.component';
+import { FsFileDragoverMessageComponent } from './components/fs-file-dragover-message/fs-file-dragover-message.component';
 
 import { FsFilePreviewActionDirective } from './directives/fs-file-preview-action.directive';
 
@@ -54,7 +56,9 @@ import { FsLabelModule } from '@firestitch/label';
     FsFilePreviewsBaseComponent,
     FsFilePickerComponent,
     FsFileImagePickerComponent,
-    FsFileImagePickerPreviewComponent
+    FsFileImagePickerPreviewComponent,
+    FsFileBouncingIconComponent,
+    FsFileDragoverMessageComponent
   ],
   providers: [
     CordovaService
@@ -70,6 +74,7 @@ export class FsFileModule {
           useValue: config || {
             allowDownload: true,
             allowRemove: true,
+            dragoverMessage: true
           }
         }
       ]

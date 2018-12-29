@@ -79,10 +79,31 @@ $desktop-width-min: 992px;
   }
 }
 
-
 @mixin fs-file($theme) {
 
   $primary: mat-palette($theme);
+
+  fs-file {
+    fs-file-dragover-message {
+      .dragover-message {
+        z-index: 999;
+        display: none;
+        .content {
+          background-color: mat-color($primary);
+        }
+        .bounce {
+          color: mat-color($primary);
+        }
+      }
+    }
+    &.dragover {
+      fs-file-dragover-message {
+        .dragover-message {
+          display: flex !important;
+        }
+      }
+    }
+  }
 
   fs-file-picker {
     .wrap {

@@ -1,5 +1,6 @@
 import {Component, HostBinding, HostListener, OnDestroy} from '@angular/core';
 
+
 @Component({
   selector: 'fs-file-drag-base',
   template: ''
@@ -17,8 +18,8 @@ export class FsFileDragBaseComponent implements OnDestroy {
     if (!this.dragover && !this.drop) {
       this.dragover = this.onWindowDragOver.bind(this);
       this.drop = this.onWindowDrop.bind(this);
-      window.addEventListener('dragover',this.dragover);
-      window.addEventListener('drop',this.drop);
+      window.addEventListener('dragover', this.dragover);
+      window.addEventListener('drop', this.drop);
     }
 
     this.dragging++;
@@ -28,7 +29,7 @@ export class FsFileDragBaseComponent implements OnDestroy {
   @HostListener('dragleave', ['$event'])
   public onDragLeaveElement(event) {
     this.dragging--;
-    if (this.dragging===0) {
+    if (this.dragging === 0) {
       this.fileOverTarget = false;
     }
   }
