@@ -26,3 +26,6 @@ export { FsFileDragBaseComponent, } from './app/components/fs-file-drag-base/fs-
 export { FsFilePreviewActionDirective } from './app/directives/fs-file-preview-action.directive';
 export { FsFileImagePickerComponent } from './app/components/fs-file-image-picker/fs-file-image-picker.component';
 export { FsFileImagePickerPreviewComponent } from './app/components/fs-file-image-picker/fs-file-image-picker-preview/fs-file-image-picker-preview.component';
+
+// Must be here for correct import order
+import 'fileapi/plugins/FileAPI.exif.js';

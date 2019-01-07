@@ -1,5 +1,4 @@
 import * as FileAPI from 'fileapi';
-import 'fileapi/plugins/FileAPI.exif.js';
 
 import { Observable } from 'rxjs/Observable';
 import { switchMap } from 'rxjs/operators/switchMap';
