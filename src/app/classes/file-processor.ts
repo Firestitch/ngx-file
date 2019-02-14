@@ -1,10 +1,7 @@
 import * as FileAPI from 'fileapi';
 
-import { Observable } from 'rxjs/Observable';
-import { switchMap } from 'rxjs/operators/switchMap';
-import { of } from 'rxjs/observable/of';
-
-import { fromPromise } from 'rxjs/observable/fromPromise';
+import { from, Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 
 import { ProcessConfig, FsFile } from '../models';
@@ -43,7 +40,7 @@ export class FileProcessor {
       }
     });
 
-    return fromPromise(Promise.all(processedFiles)).pipe(
+    return from(Promise.all(processedFiles)).pipe(
       switchMap((resultFiles) => {
         if (!multiple && resultFiles[0]) { return of(resultFiles[0]) }
 

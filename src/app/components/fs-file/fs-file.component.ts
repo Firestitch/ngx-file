@@ -12,8 +12,7 @@ import {
 } from '@angular/core';
 
 import { switchMap } from 'rxjs/operators';
-import { of } from 'rxjs/observable/of';
-import { isArray } from 'lodash';
+import { of } from 'rxjs';
 
 import { FsFileDragBaseComponent } from '../fs-file-drag-base/fs-file-drag-base';
 import { CordovaService } from '../../services/cordova.service';
@@ -135,7 +134,7 @@ export class FsFileComponent extends FsFileDragBaseComponent implements AfterVie
 
     this.select = this.inputProcessor.select.pipe(
       switchMap((files) => {
-        if (this.inputProcessor.multiple && !isArray(files)) {
+        if (this.inputProcessor.multiple && !Array.isArray(files)) {
             files = [files];
         }
 

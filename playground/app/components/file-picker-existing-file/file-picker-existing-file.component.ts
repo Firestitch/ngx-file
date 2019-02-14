@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FsFile } from 'fs-file';
+import { FsFile } from '@firestitch/file';
 import { FsMessage } from '@firestitch/message';
 
 

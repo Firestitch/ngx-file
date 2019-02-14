@@ -7,10 +7,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FsExampleModule } from '@firestitch/example';
 import { FsMessageModule, FsMessage } from '@firestitch/message';
 import { FsApiModule, FS_API_RESPONSE_HANDLER } from '@firestitch/api';
+import { FsFileModule } from '@firestitch/file';
 
 import { ToastrModule } from 'ngx-toastr'
 
-import { FsFileModule } from 'fs-file';
 import { AppMaterialModule } from './material.module';
 import { ResponseHandler } from './handlers/response.handler';
 import { AppComponent } from './app.component';

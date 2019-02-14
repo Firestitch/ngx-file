@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -12,7 +12,7 @@ export class FilePickerComponent {
 
   public select(file) {
 
-    return Observable.create(observer => {
+    return new Observable(observer => {
       this.file = file;
       observer.complete();
     });

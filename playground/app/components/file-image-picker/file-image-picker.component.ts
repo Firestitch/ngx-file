@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { FsFileImagePickerComponent } from 'fs-file';
+import { FsFileImagePickerComponent } from '@firestitch/file';
 
 
 @Component({

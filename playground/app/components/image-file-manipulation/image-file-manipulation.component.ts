@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { FileProcessor } from 'fs-file';
+import { FileProcessor } from '@firestitch/file';
 
 
 @Component({
