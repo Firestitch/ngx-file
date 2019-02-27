@@ -1,24 +1,36 @@
-<fs-file-image-picker
-  (select)="select($event)"
-  [url]="url"
-  imageQuality=".8"
-  imageWidth="500"
-  imageHeight="500"
-  previewDiameter="75">
-</fs-file-image-picker>
+<div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center">
+  <fs-file-image-picker
+    (select)="select($event)"
+    [url]="url"
+    imageQuality=".8"
+    imageWidth="500"
+    imageHeight="500"
+    previewDiameter="75">
+  </fs-file-image-picker>
 
+  <fs-file-image-picker
+    #imagePicker
+    (select)="select($event)"
+    [url]="url"
+    imageQuality=".8"
+    imageWidth="500"
+    imageHeight="500"
+    previewDiameter="120">
+  </fs-file-image-picker>
 
-<fs-file-image-picker
-  #imagePicker
-  (select)="select($event)"
-  [url]="url"
-  imageQuality=".8"
-  imageWidth="500"
-  imageHeight="500"
-  previewDiameter="120">
-</fs-file-image-picker>
+  <fs-file-image-picker
+    (select)="select($event)"
+    [url]="url"
+    imageQuality=".8"
+    imageWidth="500"
+    imageHeight="500"
+    previewDiameter="75"
+    label="Picker With Label">
+  </fs-file-image-picker>
+</div>
 
-<button mat-button (click)="cancel()">Cancel changing</button>
+<br>
+<button mat-raised-button color="primary" (click)="cancel()">Cancel changing</button>
 
 <fieldset *ngIf="file">
   <legend>File</legend>

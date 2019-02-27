@@ -9,10 +9,12 @@ import { CordovaService } from '../../services/cordova.service';
   styleUrls: ['./fs-file-image-picker.component.scss']
 })
 export class FsFileImagePickerComponent {
+
   @Input() public imageQuality: number;
   @Input() public imageWidth = 150;
   @Input() public imageHeight = 150;
   @Input() public previewDiameter = 50;
+  @Input() public label = '';
 
   @Input('url') set url(url) {
     this._file = new FsFile(url);

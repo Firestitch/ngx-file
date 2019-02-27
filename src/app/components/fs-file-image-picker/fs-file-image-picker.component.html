@@ -1,5 +1,11 @@
-<fs-label-field class="fs-image-label">
-  <fs-label><ng-content select="[fsFileLabel]"></ng-content></fs-label>
+
+
+<fs-label-field class="fs-image-label" *ngIf="label; else elseLabel">
+  <fs-label>{{label}}</fs-label>
+  <ng-container *ngTemplateOutlet="preview"></ng-container>
+</fs-label-field>
+
+<ng-template #preview>
   <fs-file-image-picker-preview
     [file]="_file"
     [imageWidth]="imageWidth"
@@ -8,5 +14,8 @@
     [imageQuality]="imageQuality"
     (select)="selectFile($event)">
   </fs-file-image-picker-preview>
-</fs-label-field>
+</ng-template>
 
+<ng-template #elseLabel>
+  <ng-container *ngTemplateOutlet="preview"></ng-container>
+</ng-template>
