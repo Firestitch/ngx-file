@@ -1,16 +1,16 @@
-<ul>
-  <li>Reduce quality to: <b>0.8</b></li>
-  <li>Resample max width: <b>500</b></li>
-  <li>Resample max height: <b>500</b></li>
-</ul>
 <fs-file-picker (select)="select($event)"
                 imageQuality=".8"
                 imageWidth="500"
                 imageHeight="500">
     <div fsFileLabel>File Picker Label</div>
 </fs-file-picker>
-
 <fieldset *ngIf="file">
   <legend>File</legend>
   <pre>{{ file | json }}</pre>
 </fieldset>
+
+<ul>
+  <li>Image quality: <b>80%</b></li>
+  <li>Max width: <b>500</b></li>
+  <li>Max height: <b>500</b></li>
+</ul>

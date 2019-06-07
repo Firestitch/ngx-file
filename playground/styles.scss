@@ -14,3 +14,15 @@ pre {
   margin: 0;
 }
 
+ul {
+  padding: 0;
+
+  li {
+    list-style: none;
+    padding-bottom: 4px;
+    &:last-child {
+      padding: 0;
+    }
+  }
+}
+

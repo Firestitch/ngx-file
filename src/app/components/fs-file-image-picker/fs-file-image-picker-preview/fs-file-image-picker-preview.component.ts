@@ -27,6 +27,8 @@ export class FsFileImagePickerPreviewComponent implements OnInit {
   @Input() public imageHeight = 500;
   @Input() public previewDiameter = 50;
   @Input() public imageQuality: number;
+  @Input() public minWidth = 0;
+  @Input() public minHeight = 0;
 
   @Input('file') set _file(file: FsFile) {
     this.file = file;
@@ -34,6 +36,7 @@ export class FsFileImagePickerPreviewComponent implements OnInit {
   }
 
   @Output() public select = new EventEmitter<any>();
+  @Output() public error = new EventEmitter<any>();
 
   constructor() {}
 

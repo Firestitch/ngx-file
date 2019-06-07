@@ -15,6 +15,8 @@ export class FsFileImagePickerComponent {
   @Input() public imageHeight = 150;
   @Input() public previewDiameter = 50;
   @Input() public label = '';
+  @Input() public minWidth = 0;
+  @Input() public minHeight = 0;
 
   @Input('url') set url(url) {
     this._file = new FsFile(url);
@@ -22,6 +24,7 @@ export class FsFileImagePickerComponent {
   }
 
   @Output() public select = new EventEmitter<any>();
+  @Output() public error = new EventEmitter<any>();
 
   public inputProcessor = null;
   public _file: FsFile;

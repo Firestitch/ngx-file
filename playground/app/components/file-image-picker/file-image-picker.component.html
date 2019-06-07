@@ -1,32 +1,45 @@
 <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center">
-  <fs-file-image-picker
-    (select)="select($event)"
-    [url]="url"
-    imageQuality=".8"
-    imageWidth="500"
-    imageHeight="500"
-    previewDiameter="75">
-  </fs-file-image-picker>
 
-  <fs-file-image-picker
-    #imagePicker
-    (select)="select($event)"
-    [url]="url"
-    imageQuality=".8"
-    imageWidth="500"
-    imageHeight="500"
-    previewDiameter="120">
-  </fs-file-image-picker>
+  <div>
+    <fs-file-image-picker
+      #imagePicker
+      (select)="select($event)"
+      (error)="error($event)"
+      [url]="url"
+      imageQuality=".8"
+      imageWidth="500"
+      imageHeight="500"
+      minHeight="500"
+      minWidth="800"
+      previewDiameter="120"
+      label="Picker With Label">
+    </fs-file-image-picker>
 
-  <fs-file-image-picker
-    (select)="select($event)"
-    [url]="url"
-    imageQuality=".8"
-    imageWidth="500"
-    imageHeight="500"
-    previewDiameter="75"
-    label="Picker With Label">
-  </fs-file-image-picker>
+    <ul>
+      <li>Image Quality: <b>80%</b></li>
+      <li>Preview Diameter: <b>120px</b></li>
+      <li>Min Width: <b>800px</b></li>
+      <li>Min Heith: <b>500px</b></li>
+    </ul>
+  </div>
+
+  <div>
+    <fs-file-image-picker
+      [style.height]="'156px'"
+      [style.display]="'block'"
+      (select)="select($event)"
+      [url]="url"
+      imageQuality=".8"
+      imageWidth="500"
+      imageHeight="500"
+      previewDiameter="75">
+    </fs-file-image-picker>
+
+    <ul>
+      <li>Image quality: <b>80%</b></li>
+      <li>Preview Diameter: <b>75px</b></li>
+    </ul>
+  </div>
 </div>
 
 <br>

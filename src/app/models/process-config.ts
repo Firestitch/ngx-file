@@ -7,6 +7,8 @@ export class ProcessConfig {
   private _height: number;
   private _quality: number;
   private _format: string;
+  private _minWidth: number;
+  private _minHeight: number;
   // private _autoOrientation: boolean;
   // private _resize: boolean;
 
@@ -67,6 +69,21 @@ export class ProcessConfig {
     return this._format;
   }
 
+  set minWidth(value) {
+    this._minWidth = value;
+  }
+
+  get minWidth() {
+    return this._minWidth;
+  }
+
+  set minHeight(value) {
+    this._minHeight = value;
+  }
+
+  get minHeight() {
+    return this._minHeight;
+  }
   // set autoOrientation(value) {
   //   this._autoOrientation = value;
   // }
@@ -95,6 +112,9 @@ export class ProcessConfig {
     this.height = config.height;
     this.quality = config.quality;
     this.format = config.format;
+    this.format = config.format;
+    this.minWidth = config.minWidth;
+    this.minHeight = config.minHeight;
     // this.autoOrientation = config.autoOrientation;
   }
 }

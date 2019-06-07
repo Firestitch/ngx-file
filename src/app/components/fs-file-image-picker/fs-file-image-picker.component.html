@@ -12,7 +12,10 @@
     [imageHeight]="imageHeight"
     [previewDiameter]="previewDiameter"
     [imageQuality]="imageQuality"
-    (select)="selectFile($event)">
+    [minWidth]="minWidth"
+    [minHeight]="minHeight"
+    (select)="selectFile($event)"
+    (error)="error.emit($event)">
   </fs-file-image-picker-preview>
 </ng-template>
 

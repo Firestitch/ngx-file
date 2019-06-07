@@ -10,5 +10,7 @@ export interface FsFileConfig {
   height?:  number | undefined;
   quality?:    number | undefined;
   format?:     string | undefined;
+  minWidth?: number;
+  minHeight?: number;
   // accept?:          string[];
 }

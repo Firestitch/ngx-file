@@ -1,11 +1,15 @@
 <div class="wrap" [style.width.px]="previewDiameter" [style.height.px]="previewDiameter">
 
-  <fs-file (select)="selectFile($event)"
-            [imageWidth]="imageWidth"
-            [imageHeight]="imageHeight"
-            [imageQuality]="imageQuality"
-            accept="image/*"
-            multiple="false">
+  <fs-file
+    (select)="selectFile($event)"
+    (error)="error.emit($event)"
+    [minHeight]="minHeight"
+    [minWidth]="minWidth"
+    [imageWidth]="imageWidth"
+    [imageHeight]="imageHeight"
+    [imageQuality]="imageQuality"
+    accept="image/*"
+    multiple="false">
 
     <ng-container *ngIf="file.typeImage; else noImage">
       <img class="image-preview" [src]="preview">

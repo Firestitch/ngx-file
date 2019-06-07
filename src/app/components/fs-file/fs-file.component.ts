@@ -8,11 +8,12 @@ import {
   Output,
   Optional,
   ViewChild,
-  NgZone
+  NgZone,
+  OnDestroy
 } from '@angular/core';
 
-import { switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
+import { of, onErrorResumeNext, Subject } from 'rxjs';
 
 import { FsFileDragBaseComponent } from '../fs-file-drag-base/fs-file-drag-base';
 import { CordovaService } from '../../services/cordova.service';
@@ -25,16 +26,29 @@ import { FS_FILE_MODULE_CONFIG } from '../../fs-file.providers';
   templateUrl: './fs-file.component.html',
   styles: [':host label { cursor: pointer }']
 })
-export class FsFileComponent extends FsFileDragBaseComponent implements AfterViewInit {
+export class FsFileComponent extends FsFileDragBaseComponent implements AfterViewInit, OnDestroy {
 
   public inputProcessor: InputProcessor = null;
-  private autoProcess = false;
+  private _autoProcess = false;
+  private _destroy$ = new Subject();
 
   private processOptions = {
     width: void 0,
     height: void 0,
     quality: 1,
+    minHeight: 0,
+    minWidth: 0
   };
+
+  @Input()
+  set minHeight(value) {
+    this.processOptions.minHeight = value;
+  }
+
+  @Input()
+  set minWidth(value) {
+    this.processOptions.minWidth = value;
+  }
 
   @Input()
   set multiple(value) {
@@ -95,7 +109,7 @@ export class FsFileComponent extends FsFileDragBaseComponent implements AfterVie
   set imageWidth(value) {
     if (value !== void 0) {
       this.processOptions.width = +value;
-      this.autoProcess = true;
+      this._autoProcess = true;
     }
   }
 
@@ -103,7 +117,7 @@ export class FsFileComponent extends FsFileDragBaseComponent implements AfterVie
   set imageHeight(value) {
     if (value !== void 0) {
       this.processOptions.height = +value;
-      this.autoProcess = true;
+      this._autoProcess = true;
     }
   }
 
@@ -112,11 +126,12 @@ export class FsFileComponent extends FsFileDragBaseComponent implements AfterVie
     const val = parseFloat(value);
     if (!isNaN(val)) {
       this.processOptions.quality = val;
-      this.autoProcess = true;
+      this._autoProcess = true;
     }
   }
 
-  @Output('select') public select: EventEmitter<any>;
+  @Output() public select = new EventEmitter();
+  @Output() public error = new EventEmitter();
 
   @ViewChild('fileInput') public fileInput: any;
   @ViewChild('fileLabel') public fileLabel: any;
@@ -130,22 +145,43 @@ export class FsFileComponent extends FsFileDragBaseComponent implements AfterVie
     super();
     this.inputProcessor = new InputProcessor(cordovaService, ngZone);
 
+
+
+    this.initSelect();
+  }
+
+  public ngOnDestroy() {
+    this._destroy$.next();
+    this._destroy$.complete();
+  }
+
+  private initSelect() {
+
     const fileProcessor = new FileProcessor();
 
-    this.select = this.inputProcessor.select.pipe(
+    this.inputProcessor.select
+    .pipe(
+      takeUntil(this._destroy$),
       switchMap((files) => {
+
         if (this.inputProcessor.multiple && !Array.isArray(files)) {
             files = [files];
         }
 
-        if (this.autoProcess) {
+        if (this._autoProcess) {
           return fileProcessor.process(files, this.processOptions);
         } else {
           return of(files);
         }
       })
-    ) as any;
-    // this.select = this.fsFile.select;
+    )
+    .subscribe((e) => {
+      this.select.emit(e);
+    },
+    e => {
+      this.error.emit(e);
+      this.initSelect();
+    })
   }
 
   public ngAfterViewInit() {

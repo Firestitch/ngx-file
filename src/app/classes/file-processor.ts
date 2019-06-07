@@ -2,6 +2,7 @@ import * as FileAPI from 'fileapi';
 
 import { from, Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { toInteger } from 'lodash-es';
 
 
 import { ProcessConfig, FsFile } from '../models';
@@ -43,7 +44,6 @@ export class FileProcessor {
     return from(Promise.all(processedFiles)).pipe(
       switchMap((resultFiles) => {
         if (!multiple && resultFiles[0]) { return of(resultFiles[0]) }
-
         return of(resultFiles);
       })
     );
@@ -84,7 +84,8 @@ export class FileProcessor {
               originFile.file = createBlob([blob], originFile.file.name, originFile.type);
 
               // Update FsFile info
-              this.getImageInfo(originFile).then((result) => {
+              this.getImageInfo(originFile)
+              .then((result) => {
                 originFile.parseInfo(result);
                 resolve(originFile);
               }).catch((error) => {
@@ -106,14 +107,33 @@ export class FileProcessor {
    * @param config
    */
   private async applyTransforms(file: FsFile, resolve, reject, config: ProcessConfig) {
+
     try {
-      const fileInfo = await this.getImageInfo(file);
+
+      const fileInfo: any = await this.getImageInfo(file);
       file.parseInfo(fileInfo);
 
       const params = this.generateTransformParams(file, config);
-      const resultFile = await this.transformFile(file, params, config);
+      const resultFile: any = await this.transformFile(file, params, config);
+      const codes = [];
+      const errors = [];
+
+      if (config.minHeight && fileInfo.height < toInteger(config.minHeight)) {
+        codes.push('minHeight');
+        errors.push(`Height must be at least ${config.minHeight}px.`);
+      }
+
+      if (config.minWidth && fileInfo.width < toInteger(config.minWidth)) {
+        codes.push('minWidth');
+        errors.push(`Width must be at least ${config.minWidth}px.`);
+      }
+
+      if (codes.length) {
+        throw { codes: codes, error: errors.join(' ') };
+      }
 
       resolve(resultFile);
+
     } catch (err) {
       reject(err);
     }
