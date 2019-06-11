@@ -25,6 +25,6 @@
       <mat-spinner class="spinner" *ngIf="file.progress" [diameter]="previewDiameter/2"></mat-spinner>
     </ng-template>
 
-    <div class="update-action" [ngStyle]="updateStyle"> {{file ? 'Update' : 'Upload '}} </div>
+    <div class="update-action" [ngStyle]="updateStyle"> {{file && file.exists ? 'Update' : 'Upload '}} </div>
   </fs-file>
 </div>

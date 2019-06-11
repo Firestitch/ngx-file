@@ -11,12 +11,14 @@ export class FsFile {
   public exifInfo: any = {};
   public extension: string;
   public type: string;
-  public url: string = '';
+  public url = '';
   public size: number;
   public typeImage: boolean;
+
   private _file: any;
   private _name: string;
   private _fileOptions: FsFileConfig;
+  private _fileExists = false;
 
   constructor(obj?: any, filename?: string) {
     if (obj instanceof File || obj instanceof Blob) {
@@ -39,6 +41,12 @@ export class FsFile {
       this.url = obj;
       this.file = file;
     }
+
+    this._checkIfFileExists();
+  }
+
+  get exists() {
+    return this._fileExists;
   }
 
   get file() {
@@ -63,6 +71,7 @@ export class FsFile {
     this.name = value.name;
     this.type = value.type;
     this.typeImage = isImageType(this.type);
+    this._checkIfFileExists();
   }
 
   set name(name) {
@@ -90,5 +99,9 @@ export class FsFile {
       imageWidth: this.imageWidth,
       imageHeight: this.imageHeight
     }
+  }
+
+  private _checkIfFileExists() {
+    this._fileExists = !!this.name || !!this.url
   }
 }
