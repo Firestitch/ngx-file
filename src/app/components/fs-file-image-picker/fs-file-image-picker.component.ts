@@ -14,6 +14,7 @@ export class FsFileImagePickerComponent {
   @Input() public imageWidth = 150;
   @Input() public imageHeight = 150;
   @Input() public previewDiameter = 50;
+  @Input() public previewFit = 'cover';
   @Input() public label = '';
   @Input() public minWidth = 0;
   @Input() public minHeight = 0;

@@ -25,6 +25,7 @@ export class FsFileImagePickerPreviewComponent implements OnInit {
 
   @Input() public imageWidth = 500;
   @Input() public imageHeight = 500;
+  @Input() public previewFit = 'cover';
   @Input() public previewDiameter = 50;
   @Input() public imageQuality: number;
   @Input() public minWidth = 0;
