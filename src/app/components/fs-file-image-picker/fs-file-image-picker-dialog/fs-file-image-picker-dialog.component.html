@@ -2,8 +2,13 @@
 <mat-dialog-content>
 
   <div *ngIf="data.file" class="details">
-    <img class="image" [src]="data.file.url">
+      <a [href]="data.file.url" target="_blank" class="image-url"><img class="image" [src]="data.file.url" (load)="imageLoad($event)"></a>
     <br>
+    <fs-label-field>
+      <fs-label>Image Size</fs-label>
+      {{width}} x {{height}}
+    </fs-label-field>
+
     <fs-label-field>
       <fs-label>Image Url</fs-label>
       <a [href]="data.file.url" target="_blank" class="url">{{data.file.url}}</a>

@@ -16,6 +16,8 @@ export class FsFileImagePickerDialogComponent {
 
   public file: FsFile;
   public reverseUrl = '';
+  public height;
+  public width;
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
@@ -23,5 +25,10 @@ export class FsFileImagePickerDialogComponent {
     if (data.file) {
       this.reverseUrl = 'https://images.google.com/searchbyimage?image_url=' + encodeURIComponent(data.file.url);
     }
+  }
+
+  imageLoad(event: any) {
+    this.height = event.target.naturalHeight;
+    this.width = event.target.naturalWidth;
   }
 }
