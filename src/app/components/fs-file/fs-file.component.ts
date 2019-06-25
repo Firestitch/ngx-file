@@ -132,6 +132,7 @@ export class FsFileComponent extends FsFileDragBaseComponent implements AfterVie
 
   @Output() public select = new EventEmitter();
   @Output() public error = new EventEmitter();
+  @Output() public clicked = new EventEmitter();
 
   @ViewChild('fileInput') public fileInput: any;
   @ViewChild('fileLabel') public fileLabel: any;
@@ -145,8 +146,6 @@ export class FsFileComponent extends FsFileDragBaseComponent implements AfterVie
     super();
     this.inputProcessor = new InputProcessor(cordovaService, ngZone);
 
-
-
     this.initSelect();
   }
 
@@ -158,6 +157,14 @@ export class FsFileComponent extends FsFileDragBaseComponent implements AfterVie
   private initSelect() {
 
     const fileProcessor = new FileProcessor();
+
+    this.inputProcessor.clicked
+    .pipe(
+      takeUntil(this._destroy$),
+    )
+    .subscribe((event: KeyboardEvent) => {
+      this.clicked.next(event);
+    });
 
     this.inputProcessor.select
     .pipe(

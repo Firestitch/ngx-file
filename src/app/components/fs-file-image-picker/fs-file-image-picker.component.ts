@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, NgZone, Output } from '@angular/core';
 import { InputProcessor } from '../../classes/input-processor';
 import { FsFile } from '../../models/fs-file';
 import { CordovaService } from '../../services/cordova.service';
+import { MatDialog } from '@angular/material';
+import { FsFileImagePickerDialogComponent } from './fs-file-image-picker-dialog/fs-file-image-picker-dialog.component';
 
 @Component({
   selector: 'fs-file-image-picker',
@@ -34,7 +36,8 @@ export class FsFileImagePickerComponent {
   private _previousFile: FsFile;
 
   constructor(private _cordovaService: CordovaService,
-              private _ngZone: NgZone) {
+              private _ngZone: NgZone,
+              private dialog: MatDialog) {
     this.inputProcessor = new InputProcessor(_cordovaService, _ngZone);
   }
 
@@ -45,6 +48,19 @@ export class FsFileImagePickerComponent {
 
   public cancel() {
     this._file = this._previousFile;
+  }
+
+  public clicked(event: KeyboardEvent) {
+
+    if (event.ctrlKey) {
+      event.preventDefault();
+
+      this.dialog.open(FsFileImagePickerDialogComponent, {
+        data: { file: this._file },
+        width: '400px',
+        autoFocus: false
+      });
+    }
   }
 
 }

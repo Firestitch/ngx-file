@@ -1,0 +1,13 @@
+.image{
+  max-width: 300px;
+  margin: auto;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+}
+
+.url {
+  word-break: break-all;
+}

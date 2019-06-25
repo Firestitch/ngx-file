@@ -38,6 +38,7 @@ export class FsFileImagePickerPreviewComponent implements OnInit {
 
   @Output() public select = new EventEmitter<any>();
   @Output() public error = new EventEmitter<any>();
+  @Output() public clicked = new EventEmitter<any>();
 
   constructor() {}
 

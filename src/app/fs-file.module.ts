@@ -5,6 +5,11 @@ import {
   MatIconModule,
   MatProgressSpinnerModule,
   MatTooltipModule,
+  MatDialogModule,
+  MatFormField,
+  MatInput,
+  MatInputModule,
+  MatFormFieldModule,
 } from '@angular/material';
 
 import { FsFileComponent } from './components/fs-file/fs-file.component';
@@ -14,6 +19,7 @@ import { FsFilePickerComponent, } from './components/fs-file-picker/fs-file-pick
 import { FsFilePreviewsBaseComponent, } from './components/fs-file-preview-base/fs-file-preview-base';
 import { FsFileDragBaseComponent, } from './components/fs-file-drag-base/fs-file-drag-base';
 import { FsFileImagePickerComponent } from './components/fs-file-image-picker/fs-file-image-picker.component';
+import { FsFileImagePickerDialogComponent } from './components/fs-file-image-picker/fs-file-image-picker-dialog/fs-file-image-picker-dialog.component';
 import { FsFileImagePickerPreviewComponent } from './components/fs-file-image-picker/fs-file-image-picker-preview/fs-file-image-picker-preview.component';
 import { FsFileBouncingIconComponent } from './components/fs-file-bouncing-icon/fs-file-bouncing-icon.component';
 import { FsFileDragoverMessageComponent } from './components/fs-file-dragover-message/fs-file-dragover-message.component';
@@ -25,6 +31,7 @@ import { FS_FILE_MODULE_CONFIG } from './fs-file.providers';
 import { FsFileModuleConfig } from './interfaces/module-config.interface';
 
 import { FsLabelModule } from '@firestitch/label';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -34,7 +41,11 @@ import { FsLabelModule } from '@firestitch/label';
     MatTooltipModule,
     MatProgressSpinnerModule,
     MatButtonModule,
-    FsLabelModule
+    MatDialogModule,
+    FsLabelModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports: [
     FsFileComponent,
@@ -46,6 +57,7 @@ import { FsLabelModule } from '@firestitch/label';
     FsFileImagePickerPreviewComponent
   ],
   entryComponents: [
+    FsFileImagePickerDialogComponent
   ],
   declarations: [
     FsFileComponent,
@@ -58,7 +70,8 @@ import { FsLabelModule } from '@firestitch/label';
     FsFileImagePickerComponent,
     FsFileImagePickerPreviewComponent,
     FsFileBouncingIconComponent,
-    FsFileDragoverMessageComponent
+    FsFileDragoverMessageComponent,
+    FsFileImagePickerDialogComponent
   ],
   providers: [
     CordovaService

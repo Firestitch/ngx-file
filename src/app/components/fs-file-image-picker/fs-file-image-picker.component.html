@@ -16,7 +16,8 @@
     [minWidth]="minWidth"
     [minHeight]="minHeight"
     (select)="selectFile($event)"
-    (error)="error.emit($event)">
+    (error)="error.emit($event)"
+    (clicked)="clicked($event)">
   </fs-file-image-picker-preview>
 </ng-template>
 

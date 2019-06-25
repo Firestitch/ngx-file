@@ -27,6 +27,7 @@ export class InputProcessor {
   public allowDrop = true;
 
   public select = new EventEmitter();
+  public clicked = new EventEmitter();
 
   private _accept = '*';
   private _acceptableTypes = new Map();
@@ -130,13 +131,13 @@ export class InputProcessor {
       return
     }
 
-    FileAPI.event.on(el.nativeElement, 'click', (el) => {
+    FileAPI.event.on(el.nativeElement, 'click', (event) => {
 
       if (!this.allowClick) {
         return;
       }
 
-      if (this.api!=='html5' && (this.capture==='camera' || this.capture==='library')) {
+      if (this.api !== 'html5' && (this.capture === 'camera' || this.capture === 'library')) {
 
         if (hasCordovaCameraSupport()) {
           if (this.capture === 'library') {
@@ -156,7 +157,12 @@ export class InputProcessor {
         }
       }
 
-      this.inputEl.click();
+
+      this.clicked.next(event);
+
+      if (!event.defaultPrevented) {
+        this.inputEl.click();
+      }
     });
   }
 
