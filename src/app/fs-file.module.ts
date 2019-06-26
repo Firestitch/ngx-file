@@ -31,6 +31,7 @@ import { FS_FILE_MODULE_CONFIG } from './fs-file.providers';
 import { FsFileModuleConfig } from './interfaces/module-config.interface';
 
 import { FsLabelModule } from '@firestitch/label';
+import { FsPromptModule } from '@firestitch/prompt';
 import { FormsModule } from '@angular/forms';
 
 
@@ -45,7 +46,8 @@ import { FormsModule } from '@angular/forms';
     FsLabelModule,
     FormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    FsPromptModule
   ],
   exports: [
     FsFileComponent,

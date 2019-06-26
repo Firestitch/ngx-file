@@ -26,5 +26,6 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close color="primary">Done</button>
+  <button mat-button mat-dialog-close (click)="upload()">Upload Via URL</button>
   <a mat-button [href]="reverseUrl" target="_blank" type="button">Reverse Image Lookup</a>
 </mat-dialog-actions>
