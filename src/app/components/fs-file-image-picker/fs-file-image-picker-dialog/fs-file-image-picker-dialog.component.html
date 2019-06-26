@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Image Utilities</h1>
+<h1 mat-dialog-title>Image</h1>
 <mat-dialog-content>
 
   <div *ngIf="data.file" class="details">
@@ -15,17 +15,9 @@
     </fs-label-field>
   </div>
 
-  <!-- <mat-form-field>
-    <textarea
-      placeholder="Input"
-      [(ngModel)]="input"
-      name="input"
-      matInput>
-    </textarea>
-  </mat-form-field> -->
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close color="primary">Done</button>
-  <button mat-button mat-dialog-close (click)="upload()">Upload Via URL</button>
-  <a mat-button [href]="reverseUrl" target="_blank" type="button">Reverse Image Lookup</a>
+  <button mat-button mat-dialog-close (click)="upload()" *ngIf="selectUrl.observers.length">Upload Via URL</button>
+  <a mat-button [href]="reverseUrl" target="_blank" type="button" *ngIf="reverseUrl">Reverse Image Lookup</a>
 </mat-dialog-actions>
