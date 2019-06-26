@@ -22,11 +22,9 @@ export class FsFileImagePickerDialogComponent {
   public height;
   public width;
 
-
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private dialogRef: MatDialogRef<FsFileImagePickerDialogComponent>,
-              public prompt: FsPrompt,
-              private httpBackend: HttpBackend
+              public prompt: FsPrompt
               ) {
     if (data.file) {
       this.reverseUrl = 'https://images.google.com/searchbyimage?image_url=' + encodeURIComponent(data.file.url);
@@ -42,19 +40,10 @@ export class FsFileImagePickerDialogComponent {
     this.prompt.input({
       label: 'Image URL',
       title: 'Upload Via URL',
-      commitLabel: 'Create',
+      commitLabel: 'Upload',
       required: true
     }).subscribe((value: string) => {
-      const inputProcessor: InputProcessor = this.data.InputProcessor;
-      const httpClient = new HttpClient(this.httpBackend);
-
-      const headers = new HttpHeaders().set('Access-Control-Allow-Origin', 'http://localhost:8000');
-
-      httpClient.get(value, { headers: headers  })
-      .subscribe(response => {
-        debugger;
-        //inputProcessor.selectFiles([]);
-      });
+      this.data.selectUrl.next(value);
     });
   }
 }

@@ -28,6 +28,7 @@ export class FsFileImagePickerComponent {
 
   @Output() public select = new EventEmitter<any>();
   @Output() public error = new EventEmitter<any>();
+  @Output() public selectUrl = new EventEmitter<any>();
 
   public inputProcessor: InputProcessor = null;
   public _file: FsFile;
@@ -58,7 +59,7 @@ export class FsFileImagePickerComponent {
       this.dialog.open(FsFileImagePickerDialogComponent, {
         data: {
           file: this._file,
-          inputProcessor: this.inputProcessor
+          selectUrl: this.selectUrl
         },
         width: '500px',
         autoFocus: false

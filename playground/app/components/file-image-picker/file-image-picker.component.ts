@@ -26,4 +26,8 @@ export class FileImagePickerComponent {
   public error(e) {
     this.message.error(e.error);
   }
+
+  public selectUrl(url) {
+    this.message.info('Image URL: ' + url);
+  }
 }

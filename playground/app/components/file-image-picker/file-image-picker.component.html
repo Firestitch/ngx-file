@@ -4,6 +4,7 @@
     <fs-file-image-picker
       #imagePicker
       (select)="select($event)"
+      (selectUrl)="selectUrl($event)"
       (error)="error($event)"
       [url]="url"
       imageQuality=".8"
@@ -28,6 +29,7 @@
       [style.height]="'156px'"
       [style.display]="'block'"
       (select)="select($event)"
+      (selectUrl)="selectUrl($event)"
       [url]="url"
       imageQuality=".8"
       imageWidth="500"
