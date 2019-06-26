@@ -52,7 +52,7 @@ export class FsFileImagePickerComponent {
 
   public clicked(event: KeyboardEvent) {
 
-    if (event.ctrlKey) {
+    if (event.shiftKey) {
       event.preventDefault();
 
       this.dialog.open(FsFileImagePickerDialogComponent, {
