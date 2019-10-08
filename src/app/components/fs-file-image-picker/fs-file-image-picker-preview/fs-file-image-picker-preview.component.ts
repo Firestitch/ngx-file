@@ -3,7 +3,7 @@ import {
   Component,
   Input,
   Output,
-  OnInit,
+  OnInit, ChangeDetectionStrategy,
 } from '@angular/core';
 
 import * as FileAPI from 'fileapi';
@@ -15,7 +15,8 @@ import { ScaleExifImage } from '../../../helpers';
 @Component({
   selector: 'fs-file-image-picker-preview',
   templateUrl: 'fs-file-image-picker-preview.component.html',
-  styleUrls: ['./fs-file-image-picker-preview.component.scss']
+  styleUrls: ['./fs-file-image-picker-preview.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsFileImagePickerPreviewComponent implements OnInit {
 
@@ -49,13 +50,13 @@ export class FsFileImagePickerPreviewComponent implements OnInit {
 
   public ngOnInit() {
 
-    let fontSize = this.previewDiameter/100;
+    let fontSize = this.previewDiameter / 100;
 
-    if (fontSize<.5) {
+    if (fontSize < .5) {
       fontSize = .5;
     }
 
-    if (fontSize>1.5) {
+    if (fontSize > 1.5) {
       fontSize = 1;
     }
 

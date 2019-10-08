@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ContentChildren,
   QueryList,
@@ -8,7 +9,8 @@ import { FsFilePreviewActionDirective } from '../../directives/fs-file-preview-a
 
 @Component({
   selector: 'fs-file-previews-base',
-  template: ''
+  template: '',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsFilePreviewsBaseComponent {
 

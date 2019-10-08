@@ -1,9 +1,16 @@
-import {Component, HostBinding, HostListener, OnDestroy} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  HostListener,
+  OnDestroy
+} from '@angular/core';
 
 
 @Component({
   selector: 'fs-file-drag-base',
-  template: ''
+  template: '',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsFileDragBaseComponent implements OnDestroy {
   private dragging = 0;

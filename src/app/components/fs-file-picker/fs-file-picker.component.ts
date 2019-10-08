@@ -7,7 +7,7 @@ import {
   Inject,
   Optional,
   OnInit,
-  NgZone
+  NgZone, ChangeDetectionStrategy
 } from '@angular/core';
 
 import { FsFileDragBaseComponent } from '../fs-file-drag-base/fs-file-drag-base';
@@ -19,7 +19,8 @@ import { FS_FILE_MODULE_CONFIG } from '../../fs-file.providers';
 
 @Component({
   selector: 'fs-file-picker',
-  templateUrl: 'fs-file-picker.component.html'
+  templateUrl: 'fs-file-picker.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsFilePickerComponent extends FsFileDragBaseComponent implements OnInit {
 

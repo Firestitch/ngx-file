@@ -4,6 +4,7 @@ import {
   Input,
   Output,
   AfterViewInit,
+  ChangeDetectionStrategy, ChangeDetectorRef,
 } from '@angular/core';
 
 import * as FileAPI from 'fileapi';
@@ -15,7 +16,8 @@ import { ScaleExifImage } from '../../helpers';
 
 @Component({
   selector: 'fs-file-preview',
-  templateUrl: 'fs-file-preview.component.html'
+  templateUrl: 'fs-file-preview.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implements AfterViewInit {
 
@@ -33,6 +35,7 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
   @Input() public previewWidth = 150;
   @Input() public previewHeight = 150;
   @Input('file') set _file(file: FsFile) {
+    debugger;
     this.file = file;
     this.generateFilePreview(file);
   }
@@ -41,7 +44,9 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
 
   public filteredActions = [];
 
-  constructor() {
+  constructor(
+    private _cdRef: ChangeDetectorRef,
+  ) {
     super();
   }
 
@@ -97,6 +102,8 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
         console.log(`FsFilePreview: Image preview error for file ${file.name}`);
         file.progress = false;
       }
+
+      this._cdRef.markForCheck();
     });
   }
 

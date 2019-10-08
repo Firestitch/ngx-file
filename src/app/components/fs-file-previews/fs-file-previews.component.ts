@@ -1,8 +1,8 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   HostBinding,
   Input,
-  OnInit
 } from '@angular/core';
 
 import { FsFilePreviewsBaseComponent } from '../fs-file-preview-base/fs-file-preview-base';
@@ -10,7 +10,8 @@ import { FsFilePreviewsBaseComponent } from '../fs-file-preview-base/fs-file-pre
 
 @Component({
   selector: 'fs-file-previews',
-  templateUrl: 'fs-file-previews.component.html'
+  templateUrl: 'fs-file-previews.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsFilePreviewsComponent extends FsFilePreviewsBaseComponent {
 

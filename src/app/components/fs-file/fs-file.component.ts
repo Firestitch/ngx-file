@@ -1,19 +1,20 @@
 import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   EventEmitter,
-  Input,
   Inject,
-  AfterViewInit,
-  Output,
-  Optional,
-  ViewChild,
+  Input,
   NgZone,
-  OnDestroy
+  OnDestroy,
+  Optional,
+  Output,
+  ViewChild
 } from '@angular/core';
 
 import { switchMap, takeUntil } from 'rxjs/operators';
-import { of, onErrorResumeNext, Subject } from 'rxjs';
+import { of, Subject } from 'rxjs';
 
 import { FsFileDragBaseComponent } from '../fs-file-drag-base/fs-file-drag-base';
 import { CordovaService } from '../../services/cordova.service';
@@ -24,7 +25,8 @@ import { FS_FILE_MODULE_CONFIG } from '../../fs-file.providers';
 @Component({
   selector: 'fs-file',
   templateUrl: './fs-file.component.html',
-  styles: [':host label { cursor: pointer }']
+  styles: [':host label { cursor: pointer }'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsFileComponent extends FsFileDragBaseComponent implements AfterViewInit, OnDestroy {
 

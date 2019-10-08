@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, NgZone, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  NgZone,
+  Output
+} from '@angular/core';
 import { InputProcessor } from '../../classes/input-processor';
 import { FsFile } from '../../models/fs-file';
 import { CordovaService } from '../../services/cordova.service';
@@ -8,7 +15,8 @@ import { FsFileImagePickerDialogComponent } from './fs-file-image-picker-dialog/
 @Component({
   selector: 'fs-file-image-picker',
   templateUrl: './fs-file-image-picker.component.html',
-  styleUrls: ['./fs-file-image-picker.component.scss']
+  styleUrls: ['./fs-file-image-picker.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsFileImagePickerComponent {
 

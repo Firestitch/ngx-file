@@ -14,7 +14,7 @@ export class MultipleFileSelectComponent {
   public constructor(private fsMessage: FsMessage) {}
 
   public select(files) {
-    this.files.push(...files);
+    this.files = [...this.files, ...files];
   }
 
   public removed(event: MouseEvent) {

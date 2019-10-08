@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
 
 @Component({
   selector: 'fs-file-bouncing-icon',
   templateUrl: './fs-file-bouncing-icon.component.html',
-  styleUrls: ['./fs-file-bouncing-icon.component.scss']
+  styleUrls: ['./fs-file-bouncing-icon.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsFileBouncingIconComponent implements OnInit {
 

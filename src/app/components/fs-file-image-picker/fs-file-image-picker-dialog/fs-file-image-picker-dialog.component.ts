@@ -1,15 +1,16 @@
 import {
-  Component, Inject, EventEmitter
+  Component, Inject, EventEmitter, ChangeDetectionStrategy
 } from '@angular/core';
 
 import { FsFile } from '../../../models/fs-file';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA } from '@angular/material';
 import { FsPrompt } from '@firestitch/prompt';
 
 
 @Component({
   templateUrl: 'fs-file-image-picker-dialog.component.html',
-  styleUrls: ['./fs-file-image-picker-dialog.component.scss']
+  styleUrls: ['./fs-file-image-picker-dialog.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsFileImagePickerDialogComponent {
 
@@ -19,10 +20,10 @@ export class FsFileImagePickerDialogComponent {
   public width;
   public selectUrl: EventEmitter<any>;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-              private dialogRef: MatDialogRef<FsFileImagePickerDialogComponent>,
-              public prompt: FsPrompt
-              ) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public prompt: FsPrompt,
+  ) {
 
     if (data.file) {
       this.reverseUrl = 'https://images.google.com/searchbyimage?image_url=' + encodeURIComponent(data.file.url);
