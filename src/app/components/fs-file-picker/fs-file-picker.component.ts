@@ -69,7 +69,7 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
   @Output() public select = new EventEmitter<any>();
   @Output() public remove = new EventEmitter();
 
-  @ViewChild('fileInput') public fileInput: any;
+  @ViewChild('fileInput', { static: false }) public fileInput: any;
 
 
   constructor(@Optional() @Inject(FS_FILE_MODULE_CONFIG) public moduleConfig,

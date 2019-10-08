@@ -35,7 +35,6 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
   @Input() public previewWidth = 150;
   @Input() public previewHeight = 150;
   @Input('file') set _file(file: FsFile) {
-    debugger;
     this.file = file;
     this.generateFilePreview(file);
   }

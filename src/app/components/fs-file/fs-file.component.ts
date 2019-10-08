@@ -7,7 +7,7 @@ import {
   Inject,
   Input,
   NgZone,
-  OnDestroy,
+  OnDestroy, OnInit,
   Optional,
   Output,
   ViewChild
@@ -28,7 +28,7 @@ import { FS_FILE_MODULE_CONFIG } from '../../fs-file.providers';
   styles: [':host label { cursor: pointer }'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FsFileComponent extends FsFileDragBaseComponent implements AfterViewInit, OnDestroy {
+export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, OnDestroy {
 
   public inputProcessor: InputProcessor = null;
   private _autoProcess = false;
@@ -136,8 +136,11 @@ export class FsFileComponent extends FsFileDragBaseComponent implements AfterVie
   @Output() public error = new EventEmitter();
   @Output() public clicked = new EventEmitter();
 
-  @ViewChild('fileInput') public fileInput: any;
-  @ViewChild('fileLabel') public fileLabel: any;
+  @ViewChild('fileInput', { static: true })
+  public fileInput: any;
+
+  @ViewChild('fileLabel', { static: true })
+  public fileLabel: any;
 
   constructor(
     cordovaService: CordovaService,
@@ -149,6 +152,12 @@ export class FsFileComponent extends FsFileDragBaseComponent implements AfterVie
     this.inputProcessor = new InputProcessor(cordovaService, ngZone);
 
     this.initSelect();
+  }
+
+  public ngOnInit() {
+    this.inputProcessor.registerInput(this.fileInput);
+    this.inputProcessor.registerLabel(this.fileLabel);
+    this.inputProcessor.registerDrop(this.el);
   }
 
   public ngOnDestroy() {
@@ -191,11 +200,5 @@ export class FsFileComponent extends FsFileDragBaseComponent implements AfterVie
       this.error.emit(e);
       this.initSelect();
     })
-  }
-
-  public ngAfterViewInit() {
-    this.inputProcessor.registerInput(this.fileInput);
-    this.inputProcessor.registerLabel(this.fileLabel);
-    this.inputProcessor.registerDrop(this.el);
   }
 }

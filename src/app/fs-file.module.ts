@@ -1,16 +1,12 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  MatButtonModule,
-  MatIconModule,
-  MatProgressSpinnerModule,
-  MatTooltipModule,
-  MatDialogModule,
-  MatFormField,
-  MatInput,
-  MatInputModule,
-  MatFormFieldModule,
-} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInput, MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { FsFileComponent } from './components/fs-file/fs-file.component';
 import { FsFilePreviewsComponent } from './components/fs-file-previews/fs-file-previews.component';

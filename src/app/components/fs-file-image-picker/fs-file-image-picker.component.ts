@@ -9,7 +9,7 @@ import {
 import { InputProcessor } from '../../classes/input-processor';
 import { FsFile } from '../../models/fs-file';
 import { CordovaService } from '../../services/cordova.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { FsFileImagePickerDialogComponent } from './fs-file-image-picker-dialog/fs-file-image-picker-dialog.component';
 
 @Component({
