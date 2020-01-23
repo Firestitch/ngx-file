@@ -10,6 +10,7 @@ import * as FileAPI from 'fileapi';
 
 import { FsFile } from '../../../models/fs-file';
 import { ScaleExifImage } from '../../../helpers';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
@@ -20,7 +21,6 @@ import { ScaleExifImage } from '../../../helpers';
 })
 export class FsFileImagePickerPreviewComponent implements OnInit {
 
-  public file: FsFile;
   public preview: string;
   public updateStyle;
 
@@ -31,11 +31,7 @@ export class FsFileImagePickerPreviewComponent implements OnInit {
   @Input() public imageQuality: number;
   @Input() public minWidth = 0;
   @Input() public minHeight = 0;
-
-  @Input('file') set _file(file: FsFile) {
-    this.file = file;
-    this.generateFilePreview(file);
-  }
+  @Input() public file: FsFile;
 
   @Output() public select = new EventEmitter<any>();
   @Output() public error = new EventEmitter<any>();
@@ -44,7 +40,7 @@ export class FsFileImagePickerPreviewComponent implements OnInit {
   constructor() {}
 
   public selectFile(file) {
-    this._file = file;
+    this.file = file;
     this.select.emit(file);
   }
 
@@ -62,45 +58,4 @@ export class FsFileImagePickerPreviewComponent implements OnInit {
 
     this.updateStyle = { fontSize: (fontSize * 12) + 'px' };
   }
-
-  /**
-   * Generate preview images for file
-   * @param file {FsFile}
-   */
-  private generateFilePreview(file: FsFile) {
-
-    if (file.url) {
-      this.preview = file.url;
-      return;
-    }
-
-    if (!this.file.typeImage) {
-      return;
-    }
-
-    file.progress = true;
-
-    FileAPI.Image.transform(file.file, [{
-      width: this.previewDiameter,
-      height: this.previewDiameter,
-      preview: true,
-      // quality: file.fileOptions.imageQuality
-    }], true, (err, images) => {
-      if (!err && images[0]) {
-        const scaledCanvasImage = ScaleExifImage(
-          images[0],
-          file.exifInfo.Orientation,
-          this.previewDiameter,
-          this.previewDiameter
-        );
-        this.preview = scaledCanvasImage.toDataURL(file.type);
-
-        file.progress = false;
-      } else {
-        file.progress = false;
-      }
-    });
-  }
-
-
 }

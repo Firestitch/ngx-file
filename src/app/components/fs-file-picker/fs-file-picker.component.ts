@@ -7,7 +7,8 @@ import {
   Inject,
   Optional,
   OnInit,
-  NgZone, ChangeDetectionStrategy
+  NgZone,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 import { FsFileDragBaseComponent } from '../fs-file-drag-base/fs-file-drag-base';

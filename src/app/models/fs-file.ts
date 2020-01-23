@@ -13,7 +13,6 @@ export class FsFile {
   public type: string;
   public url = '';
   public size: number;
-  public typeImage: boolean;
 
   private _file: any;
   private _name: string;
@@ -45,6 +44,10 @@ export class FsFile {
     this._checkIfFileExists();
   }
 
+  get typeImage() {
+    return this.type.match(/^image/) !== null;
+  }
+
   get exists() {
     return this._fileExists;
   }
@@ -70,7 +73,6 @@ export class FsFile {
     this.size = value.size;
     this.name = value.name;
     this.type = value.type;
-    this.typeImage = isImageType(this.type);
     this._checkIfFileExists();
   }
 
@@ -95,7 +97,6 @@ export class FsFile {
       size: this.size,
       progress: this.progress,
       extension: this.extension,
-      typeImage: this.typeImage,
       imageWidth: this.imageWidth,
       imageHeight: this.imageHeight
     }

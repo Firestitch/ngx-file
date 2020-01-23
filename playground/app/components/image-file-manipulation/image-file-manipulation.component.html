@@ -1,31 +1,30 @@
 <fs-file (select)="select($event)"
          accept="image/*"
-         multiple="true"
->
+         multiple="true">
   <button mat-raised-button color="primary">Select File</button>
 </fs-file>
 
-<fs-file-previews [files]="files" width="200" height="200">
-  <ng-template fs-file-preview-action placement="top-right" action="remove" tooltip="Remove">
-    <mat-icon>close</mat-icon>
-  </ng-template>
-  <ng-template fs-file-preview-action
-               placement="bottom-right"
-               (click)="enhance($event)"
-               tooltip="Enhance"
-               for-types="image/*">
-    <mat-icon>brush</mat-icon>
-  </ng-template>
-  <ng-template fs-file-preview-action placement="bottom-left" action="zoom" tooltip="Zoom" for-types="image/*">
-    <mat-icon>search</mat-icon>
-  </ng-template>
-</fs-file-previews>
-
-<fieldset *ngIf="files.length > 0">
-  <legend>Files</legend>
-  <pre>{{ files | json }}</pre>
-</fieldset>
-
+<p>
+  <fs-file-previews
+    [files]="files"
+    width="200"
+    height="200"
+    (removed)="removed($event)">
+    <ng-template fs-file-preview-action placement="top-right" action="remove" tooltip="Remove">
+      <mat-icon>close</mat-icon>
+    </ng-template>
+    <ng-template fs-file-preview-action
+                placement="bottom-right"
+                (click)="enhance($event)"
+                tooltip="Enhance"
+                for-types="image/*">
+      <mat-icon>brush</mat-icon>
+    </ng-template>
+    <ng-template fs-file-preview-action placement="bottom-left" action="zoom" tooltip="Zoom" (click)="search($event)" for-types="image/*">
+      <mat-icon>search</mat-icon>
+    </ng-template>
+  </fs-file-previews>
+</p>
 
 <ul>
   <li>Accept: <b>image/*</b></li>

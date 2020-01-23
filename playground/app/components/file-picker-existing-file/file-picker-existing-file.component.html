@@ -1,20 +1,15 @@
 <div fxLayout="row" fxLayoutGap="20px">
-  <fs-file-picker (select)="select($event)"
-                  (remove)="remove()"
-                  [file]="file">
-      <div fsFileLabel>File Picker Label</div>
+  <fs-file-picker
+    (select)="select($event)"
+    (remove)="remove()"
+    [file]="file">
+    <div fsFileLabel>File Picker Label</div>
   </fs-file-picker>
 
-  <fs-file-picker (select)="select($event)"
-                  (remove)="remove()"
-                  [file]="file"
-                  [showFilename]="false">
-      <div fsFileLabel>File Picker with hidden filename</div>
-  </fs-file-picker>
-
-  <fs-file-picker (remove)="remove()"
-                  [url]="url">
-      <div fsFileLabel>File Picker From URL</div>
+  <fs-file-picker
+    (remove)="remove()"
+    [url]="url">
+    <div fsFileLabel>File Picker From URL</div>
   </fs-file-picker>
 </div>
 

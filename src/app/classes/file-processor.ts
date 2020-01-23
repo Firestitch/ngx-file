@@ -31,7 +31,7 @@ export class FileProcessor {
     const processedFiles = [];
     files.forEach((file: FsFile) => {
 
-      if (file.typeImage) {
+      if (file.file && file.typeImage) {
         const resFilePromise = new Promise((resolve, reject) => {
           this.applyTransforms(file, resolve, reject, processConfig);
         });
@@ -41,7 +41,8 @@ export class FileProcessor {
       }
     });
 
-    return from(Promise.all(processedFiles)).pipe(
+    return from(Promise.all(processedFiles))
+    .pipe(
       switchMap((resultFiles) => {
         if (!multiple && resultFiles[0]) { return of(resultFiles[0]) }
         return of(resultFiles);

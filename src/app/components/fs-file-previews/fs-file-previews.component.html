@@ -1,9 +1,9 @@
 <fs-file-preview
   *ngFor="let file of files"
   [file]="file"
-  [_actions]="actions"
-  [_actionsTemplate]="actionsTemplate"
   [previewWidth]="previewWidth"
+  [actionTemplates]="actionTemplates"
+  [actionTemplateRefs]="actionTemplateRefs"
   [previewHeight]="previewHeight"
   (remove)="removeFile($event)"
   class="preview">

@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 
 import { switchMap, takeUntil } from 'rxjs/operators';
-import { of, Subject } from 'rxjs';
+import { of, Subject, observable, Observable } from 'rxjs';
 
 import { FsFileDragBaseComponent } from '../fs-file-drag-base/fs-file-drag-base';
 import { CordovaService } from '../../services/cordova.service';
@@ -31,7 +31,6 @@ import { FS_FILE_MODULE_CONFIG } from '../../fs-file.providers';
 export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, OnDestroy {
 
   public inputProcessor: InputProcessor = null;
-  private _autoProcess = false;
   private _destroy$ = new Subject();
 
   private processOptions = {
@@ -111,7 +110,6 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
   set imageWidth(value) {
     if (value !== void 0) {
       this.processOptions.width = +value;
-      this._autoProcess = true;
     }
   }
 
@@ -119,7 +117,6 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
   set imageHeight(value) {
     if (value !== void 0) {
       this.processOptions.height = +value;
-      this._autoProcess = true;
     }
   }
 
@@ -128,7 +125,6 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
     const val = parseFloat(value);
     if (!isNaN(val)) {
       this.processOptions.quality = val;
-      this._autoProcess = true;
     }
   }
 
@@ -186,11 +182,7 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
             files = [files];
         }
 
-        if (this._autoProcess) {
-          return fileProcessor.process(files, this.processOptions);
-        } else {
-          return of(files);
-        }
+        return fileProcessor.process(files, this.processOptions);
       })
     )
     .subscribe((e) => {

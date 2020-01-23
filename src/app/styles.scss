@@ -304,8 +304,8 @@ $desktop-width-min: 992px;
     vertical-align: top;
     overflow: hidden;
 
-    &:hover .has-actions,
-    &:focus .has-actions {
+    &:hover,
+    &:focus {
       .actions {
         display: block;
 
@@ -323,19 +323,17 @@ $desktop-width-min: 992px;
       height: 100%;
     }
 
-    ::ng-deep {
-      .mat-button-wrapper {
-        padding: 0;
-        line-height: 15px !important;
-      }
+    .mat-button-wrapper {
+      padding: 0;
+      line-height: 15px !important;
+    }
 
-      .spinner {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-left: -25%;
-        margin-top: -25%;
-      }
+    .spinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-left: -25%;
+      margin-top: -25%;
     }
   }
 

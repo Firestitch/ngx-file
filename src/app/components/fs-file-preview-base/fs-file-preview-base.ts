@@ -6,6 +6,7 @@ import {
   TemplateRef,
 } from '@angular/core';
 import { FsFilePreviewActionDirective } from '../../directives/fs-file-preview-action.directive';
+import { Input } from '@angular/core';
 
 @Component({
   selector: 'fs-file-previews-base',
@@ -18,25 +19,15 @@ export class FsFilePreviewsBaseComponent {
   public actionsTemplate = [];
 
   @ContentChildren(FsFilePreviewActionDirective)
-  private set actionsParams(val: QueryList<FsFilePreviewActionDirective>) {
-    const actions = val.toArray().map((action, index) => {
-      const newAction = action;
-      newAction.index = index;
-      if (newAction.forTypes && !Array.isArray(newAction.forTypes)) {
-        newAction.forTypes = newAction.forTypes.split(',').map((type) => type.trim());
-      }
-
-      return newAction;
-    });
-
-    this.actions.push(...actions);
+  set setActionTemplates(value: QueryList<FsFilePreviewActionDirective>) {
+    this.actionTemplates.push(...value.toArray());
   }
 
-  @ContentChildren(FsFilePreviewActionDirective, {read: TemplateRef})
-  private set actionsTemplateRefs(val: QueryList<FsFilePreviewActionDirective>) {
-    this.actionsTemplate.push(...val.toArray());
+  @ContentChildren(FsFilePreviewActionDirective, { read: TemplateRef })
+  set setActionTemplateRefs(value: QueryList<TemplateRef<any>>) {
+    this.actionTemplateRefs.push(...value.toArray());
   }
 
-  constructor() {
-  }
+  @Input() actionTemplates = [];
+  @Input() actionTemplateRefs = [];
 }

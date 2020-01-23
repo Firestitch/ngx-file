@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
-import { FileProcessor } from '@firestitch/file';
+import { FileProcessor, FsFile } from '@firestitch/file';
+import { FsMessage } from '@firestitch/message';
 
 
 @Component({
@@ -13,7 +14,7 @@ export class ImageFileManipulationComponent {
 
   private _fileProcessor = new FileProcessor();
 
-  constructor() {
+  constructor(private _message: FsMessage) {
   }
 
   public select(files) {
@@ -28,7 +29,16 @@ export class ImageFileManipulationComponent {
     })
   }
 
-  public enhance(file) {
-    console.log('enhance', file);
+  public enhance(fsFile: FsFile) {
+    this._message.success(`Enhance ${fsFile.file.name}`);
+  }
+
+  public search(fsFile: FsFile) {
+    this._message.success(`Search ${fsFile.file.name}`);
+  }
+
+  public removed(files) {
+    console.log('Removed', files);
+    this._message.success('Removed');
   }
 }
