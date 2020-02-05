@@ -324,8 +324,9 @@ export class InputProcessor {
     const acceptableType = this._acceptableTypes.get(type);
 
     return this.accept === '*'
-      || (!!acceptableType && (acceptableType.has('*') || acceptableType.has(ext)))
-      || this._acceptableExts.has(`.${targetExt}`);
+            || this.accept === '*/*'
+            || (!!acceptableType && (acceptableType.has('*') || acceptableType.has(ext)))
+            || this._acceptableExts.has(`.${targetExt}`);
   }
 
   /**
