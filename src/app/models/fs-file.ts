@@ -1,5 +1,5 @@
 import { FsFileConfig } from '../interfaces';
-import { isImageType, createBlob } from '../helpers';
+import { createBlob } from '../helpers';
 
 
 export class FsFile {
@@ -82,12 +82,6 @@ export class FsFile {
     if (parts.length > 1) {
       this.extension = parts[parts.length - 1];
     }
-  }
-
-  public parseInfo(info) {
-    this.imageWidth = info.width;
-    this.imageHeight = info.height;
-    this.exifInfo = info.exif;
   }
 
   public toObject() {

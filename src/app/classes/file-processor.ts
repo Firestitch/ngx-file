@@ -1,4 +1,5 @@
 import * as FileAPI from 'fileapi';
+import * as EXIF from 'exif-js';
 
 import { from, Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -53,14 +54,42 @@ export class FileProcessor {
   /**
    * Retrun information about image (width/height)
    */
-  private getImageInfo(originFile: FsFile) {
-    return new Promise((resolve, reject) => {
+  private _updateImageInfo(originFile: FsFile) {
+
+    const exif = new Promise((resolve, reject) => {
+      const fr = new FileReader();
+      fr.onload = () => {
+        var exif = EXIF.readFromBinaryFile(fr.result);
+        resolve(exif);
+      };
+
+      fr.onerror = () => {
+        reject(fr.error);
+      }
+
+      fr.readAsArrayBuffer(originFile.file);
+    });
+
+    const dims = new Promise((resolve, reject) => {
       FileAPI.getInfo(originFile.file, (err, info) => {
         if (!err) {
           resolve(info);
         } else {
           reject(err);
         }
+      });
+
+    });
+
+    return new Promise((resolve, reject) => {
+      Promise.all([exif, dims])
+      .then((data: any) => {
+        originFile.exifInfo = data[0] || {};
+        originFile.imageWidth = data[1].width;
+        originFile.imageHeight = data[1].height;
+        resolve(originFile);
+      },(err) => {
+        reject(err);
       });
     });
   }
@@ -76,7 +105,6 @@ export class FileProcessor {
           // Process transformed files
           if (!err && images[0]) {
             let canvasImage;
-
             canvasImage = ScaleExifImage(images[0], originFile.exifInfo.Orientation);
 
             // Convert to blob for create File object
@@ -85,10 +113,9 @@ export class FileProcessor {
               originFile.file = createBlob([blob], originFile.file.name, originFile.type);
 
               // Update FsFile info
-              this.getImageInfo(originFile)
-              .then((result) => {
-                originFile.parseInfo(result);
-                resolve(originFile);
+              this._updateImageInfo(originFile)
+              .then(result => {
+                resolve(result);
               }).catch((error) => {
                 reject({ error, originFile });
               });
@@ -107,24 +134,23 @@ export class FileProcessor {
    * @param reject
    * @param config
    */
-  private async applyTransforms(file: FsFile, resolve, reject, config: ProcessConfig) {
+  private async applyTransforms(fsFile: FsFile, resolve, reject, config: ProcessConfig) {
 
     try {
 
-      const fileInfo: any = await this.getImageInfo(file);
-      file.parseInfo(fileInfo);
+      const file: any = await this._updateImageInfo(fsFile);
 
       const params = this.generateTransformParams(file, config);
       const resultFile: any = await this.transformFile(file, params, config);
       const codes = [];
       const errors = [];
 
-      if (config.minHeight && fileInfo.height < toInteger(config.minHeight)) {
+      if (config.minHeight && file.height < toInteger(config.minHeight)) {
         codes.push('minHeight');
         errors.push(`Height must be at least ${config.minHeight}px.`);
       }
 
-      if (config.minWidth && fileInfo.width < toInteger(config.minWidth)) {
+      if (config.minWidth && file.width < toInteger(config.minWidth)) {
         codes.push('minWidth');
         errors.push(`Width must be at least ${config.minWidth}px.`);
       }
