@@ -1,5 +1,5 @@
 import * as FileAPI from 'fileapi';
-import * as EXIF from 'exif-js';
+import * as EXIF from '@firestitch/exif-js';
 
 import { from, Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';

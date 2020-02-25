@@ -6,11 +6,7 @@ import {
   OnInit, ChangeDetectionStrategy,
 } from '@angular/core';
 
-import * as FileAPI from 'fileapi';
-
 import { FsFile } from '../../../models/fs-file';
-import { ScaleExifImage } from '../../../helpers';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
