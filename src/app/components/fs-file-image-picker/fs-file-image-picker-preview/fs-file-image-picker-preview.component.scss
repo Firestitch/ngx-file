@@ -5,6 +5,9 @@
   cursor: pointer;
   -webkit-mask-image: -webkit-radial-gradient(white, black);
   border: 1px solid #f2f2f2;
+  &.disabled {
+    cursor: auto;
+  }
 }
 
 .image-preview {

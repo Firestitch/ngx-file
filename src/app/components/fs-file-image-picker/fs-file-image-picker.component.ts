@@ -12,6 +12,7 @@ import { CordovaService } from '../../services/cordova.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FsFileImagePickerDialogComponent } from './fs-file-image-picker-dialog/fs-file-image-picker-dialog.component';
 
+
 @Component({
   selector: 'fs-file-image-picker',
   templateUrl: './fs-file-image-picker.component.html',
@@ -28,6 +29,7 @@ export class FsFileImagePickerComponent {
   @Input() public label = '';
   @Input() public minWidth = 0;
   @Input() public minHeight = 0;
+  @Input() public allowUpload = true;
 
   @Input('url') set url(url) {
     this._file = new FsFile(url);
@@ -60,6 +62,10 @@ export class FsFileImagePickerComponent {
   }
 
   public clicked(event: KeyboardEvent) {
+
+    if (!this.allowUpload) {
+      return;
+    }
 
     if (event.shiftKey) {
       event.preventDefault();
