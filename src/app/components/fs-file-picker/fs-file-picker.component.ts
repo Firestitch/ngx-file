@@ -36,7 +36,7 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
   @Input() public showFilename = true;
 
   @Input('url') set url(url) {
-    this._file = new FsFile(url);
+    this._file = url ? new FsFile(url) : null;
   }
 
   @Input('file') set file(file) {
