@@ -32,7 +32,7 @@ export class FsFile {
         const match = name.toLowerCase().match(/([^\.]+)$/);
         this.extension = match ? match[1] : '';
 
-        const mime = this.extension.match(/(jpe?g|png|gif|tiff?|bmp)/) ? 'image' : 'application';
+        const mime = this.extension.match(/(jpe?g|png|gif|tiff?|bmp|svg)/) ? 'image' : 'application';
         type = mime + '/' + this.extension;
       }
 
@@ -46,6 +46,14 @@ export class FsFile {
 
   get typeImage() {
     return this.type.match(/^image/) !== null;
+  }
+
+  get typeSvg() {
+    return this.type.match(/\/svg/);
+  }
+
+  get imageProcess() {
+    return this.typeImage && !this.typeSvg;
   }
 
   get exists() {

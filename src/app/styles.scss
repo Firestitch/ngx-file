@@ -195,10 +195,10 @@ $desktop-width-min: 992px;
         font-weight: bold;
         text-align: center;
         text-transform: uppercase;
-        font-size: 25px;
+        font-size: 20px;
         position: absolute;
         width: 100%;
-        bottom: 19px;
+        bottom: 28px;
         color: #fff;
       }
 
@@ -294,10 +294,8 @@ $desktop-width-min: 992px;
     }
 
     .preview-container {
-      &:not(.type-image) {
-        border: 1px #efefef solid;
-        border-radius: 3px;
-      }
+      border: 1px #efefef solid;
+      border-radius: 3px;
     }
 
     display: inline-block;

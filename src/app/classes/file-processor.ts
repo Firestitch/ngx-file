@@ -32,7 +32,7 @@ export class FileProcessor {
     const processedFiles = [];
     files.forEach((file: FsFile) => {
 
-      if (file.file && file.typeImage) {
+      if (file.file && file.imageProcess) {
         const resFilePromise = new Promise((resolve, reject) => {
           this.applyTransforms(file, resolve, reject, processConfig);
         });

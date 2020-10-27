@@ -2,9 +2,9 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { MatInput, MatInputModule } from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
@@ -20,6 +20,7 @@ import { FsFileImagePickerPreviewComponent } from './components/fs-file-image-pi
 import { FsFileBouncingIconComponent } from './components/fs-file-bouncing-icon/fs-file-bouncing-icon.component';
 import { FsFileDragoverMessageComponent } from './components/fs-file-dragover-message/fs-file-dragover-message.component';
 
+import { FsFileLabelMessage } from './directives/fs-file-label-message.directive';
 import { FsFilePreviewActionDirective } from './directives/fs-file-preview-action.directive';
 
 import { CordovaService } from './services/cordova.service';
@@ -43,7 +44,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    FsPromptModule
+    FsPromptModule,
   ],
   exports: [
     FsFileComponent,
@@ -52,7 +53,8 @@ import { FormsModule } from '@angular/forms';
     FsFilePreviewActionDirective,
     FsFilePickerComponent,
     FsFileImagePickerComponent,
-    FsFileImagePickerPreviewComponent
+    FsFileImagePickerPreviewComponent,
+    FsFileLabelMessage,
   ],
   entryComponents: [
     FsFileImagePickerDialogComponent
@@ -69,7 +71,8 @@ import { FormsModule } from '@angular/forms';
     FsFileImagePickerPreviewComponent,
     FsFileBouncingIconComponent,
     FsFileDragoverMessageComponent,
-    FsFileImagePickerDialogComponent
+    FsFileImagePickerDialogComponent,
+    FsFileLabelMessage,
   ],
   providers: [
     CordovaService
