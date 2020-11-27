@@ -108,14 +108,14 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
 
   @Input()
   set imageWidth(value) {
-    if (value !== void 0) {
+    if (value) {
       this.processOptions.width = +value;
     }
   }
 
   @Input()
   set imageHeight(value) {
-    if (value !== void 0) {
+    if (value) {
       this.processOptions.height = +value;
     }
   }

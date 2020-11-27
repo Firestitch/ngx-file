@@ -22,8 +22,8 @@ import { FsFileImagePickerDialogComponent } from './fs-file-image-picker-dialog/
 export class FsFileImagePickerComponent {
 
   @Input() public imageQuality: number;
-  @Input() public imageWidth = 150;
-  @Input() public imageHeight = 150;
+  @Input() public imageWidth;
+  @Input() public imageHeight;
   @Input() public previewDiameter = 50;
   @Input() public previewFit = 'cover';
   @Input() public label = '';
