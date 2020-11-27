@@ -21,6 +21,7 @@ import { FS_FILE_MODULE_CONFIG } from '../../fs-file.providers';
 @Component({
   selector: 'fs-file-picker',
   templateUrl: 'fs-file-picker.component.html',
+  styleUrls: ['fs-file-picker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsFilePickerComponent extends FsFileDragBaseComponent implements OnInit {
@@ -61,11 +62,23 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
     return this._disabled;
   }
 
+  @Input('width') set setWidth(value) {
+    this.width = this._isNumeric(value) ? `${value}px` : value;
+  }
+
+
+  @Input('height') set setHeight(value) {
+    this.height = this._isNumeric(value) ? `${value}px` : value;
+  }
+
   @Input() public previewWidth = 150;
   @Input() public previewHeight = 150;
   @Input() public allowDownload;
   @Input() public allowReupload = true;
   @Input() public allowRemove;
+
+  public width = '150px';
+  public height = '150px';
 
   @Output() public select = new EventEmitter<any>();
   @Output() public remove = new EventEmitter();
@@ -73,9 +86,11 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
   @ViewChild('fileInput', { static: false }) public fileInput: any;
 
 
-  constructor(@Optional() @Inject(FS_FILE_MODULE_CONFIG) public moduleConfig,
-              cordovaService: CordovaService,
-              ngZone: NgZone) {
+  constructor(
+    @Optional() @Inject(FS_FILE_MODULE_CONFIG) public moduleConfig,
+    cordovaService: CordovaService,
+    ngZone: NgZone,
+  ) {
     super();
     this.inputProcessor = new InputProcessor(cordovaService, ngZone);
   }
@@ -91,6 +106,7 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
         this.allowRemove = this.moduleConfig.allowRemove
       }
     }
+
   }
 
   public selectFile(file) {
@@ -106,4 +122,9 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
   public actionClick(data) {
     data.event.stopPropagation();
   }
+
+  private _isNumeric(value) {
+    return /^-?\d+$/.test(value);
+  }
+
 }

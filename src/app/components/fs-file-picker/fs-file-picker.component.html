@@ -6,15 +6,18 @@
       [imageWidth]="imageWidth"
       [imageHeight]="imageHeight"
       [imageQuality]="imageQuality">
-    <div class="wrap">
+    <div class="wrap"
+      [style.width]="width"
+      [style.height]="height"
+      >
       <fs-file-preview
           class="preview"
           *ngIf="_file; else preview"
           (remove)="removeFile()"
           [file]="_file"
           [showFilename]="showFilename"
-          [previewWidth]="previewWidth"
-          [previewHeight]="previewHeight">
+          [previewHeight]="previewHeight"
+          [previewWidth]="previewWidth">
         <ng-template
             fs-file-preview-action
             placement="top-right"

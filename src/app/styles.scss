@@ -59,23 +59,23 @@ $desktop-width-min: 992px;
 
 @mixin action-positions {
   &.top-left {
-    top: 5%;
-    right: 5%;
+    top: 8px;
+    right: 8px;
   }
 
   &.top-right {
-    top: 5%;
-    right: 5%;
+    top: 8px;
+    right: 8px;
   }
 
   &.bottom-left {
-    bottom: 5%;
-    left: 5%;
+    bottom: 8px;
+    left: 8px;
   }
 
   &.bottom-right {
-    bottom: 5%;
-    right: 5%;
+    bottom: 8px;
+    right: 8px;
   }
 }
 
@@ -105,76 +105,18 @@ $desktop-width-min: 992px;
     }
   }
 
-  fs-file-picker {
+fs-file-picker {
+  &.dragover {
     .wrap {
-      display: table-cell;
-      position: relative;
-    }
-
-    &.dragover {
-      .wrap {
-        &:after {
-          content: '';
-          position: absolute;
-          top: 0;
-          right: 0;
-          bottom: 0;
-          left: 0;
-          border: 3px mat-color($primary) dashed;
-          border-radius: 3px;
-        }
-
-        .select {
-          border: none;
-        }
+      &:after {
+        border-color: mat-color($primary);
       }
-
-      .select {
-
-        button {
-          display: none;
-        }
-
-        .mat-icon {
-          color: #07a8e6;
-        }
-      }
-    }
-
-    fs-file-preview {
-      border: none !important;
-    }
-
-    .download {
-      color: inherit;
-    }
-
-    .select {
-      text-align: center;
-      border-radius: 3px;
-      border: 1px solid #efefef;
-      width: 150px;
-      height: 150px;
-      vertical-align: middle;
-      padding: 0 10px;
-      justify-content: center;
-      flex-direction: column;
-      box-sizing: border-box;
-      display: flex;
-      align-items: center;
-
-      mat-icon {
-        transform: scale(1.8);
-        color: #ddd;
-      }
-    }
-
-    .instruction {
-      font-size: 75%;
-      padding: 12px 0;
-      line-height: normal;
     }
   }
+}
+
+
+
 
   fs-file-preview {
 
@@ -224,6 +166,7 @@ $desktop-width-min: 992px;
     .preview-container {
       overflow: hidden;
       box-sizing: border-box;
+      margin: auto;
     }
 
     .actions {
@@ -256,38 +199,23 @@ $desktop-width-min: 992px;
           }
 
           &.top-left {
-            top: -35px;
-            right: -35px;
+            top: -50px;
+            right: -50px;
           }
 
           &.top-right {
-            top: -35px;
-            right: -35px;
+            top: -50px;
+            right: -50px;
           }
 
           &.bottom-left {
-            bottom: -35px;
-            left: -35px;
+            bottom: -50px;
+            left: -50px;
           }
 
           &.bottom-right {
-            bottom: -35px;
-            right: -35px;
-          }
-        }
-
-        &.mat-mini-fab {
-          width: 22%;
-          height: 22%;
-          min-width: 30px;
-          min-height: 30px;
-          max-width: 42px;
-          max-height: 42px;
-          line-height: 15px !important;
-
-          .mat-button-wrapper {
-            padding: 4px 0;
-            line-height: 15px !important;
+            bottom: -50px;
+            right: -50px;
           }
         }
       }
