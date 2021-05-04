@@ -29,6 +29,7 @@ export class FsFileImagePickerPreviewComponent implements OnInit {
   @Input() public minHeight = 0;
   @Input() public file: FsFile;
   @Input() public allowUpload = true;
+  @Input() public disabled = false;
 
   @Output() public select = new EventEmitter<any>();
   @Output() public error = new EventEmitter<any>();

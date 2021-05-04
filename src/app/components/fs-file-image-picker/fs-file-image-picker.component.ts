@@ -30,6 +30,7 @@ export class FsFileImagePickerComponent {
   @Input() public minWidth = 0;
   @Input() public minHeight = 0;
   @Input() public allowUpload = true;
+  @Input() public disabled = false;
 
   @Input('url') set url(url) {
     this._file = new FsFile(url);
