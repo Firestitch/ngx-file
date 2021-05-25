@@ -6,6 +6,7 @@
     border-radius: 3px;
     text-align: center;
     overflow: hidden;
+    box-sizing: border-box;
 
     &:after {
       border: 3px transparent dashed;
