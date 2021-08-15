@@ -11,7 +11,7 @@ import { FsMessage } from '@firestitch/message';
 })
 export class FilePickerExistingUrlComponent {
 
-  public previewUrl = 'https://www.topgear.com/sites/default/files/styles/16x9_1280w/public/images/cars-road-test/2016/02/41ae14b2673874e7e212502954b88910/lp610_4_white_005.jpg';
+  public previewUrl = 'https://cdn.luxe.digital/media/2020/12/16175821/most-expensive-cars-2021-Maserati-MC20-luxe-digital%402x.jpg';
   public file = new FsFile(this.previewUrl);
 
   public constructor(private fsMessage: FsMessage) {}

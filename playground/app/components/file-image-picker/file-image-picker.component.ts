@@ -13,7 +13,7 @@ export class FileImagePickerComponent {
   public constructor(private message: FsMessage) {}
 
   public file = void 0;
-  public url = 'https://www.topgear.com/sites/default/files/styles/16x9_1280w/public/images/cars-road-test/2016/02/41ae14b2673874e7e212502954b88910/lp610_4_white_005.jpg';
+  public url = 'https://cdn.luxe.digital/media/2020/12/16175821/most-expensive-cars-2021-Maserati-MC20-luxe-digital%402x.jpg';
 
   public select(file) {
     this.file = file;
