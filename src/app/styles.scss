@@ -115,179 +115,175 @@ fs-file-picker {
   }
 }
 
+fs-file-preview {    
+  border: 1px #efefef solid;
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  overflow: hidden;
+  border-radius: 3px;
 
+  .file-details {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 5px;
 
-
-  fs-file-preview {
-
-    .file-details {
-
-      flex-direction: column;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      padding: 5px;
-
-      .file-icon {
-        position: relative;
-      }
-
-      .file-ext {
-        font-weight: bold;
-        text-align: center;
-        text-transform: uppercase;
-        font-size: 20px;
-        position: absolute;
-        width: 100%;
-        bottom: 28px;
-        color: #fff;
-      }
-
-      mat-icon {
-        font-size: 90px;
-        width: 90px;
-        height: 90px;
-        color: #ccc;
-
-      }
-
-      .file-name {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        padding: 0 5px;
-        font-size: 75%;
-        text-align: center;
-        width: 100%;
-      }
+    .file-icon {
+      position: relative;
     }
 
-    .preview-container {
-      overflow: hidden;
-      box-sizing: border-box;
-      margin: auto;
-    }
-
-    .actions {
+    .file-ext {
+      font-weight: bold;
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 20px;
       position: absolute;
+      width: 100%;
+      bottom: 28px;
+      color: #fff;
+    }
 
-      @include apply-to(less-than, phone) {
-        display: block;
+    mat-icon {
+      font-size: 90px;
+      width: 90px;
+      height: 90px;
+      color: #ccc;
+
+    }
+
+    .file-name {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 0 5px;
+      font-size: 75%;
+      text-align: center;
+      width: 100%;
+    }
+  }
+
+  .preview-container {
+    overflow: hidden;
+    box-sizing: border-box;
+    margin: auto;
+  }
+
+  .actions {
+    position: absolute;
+
+    @include apply-to(less-than, phone) {
+      display: block;
+    }
+
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+
+    .action {
+
+      position: absolute;
+      cursor: pointer;
+
+      &.hide {
+        display: none;
       }
 
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
+      @include action-positions();
+
+      @include apply-to(greater-than, phone) {
+
+        &.top-left, &.top-right, &.bottom-left, &.bottom-right {
+          transition: top .3s, bottom .3s, left .3s, right .3s;
+        }
+
+        &.top-left {
+          top: -50px;
+          right: -50px;
+        }
+
+        &.top-right {
+          top: -50px;
+          right: -50px;
+        }
+
+        &.bottom-left {
+          bottom: -50px;
+          left: -50px;
+        }
+
+        &.bottom-right {
+          bottom: -50px;
+          right: -50px;
+        }
+      }
+    }
+  }
+
+  .preview-container {
+
+    &.type-image {
+      background-image: /* tint image */ linear-gradient(to right, rgb(255 255 255 / 75%), rgb(255 255 255 / 75%)), 
+      /* checkered effect */ linear-gradient(to right, black 50%, white 50%), 
+      linear-gradient(to bottom, black 50%, white 50%);
+      background-blend-mode: normal, difference, normal;
+      background-size: 20px 20px;
+    }
+  }
+
+  &:hover,
+  &:focus {
+    .actions {
+      display: block;
 
       .action {
-
-        position: absolute;
-        cursor: pointer;
-
-        &.hide {
-          display: none;
-        }
-
         @include action-positions();
-
-        @include apply-to(greater-than, phone) {
-
-          &.top-left, &.top-right, &.bottom-left, &.bottom-right {
-            transition: top .3s, bottom .3s, left .3s, right .3s;
-          }
-
-          &.top-left {
-            top: -50px;
-            right: -50px;
-          }
-
-          &.top-right {
-            top: -50px;
-            right: -50px;
-          }
-
-          &.bottom-left {
-            bottom: -50px;
-            left: -50px;
-          }
-
-          &.bottom-right {
-            bottom: -50px;
-            right: -50px;
-          }
-        }
       }
     }
+  }
 
-    .preview-container {
-      border: 1px #efefef solid;
-      border-radius: 3px;
+  img {
+    display: block;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
 
-      &.type-image {
-        background-image: /* tint image */ linear-gradient(to right, rgb(255 255 255 / 75%), rgb(255 255 255 / 75%)), 
-        /* checkered effect */ linear-gradient(to right, black 50%, white 50%), 
-        linear-gradient(to bottom, black 50%, white 50%);
-        background-blend-mode: normal, difference, normal;
-        background-size: 20px 20px;
-      }
-    }
+  .mat-button-wrapper {
+    padding: 0;
+    line-height: 15px !important;
+  }
 
-    display: inline-block;
+  .spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -25%;
+    margin-top: -25%;
+  }
+}
+
+fs-file-previews {
+  margin-top: -10px;
+  display: block;
+
+  .queue {
     position: relative;
-    vertical-align: top;
-    overflow: hidden;
-
-    &:hover,
-    &:focus {
-      .actions {
-        display: block;
-
-        .action {
-          @include action-positions();
-        }
-      }
-    }
-
-    img {
-      display: block;
-      border-radius: 3px;
-      object-fit: cover;
-      width: 100%;
-      height: 100%;
-    }
-
-    .mat-button-wrapper {
-      padding: 0;
-      line-height: 15px !important;
-    }
-
-    .spinner {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      margin-left: -25%;
-      margin-top: -25%;
-    }
+    display: block;
   }
 
-  fs-file-previews {
-    .queue {
-      position: relative;
-      display: block;
-    }
+  fs-file-preview {
+    margin-right: 10px;
+    margin-top: 10px;
 
-    fs-file-preview {
-      margin-right: 10px;
-      margin-bottom: 10px;
-
-      &:last-child {
-        margin-right: 0;
-        margin-bottom: 0;
-      }
+    &:last-child {
+      margin-right: 0;
     }
   }
+}
 
   @media only screen and (max-width: 550px) {
     fs-file-preview .actions {
