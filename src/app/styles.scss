@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 
 $phone-width-max: 767.98px;
 $tablet-width-min: 768px;
@@ -81,7 +81,7 @@ $desktop-width-min: 992px;
 
 @mixin fs-file($theme) {
 
-  $primary: mat-palette($theme);
+  $primary: mat.define-palette($theme);
 
   fs-file {
     fs-file-dragover-message {
@@ -89,10 +89,10 @@ $desktop-width-min: 992px;
         z-index: 999;
         display: none;
         .content {
-          background-color: mat-color($primary);
+          background-color: mat.get-color-from-palette($primary);
         }
         .bounce {
-          color: mat-color($primary);
+          color: mat.get-color-from-palette($primary);
         }
       }
     }
@@ -109,7 +109,7 @@ fs-file-picker {
   &.dragover {
     .wrap {
       &:after {
-        border-color: mat-color($primary);
+        border-color: mat.get-color-from-palette($primary);
       }
     }
   }

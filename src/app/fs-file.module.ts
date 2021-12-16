@@ -79,7 +79,7 @@ import { FormsModule } from '@angular/forms';
   ],
 })
 export class FsFileModule {
-  static forRoot(config: FsFileModuleConfig = null): ModuleWithProviders {
+  static forRoot(config: FsFileModuleConfig = null): ModuleWithProviders<FsFileModule> {
     return {
       ngModule: FsFileModule,
       providers: [
