@@ -45,7 +45,9 @@
     "@compodoc/compodoc": "^1.1.10",
     "@firestitch/api": "^8.1.10",
     "@firestitch/autocomplete": "^10.0.24",
+    "@firestitch/clear": "^8.1.0",
     "@firestitch/common": "^8.0.12",
+    "@firestitch/date": "^8.0.26",
     "@firestitch/datepicker": "^9.2.3",
     "@firestitch/dialog": "^12.0.0-beta.1",
     "@firestitch/drawer": "^9.2.7",
@@ -57,6 +59,7 @@
     "@firestitch/menu": "^12.0.0",
     "@firestitch/message": "^8.2.2",
     "@firestitch/prompt": "^8.4.5",
+    "@firestitch/scroll-picker": "^10.0.2",
     "@firestitch/upload": "^8.0.3",
     "codelyzer": "^6.0.0",
     "cpx": "^1.5.0",
@@ -72,7 +75,7 @@
     "npm-run-all": "^4.1.5",
     "parse-messy-time": "^2.1.0",
     "rxjs": "^6.5.3",
-    "typescript": "^4.3.5",
+    "typescript": "4.3.5",
     "zone.js": "~0.11.4"
   },
   "engines": {
