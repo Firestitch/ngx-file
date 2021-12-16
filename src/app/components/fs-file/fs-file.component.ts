@@ -36,9 +36,9 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
   private processOptions = {
     width: void 0,
     height: void 0,
-    quality: 1,
-    minHeight: 0,
-    minWidth: 0
+    quality: void 0,
+    minHeight: void 0,
+    minWidth: void 0,
   };
 
   @Input()
@@ -175,7 +175,6 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
 
     this.inputProcessor.select
     .pipe(
-      takeUntil(this._destroy$),
       switchMap((files) => {
 
         if (this.inputProcessor.multiple && !Array.isArray(files)) {
@@ -183,7 +182,8 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
         }
 
         return fileProcessor.process(files, this.processOptions);
-      })
+      }),
+      takeUntil(this._destroy$),
     )
     .subscribe((e) => {
       this.select.emit(e);

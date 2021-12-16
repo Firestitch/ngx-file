@@ -28,6 +28,15 @@ export class ProcessConfig {
   //   }
   // }
 
+  get shouldProcess(): boolean {
+    return this._width !== undefined
+      || this._height !== undefined
+      || this._quality !== undefined
+      || this._format !== undefined
+      || this._minHeight !== undefined
+      || this._minWidth !== undefined;
+  }
+
   set width(value) {
     if (value !== void 0) {
       this._width = +value;
@@ -111,7 +120,6 @@ export class ProcessConfig {
     this.width = config.width;
     this.height = config.height;
     this.quality = config.quality;
-    this.format = config.format;
     this.format = config.format;
     this.minWidth = config.minWidth;
     this.minHeight = config.minHeight;
