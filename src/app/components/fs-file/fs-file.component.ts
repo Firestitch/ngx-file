@@ -25,7 +25,9 @@ import { FS_FILE_MODULE_CONFIG } from '../../fs-file.providers';
 @Component({
   selector: 'fs-file',
   templateUrl: './fs-file.component.html',
-  styles: [':host label { cursor: pointer }'],
+  styleUrls: [
+    './fs-file.component.scss',
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, OnDestroy {
