@@ -1,4 +1,7 @@
 import { ElementRef, EventEmitter, NgZone } from '@angular/core';
+
+import { Subject } from 'rxjs';
+
 import * as FileAPI from 'fileapi';
 import { FsFile } from '../models';
 import {
@@ -32,6 +35,7 @@ export class InputProcessor {
   private _accept = '*';
   private _acceptableTypes = new Map();
   private _acceptableExts = new Set();
+  private _declinedFiles$ = new Subject<File[]>();
 
   constructor(private cordovaService: CordovaService, private ngZone: NgZone) {
 
@@ -54,6 +58,10 @@ export class InputProcessor {
     this.parseAcceptTypes(value);
     this._accept = value.trim();
   }
+
+  public get declinedFiles$() {
+    return this._declinedFiles$.asObservable();
+  }
   /**
    * Initialize service for target element
    * @param el
@@ -72,6 +80,8 @@ export class InputProcessor {
         return;
       }
 
+      const declinedFiles = [];
+
       const files = FileAPI.getFiles(event)
         .filter(file => {
           const nameParts = file.name.split('.');
@@ -80,9 +90,18 @@ export class InputProcessor {
             ext = nameParts[nameParts.length - 1];
           }
 
-          return this.checkAcceptableTypes(file.type, ext)
+          const acceptableFile = this.checkAcceptableTypes(file.type, ext);
+
+          if (!acceptableFile) {
+            declinedFiles.push(file);
+          }
+
+          return acceptableFile;
         });
 
+      if (declinedFiles.length > 0) {
+        this._declinedFiles$.next(declinedFiles);
+      }
 
       if (files && files.length > 0) {
         // Clear input value

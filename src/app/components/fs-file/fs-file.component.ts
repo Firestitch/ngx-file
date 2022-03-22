@@ -13,8 +13,10 @@ import {
   ViewChild
 } from '@angular/core';
 
+import { FsMessage, MessageMode } from '@firestitch/message';
+
 import { switchMap, takeUntil } from 'rxjs/operators';
-import { of, Subject, observable, Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 
 import { FsFileDragBaseComponent } from '../fs-file-drag-base/fs-file-drag-base';
 import { CordovaService } from '../../services/cordova.service';
@@ -133,6 +135,7 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
   @Output() public select = new EventEmitter();
   @Output() public error = new EventEmitter();
   @Output() public clicked = new EventEmitter();
+  @Output() public declined = new EventEmitter<File[]>();
 
   @ViewChild('fileInput', { static: true })
   public fileInput: any;
@@ -144,7 +147,10 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
     cordovaService: CordovaService,
     public el: ElementRef,
     ngZone: NgZone,
-    @Optional() @Inject(FS_FILE_MODULE_CONFIG) public moduleConfig,
+    @Optional()
+    @Inject(FS_FILE_MODULE_CONFIG)
+    public moduleConfig,
+    private _message: FsMessage,
   ) {
     super();
     this.inputProcessor = new InputProcessor(cordovaService, ngZone);
@@ -156,6 +162,7 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
     this.inputProcessor.registerInput(this.fileInput);
     this.inputProcessor.registerLabel(this.fileLabel);
     this.inputProcessor.registerDrop(this.el);
+    this.listenDeclinedFiles();
   }
 
   public ngOnDestroy() {
@@ -194,5 +201,26 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
       this.error.emit(e);
       this.initSelect();
     })
+  }
+
+  private listenDeclinedFiles(): void {
+    this.inputProcessor
+      .declinedFiles$
+      .pipe(
+        takeUntil(this._destroy$),
+      )
+      .subscribe((files) => {
+        this.declined.next(files);
+
+        files.forEach((file) => {
+          this._message.error(
+            `Upload file type is not supported for ${file.name}`,
+            {
+              mode: MessageMode.Toast,
+              positionClass: 'toast-bottom-right',
+            }
+          )
+        })
+      })
   }
 }
