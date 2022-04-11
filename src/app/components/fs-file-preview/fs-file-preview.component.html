@@ -1,8 +1,8 @@
 <div
-  [style.width.px]="previewWidth"
-  [style.height.px]="previewHeight"
-  class="preview-container"
-  [ngClass]="{ 'has-actions': !!actions.length, 'type-image': file.typeImage }">
+    [style.width.px]="previewWidth"
+    [style.height.px]="previewHeight"
+    class="preview-container"
+    [ngClass]="{ 'has-actions': !!actions.length, 'type-image': file.typeImage }">
 
   <!-- Image container -->
   <ng-container *ngIf="preview; else nonImage">
@@ -39,4 +39,6 @@
   <div class="spinner">
     <mat-spinner *ngIf="file.progress" [diameter]="previewWidth/2"></mat-spinner>
   </div>
+
+  <ng-content></ng-content>
 </div>

@@ -1,4 +1,4 @@
-<div class="wrap" [style.width.px]="previewDiameter" [style.height.px]="previewDiameter" [ngClass]="{ disabled: !allowUpload }">
+<div class="wrap" [ngClass]="{ disabled: !allowUpload }">
 
   <fs-file
     *ngIf="allowUpload"
@@ -15,21 +15,6 @@
     multiple="false">
 
     <ng-container *ngTemplateOutlet="filePreview"></ng-container>
-
-    <!-- <ng-container *ngIf="preview; else noImage">
-      <img class="image-preview" [src]="preview" [style.objectFit]="previewFit">
-      <mat-spinner class="spinner" *ngIf="file.progress" [diameter]="previewDiameter/2"></mat-spinner>
-    </ng-container>
-
-    <ng-template #noImage>
-      <div class="image-preview"
-          [style.background]="'#f2f2f2'"
-          [style.width.px]="previewDiameter"
-          [style.height.px]="previewDiameter"></div>
-      <mat-spinner class="spinner" *ngIf="file.progress" [diameter]="previewDiameter/2"></mat-spinner>
-    </ng-template> -->
-
-    <div *ngIf="allowUpload" class="update-action" [ngStyle]="updateStyle"> {{file && file.exists ? 'Update' : 'Upload '}} </div>
   </fs-file>
 
   <ng-container *ngIf="!allowUpload">
@@ -39,9 +24,10 @@
 
 <ng-template #filePreview>
   <fs-file-preview
-    [file]="file"
-    [previewHeight]="previewDiameter"
-    [previewWidth]="previewDiameter"
-    class="image-preview">
+      [file]="file"
+      [previewHeight]="previewDiameter"
+      [previewWidth]="previewDiameter"
+      class="image-preview">
+    <div *ngIf="allowUpload" class="update-action" [ngStyle]="updateStyle"> {{file && file.exists ? 'Update' : 'Upload '}} </div>
   </fs-file-preview>
 </ng-template>

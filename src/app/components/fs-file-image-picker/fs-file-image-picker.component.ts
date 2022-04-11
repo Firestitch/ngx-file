@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -47,9 +48,12 @@ export class FsFileImagePickerComponent {
 
   private _previousFile: FsFile;
 
-  constructor(private _cordovaService: CordovaService,
-              private _ngZone: NgZone,
-              private dialog: MatDialog) {
+  constructor(
+    private _cordovaService: CordovaService,
+    private _ngZone: NgZone,
+    private _dialog: MatDialog,
+    private _cdRef: ChangeDetectorRef,
+  ) {
     this.inputProcessor = new InputProcessor(_cordovaService, _ngZone);
   }
 
@@ -60,10 +64,10 @@ export class FsFileImagePickerComponent {
 
   public cancel() {
     this._file = this._previousFile;
+    this._cdRef.markForCheck();
   }
 
   public clicked(event: KeyboardEvent) {
-
     if (!this.allowUpload) {
       return;
     }
@@ -71,7 +75,7 @@ export class FsFileImagePickerComponent {
     if (event.shiftKey) {
       event.preventDefault();
 
-      this.dialog.open(FsFileImagePickerDialogComponent, {
+      this._dialog.open(FsFileImagePickerDialogComponent, {
         data: {
           file: this._file,
           selectUrl: this.selectUrl
