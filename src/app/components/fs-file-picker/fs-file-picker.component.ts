@@ -26,6 +26,8 @@ import { FS_FILE_MODULE_CONFIG } from '../../fs-file.providers';
 })
 export class FsFilePickerComponent extends FsFileDragBaseComponent implements OnInit {
 
+  @ViewChild('fileInput') public fileInput: any;
+
   public inputProcessor = null;
   public instruction = 'Drag & Drop your file or use the button below';
   public _file: FsFile;
@@ -83,9 +85,6 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
 
   @Output() public select = new EventEmitter<any>();
   @Output() public remove = new EventEmitter();
-
-  @ViewChild('fileInput') public fileInput: any;
-
 
   constructor(
     @Optional() @Inject(FS_FILE_MODULE_CONFIG) public moduleConfig,

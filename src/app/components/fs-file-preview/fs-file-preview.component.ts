@@ -21,7 +21,7 @@ import { ScaleExifImage } from '../../helpers';
   selector: 'fs-file-preview',
   templateUrl: 'fs-file-preview.component.html',
   styleUrls: ['fs-file-preview.component.scss'],
-  //changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implements AfterContentInit {
 
@@ -58,7 +58,6 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
   }
 
   public callAction($event: Event, action) {
-
     if (action.click) {
       action.click.emit({ event: $event, file: this.file });
     }
@@ -73,7 +72,6 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
    * @param file {FsFile}
    */
   private _generateFilePreview(file: FsFile) {
-
     this.preview = null;
     if (!file.typeImage) {
       return;
