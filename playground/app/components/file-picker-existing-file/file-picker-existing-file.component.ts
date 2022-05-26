@@ -13,8 +13,10 @@ export class FilePickerExistingFileComponent {
   public url = 'https://cdn.hipwallpaper.com/i/30/77/AKPMDF.jpg';
   public file = new FsFile('http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf', 'Document.pdf');
 
-  public constructor(private _message: FsMessage,
-                     private _upload: UploadService) {}
+  public constructor(
+    private _message: FsMessage,
+    private _upload: UploadService
+  ) {}
 
   public select(file: FsFile) {
     file.progress = true;

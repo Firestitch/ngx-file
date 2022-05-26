@@ -24,6 +24,7 @@ export { FsFilePickerComponent, } from './app/components/fs-file-picker/fs-file-
 export { FsFilePreviewsBaseComponent, } from './app/components/fs-file-preview-base/fs-file-preview-base';
 export { FsFileDragBaseComponent, } from './app/components/fs-file-drag-base/fs-file-drag-base';
 export { FsFilePreviewActionDirective } from './app/directives/fs-file-preview-action.directive';
-export { FsFileLabelMessage } from './app/directives/fs-file-label-message.directive';
+export { FsFileHintDirective } from './app/directives/fs-file-hint.directive';
+export { FsFileLabelDirective } from './app/directives/fs-file-label.directive';
 export { FsFileImagePickerComponent } from './app/components/fs-file-image-picker/fs-file-image-picker.component';
 export { FsFileImagePickerPreviewComponent } from './app/components/fs-file-image-picker/fs-file-image-picker-preview/fs-file-image-picker-preview.component';

@@ -1,5 +1,12 @@
-<fs-label-field class="fs-label">
-  <fs-label><ng-content select="[fsFileLabel]"></ng-content></fs-label>
+<fs-label-field class="fs-form-wrapper fs-label">
+  <ng-container *ngIf="label; else labelContent">
+    <fs-label>{{label}}</fs-label>
+  </ng-container>
+  <ng-template #labelContent>
+    <fs-label *ngIf="labels.length">
+      <ng-content select="[fsFileLabel]"></ng-content>
+    </fs-label>
+  </ng-template>
   <fs-file
       [accept]="accept"
       (select)="selectFile($event)"
@@ -12,9 +19,9 @@
         [style.height]="height">
       <fs-file-preview
           class="preview"
-          *ngIf="_file; else preview"
+          *ngIf="file; else preview"
           (remove)="removeFile()"
-          [file]="_file"
+          [file]="file"
           [showFilename]="showFilename"
           [previewHeight]="previewHeight"
           [previewWidth]="previewWidth">
@@ -23,7 +30,8 @@
             placement="top-right"
             action="remove"
             tooltip="Remove"
-            *ngIf="allowRemove" (click)="actionClick($event)">
+            *ngIf="allowRemove" 
+            (click)="actionClick($event)">
           <mat-icon>close</mat-icon>
         </ng-template>
         <ng-template
@@ -38,9 +46,15 @@
             placement="bottom-left"
             action="download"
             tooltip="Download"
-            [hide]="!(allowDownload && _file.url)"
+            [hide]="!(allowDownload && file.url)"
             (click)="actionClick($event)">
-          <a [href]="_file.url" target="_blank" tabindex="-1" class="download"><mat-icon>cloud_download</mat-icon></a>
+          <a 
+              [href]="file.url" 
+              target="_blank" 
+              tabindex="-1" 
+              class="download">
+            <mat-icon>cloud_download</mat-icon>
+          </a>
         </ng-template>
       </fs-file-preview>
 
@@ -53,5 +67,10 @@
       </ng-template>
     </div>
   </fs-file>
-  <fs-label-message><ng-content select="[fsFileLabelMessage]"></ng-content></fs-label-message>
+  <fs-label-message class="fs-form-message">
+    <span class="fs-form-hint">
+      <ng-content select="[fsFileHint]"></ng-content>
+      <ng-content select="[fsFileMessageLabel]"></ng-content>
+    </span>
+  </fs-label-message>
 </fs-label-field>

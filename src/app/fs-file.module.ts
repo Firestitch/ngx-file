@@ -20,7 +20,8 @@ import { FsFileImagePickerPreviewComponent } from './components/fs-file-image-pi
 import { FsFileBouncingIconComponent } from './components/fs-file-bouncing-icon/fs-file-bouncing-icon.component';
 import { FsFileDragoverMessageComponent } from './components/fs-file-dragover-message/fs-file-dragover-message.component';
 
-import { FsFileLabelMessage } from './directives/fs-file-label-message.directive';
+import { FsFileHintDirective } from './directives/fs-file-hint.directive';
+import { FsFileLabelDirective } from './directives/fs-file-label.directive';
 import { FsFilePreviewActionDirective } from './directives/fs-file-preview-action.directive';
 
 import { CordovaService } from './services/cordova.service';
@@ -54,10 +55,8 @@ import { FormsModule } from '@angular/forms';
     FsFilePickerComponent,
     FsFileImagePickerComponent,
     FsFileImagePickerPreviewComponent,
-    FsFileLabelMessage,
-  ],
-  entryComponents: [
-    FsFileImagePickerDialogComponent
+    FsFileHintDirective,
+    FsFileLabelDirective,
   ],
   declarations: [
     FsFileComponent,
@@ -72,7 +71,8 @@ import { FormsModule } from '@angular/forms';
     FsFileBouncingIconComponent,
     FsFileDragoverMessageComponent,
     FsFileImagePickerDialogComponent,
-    FsFileLabelMessage,
+    FsFileHintDirective,
+    FsFileLabelDirective,
   ],
   providers: [
     CordovaService

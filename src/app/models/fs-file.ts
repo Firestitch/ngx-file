@@ -19,17 +19,16 @@ export class FsFile {
   private _fileOptions: FsFileConfig;
   private _fileExists = false;
 
-  constructor(obj?: any, filename?: string) {
+  constructor(obj?: File|Blob|string, filename?: string) {
     if (obj instanceof File || obj instanceof Blob) {
       this.file = obj;
-
     } else {
-
-      const name = filename || obj;
+      const url = new URL(obj);
+      filename = filename || url.pathname.split('/').pop();
       let type = '';
 
-      if (name) {
-        const match = name.toLowerCase().match(/([^\.]+)$/);
+      if (filename) {
+        const match = filename.toLowerCase().match(/([^\.]+)$/);
         this.extension = match ? match[1] : '';
 
         const mime = this.extension.match(/(jpe?g|png|gif|tiff?|bmp|svg)/) ? 'image' : 'application';
@@ -37,7 +36,7 @@ export class FsFile {
       }
 
       const file = createBlob([''], filename, type);
-      this.url = obj;
+      this.url = url.href;
       this.file = file;
     }
 

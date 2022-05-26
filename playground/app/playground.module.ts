@@ -6,6 +6,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { FsExampleModule } from '@firestitch/example';
 import { FsMessageModule, FsMessage } from '@firestitch/message';
+import { FsFormModule } from '@firestitch/form';
 import { FsApiModule, FS_API_RESPONSE_HANDLER } from '@firestitch/api';
 import { FsFileModule } from '@firestitch/file';
 
@@ -27,6 +28,7 @@ import {
   CaptureCordovaComponent,
   FileImagePickerComponent,
 } from './components';
+import { FilePickerModelComponent } from './components/file-picker-model';
 
 
 @NgModule({
@@ -38,6 +40,7 @@ import {
       // allowRemove: true,
       // dragoverMessage: true
     }),
+    FsFormModule,
     FsApiModule,
     BrowserAnimationsModule,
     AppMaterialModule,
@@ -61,6 +64,7 @@ import {
     CaptureMultipleComponent,
     CaptureCordovaComponent,
     FileImagePickerComponent,
+    FilePickerModelComponent,
   ],
   providers: [
     { provide: FS_API_RESPONSE_HANDLER, useClass: ResponseHandler, deps: [FsMessage] },
