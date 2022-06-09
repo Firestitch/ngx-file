@@ -15,8 +15,8 @@
       [imageQuality]="imageQuality"
       [disabled]="disabled">
     <div class="wrap"
-        [style.width]="width"
-        [style.height]="height">
+        [style.width]="previewWidth + 'px'"
+        [style.height]="previewHeight + 'px'">
       <fs-file-preview
           class="preview"
           *ngIf="file; else preview"

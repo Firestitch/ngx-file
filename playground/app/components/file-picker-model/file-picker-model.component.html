@@ -2,6 +2,8 @@
   <fs-file-picker
       [(ngModel)]="file"
       name="file"
+      [previewWidth]="120"
+      [previewHeight]="120"
       [required]="true"
       [allowRemove]="true">
     <div fsFileLabel>Label</div>

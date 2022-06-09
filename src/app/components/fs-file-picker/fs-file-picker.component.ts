@@ -95,15 +95,7 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
     return this._disabled;
   }
 
-  @Input('width') set setWidth(value) {
-    this.width = this._isNumeric(value) ? `${value}px` : value;
-  }
-
-  @Input('height') set setHeight(value) {
-    this.height = this._isNumeric(value) ? `${value}px` : value;
-  }
-
-  @Input() public previewWidth = 150;
+  @Input() public previewWidth = 150;  
   @Input() public previewHeight = 150;
   @Input() public allowDownload = false;
   @Input() public allowReupload = true;
@@ -112,8 +104,6 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
   @Output() public select = new EventEmitter<any>();
   @Output() public remove = new EventEmitter();
 
-  public width = '150px';
-  public height = '150px';
   public onChange: any = () => {};
   public onTouch: any = () => {};
 
