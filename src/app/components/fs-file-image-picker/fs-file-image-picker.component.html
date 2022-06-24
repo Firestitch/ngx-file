@@ -1,8 +1,14 @@
 
 
-<fs-label-field class="fs-image-label" *ngIf="label; else elseLabel">
-  <fs-label>{{label}}</fs-label>
+<fs-label-field class="fs-image-label">
+  <fs-label *ngIf="label">{{ label }}</fs-label>
   <ng-container *ngTemplateOutlet="preview"></ng-container>
+  <fs-label-message class="fs-form-message">
+    <span class="fs-form-hint">
+      <ng-content select="[fsFileHint]"></ng-content>
+      <ng-content select="[fsFileMessageLabel]"></ng-content>
+    </span>
+  </fs-label-message>
 </fs-label-field>
 
 <ng-template #preview>
@@ -21,8 +27,4 @@
     (error)="error.emit($event)"
     (clicked)="clicked($event)">
   </fs-file-image-picker-preview>
-</ng-template>
-
-<ng-template #elseLabel>
-  <ng-container *ngTemplateOutlet="preview"></ng-container>
 </ng-template>

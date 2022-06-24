@@ -2,19 +2,22 @@
 
   <div>
     <fs-file-image-picker
-      #imagePicker
-      (select)="select($event)"
-      (selectUrl)="selectUrl($event)"
-      (error)="error($event)"
-      [url]="url"
-      imageQuality=".8"
-      imageWidth="500"
-      imageHeight="500"
-      minHeight="500"
-      minWidth="800"
-      previewDiameter="120"
-      [allowUpload]="true"
-      label="Picker With Label">
+        #imagePicker
+        (select)="select($event)"
+        (selectUrl)="selectUrl($event)"
+        (error)="error($event)"
+        [url]="url"
+        imageQuality=".8"
+        imageWidth="500"
+        imageHeight="500"
+        minHeight="500"
+        minWidth="800"
+        previewDiameter="120"
+        [allowUpload]="true"
+        label="Picker With Label">
+      <div fsFileMessageLabel>
+        Hint!
+      </div>
     </fs-file-image-picker>
 
     <ul>
