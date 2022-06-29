@@ -1,4 +1,6 @@
-<fs-label-field class="fs-form-wrapper fs-label">
+<fs-label-field 
+    class="fs-form-wrapper fs-label"
+    [ngClass]="{ 'percent-preview': previewPercent }">
   <ng-container *ngIf="label; else labelContent">
     <fs-label>{{label}}</fs-label>
   </ng-container>
@@ -14,17 +16,18 @@
       [imageHeight]="imageHeight"
       [imageQuality]="imageQuality"
       [disabled]="disabled">
-    <div class="wrap"
-        [style.width]="previewWidth + 'px'"
-        [style.height]="previewHeight + 'px'">
+    <div 
+        class="wrap"
+        [style.width]="previewWidth"
+        [style.height]="previewHeight">
       <fs-file-preview
           class="preview"
           *ngIf="file; else preview"
           (remove)="removeFile()"
           [file]="file"
           [showFilename]="showFilename"
-          [previewHeight]="previewHeight"
-          [previewWidth]="previewWidth">
+          [previewHeight]="null"
+          [previewWidth]="null">
         <ng-template
             fs-file-preview-action
             placement="top-right"

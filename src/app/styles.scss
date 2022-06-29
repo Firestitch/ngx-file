@@ -122,13 +122,13 @@ fs-file-preview {
   vertical-align: top;
   overflow: hidden;
   border-radius: 3px;
+  display: flex;
 
   .file-details {
     flex-direction: column;
     display: flex;
     align-items: center;
-    justify-content: center;
-    height: 100%;
+
     padding: 5px;
 
     .file-icon {

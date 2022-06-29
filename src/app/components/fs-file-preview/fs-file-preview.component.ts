@@ -25,27 +25,27 @@ import { ScaleExifImage } from '../../helpers';
 })
 export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implements AfterContentInit {
 
-  public file: FsFile;
-  public preview: string;
-
   @Input() showFilename = true;
 
-  @Input() set _actions(value) {
+  @Input() set setActions(value) {
     this.actions.push(...value);
   }
 
-  @Input() set _actionsTemplate(value) {
+  @Input() set setActionsTemplate(value) {
     this.actionsTemplate.push(...value);
   }
 
-  @Input() public previewWidth = 150;
-  @Input() public previewHeight = 150;
-  @Input('file') set _file(file: FsFile) {
+  @Input() public previewWidth: string | number = 150;
+  @Input() public previewHeight: string | number = 150;
+  @Input('file') set setFile(file: FsFile) {
     this.file = file;
     this._generateFilePreview(file);
   }
 
   @Output() public remove = new EventEmitter();
+
+  public file: FsFile;
+  public preview: string;
 
   constructor(
     private _cdRef: ChangeDetectorRef,
@@ -86,21 +86,24 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
       return;
     }
 
+    if (!file.file.size) {
+      return;
+    }
+
     file.progress = true;
     this.preview = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=';
+    const previewWidth = this.previewWidth || 150;
+    const previewHeight = this.previewHeight || 150;
 
     FileAPI.Image.transform(file.file, [{
-      width: this.previewWidth,
-      height: this.previewHeight,
       preview: true,
-      // quality: file.fileOptions.imageQuality
     }], true, (err, images) => {
       if (!err && images[0]) {
         const scaledCanvasImage = ScaleExifImage(
           images[0],
           file.exifInfo.Orientation,
-          this.previewWidth,
-          this.previewHeight
+          previewWidth,
+          previewHeight
         );
 
         this.preview = scaledCanvasImage.toDataURL(file.type);

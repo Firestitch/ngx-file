@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FsFile } from '@firestitch/file';
 
 
 @Component({
@@ -9,5 +10,6 @@ import { Component } from '@angular/core';
 export class FilePickerModelComponent {
 
   public file: any = 'https://cdn.hipwallpaper.com/i/30/77/AKPMDF.jpg';
-
+  //public file = new FsFile(null, 'test.png');
 }
+

@@ -44,17 +44,14 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
   @ContentChildren(FsFileLabelDirective)
   public labels: QueryList<TemplateRef<any>>;
 
-  public inputProcessor = null;
-  public instruction = 'Drag & Drop your file or use the button below';
-  public _file: FsFile;
-  
-  private _disabled: boolean;  
-
   @Input() public imageWidth;
   @Input() public imageHeight;
   @Input() public imageQuality;
   @Input() public label;
   @Input() public showFilename = true;
+  @Input() public allowDownload = false;
+  @Input() public allowReupload = true;
+  @Input() public allowRemove = false;
 
   @Input('url') set url(url) {
     this.file = url ? new FsFile(url) : null;
@@ -87,28 +84,46 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
   }
 
   @Input()
-  set disabled(value) {
+  public set disabled(value) {
     this._disabled = value;
   }
 
-  get disabled() {
+  public get disabled() {
     return this._disabled;
   }
+  
+  @Input()
+  public set previewWidth(value) {
+    this._previewWidth = Number.isInteger(value) ? `${value}px` : value;
+  }
 
-  @Input() public previewWidth = 150;  
-  @Input() public previewHeight = 150;
-  @Input() public allowDownload = false;
-  @Input() public allowReupload = true;
-  @Input() public allowRemove = false;
+  public get previewWidth() {
+    return this._previewWidth;
+  }
+  
+  @Input()
+  public set previewHeight(value) {
+    this._previewHeight = Number.isInteger(value) ? `${value}px` : value;
+  }
+
+  public get previewHeight() {
+    return this._previewHeight;
+  }
 
   @Output() public select = new EventEmitter<any>();
   @Output() public remove = new EventEmitter();
 
   public onChange: any = () => {};
   public onTouch: any = () => {};
-
   public registerOnChange(fn): void { this.onChange = fn; }
   public registerOnTouched(fn): void { this.onTouch = fn; }
+  public inputProcessor = null;
+  public instruction = 'Drag & Drop your file or use the button below';
+  public _file: FsFile;
+
+  private _disabled: boolean;  
+  private _previewWidth = '150px';
+  private _previewHeight = '150px';
 
   public constructor(
     @Optional() @Inject(FS_FILE_MODULE_CONFIG) private _moduleConfig,
@@ -130,6 +145,10 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
         this.allowRemove = this._moduleConfig.allowRemove
       }
     }
+  }
+
+  public get previewPercent() {
+    return !Number.isInteger(this._previewWidth);
   }
 
   public writeValue(file): void {

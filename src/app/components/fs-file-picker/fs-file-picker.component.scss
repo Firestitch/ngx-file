@@ -38,13 +38,25 @@
     }
   }
 
-  ::ng-deep fs-file-preview {
-    border: none;
+  ::ng-deep {
+    .percent-preview {
+      fs-file .file-label {
+        display: block;
+      }
+    }
 
-    .preview-container {
-      width: 100%;
-      height: 100%;
+    fs-file-preview {
       border: none;
+      height: 100%;
+
+      .preview-container {
+        order: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+        height: 100%;
+      }
     }
   }
 
