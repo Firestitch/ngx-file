@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FsFile } from '@firestitch/file';
 
 
 @Component({
@@ -7,9 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: [ 'single-file-select.component.css' ]
 })
 export class SingleFileSelectComponent {
-  public file = void 0;
+  public file;
 
-  public select(file) {
-    this.file = file;
+  public select(fsFile: FsFile) {
+    this.file = fsFile;
   }
 }

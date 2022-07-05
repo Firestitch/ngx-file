@@ -13,9 +13,10 @@ import {
   ChangeDetectorRef,
   QueryList,
   ContentChildren,
-  TemplateRef
+  TemplateRef,
+  OnDestroy
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 
 import { FsFileLabelDirective } from '../../directives/fs-file-label.directive';
 import { FsFileDragBaseComponent } from '../fs-file-drag-base/fs-file-drag-base';
@@ -23,6 +24,8 @@ import { InputProcessor } from '../../classes';
 import { FsFile } from '../../models/fs-file';
 import { CordovaService } from '../../services/cordova.service';
 import { FS_FILE_MODULE_CONFIG } from '../../fs-file.providers';
+import { from, Observable, of, Subject } from 'rxjs';
+import { map, switchMap, takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -30,13 +33,20 @@ import { FS_FILE_MODULE_CONFIG } from '../../fs-file.providers';
   templateUrl: 'fs-file-picker.component.html',
   styleUrls: ['fs-file-picker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [{
+  providers: [
+    {
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => FsFilePickerComponent),
     multi: true,
-  }],  
+  },
+  {
+    provide: NG_VALIDATORS, 
+    useExisting: FsFilePickerComponent,
+    multi: true
+  }
+  ],  
 })
-export class FsFilePickerComponent extends FsFileDragBaseComponent implements OnInit, ControlValueAccessor {
+export class FsFilePickerComponent extends FsFileDragBaseComponent implements OnInit, ControlValueAccessor, Validator, OnDestroy {
 
   @ViewChild('fileInput') 
   public fileInput: any;
@@ -44,6 +54,8 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
   @ContentChildren(FsFileLabelDirective)
   public labels: QueryList<TemplateRef<any>>;
 
+  @Input() public minWidth = 0;
+  @Input() public minHeight = 0;
   @Input() public imageWidth;
   @Input() public imageHeight;
   @Input() public imageQuality;
@@ -121,6 +133,7 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
   public instruction = 'Drag & Drop your file or use the button below';
   public _file: FsFile;
 
+  private _destroy$ = new Subject();
   private _disabled: boolean;  
   private _previewWidth = '150px';
   private _previewHeight = '150px';
@@ -147,8 +160,22 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
     }
   }
 
+  public validate(control: AbstractControl): ValidationErrors | null { 
+    if(this.file?.typeImage && (this.minWidth || this.minHeight)) {
+      if(this.file.imageWidth < this.minWidth) {
+        return { minWidth: `Minimum width ${this.minWidth}px` };
+      }
+
+      if(this.file.imageHeight < this.minHeight) {
+        return { minWidth: `Minimum height ${this.minHeight}px` };
+      }      
+    }
+
+    return null;
+  } 
+
   public get previewPercent() {
-    return !Number.isInteger(this._previewWidth);
+    return String(this._previewWidth).match(/%/);
   }
 
   public writeValue(file): void {
@@ -156,10 +183,19 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
     this._cdRef.markForCheck();
   }
 
-  public selectFile(file) {
-    this.file = file;
-    this.select.emit(file);
-    this.onChange(file);
+  public selectFile(fsFile: FsFile) {
+    of(true)    
+    .pipe(
+      switchMap(() => {
+        return this.minWidth || this.minHeight ? from(fsFile.updateImageInfo()) : of(true);
+      }),
+      takeUntil(this._destroy$),
+    )
+    .subscribe(() => {
+      this.file = fsFile;
+      this.select.emit(fsFile);
+      this.onChange(fsFile);
+    });
   }
 
   public removeFile() {
@@ -170,6 +206,11 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
 
   public actionClick(data) {
     data.event.stopPropagation();
+  }
+  
+  public ngOnDestroy(): void {
+    this._destroy$.next();
+    this._destroy$.complete();
   }
 
   private _isNumeric(value) {

@@ -6,10 +6,10 @@
 
 <p>
   <fs-file-previews
-    [files]="files"
-    width="200"
-    height="200"
-    (removed)="removed($event)">
+      [files]="files"
+      width="200"
+      height="200"
+      (removed)="removed($event)">
     <ng-template fs-file-preview-action placement="top-right" action="remove" tooltip="Remove">
       <mat-icon>close</mat-icon>
     </ng-template>

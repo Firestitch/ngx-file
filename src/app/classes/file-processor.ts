@@ -51,49 +51,6 @@ export class FileProcessor {
     );
   }
 
-  /**
-   * Retrun information about image (width/height)
-   */
-  private _updateImageInfo(originFile: FsFile) {
-
-    const exif = new Promise((resolve, reject) => {
-      const fr = new FileReader();
-      fr.onload = () => {
-        var exif = EXIF.readFromBinaryFile(fr.result);
-        resolve(exif);
-      };
-
-      fr.onerror = () => {
-        reject(fr.error);
-      }
-
-      fr.readAsArrayBuffer(originFile.file);
-    });
-
-    const dims = new Promise((resolve, reject) => {
-      FileAPI.getInfo(originFile.file, (err, info) => {
-        if (!err) {
-          resolve(info);
-        } else {
-          reject(err);
-        }
-      });
-
-    });
-
-    return new Promise((resolve, reject) => {
-      Promise.all([exif, dims])
-      .then((data: any) => {
-        originFile.exifInfo = data[0] || {};
-        originFile.imageWidth = data[1].width;
-        originFile.imageHeight = data[1].height;
-        resolve(originFile);
-      },(err) => {
-        reject(err);
-      });
-    });
-  }
-
   private async transformFile(originFile: FsFile, transformConfig: any, processConfig: ProcessConfig) {
     return new Promise((resolve, reject) => {
       // Transform image by options and rotate if needed
@@ -113,7 +70,7 @@ export class FileProcessor {
               originFile.file = createBlob([blob], originFile.file.name, originFile.type);
 
               // Update FsFile info
-              this._updateImageInfo(originFile)
+              originFile.updateImageInfo()
               .then(result => {
                 resolve(result);
               }).catch((error) => {
@@ -135,22 +92,20 @@ export class FileProcessor {
    * @param config
    */
   private async applyTransforms(fsFile: FsFile, resolve, reject, config: ProcessConfig) {
-
     try {
+      await fsFile.updateImageInfo();
 
-      const file: any = await this._updateImageInfo(fsFile);
-
-      const params = this.generateTransformParams(file, config);
-      const resultFile: any = await this.transformFile(file, params, config);
+      const params = this.generateTransformParams(fsFile, config);
+      const resultFile: any = await this.transformFile(fsFile, params, config);
       const codes = [];
       const errors = [];
 
-      if (config.minHeight && file.height < toInteger(config.minHeight)) {
+      if (config.minHeight && fsFile.imageHeight < toInteger(config.minHeight)) {
         codes.push('minHeight');
         errors.push(`Height must be at least ${config.minHeight}px.`);
       }
 
-      if (config.minWidth && file.width < toInteger(config.minWidth)) {
+      if (config.minWidth && fsFile.imageWidth < toInteger(config.minWidth)) {
         codes.push('minWidth');
         errors.push(`Width must be at least ${config.minWidth}px.`);
       }

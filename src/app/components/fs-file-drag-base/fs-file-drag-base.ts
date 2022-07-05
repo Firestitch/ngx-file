@@ -13,15 +13,16 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsFileDragBaseComponent implements OnDestroy {
+
   private dragging = 0;
   private dragover = null;
   private drop = null;
 
-  @HostBinding('class.dragover') public fileOverTarget = false;
+  @HostBinding('class.dragover') 
+  public fileOverTarget = false;
 
-  @HostListener('dragenter', ['$event'])
-  public onDragOverElement(event) {
-
+  @HostListener('dragenter')
+  public onDragOverElement() {
     if (!this.dragover && !this.drop) {
       this.dragover = this.onWindowDragOver.bind(this);
       this.drop = this.onWindowDrop.bind(this);
@@ -41,8 +42,8 @@ export class FsFileDragBaseComponent implements OnDestroy {
     }
   }
 
-  @HostListener('drop', ['$event'])
-  public onDropElement(event: Event) {
+  @HostListener('drop')
+  public onDropElement() {
     this.fileOverTarget = false;
   }
 

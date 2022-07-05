@@ -1,3 +1,7 @@
+import * as EXIF from '@firestitch/exif-js';
+
+import * as FileAPI from 'fileapi';
+
 import { FsFileConfig } from '../interfaces';
 import { createBlob } from '../helpers';
 
@@ -91,6 +95,49 @@ export class FsFile {
       this.extension = parts[parts.length - 1];
     }
   }
+
+  public updateImageInfo() {
+    if(!this.typeImage) {
+      return Promise.resolve(this);
+    }
+
+    const exif = new Promise((resolve, reject) => {
+      const fr = new FileReader();
+      fr.onload = () => {
+        var exif = EXIF.readFromBinaryFile(fr.result);
+        resolve(exif);
+      };
+
+      fr.onerror = () => {
+        reject(fr.error);
+      }
+
+      fr.readAsArrayBuffer(this.file);
+    });
+
+    const dims = new Promise((resolve, reject) => {
+      FileAPI.getInfo(this.file, (err, info) => {
+        if (!err) {
+          resolve(info);
+        } else {
+          reject(err);
+        }
+      });
+    });
+
+    return new Promise((resolve, reject) => {
+      Promise.all([exif, dims])
+      .then((data: any) => {
+        this.exifInfo = data[0] || {};
+        this.imageWidth = data[1].width;
+        this.imageHeight = data[1].height;
+        resolve(this);
+      },(err) => {
+        reject(err);
+      });
+    });
+  }
+    
 
   public toObject() {
     return {
