@@ -9,7 +9,7 @@ import { FsFile } from '@firestitch/file';
 })
 export class FilePickerModelComponent {
 
-  public file: any = 'https://cdn.hipwallpaper.com/i/30/77/AKPMDF.jpg';
+  public file: any = '';
   //public file = new FsFile(null, 'test.png');
 }
 

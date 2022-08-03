@@ -1,9 +1,9 @@
 <fs-file-picker
-  (select)="select($event)"
-  (remove)="remove()"
-  width="100%"
-  [file]="file">
-    <div fsFileLabel>File Picker Label</div>
+    (select)="select($event)"
+    (remove)="remove()"
+    width="100%"
+    [file]="file">
+  <div fsFileLabel>File Picker Label</div>
 </fs-file-picker>
 
 <fieldset *ngIf="file">

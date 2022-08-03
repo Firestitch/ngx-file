@@ -49,8 +49,8 @@
             placement="bottom-left"
             action="download"
             tooltip="Download"
-            [hide]="!(allowDownload && file.url)"
-            (click)="actionClick($event)">
+            [hide]="!(allowDownload && ((download.observers.length && file) || file.url))"
+            (click)="downloadClicked($event)">
           <a 
               [href]="file.url" 
               target="_blank" 

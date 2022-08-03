@@ -11,7 +11,7 @@ import { FsMessage } from '@firestitch/message';
 })
 export class FilePickerExistingUrlComponent {
 
-  public previewUrl = 'https://cdn.luxe.digital/media/2020/12/16175821/most-expensive-cars-2021-Maserati-MC20-luxe-digital%402x.jpg';
+  public previewUrl = 'https://editorial.pxcrush.net/carsales/general/editorial/ferrari-sf90-stradale-0056.jpg?width=1024&height=683';
   public file = new FsFile(this.previewUrl);
 
   public constructor(private fsMessage: FsMessage) {}

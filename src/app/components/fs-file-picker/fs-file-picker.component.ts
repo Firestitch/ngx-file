@@ -124,6 +124,7 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
 
   @Output() public select = new EventEmitter<any>();
   @Output() public remove = new EventEmitter();
+  @Output() public download = new EventEmitter<FsFile>();
 
   public onChange: any = () => {};
   public onTouch: any = () => {};
@@ -204,8 +205,17 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
     this.onChange(null);
   }
 
-  public actionClick(data) {
-    data.event.stopPropagation();
+  public actionClick(event: { event: PointerEvent }) {
+    event.event.stopPropagation();
+  }
+
+  public downloadClicked(event: { event: PointerEvent }) {
+    event.event.stopPropagation();
+
+    if(this.download.observers.length) {
+      event.event.preventDefault();
+      this.download.emit(this.file);
+    }
   }
   
   public ngOnDestroy(): void {

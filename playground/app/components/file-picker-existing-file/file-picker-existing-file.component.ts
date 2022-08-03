@@ -10,7 +10,7 @@ import { UploadService } from 'playground/app/services';
   styleUrls: [ 'file-picker-existing-file.component.css' ]
 })
 export class FilePickerExistingFileComponent {
-  public url = 'https://cdn.hipwallpaper.com/i/30/77/AKPMDF.jpg';
+  public url = 'https://editorial.pxcrush.net/carsales/general/editorial/ferrari-sf90-stradale-0056.jpg?width=1024&height=683';
   public file = new FsFile('http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf', 'Document.pdf');
 
   public constructor(
@@ -25,6 +25,10 @@ export class FilePickerExistingFileComponent {
       this.file = file;
       file.progress = false;
     });
+  }
+
+  public download(fsFile) {
+    this._message.success('Downloaded');
   }
 
   public remove() {
