@@ -12,7 +12,7 @@
     [imageQuality]="imageQuality"
     [disabled]="disabled"
     accept="image/*"
-    multiple="false">
+    [multiple]="false">
 
     <ng-container *ngTemplateOutlet="filePreview"></ng-container>
   </fs-file>

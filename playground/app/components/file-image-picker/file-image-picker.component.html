@@ -7,12 +7,12 @@
         (selectUrl)="selectUrl($event)"
         (error)="error($event)"
         [url]="url"
-        imageQuality=".8"
-        imageWidth="500"
-        imageHeight="500"
-        minHeight="500"
-        minWidth="800"
-        previewDiameter="120"
+        [imageQuality]=".8"
+        [imageWidth]="500"
+        [imageHeight]="500"
+        [minHeight]="500"
+        [minWidth]="800"
+        [previewDiameter]="120"
         [allowUpload]="true"
         label="Picker With Label">
       <div fsFileMessageLabel>
@@ -34,10 +34,10 @@
       (select)="select($event)"
       (selectUrl)="selectUrl($event)"
       [url]="url"
-      imageQuality=".8"
-      imageWidth="500"
-      imageHeight="500"
-      previewDiameter="75">
+      [imageQuality]=".8"
+      [imageWidth]="500"
+      [imageHeight]="500"
+      [previewDiameter]="75">
     </fs-file-image-picker>
 
     <ul>

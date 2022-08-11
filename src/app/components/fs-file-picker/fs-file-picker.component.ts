@@ -105,8 +105,8 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
   }
   
   @Input()
-  public set previewWidth(value) {
-    this._previewWidth = Number.isInteger(value) ? `${value}px` : value;
+  public set previewWidth(value: string | number) {
+    this._previewWidth = Number.isInteger(value) ? `${value}px` : value?.toString() || '';
   }
 
   public get previewWidth() {
@@ -114,8 +114,8 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
   }
   
   @Input()
-  public set previewHeight(value) {
-    this._previewHeight = Number.isInteger(value) ? `${value}px` : value;
+  public set previewHeight(value: string | number) {
+    this._previewHeight = Number.isInteger(value) ? `${value}px` : value?.toString() || '';
   }
 
   public get previewHeight() {

@@ -8,6 +8,7 @@ import { FsMessage } from '@firestitch/message';
   styleUrls: [ 'multiple-file-select.component.css' ]
 })
 export class MultipleFileSelectComponent {
+  
   public files = [];
   public filesJsonInfo = [];
 
