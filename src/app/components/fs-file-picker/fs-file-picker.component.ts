@@ -16,7 +16,7 @@ import {
   TemplateRef,
   OnDestroy
 } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
+import { AbstractControl, AsyncValidator, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
 
 import { FsFileLabelDirective } from '../../directives/fs-file-label.directive';
 import { FsFileDragBaseComponent } from '../fs-file-drag-base/fs-file-drag-base';
@@ -46,7 +46,7 @@ import { map, switchMap, takeUntil } from 'rxjs/operators';
   }
   ],  
 })
-export class FsFilePickerComponent extends FsFileDragBaseComponent implements OnInit, ControlValueAccessor, Validator, OnDestroy {
+export class FsFilePickerComponent extends FsFileDragBaseComponent implements OnInit, ControlValueAccessor, AsyncValidator, OnDestroy {
 
   @ViewChild('fileInput') 
   public fileInput: any;
@@ -161,15 +161,15 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
     }
   }
 
-  public validate(control: AbstractControl): ValidationErrors | null { 
+  public validate(control: AbstractControl): Promise<ValidationErrors | null> |  null { 
     if(this.file?.typeImage && (this.minWidth || this.minHeight)) {
-      if(this.file.imageWidth < this.minWidth) {
-        return { minWidth: `Minimum width ${this.minWidth}px` };
-      }
+      // if(this.file.imageWidth < this.minWidth) {
+      //   return { minWidth: `Minimum width ${this.minWidth}px` };
+      // }
 
-      if(this.file.imageHeight < this.minHeight) {
-        return { minWidth: `Minimum height ${this.minHeight}px` };
-      }      
+      // if(this.file.imageHeight < this.minHeight) {
+      //   return { minWidth: `Minimum height ${this.minHeight}px` };
+      // }      
     }
 
     return null;
@@ -188,7 +188,7 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
     of(true)    
     .pipe(
       switchMap(() => {
-        return this.minWidth || this.minHeight ? from(fsFile.updateImageInfo()) : of(true);
+        return this.minWidth || this.minHeight ? from(fsFile.imageInfo) : of(true);
       }),
       takeUntil(this._destroy$),
     )

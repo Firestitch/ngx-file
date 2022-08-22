@@ -99,21 +99,27 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
       preview: true,
     }], true, (err, images) => {
       if (!err && images[0]) {
-        const scaledCanvasImage = ScaleExifImage(
-          images[0],
-          file.exifInfo.Orientation,
-          previewWidth,
-          previewHeight
-        );
+        file.exifInfo
+          .then((exifInfo) => {
+            const scaledCanvasImage = ScaleExifImage(
+              images[0],
+              exifInfo.Orientation,
+              previewWidth,
+              previewHeight
+            );
 
-        this.preview = scaledCanvasImage.toDataURL(file.type);
-        file.progress = false;
+            this.preview = scaledCanvasImage.toDataURL(file.type);
+            file.progress = false;
+            this._cdRef.markForCheck();
+         })
+         .catch(() => {
+           this._cdRef.markForCheck();
+         });
       } else {
         console.log(`FsFilePreview: Image preview error for file ${file.name}`);
         file.progress = false;
+        this._cdRef.markForCheck();
       }
-
-      this._cdRef.markForCheck();
     });
   }
 

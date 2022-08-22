@@ -9,10 +9,7 @@ import { createBlob } from '../helpers';
 export class FsFile {
 
   public progress = false;
-  public imageWidth: number;
-  public imageHeight: number;
   public rotate: number;
-  public exifInfo: any = {};
   public extension: string;
   public type: string;
   public url = '';
@@ -22,6 +19,9 @@ export class FsFile {
   private _name: string;
   private _fileOptions: FsFileConfig;
   private _fileExists = false;
+  private _imageWidth: number;
+  private _imageHeight: number;
+  private _exifInfo: any;  
 
   constructor(obj?: File|Blob|string, filename?: string) {
     if (obj instanceof File || obj instanceof Blob) {
@@ -48,39 +48,66 @@ export class FsFile {
     this._checkIfFileExists();
   }
 
-  get typeImage() {
+  public get imageWidth(): Promise<number> {
+    return new Promise((resolve, reject) => {
+      this.imageInfo
+        .then((data) => {
+          resolve(data.exif);
+        }, reject);
+    });
+  }
+
+  public get imageHeight(): Promise<number> {
+    return new Promise((resolve, reject) => {
+      this.imageInfo
+        .then((data) => {
+          resolve(data.height);
+        }, reject);
+    });
+  }
+
+  public get exifInfo(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.imageInfo
+        .then((data) => {
+          resolve(data.exif);
+        }, reject);
+    });
+  }
+
+  public get typeImage() {
     return this.type.match(/^image/) !== null;
   }
 
-  get typeSvg() {
+  public get typeSvg() {
     return this.type.match(/\/svg/);
   }
 
-  get imageProcess() {
+  public get imageProcess() {
     return this.typeImage && !this.typeSvg;
   }
 
-  get exists() {
+  public get exists() {
     return this._fileExists;
   }
 
-  get file() {
+  public get file() {
     return this._file;
   }
 
-  get name() {
+  public get name() {
     return this._name;
   }
 
-  set fileOptions(value) {
+  public set fileOptions(value) {
     this._fileOptions = value;
   }
 
-  get fileOptions() {
+  public get fileOptions() {
     return this._fileOptions;
   }
 
-  set file(value) {
+  public set file(value) {
     this._file = value;
     this.size = value.size;
     this.name = value.name;
@@ -88,7 +115,7 @@ export class FsFile {
     this._checkIfFileExists();
   }
 
-  set name(name) {
+  public set name(name) {
     this._name = name;
     const parts = String(name).split('.');
     if (parts.length > 1) {
@@ -96,9 +123,13 @@ export class FsFile {
     }
   }
 
-  public updateImageInfo() {
-    if(!this.typeImage) {
-      return Promise.resolve(this);
+  public get imageInfo(): Promise<{ width: number; height: number; exif: any }> {
+    if (!this.typeImage || this._exifInfo) {
+      return Promise.resolve({
+        width: this._imageWidth,
+        height: this._imageHeight,
+        exif: this._exifInfo,
+      });
     }
 
     const exif = new Promise((resolve, reject) => {
@@ -128,16 +159,20 @@ export class FsFile {
     return new Promise((resolve, reject) => {
       Promise.all([exif, dims])
       .then((data: any) => {
-        this.exifInfo = data[0] || {};
-        this.imageWidth = data[1].width;
-        this.imageHeight = data[1].height;
-        resolve(this);
+        this._exifInfo = data[0] || {};
+        this._imageWidth = data[1].width;
+        this._imageHeight = data[1].height;
+
+        resolve({
+          width: this._imageWidth,
+          height: this._imageHeight,
+          exif: this._exifInfo,
+        });
       },(err) => {
         reject(err);
       });
     });
   }
-    
 
   public toObject() {
     return {

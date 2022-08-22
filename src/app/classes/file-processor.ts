@@ -36,6 +36,7 @@ export class FileProcessor {
         const resFilePromise = new Promise((resolve, reject) => {
           this.applyTransforms(file, resolve, reject, processConfig);
         });
+
         processedFiles.push(resFilePromise);
       } else {
         processedFiles.push(file);
@@ -51,7 +52,7 @@ export class FileProcessor {
     );
   }
 
-  private async transformFile(originFile: FsFile, transformConfig: any, processConfig: ProcessConfig) {
+  private async transformFile(originFile: FsFile, transformConfig: any, processConfig: ProcessConfig): Promise<FsFile> {
     return new Promise((resolve, reject) => {
       // Transform image by options and rotate if needed
       FileAPI.Image.transform(
@@ -61,22 +62,26 @@ export class FileProcessor {
         (err, images) => {
           // Process transformed files
           if (!err && images[0]) {
-            let canvasImage;
-            canvasImage = ScaleExifImage(images[0], originFile.exifInfo.Orientation);
+            originFile.exifInfo
+            .then((exifInfo) => {
+              let canvasImage;
+              canvasImage = ScaleExifImage(images[0], exifInfo.Orientation);
 
-            // Convert to blob for create File object
-            canvasImage.toBlob((blob) => {
-              // Save as file to FsFile
-              originFile.file = createBlob([blob], originFile.file.name, originFile.type);
+              // Convert to blob for create File object
+              canvasImage.toBlob((blob) => {
+                // Save as file to FsFile
+                originFile.file = createBlob([blob], originFile.file.name, originFile.type);
 
-              // Update FsFile info
-              originFile.updateImageInfo()
-              .then(result => {
-                resolve(result);
-              }).catch((error) => {
-                reject({ error, originFile });
-              });
-            }, transformConfig.type, canvasImage.quality)
+                // Update FsFile info
+                originFile.imageInfo
+                  .then(() => {
+                    resolve(originFile);
+                  }).catch((error) => {
+                    reject({ error, originFile });
+                  });
+              }, transformConfig.type, canvasImage.quality);
+            }, reject);
+
           } else {
             reject(err);
           }
@@ -93,7 +98,7 @@ export class FileProcessor {
    */
   private async applyTransforms(fsFile: FsFile, resolve, reject, config: ProcessConfig) {
     try {
-      await fsFile.updateImageInfo();
+      await fsFile.imageInfo;
 
       const params = this.generateTransformParams(fsFile, config);
       const resultFile: any = await this.transformFile(fsFile, params, config);
@@ -137,9 +142,5 @@ export class FileProcessor {
     }
 
     return transformParams;
-  }
-
-  private alertImageProcessingError(file) {
-    alert(`File ${file.name} can't be processed as image. File was rejected`);
   }
 }
