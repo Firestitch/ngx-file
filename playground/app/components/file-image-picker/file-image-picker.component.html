@@ -13,7 +13,6 @@
         [minHeight]="500"
         [minWidth]="800"
         [previewDiameter]="120"
-        [allowUpload]="true"
         label="Picker With Label">
       <div fsFileMessageLabel>
         Hint!
@@ -43,6 +42,19 @@
     <ul>
       <li>Image quality: <b>80%</b></li>
       <li>Preview Diameter: <b>75px</b></li>
+    </ul>
+  </div>
+
+  <div>
+    <fs-file-image-picker
+      (select)="select($event)"
+      (selectUrl)="selectUrl($event)"
+      [url]="url"
+      [disabled]="true">
+    </fs-file-image-picker>
+    
+    <ul>
+      <li>Disabled</li>
     </ul>
   </div>
 </div>

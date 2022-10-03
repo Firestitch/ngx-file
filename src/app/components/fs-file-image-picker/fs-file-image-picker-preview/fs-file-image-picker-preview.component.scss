@@ -1,10 +1,9 @@
 .wrap {
-  cursor: pointer;
-  display: inline-flex;
-
-  &.disabled {
-    cursor: auto;
+  &:not(.disabled) {
+    cursor: pointer;
   }
+  
+  display: inline-flex;
 }
 
 .image-preview {

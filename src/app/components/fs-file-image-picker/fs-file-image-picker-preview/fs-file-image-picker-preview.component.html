@@ -1,7 +1,6 @@
-<div class="wrap" [ngClass]="{ disabled: !allowUpload }">
-
+<div class="wrap" [ngClass]="{ disabled: disabled }">
   <fs-file
-    *ngIf="allowUpload"
+    *ngIf="!disabled; else filePreview"
     (select)="selectFile($event)"
     (error)="error.emit($event)"
     (clicked)="clicked.emit($event)"
@@ -16,10 +15,6 @@
 
     <ng-container *ngTemplateOutlet="filePreview"></ng-container>
   </fs-file>
-
-  <ng-container *ngIf="!allowUpload">
-    <ng-container *ngTemplateOutlet="filePreview"></ng-container>
-  </ng-container>
 </div>
 
 <ng-template #filePreview>
@@ -28,6 +23,6 @@
       [previewHeight]="previewDiameter"
       [previewWidth]="previewDiameter"
       class="image-preview">
-    <div *ngIf="allowUpload" class="update-action" [ngStyle]="updateStyle"> {{file && file.exists ? 'Update' : 'Upload '}} </div>
+    <div *ngIf="!disabled" class="update-action" [ngStyle]="updateStyle"> {{file && file.exists ? 'Update' : 'Upload '}} </div>
   </fs-file-preview>
 </ng-template>

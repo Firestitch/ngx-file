@@ -32,7 +32,6 @@ export class FsFileImagePickerComponent {
   @Input() public label = '';
   @Input() public minWidth = 0;
   @Input() public minHeight = 0;
-  @Input() public allowUpload = true;
   @Input() public disabled = false;
 
   @Input('url') set url(url) {
@@ -70,7 +69,7 @@ export class FsFileImagePickerComponent {
   }
 
   public clicked(event: KeyboardEvent) {
-    if (!this.allowUpload) {
+    if (this.disabled) {
       return;
     }
 
