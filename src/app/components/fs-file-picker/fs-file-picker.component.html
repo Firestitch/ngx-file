@@ -1,11 +1,11 @@
-<fs-label-field 
-    class="fs-form-wrapper fs-label"
+<fs-label-field
+    class="fs-form-wrapper"
     [ngClass]="{ 'percent-preview': previewPercent }">
   <ng-container *ngIf="label; else labelContent">
-    <fs-label>{{label}}</fs-label>
+    <fs-label class="fs-form-label">{{label}}</fs-label>
   </ng-container>
   <ng-template #labelContent>
-    <fs-label *ngIf="labels.length">
+    <fs-label *ngIf="labels.length" class="fs-form-label">
       <ng-content select="[fsFileLabel]"></ng-content>
     </fs-label>
   </ng-template>
@@ -16,7 +16,7 @@
       [imageHeight]="imageHeight"
       [imageQuality]="imageQuality"
       [disabled]="disabled">
-    <div 
+    <div
         class="wrap"
         [style.width]="previewWidth"
         [style.height]="previewHeight">
@@ -33,7 +33,7 @@
             placement="top-right"
             action="remove"
             tooltip="Remove"
-            *ngIf="allowRemove" 
+            *ngIf="allowRemove"
             (click)="actionClick($event)">
           <mat-icon>close</mat-icon>
         </ng-template>
@@ -51,10 +51,10 @@
             tooltip="Download"
             [hide]="!(allowDownload && ((download.observers.length && file) || file.url))"
             (click)="downloadClicked($event)">
-          <a 
-              [href]="file.url" 
-              target="_blank" 
-              tabindex="-1" 
+          <a
+              [href]="file.url"
+              target="_blank"
+              tabindex="-1"
               class="download">
             <mat-icon>cloud_download</mat-icon>
           </a>
