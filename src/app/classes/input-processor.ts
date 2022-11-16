@@ -43,16 +43,14 @@ export class InputProcessor {
       this.cordova.camera = getCordovaCamera();
       this.cordova.capture = getCordovaCapture();
       this.cordova.resolveLocalFileSystemURL = getCordovaResolveLocalFileSystemURL();
-
-      console.log(this.cordova);
     });
   }
 
-  get accept() {
+  public get accept() {
     return this._accept;
   }
 
-  set accept(value) {
+  public set accept(value) {
     this._acceptableTypes.clear();
     this._acceptableExts.clear();
     this.parseAcceptTypes(value);
@@ -62,12 +60,12 @@ export class InputProcessor {
   public get declinedFiles$() {
     return this._declinedFiles$.asObservable();
   }
+
   /**
    * Initialize service for target element
    * @param el
    */
   public registerInput(el: ElementRef) {
-
     if (!el) {
       return
     }
@@ -113,7 +111,6 @@ export class InputProcessor {
   }
 
   public registerDrop(el: ElementRef) {
-
     if (!el) {
       return
     }
@@ -145,7 +142,6 @@ export class InputProcessor {
   }
 
   public registerLabel(el: ElementRef) {
-
     if (!el) {
       return
     }
@@ -175,7 +171,6 @@ export class InputProcessor {
           }
         }
       }
-
 
       this.clicked.next(event);
 

@@ -10,6 +10,12 @@ import { ProcessConfig, FsFile } from '../models';
 import { ScaleExifImage, createBlob } from '../helpers';
 import { FsFileConfig } from '../interfaces';
 
+type TransformConfig = { 
+  type: string; 
+  maxWidth: number;
+  maxHeight: number; 
+  quality: number;
+};
 
 export class FileProcessor {
 
@@ -32,7 +38,7 @@ export class FileProcessor {
     const processedFiles = [];
     files.forEach((file: FsFile) => {
 
-      if (file.file && file.imageProcess && processConfig.shouldProcess) {
+      if (file.file && file.imageProcess) {
         const resFilePromise = new Promise((resolve, reject) => {
           this.applyTransforms(file, resolve, reject, processConfig);
         });
@@ -52,7 +58,7 @@ export class FileProcessor {
     );
   }
 
-  private async transformFile(originFile: FsFile, transformConfig: any, processConfig: ProcessConfig): Promise<FsFile> {
+  private async transformFile(originFile: FsFile, transformConfig: TransformConfig): Promise<FsFile> {
     return new Promise((resolve, reject) => {
       // Transform image by options and rotate if needed
       FileAPI.Image.transform(
@@ -64,9 +70,7 @@ export class FileProcessor {
           if (!err && images[0]) {
             originFile.exifInfo
             .then((exifInfo) => {
-              let canvasImage;
-              canvasImage = ScaleExifImage(images[0], exifInfo.Orientation);
-
+              const canvasImage = ScaleExifImage(images[0], exifInfo.Orientation);
               // Convert to blob for create File object
               canvasImage.toBlob((blob) => {
                 // Save as file to FsFile
@@ -100,8 +104,8 @@ export class FileProcessor {
     try {
       await fsFile.imageInfo;
 
-      const params = this.generateTransformParams(fsFile, config);
-      const resultFile: any = await this.transformFile(fsFile, params, config);
+      const transformConfig = this.generateTransformParams(fsFile, config);
+      const resultFile: any = await this.transformFile(fsFile, transformConfig);
       const codes = [];
       const errors = [];
 
@@ -126,7 +130,7 @@ export class FileProcessor {
     }
   }
 
-  private generateTransformParams(file, config: ProcessConfig) {
+  private generateTransformParams(file, config: ProcessConfig): TransformConfig {
     const transformParams: any = {};
 
     // Type for result image
