@@ -141,9 +141,7 @@ export class FileProcessor {
     transformParams.maxHeight = config.height;
 
     // Quality for result image
-    if (config.quality !== void 0) {
-      transformParams.quality = config.quality || 1;
-    }
+    transformParams.quality = config.quality || 1;
 
     return transformParams;
   }

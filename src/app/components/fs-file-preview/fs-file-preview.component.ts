@@ -26,6 +26,9 @@ import { ScaleExifImage } from '../../helpers';
 export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implements AfterContentInit {
 
   @Input() showFilename = true;
+  @Input() public previewWidth: string | number = 150;
+  @Input() public previewHeight: string | number = 150;
+  @Input() public file: FsFile;
 
   @Input() set setActions(value) {
     this.actions.push(...value);
@@ -35,23 +38,7 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
     this.actionsTemplate.push(...value);
   }
 
-  @Input() public previewWidth: string | number = 150;
-  @Input() public previewHeight: string | number = 150;
-  @Input('file') set setFile(file: FsFile) {
-    this.file = file;
-    this._generateFilePreview(file);
-  }
-
   @Output() public remove = new EventEmitter();
-
-  public file: FsFile;
-  public preview: string;
-
-  constructor(
-    private _cdRef: ChangeDetectorRef,
-  ) {
-    super();
-  }
 
   public ngAfterContentInit() {
     this._cleanActions();
@@ -65,62 +52,6 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
     if (action.action == 'remove') {
       this.remove.emit({ event: $event, file: this.file });
     }
-  }
-
-  /**
-   * Generate preview images for file
-   * @param file {FsFile}
-   */
-  private _generateFilePreview(file: FsFile) {
-    this.preview = null;
-    if (!file.typeImage) {
-      return;
-    }
-
-    if(file.url) {
-      this.preview = file.url;
-      return;
-    }
-
-    if (!file.file) {
-      return;
-    }
-
-    if (!file.file.size) {
-      return;
-    }
-
-    file.progress = true;
-    this.preview = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=';
-    const previewWidth = this.previewWidth || 150;
-    const previewHeight = this.previewHeight || 150;
-
-    FileAPI.Image.transform(file.file, [{
-      preview: true,
-    }], true, (err, images) => {
-      if (!err && images[0]) {
-        file.exifInfo
-          .then((exifInfo) => {
-            const scaledCanvasImage = ScaleExifImage(
-              images[0],
-              exifInfo.Orientation,
-              previewWidth,
-              previewHeight
-            );
-
-            this.preview = scaledCanvasImage.toDataURL(file.type);
-            file.progress = false;
-            this._cdRef.markForCheck();
-         })
-         .catch(() => {
-           this._cdRef.markForCheck();
-         });
-      } else {
-        console.log(`FsFilePreview: Image preview error for file ${file.name}`);
-        file.progress = false;
-        this._cdRef.markForCheck();
-      }
-    });
   }
 
   private _cleanActions() {

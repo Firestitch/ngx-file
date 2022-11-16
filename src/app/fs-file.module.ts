@@ -31,6 +31,7 @@ import { FsFileModuleConfig } from './interfaces/module-config.interface';
 import { FsLabelModule } from '@firestitch/label';
 import { FsPromptModule } from '@firestitch/prompt';
 import { FormsModule } from '@angular/forms';
+import { PreviewImagePipe } from './pipes';
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import { FormsModule } from '@angular/forms';
     FsFileImagePickerDialogComponent,
     FsFileHintDirective,
     FsFileLabelDirective,
+    PreviewImagePipe,
   ],
   providers: [
     CordovaService
