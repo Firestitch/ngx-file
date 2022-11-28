@@ -60,7 +60,7 @@ $desktop-width-min: 992px;
 @mixin action-positions {
   &.top-left {
     top: 8px;
-    right: 8px;
+    left: 8px;
   }
 
   &.top-right {
@@ -203,7 +203,7 @@ fs-file-preview {
 
         &.top-left {
           top: -50px;
-          right: -50px;
+          left: -50px;
         }
 
         &.top-right {

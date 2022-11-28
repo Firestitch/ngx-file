@@ -1,1 +1,1 @@
-export * from './file-config.interface';
+export * from './file-process-config.interface';

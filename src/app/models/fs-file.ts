@@ -2,7 +2,6 @@ import * as EXIF from '@firestitch/exif-js';
 
 import * as FileAPI from 'fileapi';
 
-import { FsFileConfig } from '../interfaces';
 import { createBlob } from '../helpers';
 
 
@@ -17,7 +16,6 @@ export class FsFile {
 
   private _file: any;
   private _name: string;
-  private _fileOptions: FsFileConfig;
   private _fileExists = false;
   private _imageWidth: number;
   private _imageHeight: number;
@@ -99,14 +97,6 @@ export class FsFile {
     return this._name;
   }
 
-  public set fileOptions(value) {
-    this._fileOptions = value;
-  }
-
-  public get fileOptions() {
-    return this._fileOptions;
-  }
-
   public set file(value) {
     this._file = value;
     this.size = value.size;
@@ -172,6 +162,19 @@ export class FsFile {
         reject(err);
       });
     });
+  }
+
+  public download() {
+    const href = this.file instanceof File || this.file instanceof Blob ?
+      URL.createObjectURL(this.file) :
+      this.file;
+
+    var link = document.createElement('a'); 
+    link.href = href;
+    link.download = this.name;
+    document.body.appendChild(link); 
+    link.click();
+    link.remove();
   }
 
   public toObject() {

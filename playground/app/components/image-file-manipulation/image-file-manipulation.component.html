@@ -1,6 +1,7 @@
-<fs-file (select)="select($event)"
-         accept="image/*"
-         [multiple]="true">
+<fs-file 
+    (select)="select($event)"
+    accept="image/*"
+    [multiple]="true">
   <button mat-raised-button color="primary">Select File</button>
 </fs-file>
 
@@ -13,11 +14,12 @@
     <ng-template fs-file-preview-action placement="top-right" action="remove" tooltip="Remove">
       <mat-icon>close</mat-icon>
     </ng-template>
-    <ng-template fs-file-preview-action
-                placement="bottom-right"
-                (click)="enhance($event)"
-                tooltip="Enhance"
-                for-types="image/*">
+    <ng-template 
+       fs-file-preview-action
+        placement="bottom-right"
+        (click)="enhance($event)"
+        tooltip="Enhance"
+        for-types="image/*">
       <mat-icon>brush</mat-icon>
     </ng-template>
     <ng-template fs-file-preview-action placement="bottom-left" action="zoom" tooltip="Zoom" (click)="search($event)" for-types="image/*">

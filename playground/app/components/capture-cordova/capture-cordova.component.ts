@@ -31,13 +31,14 @@ export class CaptureCordovaComponent {
 
     const fileProcessor = new FileProcessor();
 
-    fileProcessor.process([fsFile], {
+    fileProcessor.processFile(fsFile, {
       quality: .8,
-      width: 2048,
-      height: 2048
-    }).subscribe(fsFiles => {
-       this.fsApi.post('https://boilerplate.firestitch.com/api/dummy/upload', { file: fsFiles[0].file })
-      .subscribe(event => {
+      maxWidth: 2048,
+      maxHeight: 2048
+    })
+    .subscribe((fsFile) => {
+       this.fsApi.post('https://boilerplate.firestitch.com/api/dummy/upload', { file: fsFile.file })
+      .subscribe((event) => {
         this.fsMessage.success('Successfully uploaded the file');
       });
     });

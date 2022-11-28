@@ -1,91 +1,120 @@
-import * as FileAPI from 'fileapi';
-import * as EXIF from '@firestitch/exif-js';
+import { forkJoin, from, Observable, of, throwError } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
 
-import { from, Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 import { toInteger } from 'lodash-es';
+import * as FileAPI from 'fileapi';
 
+import { FileProcessConfig, FsFile } from '../models';
+import { createBlob } from '../helpers';
+import { FsFileProcessConfig } from '../interfaces';
 
-import { ProcessConfig, FsFile } from '../models';
-import { ScaleExifImage, createBlob } from '../helpers';
-import { FsFileConfig } from '../interfaces';
-
-type TransformConfig = { 
-  type: string; 
-  maxWidth: number;
-  maxHeight: number; 
-  quality: number;
-};
 
 export class FileProcessor {
 
-  constructor() {}
+  public processFile(fsFile: FsFile, config: FileProcessConfig | FsFileProcessConfig): Observable<FsFile> {
+    const processConfig = config instanceof FileProcessConfig ? config : new FileProcessConfig(config);
 
-  /**
-   * Process uploaded files
-   * @param files
-   * @param config
-   */
-  public process(files, config: FsFileConfig): Observable<any> {
-    let multiple = true;
-    const processConfig = new ProcessConfig(config);
-
-    if (!Array.isArray(files)) {
-      files = [files];
-      multiple = false;
-    }
-
-    const processedFiles = [];
-    files.forEach((file: FsFile) => {
-
-      if (file.file && file.imageProcess) {
-        const resFilePromise = new Promise((resolve, reject) => {
-          this.applyTransforms(file, resolve, reject, processConfig);
-        });
-
-        processedFiles.push(resFilePromise);
-      } else {
-        processedFiles.push(file);
-      }
-    });
-
-    return from(Promise.all(processedFiles))
+    return (
+      fsFile.imageProcess ?
+        from(this._applyTransforms(fsFile, processConfig)) :
+        of(fsFile)
+    )
     .pipe(
-      switchMap((resultFiles) => {
-        if (!multiple && resultFiles[0]) { return of(resultFiles[0]) }
-        return of(resultFiles);
-      })
+      switchMap((fsFile) => this._validate(fsFile, processConfig))
     );
   }
 
-  private async transformFile(originFile: FsFile, transformConfig: TransformConfig): Promise<FsFile> {
+  public processFiles(fsFiles: FsFile[], config: FileProcessConfig | FsFileProcessConfig): Observable<FsFile[]> {
+    const errors = [];
+    return forkJoin(
+        fsFiles.map((fsFile) => this.processFile(fsFile, config)
+          .pipe(
+            catchError((error) => {
+              errors.push(error);
+              return of(null);
+            }),
+          )
+        )
+      )
+      .pipe(
+        switchMap((fsFiles) => {
+          if(errors.length) {
+            const error = errors
+              .reduce((accum, item) => {
+                return [
+                  ...accum,
+                  item.error
+                ];
+              }, [])
+              .join(', ');
+
+              const code = errors
+              .reduce((accum, item) => {
+                return [
+                  ...accum,
+                  item.code
+                ];
+              }, [])
+              .join(', ');  
+              
+            return throwError({ error, code });
+          }
+
+          return of(fsFiles);
+        })
+      );
+  }
+
+  private _validate(fsFile: FsFile, processConfig: FileProcessConfig): Observable<FsFile> {
+    if (processConfig.minHeight || processConfig.minWidth) {
+      return from(fsFile.imageInfo)
+        .pipe( 
+          switchMap((data) => {
+            if(data.height < toInteger(processConfig.minHeight)) {
+              return  throwError({ error: `Height must be at least ${processConfig.minHeight}px.`, code: 'minHeight' });
+            }
+
+            if(data.width < toInteger(processConfig.minWidth)) {
+              return  throwError({ error: `Width must be at least ${processConfig.minWidth}px.`, code: 'minWidth' });
+            }
+
+            return of(fsFile);
+          }),
+        );
+      }
+    
+      return of(fsFile);
+  }
+
+  private _transform(fsFile: FsFile, processConfig: FileProcessConfig): Promise<FsFile> {
     return new Promise((resolve, reject) => {
+      if(
+        !processConfig.orientate &&
+        !processConfig.maxWidth && 
+        !processConfig.maxHeight && 
+        processConfig.quality === 1
+      ) {
+        return resolve(fsFile);
+      }
+      
+      const transformConfig = this._generateTransformConfig(fsFile, processConfig);
+
       // Transform image by options and rotate if needed
       FileAPI.Image.transform(
-        originFile.file,
+        fsFile.file,
         [transformConfig],
-        true, // AutoRotate
+        processConfig.orientate,  
         (err, images) => {
           // Process transformed files
           if (!err && images[0]) {
-            originFile.exifInfo
-            .then((exifInfo) => {
-              const canvasImage = ScaleExifImage(images[0], exifInfo.Orientation);
-              // Convert to blob for create File object
-              canvasImage.toBlob((blob) => {
-                // Save as file to FsFile
-                originFile.file = createBlob([blob], originFile.file.name, originFile.type);
+            const canvas: HTMLCanvasElement = images[0];
+            const type = (processConfig.format) ? 'image/' + processConfig.format : fsFile.type;
 
-                // Update FsFile info
-                originFile.imageInfo
-                  .then(() => {
-                    resolve(originFile);
-                  }).catch((error) => {
-                    reject({ error, originFile });
-                  });
-              }, transformConfig.type, canvasImage.quality);
-            }, reject);
-
+            canvas.toBlob((blob) => {
+              fsFile.file = createBlob([blob], fsFile.file.name, fsFile.type);
+              resolve(fsFile);
+              
+            }, type, processConfig.quality);
           } else {
             reject(err);
           }
@@ -93,56 +122,18 @@ export class FileProcessor {
     });
   }
 
-  /**
-   * Process image file
-   * @param file
-   * @param resolve
-   * @param reject
-   * @param config
-   */
-  private async applyTransforms(fsFile: FsFile, resolve, reject, config: ProcessConfig) {
-    try {
-      await fsFile.imageInfo;
-
-      const transformConfig = this.generateTransformParams(fsFile, config);
-      const resultFile: any = await this.transformFile(fsFile, transformConfig);
-      const codes = [];
-      const errors = [];
-
-      if (config.minHeight && fsFile.imageHeight < toInteger(config.minHeight)) {
-        codes.push('minHeight');
-        errors.push(`Height must be at least ${config.minHeight}px.`);
-      }
-
-      if (config.minWidth && fsFile.imageWidth < toInteger(config.minWidth)) {
-        codes.push('minWidth');
-        errors.push(`Width must be at least ${config.minWidth}px.`);
-      }
-
-      if (codes.length) {
-        throw { codes: codes, error: errors.join(' ') };
-      }
-
-      resolve(resultFile);
-
-    } catch (err) {
-      reject(err);
-    }
+  private async _applyTransforms(fsFile: FsFile, processConfig: FileProcessConfig): Promise<FsFile> {
+    return this._transform(fsFile, processConfig);
   }
 
-  private generateTransformParams(file, config: ProcessConfig): TransformConfig {
-    const transformParams: any = {};
-
-    // Type for result image
-    transformParams.type = (config.format) ? 'image/' + config.format : file.type;
-
-    // Resize
-    transformParams.maxWidth = config.width;
-    transformParams.maxHeight = config.height;
-
-    // Quality for result image
-    transformParams.quality = config.quality || 1;
-
-    return transformParams;
+  private _generateTransformConfig(file, config: FileProcessConfig) {
+    return {
+      // Resize
+      maxWidth: config.maxWidth,
+      maxHeight: config.maxHeight,
+  
+      // Quality for result image
+      quality: config.quality || 1
+    };
   }
 }

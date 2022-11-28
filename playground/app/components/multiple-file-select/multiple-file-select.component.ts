@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FsFile } from '@firestitch/file';
 import { FsMessage } from '@firestitch/message';
 
 
@@ -12,13 +13,21 @@ export class MultipleFileSelectComponent {
   public files = [];
   public filesJsonInfo = [];
 
-  public constructor(private fsMessage: FsMessage) {}
+  public constructor(private _message: FsMessage) {}
 
   public select(files) {
     this.files = [...this.files, ...files];
   }
 
-  public removed(event: MouseEvent) {
-    this.fsMessage.success('Removed');
+  public removed(event) {
+    this._message.success('Removed');
+  }
+
+  public error(error) {
+    console.log(error);
+  }
+
+  public download(event: { file?: FsFile, event?: PointerEvent }) {
+    event.file.download();    
   }
 }

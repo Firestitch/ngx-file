@@ -1,4 +1,5 @@
 import {Directive, EventEmitter, Input, Output} from '@angular/core';
+import { FsFile } from '../models';
 
 
 @Directive({
@@ -11,6 +12,7 @@ export class FsFilePreviewActionDirective {
   @Input() public action: string;
   @Input() public hide: boolean;
   @Input('for-types') public forTypes: string | string[];
-  @Output() public click = new EventEmitter();
+
+  @Output() public click = new EventEmitter<{ file: FsFile, event: PointerEvent }>();
 }
 

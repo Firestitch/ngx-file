@@ -1,2 +1,2 @@
-export * from './process-config';
+export * from './file-process-config';
 export * from './fs-file';

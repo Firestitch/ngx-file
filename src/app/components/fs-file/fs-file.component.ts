@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -22,41 +21,39 @@ import { FsFileDragBaseComponent } from '../fs-file-drag-base/fs-file-drag-base'
 import { CordovaService } from '../../services/cordova.service';
 import { FileProcessor, InputProcessor } from '../../classes';
 import { FS_FILE_MODULE_CONFIG } from '../../fs-file.providers';
+import { FileProcessConfig } from '../../models';
 
 
 @Component({
   selector: 'fs-file',
   templateUrl: './fs-file.component.html',
-  styleUrls: [
-    './fs-file.component.scss',
-  ],
+  styleUrls: ['./fs-file.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, OnDestroy {
 
   public inputProcessor: InputProcessor = null;
+
   private _destroy$ = new Subject();
-
-  private processOptions = {
-    width: void 0,
-    height: void 0,
-    quality: void 0,
-    minHeight: void 0,
-    minWidth: void 0,
-  };
+  private processConfig = new FileProcessConfig();
 
   @Input()
-  set minHeight(value) {
-    this.processOptions.minHeight = value;
+  public set minHeight(value) {
+    this.processConfig.minHeight = value;
   }
 
   @Input()
-  set minWidth(value) {
-    this.processOptions.minWidth = value;
+  public set minWidth(value) {
+    this.processConfig.minWidth = value;
   }
 
   @Input()
-  set multiple(value) {
+  public set orientate(value) {
+    this.processConfig.orientate = value;
+  }
+
+  @Input()
+  public set multiple(value) {
     // TODO This should be a helper function in @firestitch/common
     if (typeof(value) === 'boolean') {
       this.inputProcessor.multiple = value;
@@ -65,71 +62,64 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
     }
   }
 
-  get multiple() {
+  public get multiple() {
     return this.inputProcessor.multiple;
   }
 
-  get api() {
+  public get api() {
     return this.inputProcessor.api;
   }
 
   @Input()
-  set capture(value) {
+  public set capture(value) {
     this.inputProcessor.capture = value;
   }
 
   @Input()
-  set allowClick(value) {
+  public set allowClick(value) {
     this.inputProcessor.allowClick = value;
   }
 
   @Input()
-  set allowDrop(value) {
+  public set allowDrop(value) {
     this.inputProcessor.allowDrop = value;
   }
 
-  get capture() {
+  public get capture() {
     return this.inputProcessor.capture;
   }
 
   @Input()
-  set accept(value) {
+  public set accept(value) {
     this.inputProcessor.accept = value;
   }
 
-  get accept() {
+  public get accept() {
     return this.inputProcessor.accept || '*';
   }
 
   @Input()
-  set disabled(value) {
+  public set disabled(value) {
     this.inputProcessor.disabled = value;
   }
 
-  get disabled() {
+  public get disabled() {
     return this.inputProcessor.disabled;
   }
 
   @Input()
-  set imageWidth(value) {
-    if (value) {
-      this.processOptions.width = +value;
-    }
+  public set imageWidth(value) {
+    this.processConfig.maxWidth = +value;
   }
 
   @Input()
-  set imageHeight(value) {
-    if (value) {
-      this.processOptions.height = +value;
-    }
+  public set imageHeight(value) {
+    this.processConfig.maxHeight = +value;
   }
 
   @Input()
-  set imageQuality(value) {
-    const val = parseFloat(value);
-    if (!isNaN(val)) {
-      this.processOptions.quality = val;
-    }
+  public set imageQuality(value) {
+    this.processConfig.quality = value;
   }
 
   @Output() public select = new EventEmitter();
@@ -171,7 +161,6 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
   }
 
   private initSelect() {
-
     const fileProcessor = new FileProcessor();
 
     this.inputProcessor.clicked
@@ -185,19 +174,18 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
     this.inputProcessor.select
     .pipe(
       switchMap((files) => {
-
         if (this.inputProcessor.multiple && !Array.isArray(files)) {
             files = [files];
         }
 
-        return fileProcessor.process(files, this.processOptions);
+        return fileProcessor.processFiles(files, this.processConfig);
       }),
       takeUntil(this._destroy$),
     )
     .subscribe((e) => {
       this.select.emit(e);
     },
-    e => {
+    (e) => {
       this.error.emit(e);
       this.initSelect();
     })

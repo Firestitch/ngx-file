@@ -1,17 +1,31 @@
 <fs-file
-  (select)="select($event)"
-  [multiple]="true"
-  imageWidth="1000"
-  imageHeight="1000"
-  imageQuality=".8">
-  <button mat-raised-button color="primary">Select File</button>
+    (select)="select($event)"
+    (error)="error($event)"
+    [multiple]="true">
+  <button 
+      mat-raised-button 
+      color="primary">
+    Select File
+  </button>
 </fs-file>
 
 <div class="previews">
   <fs-file-previews [files]="files">
-    <ng-template fs-file-preview-action placement="top-right" action="remove" tooltip="Remove" (click)="removed($event)">
+    <ng-template 
+        fs-file-preview-action 
+        placement="top-right" 
+        action="remove" 
+        tooltip="Remove" 
+        (click)="removed($event)">
       <mat-icon>close</mat-icon>
     </ng-template>
+    <ng-template 
+        fs-file-preview-action 
+        placement="top-left" 
+        tooltip="Download" 
+        (click)="download($event)">
+      <mat-icon>download</mat-icon>
+    </ng-template>    
   </fs-file-previews>
 </div>
 

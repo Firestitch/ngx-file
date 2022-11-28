@@ -5,16 +5,12 @@ import {
   Output,
   AfterContentInit,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
 } from '@angular/core';
 
 import { isArray } from 'lodash-es';
 
-import * as FileAPI from 'fileapi';
-
 import { FsFile } from '../../models';
 import { FsFilePreviewsBaseComponent } from '../fs-file-preview-base/fs-file-preview-base';
-import { ScaleExifImage } from '../../helpers';
 
 
 @Component({
@@ -24,6 +20,8 @@ import { ScaleExifImage } from '../../helpers';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implements AfterContentInit {
+
+  public loaded = false;
 
   @Input() showFilename = true;
   @Input() public previewWidth: string | number = 150;
@@ -42,6 +40,10 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
 
   public ngAfterContentInit() {
     this._cleanActions();
+  }
+
+  public previewLoaded() {
+    this.loaded = true;
   }
 
   public callAction($event: Event, action) {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { FileProcessor, FsFile } from '@firestitch/file';
+import { FileProcessor } from '@firestitch/file';
 import { FsMessage } from '@firestitch/message';
 
 
@@ -20,21 +20,21 @@ export class ImageFileManipulationComponent {
   public select(files) {
     this.files = this.files.concat(files);
 
-    this._fileProcessor.process(this.files, {
+    this._fileProcessor.processFiles(this.files, {
       quality: .8,
-      width: 1000,
-      height: 1000
+      maxWidth: 1000,
+      maxHeight: 1000
     }).subscribe((resFiles) => {
       console.log(resFiles);
     })
   }
 
-  public enhance(fsFile: FsFile) {
-    this._message.success(`Enhance ${fsFile.file.name}`);
+  public enhance(event) {
+    this._message.success(`Enhance ${event.file.name}`);
   }
 
-  public search(fsFile: FsFile) {
-    this._message.success(`Search ${fsFile.file.name}`);
+  public search(event) {
+    this._message.success(`Search ${event.file.name}`);
   }
 
   public removed(files) {
