@@ -88,6 +88,7 @@ export class InputProcessor {
             ext = nameParts[nameParts.length - 1];
           }
 
+          ext = (ext + '').toLowerCase();
           const acceptableFile = this.checkAcceptableTypes(file.type, ext);
 
           if (!acceptableFile) {

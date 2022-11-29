@@ -1,7 +1,7 @@
 {
   "name": "@firestitch/file",
   "title": "File",
-  "version": "12.7.0",
+  "version": "12.7.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/Firestitch/ngx-file"
@@ -47,7 +47,7 @@
     "@firestitch/autocomplete": "^12.0.0",
     "@firestitch/autocomplete-chips": "^12.0.0",
     "@firestitch/clear": "^12.0.0",
-    "@firestitch/common": "^12.0.0",
+    "@firestitch/common": "^12.4.2",
     "@firestitch/date": "^12.0.0",
     "@firestitch/datepicker": "^12.0.1",
     "@firestitch/dialog": "^12.0.1",
