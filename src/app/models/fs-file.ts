@@ -21,9 +21,15 @@ export class FsFile {
   private _imageHeight: number;
   private _exifInfo: any;  
 
-  constructor(obj?: File|Blob|string, filename?: string) {
-    if (obj instanceof File || obj instanceof Blob) {
+  constructor(obj?: File|Blob|string, filename?: string) {    
+    if (obj instanceof File) {
       this.file = obj;
+    } else if (obj instanceof Blob) {
+      if(!filename) {
+        filename = 'file.' + obj.type.split('/')[1];
+      }
+
+      this.file = new File([obj], filename, { type: obj.type });
     } else {
       if(obj) {
         const url = new URL(obj);
