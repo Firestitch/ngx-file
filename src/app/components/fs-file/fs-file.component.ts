@@ -14,7 +14,7 @@ import {
 
 import { FsMessage, MessageMode } from '@firestitch/message';
 
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { map, switchMap, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 import { FsFileDragBaseComponent } from '../fs-file-drag-base/fs-file-drag-base';
@@ -144,7 +144,6 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
   ) {
     super();
     this.inputProcessor = new InputProcessor(cordovaService, ngZone);
-
     this.initSelect();
   }
 
@@ -174,11 +173,14 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
     this.inputProcessor.select
     .pipe(
       switchMap((files) => {
-        if (this.inputProcessor.multiple && !Array.isArray(files)) {
+        if (!Array.isArray(files)) {
             files = [files];
         }
 
         return fileProcessor.processFiles(files, this.processConfig);
+      }),
+      map((fsFiles) => {
+        return this.inputProcessor.multiple ? fsFiles : fsFiles[0]; 
       }),
       takeUntil(this._destroy$),
     )

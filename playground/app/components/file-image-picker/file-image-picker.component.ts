@@ -17,6 +17,7 @@ export class FileImagePickerComponent {
 
   public select(file) {
     this.file = file;
+    console.log('Select File', file);
   }
 
   public cancel() {
@@ -24,7 +25,7 @@ export class FileImagePickerComponent {
   }
 
   public error(e) {
-    this.message.error(e.error);
+    this.message.error(e.message);
   }
 
   public selectUrl(url) {

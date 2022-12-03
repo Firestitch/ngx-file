@@ -57,7 +57,7 @@ export class FileProcessor {
               }, [])
               .join(', ');  
               
-            return throwError({ error, code });
+            return throwError({ error, code, message: error });
           }
 
           return of(fsFiles);
@@ -71,11 +71,11 @@ export class FileProcessor {
         .pipe( 
           switchMap((data) => {
             if(data.height < toInteger(processConfig.minHeight)) {
-              return  throwError({ error: `Height must be at least ${processConfig.minHeight}px.`, code: 'minHeight' });
+              return throwError({ error: `Height must be at least ${processConfig.minHeight}px.`, code: 'minHeight' });
             }
 
             if(data.width < toInteger(processConfig.minWidth)) {
-              return  throwError({ error: `Width must be at least ${processConfig.minWidth}px.`, code: 'minWidth' });
+              return throwError({ error: `Width must be at least ${processConfig.minWidth}px.`, code: 'minWidth' });
             }
 
             return of(fsFile);
