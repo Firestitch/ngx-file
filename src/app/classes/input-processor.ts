@@ -7,7 +7,6 @@ import { FsFile } from '../models';
 import {
   getCordovaCamera,
   getCordovaCapture,
-  createBlob,
   getCordovaResolveLocalFileSystemURL,
   hasCordovaCameraSupport,
   hasCordovaCaptureSupport,
@@ -291,7 +290,7 @@ export class InputProcessor {
               u8arr[n] = byteString.charCodeAt(n);
             }
 
-            const blob = createBlob([u8arr], file.name, file.type);
+            const blob = new File([u8arr], file.name, { type: file.type });
             resolve(blob);
           };
 

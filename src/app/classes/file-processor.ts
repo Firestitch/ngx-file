@@ -5,7 +5,6 @@ import { toInteger } from 'lodash-es';
 import * as FileAPI from 'fileapi';
 
 import { FileProcessConfig, FsFile } from '../models';
-import { createBlob } from '../helpers';
 import { FsFileProcessConfig } from '../interfaces';
 
 
@@ -111,7 +110,7 @@ export class FileProcessor {
             const type = (processConfig.format) ? 'image/' + processConfig.format : fsFile.type;
 
             canvas.toBlob((blob) => {
-              fsFile.file = createBlob([blob], fsFile.file.name, fsFile.type);
+              fsFile.file = new File([blob], fsFile.file.name, { type: fsFile.type });
               resolve(fsFile);
               
             }, type, processConfig.quality);

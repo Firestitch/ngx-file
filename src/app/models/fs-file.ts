@@ -2,8 +2,6 @@ import * as EXIF from '@firestitch/exif-js';
 
 import * as FileAPI from 'fileapi';
 
-import { createBlob } from '../helpers';
-
 
 export class FsFile {
 
@@ -46,7 +44,7 @@ export class FsFile {
         type = mime + '/' + this.extension;
       }
 
-      this.file = createBlob([''], filename, type);
+      this.file = new File([], filename, { type });
     }
 
     this._checkIfFileExists();
@@ -103,11 +101,11 @@ export class FsFile {
     return this._name;
   }
 
-  public set file(value) {
+  public set file(value: File) {
     this._file = value;
     this.size = value.size;
-    this.name = value.name;
     this.type = value.type;
+    this.name = value.name;
     this._checkIfFileExists();
   }
 
@@ -171,7 +169,7 @@ export class FsFile {
   }
 
   public download() {
-    const href = this.file instanceof File || this.file instanceof Blob ?
+    const href = this.file instanceof File ?
       URL.createObjectURL(this.file) :
       this.file;
 
@@ -196,6 +194,6 @@ export class FsFile {
   }
 
   private _checkIfFileExists() {
-    this._fileExists = !!this.name || !!this.url
+    this._fileExists = !!this.url || !!this.size;
   }
 }

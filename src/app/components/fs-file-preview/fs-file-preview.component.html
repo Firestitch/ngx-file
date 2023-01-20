@@ -4,11 +4,12 @@
     class="preview-container"
     [ngClass]="{ 
       'has-actions': !!actions.length, 
-      'type-image': file.typeImage 
+      'type-image': file.typeImage && file.exists
     }">
 
   <!-- Image container -->
-  <ng-container *ngIf="file; else nonImage">
+  <ng-container 
+      *ngIf="file?.exists && file.typeImage; else nonImage">
     <img 
       [src]="file | previewImage | async" 
       [ngClass]="{ loaded: this.loaded }"

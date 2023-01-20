@@ -70,13 +70,10 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
   }
 
   @Input('file') set file(file) {
-    if(file) {
-      if(file instanceof FsFile) {
-        this._file = file;
-          
-      } else {
-        this._file = new FsFile(file);
-      }
+    if(file instanceof FsFile) {
+      this._file = file;
+    } else if(file) {
+      this._file = new FsFile(file);
     } else {
       this._file = null;
     }

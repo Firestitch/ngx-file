@@ -6,7 +6,6 @@ export { FsFileModule } from './app/fs-file.module';
 export { CordovaService } from './app/services/cordova.service';
 export { FsFile } from './app/models/fs-file';
 export {
-  createBlob,
   getCordovaCamera,
   getCordovaCapture,
   getCordovaResolveLocalFileSystemURL,

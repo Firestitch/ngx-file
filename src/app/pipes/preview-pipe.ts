@@ -19,7 +19,7 @@ export class PreviewImagePipe implements PipeTransform {
         return;
       }
 
-      if(data instanceof Blob || data instanceof File) {
+      if(data instanceof File) {
         const fileReader = new FileReader();
         fileReader.onload = () => {
           observer.next(fileReader.result);
