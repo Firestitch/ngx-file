@@ -1,6 +1,8 @@
 import * as EXIF from '@firestitch/exif-js';
 
 import * as FileAPI from 'fileapi';
+import { from, Observable, of } from 'rxjs';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 
 export class FsFile {
@@ -135,46 +137,63 @@ export class FsFile {
       });
     }
 
-    const exif = new Promise((resolve, reject) => {
+    const exif$ = new Observable<any>((observer) => {
       const fr = new FileReader();
       fr.onload = () => {
-        var exif = EXIF.readFromBinaryFile(fr.result);
-        resolve(exif);
+        const exif = EXIF.readFromBinaryFile(fr.result);
+        if(exif) {
+          observer.next(exif);
+          observer.complete();
+        } else {
+          observer.error('Failed to read from binary file');
+        }
       };
 
       fr.onerror = () => {
-        reject(fr.error);
+        observer.error(fr.error);
       }
 
       fr.readAsArrayBuffer(this.file);
     });
 
-    const dims = new Promise((resolve, reject) => {
+    const dims$ = new Observable<any>((observer) => {
       FileAPI.getInfo(this.file, (err, info) => {
         if (!err) {
-          resolve(info);
+          observer.next(info);
+          observer.complete();
         } else {
-          reject(err);
+          observer.error(err);        
         }
       });
     });
 
-    return new Promise((resolve, reject) => {
-      Promise.all([exif, dims])
-      .then((data: any) => {
-        this._exifInfo = data[0] || {};
-        this._imageWidth = data[1].width;
-        this._imageHeight = data[1].height;
+    return of(true)
+      .pipe(
+        switchMap(() => dims$
+          .pipe(
+            tap((dims) => {
+            this._imageWidth = dims.width;
+            this._imageHeight = dims.height;
+            }),
 
-        resolve({
+            catchError(() => of(true)),
+          )
+        ),
+        switchMap(() => exif$
+          .pipe(
+            tap((exif) => {
+              this._exifInfo = exif || {};
+            }),
+            catchError(() => of(true)),
+          )
+        ),
+        map(() => ({
           width: this._imageWidth,
           height: this._imageHeight,
           exif: this._exifInfo,
-        });
-      },(err) => {
-        reject(err);
-      });
-    });
+        })),
+      )
+      .toPromise();
   }
 
   public download() {
