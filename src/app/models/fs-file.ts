@@ -22,20 +22,29 @@ export class FsFile {
   constructor(obj?: File|Blob|string, filename?: string) {    
     if (obj instanceof File) {
       this.file = obj;
-    } else if (obj instanceof Blob) {
-      if(!filename) {
-        filename = 'file.' + obj.type.split('/')[1];
-      }
-
-      this.file = new File([obj], filename, { type: obj.type });
     } else {
-      if(obj) {
-        const url = new URL(obj);
-        filename = filename || url.pathname.split('/').pop();
-        this.url = url.href;
+      let type;
+      let fileBlob = [];
+
+      if (obj instanceof Blob) {
+        fileBlob = [obj];
+
+        if(obj.type) {
+          type = obj.type;
+
+          if(!filename) {
+            filename = 'file.' + obj.type.split('/').pop();
+          }
+        }
+
+      } else {
+        if(obj) {
+          const url = new URL(obj);
+          filename = filename || url.pathname.split('/').pop();
+          this.url = url.href;
+        }
       }
 
-      let type = '';
       if (filename) {
         const match = filename.toLowerCase().match(/([^\.]+)$/);
         this.extension = match ? match[1] : '';
@@ -44,7 +53,7 @@ export class FsFile {
         type = mime + '/' + this.extension;
       }
 
-      this.file = new File([], filename, { type });
+      this.file = new File(fileBlob, filename, { type });
     }
 
     this._checkIfFileExists();
