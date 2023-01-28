@@ -1,9 +1,9 @@
 <fs-file-picker
-  (select)="select($event)"
-  imageQuality=".8"
-  imageWidth="500"
-  imageHeight="500">
-    <div fsFileLabel>File Picker Label</div>
+    (select)="select($event)"
+    [imageQuality]=".8"
+    [imageWidth]="500"
+    [imageHeight]="500">
+  <div fsFileLabel>File Picker Label</div>
 </fs-file-picker>
 <fieldset *ngIf="file">
   <legend>File</legend>

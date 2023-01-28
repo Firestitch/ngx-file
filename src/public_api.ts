@@ -27,5 +27,7 @@ export { FsFilePreviewActionDirective } from './app/directives/fs-file-preview-a
 export { FsFileHintDirective } from './app/directives/fs-file-hint.directive';
 export { FsFileLabelDirective } from './app/directives/fs-file-label.directive';
 
+export { FsFilePickerSelectDirective } from './app/directives';
+
 export { FsFileProcessConfig } from './app/interfaces';
 export { FileProcessor } from './app/classes';

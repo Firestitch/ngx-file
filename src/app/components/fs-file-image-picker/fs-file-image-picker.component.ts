@@ -27,7 +27,7 @@ export class FsFileImagePickerComponent {
   @Input() public imageQuality: number;
   @Input() public imageWidth;
   @Input() public imageHeight;
-  @Input() public previewDiameter = 50;
+  @Input() public previewDiameter = 80;
   @Input() public previewFit = 'cover';
   @Input() public label = '';
   @Input() public minWidth = 0;
@@ -35,8 +35,8 @@ export class FsFileImagePickerComponent {
   @Input() public disabled = false;
 
   @Input('url') set url(url) {
-    this._file = new FsFile(url);
-    this._previousFile = new FsFile(url);
+    this._file = url ? new FsFile(url) : null;
+    this._previousFile = url ? url : new FsFile(url);
   }
 
   @Output() public select = new EventEmitter<any>();

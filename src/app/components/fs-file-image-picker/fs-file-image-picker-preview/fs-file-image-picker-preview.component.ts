@@ -17,13 +17,12 @@ import { FsFile } from '../../../models/fs-file';
 })
 export class FsFileImagePickerPreviewComponent implements OnInit {
 
-  public preview: string;
-  public updateStyle;
 
   @Input() public imageWidth;
   @Input() public imageHeight;
+  @Input() public borderRadius = '100%';
   @Input() public previewFit = 'cover';
-  @Input() public previewDiameter = 50;
+  @Input() public previewDiameter = 80;
   @Input() public imageQuality: number;
   @Input() public minWidth = 0;
   @Input() public minHeight = 0;
@@ -34,7 +33,8 @@ export class FsFileImagePickerPreviewComponent implements OnInit {
   @Output() public error = new EventEmitter<any>();
   @Output() public clicked = new EventEmitter<any>();
 
-  constructor() {}
+  public preview: string;
+  public updateStyle;
 
   public selectFile(file) {
     this.file = file;
@@ -42,7 +42,6 @@ export class FsFileImagePickerPreviewComponent implements OnInit {
   }
 
   public ngOnInit() {
-
     let fontSize = this.previewDiameter / 100;
 
     if (fontSize < .5) {

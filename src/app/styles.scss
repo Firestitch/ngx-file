@@ -118,85 +118,15 @@ fs-file-picker {
 }
 
 fs-file-preview {    
-  border: 1px #efefef solid;
-  display: inline-block;
-  position: relative;
-  vertical-align: top;
-  overflow: hidden;
-  border-radius: 3px;
-
-  .file-details {
-    flex-direction: column;
-    display: flex;
-    align-items: center;
-
-    padding: 5px;
-
-    .file-icon {
-      position: relative;
-    }
-
-    .file-ext {
-      font-weight: bold;
-      text-align: center;
-      text-transform: uppercase;
-      font-size: 20px;
-      position: absolute;
-      width: 100%;
-      bottom: 28px;
-      color: #fff;
-    }
-
-    mat-icon {
-      font-size: 90px;
-      width: 90px;
-      height: 90px;
-      color: #ccc;
-
-    }
-
-    .file-name {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      padding: 0 5px;
-      font-size: 75%;
-      text-align: center;
-      width: 100%;
-    }
-  }
-
-  .preview-container {
-    overflow: hidden;
-    box-sizing: border-box;
-    margin: auto;
-  }
-
   .actions {
-    position: absolute;
-
     @include apply-to(less-than, phone) {
       display: block;
     }
 
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-
     .action {
-
-      position: absolute;
-      cursor: pointer;
-
-      &.hide {
-        display: none;
-      }
-
       @include action-positions();
 
       @include apply-to(greater-than, phone) {
-
         &.top-left, &.top-right, &.bottom-left, &.bottom-right {
           transition: top .3s, bottom .3s, left .3s, right .3s;
         }
@@ -224,48 +154,24 @@ fs-file-preview {
     }
   }
 
-  .preview-container {
-
-    &.type-image {
-      background-image: /* tint image */ linear-gradient(to right, rgb(255 255 255 / 75%), rgb(255 255 255 / 75%)), 
-      /* checkered effect */ linear-gradient(to right, black 50%, white 50%), 
-      linear-gradient(to bottom, black 50%, white 50%);
-      background-blend-mode: normal, difference, normal;
-      background-size: 20px 20px;
-    }
-  }
-
   &:hover,
   &:focus {
     .actions {
-      display: block;
-
       .action {
         @include action-positions();
       }
     }
   }
+}
 
-  img {
-    display: block;
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-  }
-
-  .mat-button-wrapper {
-    padding: 0;
-    line-height: 15px !important;
-  }
-
-  .spinner {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-left: -25%;
-    margin-top: -25%;
+fs-file-image-picker-preview {
+  .wrap:not(.exists) {
+    .image-preview {
+      border: 1px solid mat.get-color-from-palette($primary) !important;
+    }
   }
 }
+
 
 fs-file-previews {
   margin-top: -10px;

@@ -14,9 +14,13 @@ import {
   QueryList,
   ContentChildren,
   TemplateRef,
-  OnDestroy
+  OnDestroy,
+  ContentChild
 } from '@angular/core';
-import { AbstractControl, AsyncValidator, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator } from '@angular/forms';
+import { AbstractControl, AsyncValidator, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors } from '@angular/forms';
+
+import { from, of, Subject } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
 
 import { FsFileLabelDirective } from '../../directives/fs-file-label.directive';
 import { FsFileDragBaseComponent } from '../fs-file-drag-base/fs-file-drag-base';
@@ -24,8 +28,7 @@ import { InputProcessor } from '../../classes';
 import { FsFile } from '../../models/fs-file';
 import { CordovaService } from '../../services/cordova.service';
 import { FS_FILE_MODULE_CONFIG } from '../../fs-file.providers';
-import { from, Observable, of, Subject } from 'rxjs';
-import { map, switchMap, takeUntil } from 'rxjs/operators';
+import { FsFilePickerSelectDirective } from '../../directives';
 
 
 @Component({
@@ -53,6 +56,9 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
 
   @ContentChildren(FsFileLabelDirective)
   public labels: QueryList<TemplateRef<any>>;
+
+  @ContentChild(FsFilePickerSelectDirective, { read: TemplateRef })
+  public filePickerSelectTemplate: TemplateRef<any>;
 
   @Input() public minWidth = 0;
   @Input() public minHeight = 0;

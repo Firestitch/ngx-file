@@ -62,11 +62,16 @@
       </fs-file-preview>
 
       <ng-template #preview>
-        <div class="select">
-          <mat-icon>cloud_upload</mat-icon>
-          <div class="instruction">{{instruction}}</div>
-          <div class="mat-raised-button mat-primary">Upload</div>
-        </div>
+        <ng-container *ngIf="filePickerSelectTemplate">
+          <ng-container [ngTemplateOutlet]="filePickerSelectTemplate"></ng-container>
+        </ng-container>
+        <ng-container *ngIf="!filePickerSelectTemplate">
+          <div class="select">
+            <mat-icon>cloud_upload</mat-icon>
+            <div class="instruction">{{instruction}}</div>
+            <div class="mat-raised-button mat-primary">Upload</div>
+          </div>
+        </ng-container>
       </ng-template>
     </div>
   </fs-file>

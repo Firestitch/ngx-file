@@ -32,23 +32,17 @@
       [style.display]="'block'"
       (select)="select($event)"
       (selectUrl)="selectUrl($event)"
-      [url]="url"
       [imageQuality]=".8"
       [imageWidth]="500"
-      [imageHeight]="500"
-      [previewDiameter]="75">
+      [imageHeight]="500">
     </fs-file-image-picker>
-
-    <ul>
-      <li>Image quality: <b>80%</b></li>
-      <li>Preview Diameter: <b>75px</b></li>
-    </ul>
   </div>
 
   <div>
     <fs-file-image-picker
       (select)="select($event)"
       (selectUrl)="selectUrl($event)"
+      [previewDiameter]="80"
       [url]="url"
       [disabled]="true">
     </fs-file-image-picker>
@@ -60,7 +54,12 @@
 </div>
 
 <br>
-<button mat-raised-button color="primary" (click)="cancel()">Cancel changing</button>
+<button 
+    mat-raised-button 
+    color="primary" 
+    (click)="cancel()">
+  Cancel changing
+</button>
 
 <fieldset *ngIf="file">
   <legend>File</legend>
