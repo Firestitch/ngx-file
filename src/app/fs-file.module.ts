@@ -16,7 +16,6 @@ import { FsFilePreviewsBaseComponent, } from './components/fs-file-preview-base/
 import { FsFileDragBaseComponent, } from './components/fs-file-drag-base/fs-file-drag-base';
 import { FsFileImagePickerComponent } from './components/fs-file-image-picker/fs-file-image-picker.component';
 import { FsFileImagePickerDialogComponent } from './components/fs-file-image-picker/fs-file-image-picker-dialog/fs-file-image-picker-dialog.component';
-import { FsFileImagePickerPreviewComponent } from './components/fs-file-image-picker/fs-file-image-picker-preview/fs-file-image-picker-preview.component';
 import { FsFileBouncingIconComponent } from './components/fs-file-bouncing-icon/fs-file-bouncing-icon.component';
 import { FsFileDragoverMessageComponent } from './components/fs-file-dragover-message/fs-file-dragover-message.component';
 
@@ -56,7 +55,6 @@ import { FsFilePickerSelectDirective } from './directives';
     FsFilePreviewActionDirective,
     FsFilePickerComponent,
     FsFileImagePickerComponent,
-    FsFileImagePickerPreviewComponent,
     FsFileHintDirective,
     FsFileLabelDirective,
     FsFilePickerSelectDirective,
@@ -70,7 +68,6 @@ import { FsFilePickerSelectDirective } from './directives';
     FsFilePreviewsBaseComponent,
     FsFilePickerComponent,
     FsFileImagePickerComponent,
-    FsFileImagePickerPreviewComponent,
     FsFileBouncingIconComponent,
     FsFileDragoverMessageComponent,
     FsFileImagePickerDialogComponent,

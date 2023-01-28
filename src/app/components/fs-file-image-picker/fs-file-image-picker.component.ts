@@ -2,13 +2,16 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ContentChild,
   EventEmitter,
   Input,
   NgZone,
-  Output
+  Output,
+  TemplateRef
 } from '@angular/core';
 
 import { MatDialog } from '@angular/material/dialog';
+import { FsFileHintDirective, FsFileLabelDirective } from '../../directives';
 
 import { InputProcessor } from '../../classes/input-processor';
 import { FsFile } from '../../models/fs-file';
@@ -24,7 +27,14 @@ import { FsFileImagePickerDialogComponent } from './fs-file-image-picker-dialog/
 })
 export class FsFileImagePickerComponent {
 
+  @ContentChild(FsFileLabelDirective, { read: TemplateRef })
+  public labelTemplate: TemplateRef<any>;
+
+  @ContentChild(FsFileHintDirective, { read: TemplateRef })
+  public hintTemplate: TemplateRef<any>;
+
   @Input() public imageQuality: number;
+  @Input() public borderRadius = '100%';
   @Input() public imageWidth;
   @Input() public imageHeight;
   @Input() public previewDiameter = 80;
@@ -35,8 +45,8 @@ export class FsFileImagePickerComponent {
   @Input() public disabled = false;
 
   @Input('url') set url(url) {
+    this._previousFile = this._file;
     this._file = url ? new FsFile(url) : null;
-    this._previousFile = url ? url : new FsFile(url);
   }
 
   @Output() public select = new EventEmitter<any>();
@@ -55,20 +65,28 @@ export class FsFileImagePickerComponent {
     private _dialog: MatDialog,
     private _cdRef: ChangeDetectorRef,
   ) {
-    this.inputProcessor = new InputProcessor(_cordovaService, _ngZone);
+    this.inputProcessor = new InputProcessor(this._cordovaService, this._ngZone);
   }
 
-  public selectFile(file) {
+  public get file(): FsFile {
+    return this._file;
+  }
+
+  public selectFile(file): void {
+    this._previousFile = this._file;
     this._file = file;
-    this.select.emit(file);
+    setTimeout(() => {
+      this.select.emit(file);
+    });    
   }
 
-  public cancel() {
+  public cancel(): void {
     this._file = this._previousFile;
+    this._previousFile = null;
     this._cdRef.markForCheck();
   }
 
-  public clicked(event: KeyboardEvent) {
+  public clicked(event: KeyboardEvent): void {
     if (this.disabled) {
       return;
     }

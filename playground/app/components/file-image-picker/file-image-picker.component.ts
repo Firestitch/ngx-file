@@ -8,7 +8,8 @@ import { FsMessage } from '@firestitch/message';
   templateUrl: 'file-image-picker.component.html',
 })
 export class FileImagePickerComponent {
-  @ViewChild('imagePicker', { static: true }) public imagePicker: FsFileImagePickerComponent;
+  @ViewChild('imagePicker', { static: true }) 
+  public imagePicker: FsFileImagePickerComponent;
 
   public constructor(private message: FsMessage) {}
 
