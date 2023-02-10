@@ -64,13 +64,13 @@
           class="upload-icon">
         <button 
             mat-mini-fab
+            type="button"
             [style.margin]="(previewDiameter < 100 ? (1 - (previewDiameter / 100)) * -10 : 1) + 'px'"
             [style.transform]="'scale(' + (previewDiameter < 100 ? (previewDiameter / 100) : 1) + ')'">
           <mat-icon>
               photo_camera
           </mat-icon>
         </button>
-        
       </div>
     </div>
   </ng-template>
