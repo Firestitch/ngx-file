@@ -89,8 +89,13 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
     return this.inputProcessor.capture;
   }
 
+  /**
+   * Accept Examples
+   * 
+   * image/*,audio/*,video/*,image/jpg,.pdf
+   */
   @Input()
-  public set accept(value) {
+  public set accept(value: string) {
     this.inputProcessor.accept = value;
   }
 
