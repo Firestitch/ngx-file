@@ -15,21 +15,22 @@ import { CordovaService } from '../services/cordova.service';
 
 
 export class InputProcessor {
+
   public containerEl: any;
   public inputEl: any;
-  public cordova = {  camera: null,
-                      capture: null,
-                      resolveLocalFileSystemURL: null };
-
   public multiple = false;
   public api: 'html5' | 'any' | 'cordova' = null;
   public capture: string = null;
   public disabled;
   public allowClick = true;
   public allowDrop = true;
-
   public select = new EventEmitter();
   public clicked = new EventEmitter();
+  public cordova = {  
+    camera: null,
+    capture: null,
+    resolveLocalFileSystemURL: null 
+  };
 
   private _accept = '*';
   private _acceptableTypes = new Map();
@@ -37,12 +38,12 @@ export class InputProcessor {
   private _declinedFiles$ = new Subject<File[]>();
 
   constructor(private cordovaService: CordovaService, private ngZone: NgZone) {
-
-    cordovaService.isReady().subscribe(() => {
-      this.cordova.camera = getCordovaCamera();
-      this.cordova.capture = getCordovaCapture();
-      this.cordova.resolveLocalFileSystemURL = getCordovaResolveLocalFileSystemURL();
-    });
+    cordovaService.isReady()
+      .subscribe(() => {
+        this.cordova.camera = getCordovaCamera();
+        this.cordova.capture = getCordovaCapture();
+        this.cordova.resolveLocalFileSystemURL = getCordovaResolveLocalFileSystemURL();
+      });
   }
 
   public get accept() {
@@ -52,8 +53,19 @@ export class InputProcessor {
   public set accept(value) {
     this._acceptableTypes.clear();
     this._acceptableExts.clear();
+
     this.parseAcceptTypes(value);
-    this._accept = value.trim();
+    this._accept = [
+      ...Array.from(this._acceptableTypes)
+        .reduce((accum, [ key, values ]) => {
+          return [
+            ...accum, 
+            ...Array.from(values)
+              .map((value) => `${key}/${value}`),
+          ];
+        },[]),
+      ...Array.from(this._acceptableExts).values(),
+    ].join(',');
   }
 
   public get declinedFiles$() {
@@ -78,7 +90,6 @@ export class InputProcessor {
       }
 
       const declinedFiles = [];
-
       const files = FileAPI.getFiles(event)
         .filter(file => {
           const nameParts = file.name.split('.');
@@ -147,7 +158,6 @@ export class InputProcessor {
     }
 
     FileAPI.event.on(el.nativeElement, 'click', (event) => {
-
       if (!this.allowClick) {
         return;
       }
@@ -347,16 +357,21 @@ export class InputProcessor {
    * Parset and store acceptable types for feature filter
    * @param types
    */
-  private parseAcceptTypes(types) {
-    if (typeof types !== 'string' && types.length === 0) { return }
+  private parseAcceptTypes(value) {
+    let types = [];
+    if (typeof value === 'string') { 
+      types = value.split(/[,;]/);
+    }
+    
+    if(!types.length) {
+      return;
+    }
 
-    const parts = types.split(',').map(type => type.trim());
+    types = types
+      .map((type) => type.trim());
 
-    parts.forEach((part) => {
-      const hasSlash = part.indexOf('/') > -1;
-      const hasDot = part.indexOf('.') === 0;
-
-      if (hasSlash) {
+    types.forEach((part) => {
+      if (part.indexOf('/') !== -1) {
         const [ type, ext ] = part.split('/');
         if (this._acceptableTypes.has(type)) {
           const existedType = this._acceptableTypes.get(type);
@@ -369,11 +384,14 @@ export class InputProcessor {
           this._acceptableTypes.set(type, extensions);
           extensions.add(ext);
         }
-      }
-
-      if (hasDot) {
+      } else if(part.indexOf('.') !== -1) {
+        part = part.replace(/^\*/,'');
         if (!this._acceptableExts.has(part)) {
           this._acceptableExts.add(part);
+        }
+      } else if(part.match(/[a-z0-9]{3,4}/i)) {
+        if (!this._acceptableExts.has(part)) {
+          this._acceptableExts.add(`.${part}`);
         }
       }
     })

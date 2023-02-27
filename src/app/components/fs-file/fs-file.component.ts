@@ -95,8 +95,8 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
    * image/*,audio/*,video/*,image/jpg,.pdf
    */
   @Input()
-  public set accept(value: string) {
-    this.inputProcessor.accept = value;
+  public set accept(value: string | string[]) {
+    this.inputProcessor.accept = Array.isArray(value) ? value.join(',') : value;
   }
 
   public get accept() {

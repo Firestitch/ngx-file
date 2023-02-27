@@ -86,13 +86,7 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
   }
 
   @Input()
-  public set accept(value) {
-    this.inputProcessor.accept = value;
-  }
-
-  public get accept() {
-    return this.inputProcessor.accept || '*';
-  }
+  public accept: string | string[];
   
   public get file() {
     return this._file;
