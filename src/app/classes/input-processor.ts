@@ -53,8 +53,8 @@ export class InputProcessor {
   public set accept(value) {
     this._acceptableTypes.clear();
     this._acceptableExts.clear();
-
     this.parseAcceptTypes(value);
+
     this._accept = [
       ...Array.from(this._acceptableTypes)
         .reduce((accum, [ key, values ]) => {
@@ -371,7 +371,9 @@ export class InputProcessor {
       .map((type) => type.trim());
 
     types.forEach((part) => {
-      if (part.indexOf('/') !== -1) {
+      if(part === '*') {
+        this._acceptableExts.add('*');
+      } else if (part.indexOf('/') !== -1) {
         const [ type, ext ] = part.split('/');
         if (this._acceptableTypes.has(type)) {
           const existedType = this._acceptableTypes.get(type);
