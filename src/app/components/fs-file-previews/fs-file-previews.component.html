@@ -1,6 +1,6 @@
 <fs-file-preview
   *ngFor="let file of files"
-  [file]="file"
+  [file]="file | filePreviewMapFile:mapFile"
   [previewWidth]="previewWidth"
   [actionTemplates]="actionTemplates"
   [actionTemplateRefs]="actionTemplateRefs"

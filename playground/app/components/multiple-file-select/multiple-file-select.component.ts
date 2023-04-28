@@ -23,6 +23,10 @@ export class MultipleFileSelectComponent {
     this._message.success('Removed');
   }
 
+  public mapFile(file) {
+    return file;
+  }
+
   public error(error) {
     console.log(error);
   }

@@ -18,6 +18,7 @@ import { FsFilePreviewsBaseComponent } from '../fs-file-preview-base/fs-file-pre
 export class FsFilePreviewsComponent extends FsFilePreviewsBaseComponent {
 
   @Input() public files;
+  @Input() public mapFile
   @Input() public previewWidth = 150;
   @Input() public previewHeight = 150;
 
