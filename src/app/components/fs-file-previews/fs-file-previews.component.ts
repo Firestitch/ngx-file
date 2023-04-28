@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 
 import { FsFilePreviewsBaseComponent } from '../fs-file-preview-base/fs-file-preview-base';
+import { FsFile } from '../../models';
 
 
 @Component({
@@ -17,8 +18,8 @@ import { FsFilePreviewsBaseComponent } from '../fs-file-preview-base/fs-file-pre
 })
 export class FsFilePreviewsComponent extends FsFilePreviewsBaseComponent {
 
-  @Input() public files;
-  @Input() public mapFile
+  @Input() public files: FsFile[] | any[];
+  @Input() public mapFile: (file: any) => FsFile;
   @Input() public previewWidth = 150;
   @Input() public previewHeight = 150;
 
