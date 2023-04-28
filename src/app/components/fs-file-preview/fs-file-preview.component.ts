@@ -36,7 +36,7 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
     this.actionsTemplate.push(...value);
   }
 
-  @Output() public remove = new EventEmitter();
+  @Output() public remove = new EventEmitter<{ event: MouseEvent, file: FsFile, index: number }>();
 
   public ngAfterContentInit() {
     this._cleanActions();
@@ -46,13 +46,13 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
     this.loaded = true;
   }
 
-  public callAction($event: Event, action) {
+  public callAction($event: MouseEvent, action, index) {
     if (action.click) {
-      action.click.emit({ event: $event, file: this.file });
+      action.click.emit({ event: $event, file: this.file, index });
     }
 
     if (action.action == 'remove') {
-      this.remove.emit({ event: $event, file: this.file });
+      this.remove.emit({ event: $event, file: this.file, index });
     }
   }
 

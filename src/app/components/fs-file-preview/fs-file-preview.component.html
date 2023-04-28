@@ -30,12 +30,12 @@
   <div class="actions">
     <ng-container *ngFor="let action of actionTemplates; let index = index">
       <div
-        class="action mat-mini-fab mat-primary"
-        *ngIf="!action.hide"
-        [ngClass]="{ hide: action.hide }"
-        [class]="action.placement"
-        [matTooltip]="action.tooltip"
-        (click)="callAction($event,action)">
+          class="action mat-mini-fab mat-primary"
+          *ngIf="!action.hide"
+          [ngClass]="{ hide: action.hide }"
+          [class]="action.placement"
+          [matTooltip]="action.tooltip"
+          (click)="callAction($event, action, index)">
         <span class="mat-button-wrapper">
           <ng-template [ngTemplateOutlet]="actionTemplateRefs[index]"></ng-template>
         </span>
