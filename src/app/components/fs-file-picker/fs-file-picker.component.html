@@ -42,7 +42,7 @@
             placement="bottom-right"
             tooltip="Reupload"
             *ngIf="allowReupload">
-          <mat-icon>cloud_upload</mat-icon>
+          <mat-icon>upload_file</mat-icon>
         </ng-template>
         <ng-template
             fs-file-preview-action
@@ -56,7 +56,7 @@
               target="_blank"
               tabindex="-1"
               class="download">
-            <mat-icon>cloud_download</mat-icon>
+            <mat-icon>download</mat-icon>
           </a>
         </ng-template>
       </fs-file-preview>
@@ -67,7 +67,7 @@
         </ng-container>
         <ng-container *ngIf="!filePickerSelectTemplate">
           <div class="select">
-            <mat-icon>cloud_upload</mat-icon>
+            <mat-icon>upload_file</mat-icon>
             <div class="instruction">{{instruction}}</div>
             <div class="mat-raised-button">Upload</div>
           </div>
