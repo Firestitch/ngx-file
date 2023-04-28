@@ -27,6 +27,7 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
   @Input() public previewWidth: string | number = 150;
   @Input() public previewHeight: string | number = 150;
   @Input() public file: FsFile;
+  @Input() public index: number;
 
   @Input() set setActions(value) {
     this.actions.push(...value);
