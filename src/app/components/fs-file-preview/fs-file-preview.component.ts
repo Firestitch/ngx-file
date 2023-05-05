@@ -5,6 +5,7 @@ import {
   Output,
   AfterContentInit,
   ChangeDetectionStrategy,
+  OnInit,
 } from '@angular/core';
 
 import { isArray } from 'lodash-es';
@@ -19,7 +20,7 @@ import { FsFilePreviewsBaseComponent } from '../fs-file-preview-base/fs-file-pre
   styleUrls: ['fs-file-preview.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implements AfterContentInit {
+export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implements AfterContentInit, OnInit {
 
   public loaded = false;
 
@@ -27,6 +28,7 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
   @Input() public previewWidth: string | number = 150;
   @Input() public previewHeight: string | number = 150;
   @Input() public file: FsFile;
+  @Input() public url: string;
   @Input() public index: number;
 
   @Input() set setActions(value) {
@@ -38,6 +40,12 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
   }
 
   @Output() public remove = new EventEmitter<{ event: MouseEvent, file: FsFile, index: number }>();
+
+  public ngOnInit(): void {
+    if(this.url) {
+      this.file = new FsFile(this.url);
+    }
+  }
 
   public ngAfterContentInit() {
     this._cleanActions();
