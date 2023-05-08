@@ -51,6 +51,7 @@ export class InputProcessor {
   }
 
   public set accept(value) {
+    value = value || '*';
     this._acceptableTypes.clear();
     this._acceptableExts.clear();
     this.parseAcceptTypes(value);

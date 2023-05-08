@@ -100,7 +100,7 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
   }
 
   public get accept() {
-    return this.inputProcessor.accept || '*';
+    return this.inputProcessor.accept;
   }
 
   @Input()
