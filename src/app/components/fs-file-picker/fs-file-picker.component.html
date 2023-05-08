@@ -42,7 +42,7 @@
             placement="bottom-right"
             tooltip="Reupload"
             *ngIf="allowReupload">
-          <mat-icon>upload_file</mat-icon>
+          <mat-icon>upload</mat-icon>
         </ng-template>
         <ng-template
             fs-file-preview-action
@@ -67,7 +67,7 @@
         </ng-container>
         <ng-container *ngIf="!filePickerSelectTemplate">
           <div class="select">
-            <mat-icon>upload_file</mat-icon>
+            <mat-icon>upload</mat-icon>
             <div class="instruction">{{instruction}}</div>
             <div class="mat-raised-button">Upload</div>
           </div>
