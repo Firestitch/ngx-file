@@ -191,14 +191,12 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
       takeUntil(this._destroy$),
     )
     .subscribe(() => {
-      this.file = fsFile;
-      this.select.emit(fsFile);
-      this.onChange(fsFile);
+      if(!this.multiple) {
+        this.file = fsFile;
+        this.select.emit(fsFile);
+        this.onChange(fsFile);
+      }
     });
-  }
-
-  public clear() {
-    this.file = null;
   }
 
   public removeFile() {
