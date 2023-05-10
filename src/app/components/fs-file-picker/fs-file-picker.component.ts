@@ -69,6 +69,7 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
   @Input() public showFilename = true;
   @Input() public allowDownload = false;
   @Input() public allowReupload = true;
+  @Input() public multiple = false;
   @Input() public allowRemove = false;
 
   @Input('url') set url(url) {
@@ -194,6 +195,10 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
       this.select.emit(fsFile);
       this.onChange(fsFile);
     });
+  }
+
+  public clear() {
+    this.file = null;
   }
 
   public removeFile() {
