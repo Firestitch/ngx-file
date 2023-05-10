@@ -183,20 +183,12 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
   }
 
   public selectFile(fsFile: FsFile) {
-    of(true)    
-    .pipe(
-      switchMap(() => {
-        return this.minWidth || this.minHeight ? from(fsFile.imageInfo) : of(true);
-      }),
-      takeUntil(this._destroy$),
-    )
-    .subscribe(() => {
-      if(!this.multiple) {
-        this.file = fsFile;
-        this.select.emit(fsFile);
-        this.onChange(fsFile);
-      }
-    });
+    if(!this.multiple) {
+      this.file = fsFile;
+      this.onChange(fsFile);
+    }
+    
+    this.select.emit(fsFile);
   }
 
   public removeFile() {
