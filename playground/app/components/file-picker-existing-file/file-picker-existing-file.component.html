@@ -15,6 +15,13 @@
     <div fsFileLabel>File Picker From URL</div>
     <div fsFileHint>Hint message</div>
   </fs-file-picker>
+
+  <fs-file-picker
+      (remove)="remove()"
+      [allowRemove]="true"
+      [apiFile]="apiFile">
+    <div fsFileLabel>File Picker from ApiFile</div>
+  </fs-file-picker>
 </div>
 
 <fieldset *ngIf="file">

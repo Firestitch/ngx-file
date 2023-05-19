@@ -1,3 +1,4 @@
+import { FsApiFile } from '@firestitch/api';
 import * as EXIF from '@firestitch/exif-js';
 
 import * as FileAPI from 'fileapi';
@@ -20,8 +21,9 @@ export class FsFile {
   private _imageWidth: number;
   private _imageHeight: number;
   private _exifInfo: any;  
+  private _apiFile: FsApiFile;
 
-  constructor(obj?: File|Blob|string, filename?: string) {    
+  constructor(obj?: File|Blob|string|FsApiFile, filename?: string) {    
     if (obj instanceof File) {
       this.file = obj;
     } else {
@@ -39,12 +41,13 @@ export class FsFile {
           }
         }
 
-      } else {
-        if(obj) {
-          const url = new URL(obj);
-          filename = filename || url.pathname.split('/').pop();
-          this.url = url.href;
-        }
+      } else if(typeof obj === 'string') {
+        const url = new URL(obj);
+        filename = filename || url.pathname.split('/').pop();
+        this.url = url.href;
+      } else if (obj instanceof FsApiFile) {
+        this._apiFile = obj;
+        filename = filename || this._apiFile.name;
       }
 
       if (filename) {
@@ -98,6 +101,10 @@ export class FsFile {
 
   public get imageProcess() {
     return this.typeImage && !this.typeSvg;
+  }
+
+  public get apiFile(): FsApiFile {
+    return this._apiFile;
   }
 
   public get exists() {
@@ -222,6 +229,6 @@ export class FsFile {
   }
 
   private _checkIfFileExists() {
-    this._fileExists = !!this.url || !!this.size;
+    this._fileExists = !!this.url || !!this.size || !!this.apiFile;
   }
 }

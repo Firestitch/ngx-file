@@ -29,6 +29,7 @@ import { FsFile } from '../../models/fs-file';
 import { CordovaService } from '../../services/cordova.service';
 import { FS_FILE_MODULE_CONFIG } from '../../fs-file.providers';
 import { FsFilePickerSelectDirective } from '../../directives';
+import { FsApiFile } from '@firestitch/api';
 
 
 @Component({
@@ -84,6 +85,10 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
     } else {
       this._file = null;
     }
+  }
+
+  @Input('apiFile') set apiFile(apiFile: FsApiFile) {
+    this._file = apiFile ? new FsFile(apiFile) : null;
   }
 
   @Input()
