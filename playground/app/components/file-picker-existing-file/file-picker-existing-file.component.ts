@@ -3,6 +3,8 @@ import { FsApi, FsApiFile } from '@firestitch/api';
 import { FsFile } from '@firestitch/file';
 import { FsMessage } from '@firestitch/message';
 import { UploadService } from 'playground/app/services';
+import { DialogComponent } from './dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -20,6 +22,7 @@ export class FilePickerExistingFileComponent {
     private _message: FsMessage,
     private _upload: UploadService,
     private _api: FsApi,
+    private _dialog: MatDialog,
   ) {
     this.apiFile = this._api.createApiFile(`/assets/lamborghini-sian-roadster-t1-1024x576.jpg`);
   }
@@ -36,6 +39,15 @@ export class FilePickerExistingFileComponent {
 
   public download(fsFile) {
     this._message.success('Downloaded');
+  }
+
+  public openDialog() {
+    this._dialog.open(DialogComponent, {
+      data: {
+      },
+      width: '800px',
+    });
+
   }
 
   public remove() {

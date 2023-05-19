@@ -27,6 +27,7 @@ import {
   CaptureMultipleComponent,
   CaptureCordovaComponent,
   FileImagePickerComponent,
+  DialogComponent,
 } from './components';
 import { FilePickerModelComponent } from './components/file-picker-model';
 
@@ -65,6 +66,7 @@ import { FilePickerModelComponent } from './components/file-picker-model';
     CaptureCordovaComponent,
     FileImagePickerComponent,
     FilePickerModelComponent,
+    DialogComponent,
   ],
   providers: [
     { provide: FS_API_RESPONSE_HANDLER, useClass: ResponseHandler, deps: [FsMessage] },

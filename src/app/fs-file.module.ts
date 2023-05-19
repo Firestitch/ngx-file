@@ -36,16 +36,18 @@ import { FsFilePickerSelectDirective } from './directives';
 
 @NgModule({
   imports: [
+    FormsModule,
     CommonModule,
+
     MatIconModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
     MatButtonModule,
     MatDialogModule,
-    FsLabelModule,
-    FormsModule,
     MatFormFieldModule,
     MatInputModule,
+
+    FsLabelModule,
     FsPromptModule,
   ],
   exports: [
@@ -58,6 +60,7 @@ import { FsFilePickerSelectDirective } from './directives';
     FsFileHintDirective,
     FsFileLabelDirective,
     FsFilePickerSelectDirective,
+    PreviewImagePipe,
   ],
   declarations: [
     FsFileComponent,

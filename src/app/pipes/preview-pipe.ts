@@ -14,7 +14,8 @@ export class PreviewImagePipe implements PipeTransform {
 
   public constructor(
     private _sanitizer: DomSanitizer
-  ) {}
+  ) {
+  }
 
   public transform(file) {    
     const data = this._getData(file);

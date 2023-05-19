@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Dialog</h1>
+<mat-dialog-content>
+  <fs-file-picker
+    [apiFile]="fileApi">
+  </fs-file-picker>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button
+      mat-button
+      type="button"
+      [mat-dialog-close]="null">
+    Cancel
+  </button>
+</mat-dialog-actions>
