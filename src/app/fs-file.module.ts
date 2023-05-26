@@ -60,7 +60,6 @@ import { FsFilePickerSelectDirective } from './directives';
     FsFileHintDirective,
     FsFileLabelDirective,
     FsFilePickerSelectDirective,
-    PreviewImagePipe,
   ],
   declarations: [
     FsFileComponent,

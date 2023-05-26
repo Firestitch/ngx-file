@@ -77,8 +77,10 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
     this.file = url ? new FsFile(url) : null;
   }
 
-  @Input('file') set file(file) {
-    if(file instanceof FsFile) {
+  @Input('file') set file(file: FsFile | FsApiFile | string) {
+    if(file instanceof FsApiFile) {
+      this._file = new FsFile(file)
+    } else if(file instanceof FsFile) {
       this._file = file;
     } else if(file) {
       this._file = new FsFile(file);
@@ -87,14 +89,10 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
     }
   }
 
-  @Input('apiFile') set apiFile(apiFile: FsApiFile) {
-    this._file = apiFile ? new FsFile(apiFile) : null;
-  }
-
   @Input()
   public accept: string | string[];
   
-  public get file() {
+  public get file(): FsFile {
     return this._file;
   }
 
