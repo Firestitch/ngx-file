@@ -20,7 +20,7 @@ export class PreviewImagePipe implements PipeTransform {
   public transform(file) {    
     const data = this._getData(file);
     if(data instanceof FsApiFile) {
-      return data.dataUrl
+      return data.blobUrl
         .pipe(
           map((data)=> this._sanitizer.bypassSecurityTrustUrl(data)),
         );
