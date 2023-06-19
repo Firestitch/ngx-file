@@ -20,7 +20,7 @@ export class InputProcessor {
   public inputEl: any;
   public multiple = false;
   public api: 'html5' | 'any' | 'cordova' = null;
-  public capture: string = null;
+  public capture: 'camera' | 'library' = 'camera';
   public disabled;
   public allowClick = true;
   public allowDrop = true;
@@ -37,8 +37,11 @@ export class InputProcessor {
   private _acceptableExts = new Set();
   private _declinedFiles$ = new Subject<File[]>();
 
-  constructor(private cordovaService: CordovaService, private ngZone: NgZone) {
-    cordovaService.isReady()
+  constructor(
+    private _cordovaService: CordovaService, 
+    private _ngZone: NgZone
+  ) {
+    this._cordovaService.isReady()
       .subscribe(() => {
         this.cordova.camera = getCordovaCamera();
         this.cordova.capture = getCordovaCapture();
@@ -215,7 +218,7 @@ export class InputProcessor {
 
       this.getCordovaFile(captureFile.fullPath)
       .then((file) => {
-        this.ngZone.run(() => {
+        this._ngZone.run(() => {
           this.selectFiles([file]);
         });
       }).catch(error => {
@@ -264,7 +267,7 @@ export class InputProcessor {
 
       this.getCordovaFile(data)
       .then((file) => {
-        this.ngZone.run(() => {
+        this._ngZone.run(() => {
           this.selectFiles([file]);
         });
         this.cordovaCameraCleanup();
@@ -318,11 +321,11 @@ export class InputProcessor {
   }
 
   public isAcceptVideo() {
-    return this.accept.match(/video/i);
+    return this.accept.match(/video/i) || this.accept === '*';
   }
 
   public isAcceptImage() {
-    return this.accept.match(/image/i);
+    return this.accept.match(/image/i) || this.accept === '*';
   }
 
   public selectFiles(files) {
