@@ -8,7 +8,7 @@ import { FsExampleModule } from '@firestitch/example';
 import { FsMessageModule, FsMessage } from '@firestitch/message';
 import { FsFormModule } from '@firestitch/form';
 import { FsApiModule, FS_API_RESPONSE_HANDLER } from '@firestitch/api';
-import { FsFileModule } from '@firestitch/file';
+import { FS_FILE_CLICK_INTERCEPTOR, FsFileModule } from '@firestitch/file';
 
 import { ToastrModule } from 'ngx-toastr'
 
@@ -30,6 +30,7 @@ import {
   DialogComponent,
 } from './components';
 import { FilePickerModelComponent } from './components/file-picker-model';
+import { CordovaClickInterceptor } from './interceptors/cordova-click-interceptor';
 
 
 @NgModule({
@@ -51,8 +52,6 @@ import { FilePickerModelComponent } from './components/file-picker-model';
     FsMessageModule.forRoot(),
     ToastrModule.forRoot({ preventDuplicates: true }),
   ],
-  entryComponents: [
-  ],
   declarations: [
     AppComponent,
     SingleFileSelectComponent,
@@ -69,7 +68,17 @@ import { FilePickerModelComponent } from './components/file-picker-model';
     DialogComponent,
   ],
   providers: [
-    { provide: FS_API_RESPONSE_HANDLER, useClass: ResponseHandler, deps: [FsMessage] },
+    { 
+      provide: FS_API_RESPONSE_HANDLER, 
+      useClass: ResponseHandler, deps: [FsMessage]
+    },
+    {
+      provide: FS_FILE_CLICK_INTERCEPTOR,
+      multi: true,
+      useFactory: () => {
+        return new CordovaClickInterceptor();
+      },
+    }
   ],
 })
 export class PlaygroundModule {

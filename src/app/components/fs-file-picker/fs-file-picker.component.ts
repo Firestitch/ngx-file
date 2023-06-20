@@ -19,15 +19,12 @@ import {
 } from '@angular/core';
 import { AbstractControl, AsyncValidator, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors } from '@angular/forms';
 
-import { from, of, Subject } from 'rxjs';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 import { FsFileLabelDirective } from '../../directives/fs-file-label.directive';
 import { FsFileDragBaseComponent } from '../fs-file-drag-base/fs-file-drag-base';
-import { InputProcessor } from '../../classes';
 import { FsFile } from '../../models/fs-file';
-import { CordovaService } from '../../services/cordova.service';
-import { FS_FILE_MODULE_CONFIG } from '../../fs-file.providers';
+import { FS_FILE_MODULE_CONFIG } from '../../injectors/file-config.injector';
 import { FsFilePickerSelectDirective } from '../../directives';
 import { FsApiFile } from '@firestitch/api';
 
@@ -142,12 +139,9 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
 
   public constructor(
     @Optional() @Inject(FS_FILE_MODULE_CONFIG) private _moduleConfig,
-    private _cordovaService: CordovaService,
-    private _ngZone: NgZone,
     private _cdRef: ChangeDetectorRef,
   ) {
     super();
-    this.inputProcessor = new InputProcessor(_cordovaService, _ngZone);
   }
 
   public ngOnInit() {

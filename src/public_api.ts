@@ -3,7 +3,6 @@
  */
 
 export { FsFileModule } from './app/fs-file.module';
-export { CordovaService } from './app/services/cordova.service';
 export { FsFile } from './app/models/fs-file';
 export {
   getCordovaCamera,
@@ -29,4 +28,5 @@ export { FsFileLabelDirective } from './app/directives/fs-file-label.directive';
 export { FsFilePickerSelectDirective } from './app/directives';
 
 export { FsFileProcessConfig } from './app/interfaces';
-export { FileProcessor } from './app/classes';
+export { FS_FILE_CLICK_INTERCEPTOR } from './app/injectors';
+export { FileProcessor, FileClickInterceptor, FileClickHandler } from './app/classes';

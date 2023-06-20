@@ -23,8 +23,7 @@ import { FsFileHintDirective } from './directives/fs-file-hint.directive';
 import { FsFileLabelDirective } from './directives/fs-file-label.directive';
 import { FsFilePreviewActionDirective } from './directives/fs-file-preview-action.directive';
 
-import { CordovaService } from './services/cordova.service';
-import { FS_FILE_MODULE_CONFIG } from './fs-file.providers';
+import { FS_FILE_MODULE_CONFIG } from './injectors';
 import { FsFileModuleConfig } from './interfaces/module-config.interface';
 
 import { FsLabelModule } from '@firestitch/label';
@@ -78,9 +77,6 @@ import { FsFilePickerSelectDirective } from './directives';
     PreviewImagePipe,
     FilePreviewMapFilePipe,
     FsFilePickerSelectDirective,
-  ],
-  providers: [
-    CordovaService
   ],
 })
 export class FsFileModule {

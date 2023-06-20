@@ -18,10 +18,10 @@ import { map, switchMap, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 import { FsFileDragBaseComponent } from '../fs-file-drag-base/fs-file-drag-base';
-import { CordovaService } from '../../services/cordova.service';
-import { FileProcessor, InputProcessor } from '../../classes';
-import { FS_FILE_MODULE_CONFIG } from '../../fs-file.providers';
+import { FileProcessor } from '../../classes';
+import { FS_FILE_MODULE_CONFIG } from '../../injectors';
 import { FileProcessConfig } from '../../models';
+import { InputProcessorService } from '../../services';
 
 
 @Component({
@@ -29,10 +29,9 @@ import { FileProcessConfig } from '../../models';
   templateUrl: './fs-file.component.html',
   styleUrls: ['./fs-file.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [InputProcessorService],
 })
 export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, OnDestroy {
-
-  public inputProcessor: InputProcessor = null;
 
   private _destroy$ = new Subject();
   private processConfig = new FileProcessConfig();
@@ -139,8 +138,8 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
   public fileLabel: any;
 
   constructor(
-    cordovaService: CordovaService,
     public el: ElementRef,
+    public inputProcessor: InputProcessorService,
     ngZone: NgZone,
     @Optional()
     @Inject(FS_FILE_MODULE_CONFIG)
@@ -148,7 +147,6 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
     private _message: FsMessage,
   ) {
     super();
-    this.inputProcessor = new InputProcessor(cordovaService, ngZone);
     this.initSelect();
   }
 
@@ -179,7 +177,7 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
     .pipe(
       switchMap((files) => {
         if (!Array.isArray(files)) {
-            files = [files];
+          files = [files];
         }
 
         return fileProcessor.processFiles(files, this.processConfig);

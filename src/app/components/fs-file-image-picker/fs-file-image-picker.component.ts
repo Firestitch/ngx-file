@@ -5,7 +5,6 @@ import {
   ContentChild,
   EventEmitter,
   Input,
-  NgZone,
   Output,
   TemplateRef
 } from '@angular/core';
@@ -13,9 +12,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { FsFileHintDirective, FsFileLabelDirective } from '../../directives';
 
-import { InputProcessor } from '../../classes/input-processor';
 import { FsFile } from '../../models/fs-file';
-import { CordovaService } from '../../services/cordova.service';
 import { FsFileImagePickerDialogComponent } from './fs-file-image-picker-dialog/fs-file-image-picker-dialog.component';
 
 
@@ -53,20 +50,15 @@ export class FsFileImagePickerComponent {
   @Output() public error = new EventEmitter<any>();
   @Output() public selectUrl = new EventEmitter<any>();
 
-  public inputProcessor: InputProcessor = null;
   public _file: FsFile;
   public preview: string;
 
   private _previousFile: FsFile;
 
   constructor(
-    private _cordovaService: CordovaService,
-    private _ngZone: NgZone,
     private _dialog: MatDialog,
     private _cdRef: ChangeDetectorRef,
-  ) {
-    this.inputProcessor = new InputProcessor(this._cordovaService, this._ngZone);
-  }
+  ) {}
 
   public get file(): FsFile {
     return this._file;
