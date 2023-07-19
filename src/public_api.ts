@@ -5,11 +5,6 @@
 export { FsFileModule } from './app/fs-file.module';
 export { FsFile } from './app/models/fs-file';
 export {
-  getCordovaCamera,
-  getCordovaCapture,
-  getCordovaResolveLocalFileSystemURL,
-  hasCordovaCameraSupport,
-  hasCordovaCaptureSupport,
   isImageType,
   ScaleExifImage
 } from './app/helpers';

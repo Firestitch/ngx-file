@@ -9,13 +9,13 @@ export class FileProcessConfig {
   private _format: 'png' | 'jpg';
   private _minWidth: number;
   private _minHeight: number;
-  private _orientate: boolean;
+  private _orientate = true;
 
   constructor(config: FsFileProcessConfig = {}) {
     this.maxWidth = config.maxWidth;
     this.maxHeight = config.maxHeight;
     this.format = config.format;
-    this.orientate = config.orientate;
+    this.orientate = config.orientate ?? true;
     this.minWidth = config.minWidth;
     this.minHeight = config.minHeight;
   }
