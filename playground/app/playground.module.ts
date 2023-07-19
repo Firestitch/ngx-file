@@ -25,7 +25,6 @@ import {
   FilePickerExistingUrlComponent,
   CaptureSingleComponent,
   CaptureMultipleComponent,
-  CaptureCordovaComponent,
   FileImagePickerComponent,
   DialogComponent,
 } from './components';
@@ -62,7 +61,6 @@ import { CordovaClickInterceptor } from './interceptors/cordova-click-intercepto
     FilePickerExistingUrlComponent,
     CaptureSingleComponent,
     CaptureMultipleComponent,
-    CaptureCordovaComponent,
     FileImagePickerComponent,
     FilePickerModelComponent,
     DialogComponent,
