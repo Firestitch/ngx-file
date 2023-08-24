@@ -27,7 +27,6 @@ import { FS_FILE_MODULE_CONFIG } from './injectors';
 import { FsFileModuleConfig } from './interfaces/module-config.interface';
 
 import { FsLabelModule } from '@firestitch/label';
-import { FsPromptModule } from '@firestitch/prompt';
 import { FormsModule } from '@angular/forms';
 import { FilePreviewMapFilePipe, PreviewImagePipe } from './pipes';
 import { FsFilePickerSelectDirective } from './directives';
@@ -47,7 +46,6 @@ import { FsFilePickerSelectDirective } from './directives';
     MatInputModule,
 
     FsLabelModule,
-    FsPromptModule,
   ],
   exports: [
     FsFileComponent,
