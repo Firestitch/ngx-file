@@ -167,7 +167,7 @@ fs-file-preview {
 fs-file-image-picker {
   .wrap:not(.exists) {
     .image-preview {
-      border: 1px solid mat.get-color-from-palette($primary) !important;
+      border-color: mat.get-color-from-palette($primary) !important;
     }
   }
 }

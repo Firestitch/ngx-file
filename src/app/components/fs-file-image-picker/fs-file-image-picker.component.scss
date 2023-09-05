@@ -3,8 +3,6 @@
 }
 
 .wrap {
-  display: inline-flex;
-
   &:not(.disabled) {
     cursor: pointer;
   }
@@ -18,10 +16,11 @@
 
 .image-preview {
   position: relative;
-  border: 1px solid transparent;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid transparent;
+  box-sizing: content-box;
 
   .upload-icon {
     position: absolute;
