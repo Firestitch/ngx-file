@@ -4,7 +4,6 @@ import {
 
 import { FsFile } from '../../../models/fs-file';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FsPrompt } from '@firestitch/prompt';
 
 
 @Component({
@@ -22,7 +21,6 @@ export class FsFileImagePickerDialogComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    public prompt: FsPrompt,
   ) {
 
     if (data.file) {
@@ -37,13 +35,6 @@ export class FsFileImagePickerDialogComponent {
   }
 
   upload() {
-    this.prompt.input({
-      label: 'Image URL',
-      title: 'Upload Via URL',
-      commitLabel: 'Upload',
-      required: true
-    }).subscribe((value: string) => {
-      this.selectUrl.next(value);
-    });
+
   }
 }
