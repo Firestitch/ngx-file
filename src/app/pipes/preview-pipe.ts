@@ -26,7 +26,7 @@ export class FsFileSrcPipe implements PipeTransform {
         );
     } else if(typeof data === 'string') {
       return of(data);
-    } else if(data instanceof File) {
+    } else if(data instanceof Blob) {
       return new Observable((observer) => {
         const fileReader = new FileReader();
         fileReader.onload = () => {
