@@ -28,7 +28,7 @@ import { FsFileModuleConfig } from './interfaces/module-config.interface';
 
 import { FsLabelModule } from '@firestitch/label';
 import { FormsModule } from '@angular/forms';
-import { FilePreviewMapFilePipe, FileSrcPipe } from './pipes';
+import { FilePreviewMapFilePipe, FsFileSrcPipe } from './pipes';
 import { FsFilePickerSelectDirective } from './directives';
 
 
@@ -57,6 +57,7 @@ import { FsFilePickerSelectDirective } from './directives';
     FsFileHintDirective,
     FsFileLabelDirective,
     FsFilePickerSelectDirective,
+    FsFileSrcPipe,
   ],
   declarations: [
     FsFileComponent,
@@ -72,7 +73,7 @@ import { FsFilePickerSelectDirective } from './directives';
     FsFileImagePickerDialogComponent,
     FsFileHintDirective,
     FsFileLabelDirective,
-    FileSrcPipe,
+    FsFileSrcPipe,
     FilePreviewMapFilePipe,
     FsFilePickerSelectDirective,
   ],

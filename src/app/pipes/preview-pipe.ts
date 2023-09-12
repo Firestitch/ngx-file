@@ -10,7 +10,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Pipe({ name: 'fsFileSrc' })
-export class FileSrcPipe implements PipeTransform {
+export class FsFileSrcPipe implements PipeTransform {
 
   public constructor(
     private _sanitizer: DomSanitizer

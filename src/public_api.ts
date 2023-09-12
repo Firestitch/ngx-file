@@ -22,4 +22,4 @@ export { FsFileProcessConfig } from './app/interfaces';
 export { FS_FILE_CLICK_INTERCEPTOR } from './app/injectors';
 export { FileProcessor, FileClickInterceptor, FileClickHandler } from './app/classes';
 export { InputProcessorService } from './app/services';
-export { FileSrcPipe } from './app/pipes';
+export { FsFileSrcPipe } from './app/pipes';
