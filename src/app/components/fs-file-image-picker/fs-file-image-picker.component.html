@@ -47,7 +47,7 @@
         [style.width]="previewDiameter + 'px'">
       <ng-container 
         *ngIf="file?.exists && file.typeImage; else noImage">
-        <ng-container *ngIf="(file | previewImage | async) as src">
+        <ng-container *ngIf="(file | fsFileSrc | async) as src">
           <img 
             [style.borderRadius]="borderRadius"
             [src]="src">

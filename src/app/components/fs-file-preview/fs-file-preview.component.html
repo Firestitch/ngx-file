@@ -10,10 +10,12 @@
   <!-- Image container -->
   <ng-container 
       *ngIf="file?.exists && file.typeImage; else nonImage">
-    <img 
-      [src]="file | previewImage | async" 
-      [ngClass]="{ loaded: this.loaded }"
-      (load)="previewLoaded()">
+    <ng-container *ngIf="(file | fsFileSrc | async) as src">
+      <img 
+        [src]="src" 
+        [ngClass]="{ loaded: this.loaded }"
+        (load)="previewLoaded()">
+    </ng-container>
   </ng-container>
 
   <!-- Non image container -->

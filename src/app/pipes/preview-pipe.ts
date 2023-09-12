@@ -9,8 +9,8 @@ import { map } from 'rxjs/operators';
 import { DomSanitizer } from '@angular/platform-browser';
 
 
-@Pipe({ name: 'previewImage' })
-export class PreviewImagePipe implements PipeTransform {
+@Pipe({ name: 'fsFileSrc' })
+export class FileSrcPipe implements PipeTransform {
 
   public constructor(
     private _sanitizer: DomSanitizer
