@@ -152,6 +152,16 @@ $desktop-width-min: 992px;
 
     &:not(.loaded) {
       background: none;
+
+      .actions {
+        display: none;
+      }
+    }
+
+    &.loaded  {
+      img {
+        opacity: 1;
+      }
     }
   }
 
@@ -237,10 +247,6 @@ $desktop-width-min: 992px;
 
 img {
   opacity: 0;
-
-  &.loaded {
-    opacity: 1;
-  }
 }
 
 .loader {

@@ -15,7 +15,6 @@
     <ng-container *ngIf="(file | fsFileSrc:previewWidth:previewHeight | async) as src">
       <img 
         [src]="src" 
-        [ngClass]="{ loaded: this.loaded }"
         (load)="previewLoaded()">
     </ng-container>
 
