@@ -1,43 +1,8 @@
 @use 'node_modules/@angular/material' as mat;
-
 $phone-width-max: 767.98px;
 $tablet-width-min: 768px;
 $tablet-width-max: 991.98px;
 $desktop-width-min: 992px;
-
-@mixin apply-to($ltgt, $device) {
-  $extrema: null;
-  $boundary-target: null;
-  $delta: null;
-
-  @if $ltgt == less-than {
-    $extrema: max;
-    $delta: -1;
-  } @else if $ltgt == greater-than {
-    $extrema: min;
-    $delta: +1;
-  }
-
-  @if $device == phone {
-    @if $ltgt == less-than {
-      $boundary-target: $phone-width-max;
-    } @else if $ltgt == greater-than {
-      $boundary-target: $tablet-width-min;
-    }
-  } @else if $device == tablet {
-    @if $ltgt == less-than {
-      $boundary-target: $tablet-width-min;
-    } @else if $ltgt == greater-than {
-      $boundary-target: $tablet-width-max;
-    }
-  } @else if $device == desktop {
-    $boundary-target: $desktop-width-min;
-  }
-
-  @media only screen and (#{$extrema}-width: $boundary-target) {
-    @content;
-  }
-}
 
 @mixin phone {
   @media only screen and (max-width: #{$phone-width-max}) {
@@ -54,28 +19,6 @@ $desktop-width-min: 992px;
 @mixin desktop {
   @media only screen and (min-width: #{$desktop-width-min}) {
     @content;
-  }
-}
-
-@mixin action-positions {
-  &.top-left {
-    top: 8px;
-    left: 8px;
-  }
-
-  &.top-right {
-    top: 8px;
-    right: 8px;
-  }
-
-  &.bottom-left {
-    bottom: 8px;
-    left: 8px;
-  }
-
-  &.bottom-right {
-    bottom: 8px;
-    right: 8px;
   }
 }
 
@@ -117,52 +60,6 @@ fs-file-picker {
   }
 }
 
-fs-file-preview {    
-  .actions {
-    @include apply-to(less-than, phone) {
-      display: block;
-    }
-
-    .action {
-      @include action-positions();
-
-      @include apply-to(greater-than, phone) {
-        &.top-left, &.top-right, &.bottom-left, &.bottom-right {
-          transition: top .3s, bottom .3s, left .3s, right .3s;
-        }
-
-        &.top-left {
-          top: -50px;
-          left: -50px;
-        }
-
-        &.top-right {
-          top: -50px;
-          right: -50px;
-        }
-
-        &.bottom-left {
-          bottom: -50px;
-          left: -50px;
-        }
-
-        &.bottom-right {
-          bottom: -50px;
-          right: -50px;
-        }
-      }
-    }
-  }
-
-  &:hover,
-  &:focus {
-    .actions {
-      .action {
-        @include action-positions();
-      }
-    }
-  }
-}
 
 fs-file-image-picker {
   .wrap:not(.exists) {

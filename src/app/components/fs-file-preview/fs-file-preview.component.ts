@@ -1,11 +1,11 @@
 import {
-  EventEmitter,
-  Component,
-  Input,
-  Output,
   AfterContentInit,
   ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
   OnInit,
+  Output,
 } from '@angular/core';
 
 import { isArray } from 'lodash-es';
@@ -25,11 +25,12 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
   public loaded = false;
 
   @Input() showFilename = true;
-  @Input() public previewWidth: string | number = 150;
-  @Input() public previewHeight: string | number = 150;
+  @Input() public previewWidth: number = 150;
+  @Input() public previewHeight: number = 150;
   @Input() public file: FsFile;
   @Input() public url: string;
   @Input() public index: number;
+  @Input() public showActionOn: 'hover' | 'always' = 'hover';
 
   @Input() set setActions(value) {
     this.actions.push(...value);
@@ -42,7 +43,7 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
   @Output() public remove = new EventEmitter<{ event: MouseEvent, file: FsFile, index: number }>();
 
   public ngOnInit(): void {
-    if(this.url) {
+    if (this.url) {
       this.file = new FsFile(this.url);
     }
   }
@@ -66,23 +67,24 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
   }
 
   private _cleanActions() {
-    this.actionTemplates.forEach(action => {
-      if (action.forTypes) {
-        // save original type
-        const [originalFileType, originalContentType] = this.file.type.split('/');
-        const types: any = isArray(action.forTypes) ? action.forTypes : [action.forTypes];
+    this.actionTemplates
+      .forEach(action => {
+        if (action.forTypes) {
+          // save original type
+          const [originalFileType, originalContentType] = this.file.type.split('/');
+          const types: any = isArray(action.forTypes) ? action.forTypes : [action.forTypes];
 
-        // Looking for allowed type
-        for (let i = 0; i < types.length; i++) {
-          const [fileType, contentType] = types[i].split('/');
-          const allowed = fileType === originalFileType && (contentType === originalContentType || contentType === '*');
+          // Looking for allowed type
+          for (let i = 0; i < types.length; i++) {
+            const [fileType, contentType] = types[i].split('/');
+            const allowed = fileType === originalFileType && (contentType === originalContentType || contentType === '*');
 
-          if (!allowed) {
-            action.hide = true;
-            break;
+            if (!allowed) {
+              action.hide = true;
+              break;
+            }
           }
         }
-      }
-    });
+      });
   }
 }

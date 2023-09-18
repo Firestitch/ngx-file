@@ -4,17 +4,23 @@
     class="preview-container"
     [ngClass]="{ 
       'has-actions': !!actions.length, 
-      'type-image': file.typeImage && file.exists
+      'type-image': file.typeImage && file.exists,
+      'loaded': loaded,
+      'show-action-always': showActionOn === 'always'
     }">
 
   <!-- Image container -->
   <ng-container 
       *ngIf="file?.exists && file.typeImage; else nonImage">
-    <ng-container *ngIf="(file | fsFileSrc | async) as src">
+    <ng-container *ngIf="(file | fsFileSrc:previewWidth:previewHeight | async) as src">
       <img 
         [src]="src" 
         [ngClass]="{ loaded: this.loaded }"
         (load)="previewLoaded()">
+    </ng-container>
+
+    <ng-container *ngIf="!loaded">
+      <div class="loader"></div>
     </ng-container>
   </ng-container>
 
@@ -34,7 +40,6 @@
       <div
           class="action mat-mini-fab mat-primary"
           *ngIf="!action.hide"
-          [ngClass]="{ hide: action.hide }"
           [class]="action.placement"
           [matTooltip]="action.tooltip"
           (click)="callAction($event, action, index)">

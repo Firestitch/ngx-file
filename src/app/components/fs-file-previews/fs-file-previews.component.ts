@@ -1,14 +1,14 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   HostBinding,
   Input,
   Output,
-  EventEmitter,
 } from '@angular/core';
 
-import { FsFilePreviewsBaseComponent } from '../fs-file-preview-base/fs-file-preview-base';
 import { FsFile } from '../../models';
+import { FsFilePreviewsBaseComponent } from '../fs-file-preview-base/fs-file-preview-base';
 
 
 @Component({
@@ -22,6 +22,7 @@ export class FsFilePreviewsComponent extends FsFilePreviewsBaseComponent {
   @Input() public mapFile: (file: any) => FsFile;
   @Input() public previewWidth = 150;
   @Input() public previewHeight = 150;
+  @Input() public showActionOn: 'hover' | 'always' = 'hover';
 
   @Output() public removed = new EventEmitter();
 

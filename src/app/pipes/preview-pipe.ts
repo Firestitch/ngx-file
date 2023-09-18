@@ -1,60 +1,93 @@
 
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 
-import { FsFile } from '../models';
 import { FsApiFile } from '@firestitch/api';
-import { map } from 'rxjs/operators';
-import { DomSanitizer } from '@angular/platform-browser';
+import { switchMap } from 'rxjs/operators';
+import { FsFile } from '../models';
+
+import * as FileAPI from 'fileapi';
 
 
 @Pipe({ name: 'fsFileSrc' })
 export class FsFileSrcPipe implements PipeTransform {
 
-  public constructor(
-    private _sanitizer: DomSanitizer
-  ) {
-  }
+  public transform(file, maxWidth?: number, maxHeight?: number) {
+    return of(null)
+      .pipe(
+        switchMap(() => {
+          const data = this._getData(file);
 
-  public transform(file) {    
-    const data = this._getData(file);
-    if(data instanceof FsApiFile) {
-      return data.blobUrl
-        .pipe(
-          map((data)=> this._sanitizer.bypassSecurityTrustUrl(data)),
-        );
-    } else if(typeof data === 'string') {
-      return of(data);
-    } else if(data instanceof Blob) {
-      return new Observable((observer) => {
-        const fileReader = new FileReader();
-        fileReader.onload = () => {
-          observer.next(fileReader.result);
-          observer.complete();
-        }
+          if (typeof data === 'string') {
+            return of(data);
+          }
 
-        fileReader.onerror = (e) => {
-          observer.error(e);
-        }
+          if (data instanceof FsApiFile || data instanceof Blob) {
+            return of(null)
+              .pipe(
+                switchMap(() => {
+                  return data instanceof FsApiFile ? data.blob : of(data);
+                }),
+                switchMap((blob) => {
+                  return new Observable((observer) => {
+                    FileAPI.Image.transform(
+                      blob,
+                      [
+                        {
+                          maxWidth: maxWidth * 2,
+                          maxHeight: maxHeight * 2,
+                        }
+                      ],
+                      false,
+                      (err, images) => {
+                        if (!err && images[0]) {
+                          const canvas: HTMLCanvasElement = images[0];
 
-        fileReader.readAsDataURL(data);
-      });
-    }
+                          canvas.toBlob((canvasBlob) => {
+                            observer.next(canvasBlob);
+                            observer.complete();
+                          }, 'image/jpg', 100);
+                        } else {
+                          observer.error(err);
+                        }
+                      });
+                  })
+                }),
+                switchMap((data: any) => {
+                  return new Observable((observer) => {
+                    const fileReader = new FileReader();
+                    fileReader.onload = () => {
+                      observer.next(fileReader.result);
+                      observer.complete();
+                    }
 
-    return of(null);
+                    fileReader.onerror = (e) => {
+                      observer.error(e);
+                    }
+
+                    fileReader.readAsDataURL(data);
+                  })
+                })
+              );
+
+          }
+
+          return throwError('Invalid file type');
+        }),
+      );
   }
 
   private _getData(file) {
-    if(file instanceof FsFile) {
-      if(file.apiFile) {
+    if (file instanceof FsFile) {
+      if (file.apiFile) {
         return file.apiFile;
       }
 
       return file.url ? file.url : file.file;
     }
 
-    if(file instanceof Blob || file instanceof File) {
+    if (file instanceof Blob || file instanceof File) {
       return file;
     }
 
