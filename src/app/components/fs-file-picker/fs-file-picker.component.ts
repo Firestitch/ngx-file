@@ -1,32 +1,31 @@
 import {
-  EventEmitter,
-  Component,
-  Input,
-  Output,
-  ViewChild,
-  Inject,
-  Optional,
-  OnInit,
-  NgZone,
   ChangeDetectionStrategy,
-  forwardRef,
   ChangeDetectorRef,
-  QueryList,
+  Component,
+  ContentChild,
   ContentChildren,
-  TemplateRef,
+  EventEmitter,
+  Inject,
+  Input,
   OnDestroy,
-  ContentChild
+  OnInit,
+  Optional,
+  Output,
+  QueryList,
+  TemplateRef,
+  ViewChild,
+  forwardRef
 } from '@angular/core';
 import { AbstractControl, AsyncValidator, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors } from '@angular/forms';
 
 import { Subject } from 'rxjs';
 
-import { FsFileLabelDirective } from '../../directives/fs-file-label.directive';
-import { FsFileDragBaseComponent } from '../fs-file-drag-base/fs-file-drag-base';
-import { FsFile } from '../../models/fs-file';
-import { FS_FILE_MODULE_CONFIG } from '../../injectors/file-config.injector';
-import { FsFilePickerSelectDirective } from '../../directives';
 import { FsApiFile } from '@firestitch/api';
+import { FsFilePickerSelectDirective } from '../../directives';
+import { FsFileLabelDirective } from '../../directives/fs-file-label.directive';
+import { FS_FILE_MODULE_CONFIG } from '../../injectors/file-config.injector';
+import { FsFile } from '../../models/fs-file';
+import { FsFileDragBaseComponent } from '../fs-file-drag-base/fs-file-drag-base';
 
 
 @Component({
@@ -36,20 +35,20 @@ import { FsApiFile } from '@firestitch/api';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => FsFilePickerComponent),
-    multi: true,
-  },
-  {
-    provide: NG_VALIDATORS, 
-    useExisting: FsFilePickerComponent,
-    multi: true
-  }
-  ],  
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => FsFilePickerComponent),
+      multi: true,
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: FsFilePickerComponent,
+      multi: true
+    }
+  ],
 })
 export class FsFilePickerComponent extends FsFileDragBaseComponent implements OnInit, ControlValueAccessor, AsyncValidator, OnDestroy {
 
-  @ViewChild('fileInput') 
+  @ViewChild('fileInput')
   public fileInput: any;
 
   @ContentChildren(FsFileLabelDirective)
@@ -75,20 +74,22 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
   }
 
   @Input('file') set file(file: FsFile | FsApiFile | string) {
-    if(file instanceof FsApiFile) {
-      this._file = new FsFile(file)
-    } else if(file instanceof FsFile) {
+    if (file instanceof FsApiFile) {
+      this._file = new FsFile(file);
+    } else if (file instanceof FsFile) {
       this._file = file;
-    } else if(file) {
+    } else if (file) {
       this._file = new FsFile(file);
     } else {
       this._file = null;
     }
+
+    this.previewFile = this._file;
   }
 
   @Input()
   public accept: string | string[];
-  
+
   public get file(): FsFile {
     return this._file;
   }
@@ -101,7 +102,7 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
   public get disabled() {
     return this._disabled;
   }
-  
+
   @Input()
   public set previewWidth(value: string | number) {
     this._previewWidth = Number.isInteger(value) ? `${value}px` : value?.toString() || '';
@@ -110,7 +111,7 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
   public get previewWidth() {
     return this._previewWidth;
   }
-  
+
   @Input()
   public set previewHeight(value: string | number) {
     this._previewHeight = Number.isInteger(value) ? `${value}px` : value?.toString() || '';
@@ -124,17 +125,17 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
   @Output() public remove = new EventEmitter();
   @Output() public download = new EventEmitter<FsFile>();
 
-  public onChange: any = () => {};
-  public onTouch: any = () => {};
+  public onChange: any = () => { };
+  public onTouch: any = () => { };
   public registerOnChange(fn): void { this.onChange = fn; }
   public registerOnTouched(fn): void { this.onTouch = fn; }
-  public inputProcessor = null;
   public instruction = 'Drag & Drop your file or use the button below';
-  public _file: FsFile;
+  public previewFile: FsFile;
 
   private _destroy$ = new Subject();
-  private _disabled: boolean;  
+  private _disabled: boolean;
   private _previewWidth = '150px';
+  private _file: FsFile;
   private _previewHeight = '150px';
 
   public constructor(
@@ -156,8 +157,8 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
     }
   }
 
-  public validate(control: AbstractControl): Promise<ValidationErrors | null> |  null { 
-    if(this.file?.typeImage && (this.minWidth || this.minHeight)) {
+  public validate(control: AbstractControl): Promise<ValidationErrors | null> | null {
+    if (this.file?.typeImage && (this.minWidth || this.minHeight)) {
       // if(this.file.imageWidth < this.minWidth) {
       //   return { minWidth: `Minimum width ${this.minWidth}px` };
       // }
@@ -168,7 +169,7 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
     }
 
     return null;
-  } 
+  }
 
   public get previewPercent() {
     return String(this._previewWidth).match(/%/);
@@ -179,17 +180,22 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
     this._cdRef.markForCheck();
   }
 
+  public selectFilePreview(fsFiles: FsFile[]) {
+    this.previewFile = fsFiles[0];
+  }
+
   public selectFile(fsFile: FsFile) {
-    if(!this.multiple) {
+    if (!this.multiple) {
       this.file = fsFile;
       this.onChange(fsFile);
     }
-    
+
     this.select.emit(fsFile);
   }
 
   public removeFile() {
-    this.file = void 0;
+    this.file = null;
+    this.previewFile = null;
     this.remove.emit(this.file);
     this.onChange(null);
   }
@@ -201,19 +207,15 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
   public downloadClicked(event: { event: PointerEvent }) {
     event.event.stopPropagation();
 
-    if(this.download.observers.length) {
+    if (this.download.observers.length) {
       event.event.preventDefault();
       this.download.emit(this.file);
     }
   }
-  
+
   public ngOnDestroy(): void {
     this._destroy$.next();
     this._destroy$.complete();
-  }
-
-  private _isNumeric(value) {
-    return /^-?\d+$/.test(value);
   }
 
 }

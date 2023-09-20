@@ -12,6 +12,7 @@
   <fs-file
       [accept]="accept"
       (select)="selectFile($event)"
+      (selectPreviews)="selectFilePreview($event)"
       [imageWidth]="imageWidth"
       [imageHeight]="imageHeight"
       [imageQuality]="imageQuality"
@@ -23,26 +24,26 @@
         [style.height]="previewHeight">
       <fs-file-preview
           class="preview"
-          *ngIf="file; else preview"
+          *ngIf="previewFile; else preview"
           (remove)="removeFile()"
-          [file]="file"
+          [file]="previewFile"
           [showFilename]="showFilename"
           [previewHeight]="null"
           [previewWidth]="null">
         <ng-template
+            *ngIf="allowRemove"
             fs-file-preview-action
             placement="top-right"
             action="remove"
             tooltip="Remove"
-            *ngIf="allowRemove"
             (click)="actionClick($event)">
           <mat-icon>close</mat-icon>
         </ng-template>
         <ng-template
+            *ngIf="allowReupload"
             fs-file-preview-action
             placement="bottom-right"
-            tooltip="Reupload"
-            *ngIf="allowReupload">
+            tooltip="Reupload">
           <mat-icon>upload</mat-icon>
         </ng-template>
         <ng-template
@@ -53,7 +54,7 @@
             [hide]="!(allowDownload && ((download.observers.length && file) || file.url))"
             (click)="downloadClicked($event)">
           <a
-              [href]="file.url"
+              [href]="previewFile.url"
               target="_blank"
               tabindex="-1"
               class="download">

@@ -4,8 +4,10 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnChanges,
   OnInit,
   Output,
+  SimpleChanges,
 } from '@angular/core';
 
 import { isArray } from 'lodash-es';
@@ -20,7 +22,7 @@ import { FsFilePreviewsBaseComponent } from '../fs-file-preview-base/fs-file-pre
   styleUrls: ['fs-file-preview.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implements AfterContentInit, OnInit {
+export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implements AfterContentInit, OnInit, OnChanges {
 
   public loaded = false;
 
@@ -45,6 +47,12 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
   public ngOnInit(): void {
     if (this.url) {
       this.file = new FsFile(this.url);
+    }
+  }
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes.file) {
+      this.loaded = false;
     }
   }
 

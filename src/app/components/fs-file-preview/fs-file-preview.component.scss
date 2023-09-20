@@ -177,6 +177,26 @@ $desktop-width-min: 992px;
     }
 
     .action {
+      &.top-left {
+        top: 8px;
+        left: 8px;
+      }
+
+      &.top-right {
+        top: 8px;
+        right: 8px;
+      }
+
+      &.bottom-left {
+        bottom: 8px;
+        left: 8px;
+      }
+
+      &.bottom-right {
+        bottom: 8px;
+        right: 8px;
+      }
+
       @include apply-to(greater-than, phone) {
         &.top-left,
         &.top-right,
@@ -250,12 +270,13 @@ img {
 }
 
 .loader {
-  width: 50%;
   height: 50%;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  max-height: 70px;
+  aspect-ratio: 1 / 1;
 
   &:after {
     content: " ";

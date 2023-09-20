@@ -5,7 +5,6 @@ import {
   EventEmitter,
   Inject,
   Input,
-  NgZone,
   OnDestroy, OnInit,
   Optional,
   Output,
@@ -14,14 +13,14 @@ import {
 
 import { FsMessage, MessageMode } from '@firestitch/message';
 
-import { map, switchMap, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Subject, of } from 'rxjs';
+import { catchError, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 
-import { FsFileDragBaseComponent } from '../fs-file-drag-base/fs-file-drag-base';
 import { FileProcessor } from '../../classes';
 import { FS_FILE_MODULE_CONFIG } from '../../injectors';
-import { FileProcessConfig } from '../../models';
+import { FileProcessConfig, FsFile } from '../../models';
 import { InputProcessorService } from '../../services';
+import { FsFileDragBaseComponent } from '../fs-file-drag-base/fs-file-drag-base';
 
 
 @Component({
@@ -54,7 +53,7 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
   @Input()
   public set multiple(value) {
     // TODO This should be a helper function in @firestitch/common
-    if (typeof(value) === 'boolean') {
+    if (typeof (value) === 'boolean') {
       this.inputProcessor.multiple = value;
     } else {
       this.inputProcessor.multiple = value === 'true';
@@ -127,6 +126,7 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
   }
 
   @Output() public select = new EventEmitter();
+  @Output() public selectPreviews = new EventEmitter<FsFile[]>();
   @Output() public error = new EventEmitter();
   @Output() public clicked = new EventEmitter();
   @Output() public declined = new EventEmitter<File[]>();
@@ -140,7 +140,6 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
   constructor(
     public el: ElementRef,
     public inputProcessor: InputProcessorService,
-    ngZone: NgZone,
     @Optional()
     @Inject(FS_FILE_MODULE_CONFIG)
     public moduleConfig,
@@ -166,34 +165,39 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
     const fileProcessor = new FileProcessor();
 
     this.inputProcessor.clicked
-    .pipe(
-      takeUntil(this._destroy$),
-    )
-    .subscribe((event: KeyboardEvent) => {
-      this.clicked.next(event);
-    });
+      .pipe(
+        takeUntil(this._destroy$),
+      )
+      .subscribe((event: KeyboardEvent) => {
+        this.clicked.next(event);
+      });
 
     this.inputProcessor.select
-    .pipe(
-      switchMap((files) => {
-        if (!Array.isArray(files)) {
-          files = [files];
-        }
+      .pipe(
+        map((files) => {
+          return Array.isArray(files) ? files : [files];
+        }),
+        tap((files) => {
+          this.selectPreviews.emit(files);
+        }),
+        switchMap((files) => {
+          return fileProcessor.processFiles(files, this.processConfig);
+        }),
+        map((fsFiles) => {
+          return this.inputProcessor.multiple ? fsFiles : fsFiles[0];
+        }),
+        tap((e) => {
+          this.select.emit(e);
+        }),
+        catchError((e) => {
+          this.error.emit(e);
+          this.initSelect();
 
-        return fileProcessor.processFiles(files, this.processConfig);
-      }),
-      map((fsFiles) => {
-        return this.inputProcessor.multiple ? fsFiles : fsFiles[0]; 
-      }),
-      takeUntil(this._destroy$),
-    )
-    .subscribe((e) => {
-      this.select.emit(e);
-    },
-    (e) => {
-      this.error.emit(e);
-      this.initSelect();
-    })
+          return of(null);
+        }),
+        takeUntil(this._destroy$),
+      )
+      .subscribe();
   }
 
   private listenDeclinedFiles(): void {

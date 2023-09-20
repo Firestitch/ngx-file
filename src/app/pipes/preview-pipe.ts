@@ -1,19 +1,23 @@
 
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { Observable, of, throwError } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 import { FsApiFile } from '@firestitch/api';
-import { switchMap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { FsFile } from '../models';
 
-import * as FileAPI from 'fileapi';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Pipe({ name: 'fsFileSrc' })
 export class FsFileSrcPipe implements PipeTransform {
 
-  public transform(file, maxWidth?: number, maxHeight?: number) {
+  public constructor(
+    private _domSanitizer: DomSanitizer,
+  ) { }
+
+  public transform(file) {
     return of(null)
       .pipe(
         switchMap(() => {
@@ -29,45 +33,8 @@ export class FsFileSrcPipe implements PipeTransform {
                 switchMap(() => {
                   return data instanceof FsApiFile ? data.blob : of(data);
                 }),
-                switchMap((blob) => {
-                  return new Observable((observer) => {
-                    FileAPI.Image.transform(
-                      blob,
-                      [
-                        {
-                          maxWidth: maxWidth * 2,
-                          maxHeight: maxHeight * 2,
-                        }
-                      ],
-                      false,
-                      (err, images) => {
-                        if (!err && images[0]) {
-                          const canvas: HTMLCanvasElement = images[0];
-
-                          canvas.toBlob((canvasBlob) => {
-                            observer.next(canvasBlob);
-                            observer.complete();
-                          }, 'image/jpg', 100);
-                        } else {
-                          observer.error(err);
-                        }
-                      });
-                  })
-                }),
-                switchMap((data: any) => {
-                  return new Observable((observer) => {
-                    const fileReader = new FileReader();
-                    fileReader.onload = () => {
-                      observer.next(fileReader.result);
-                      observer.complete();
-                    }
-
-                    fileReader.onerror = (e) => {
-                      observer.error(e);
-                    }
-
-                    fileReader.readAsDataURL(data);
-                  })
+                map((data: any) => {
+                  return this._domSanitizer.bypassSecurityTrustUrl(URL.createObjectURL(data));
                 })
               );
 
