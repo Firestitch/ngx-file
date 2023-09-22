@@ -3,10 +3,10 @@ import { ElementRef, EventEmitter, Inject, Injectable, Optional } from '@angular
 import { Subject } from 'rxjs';
 
 import * as FileAPI from 'fileapi';
-import { FsFile } from '../models';
-import { FS_FILE_CLICK_INTERCEPTOR } from '../injectors';
 import { FileClickHandler, FileClickInterceptor } from '../classes';
 import { ClickInterceptor } from '../classes/click-interceptor';
+import { FS_FILE_CLICK_INTERCEPTOR } from '../injectors';
+import { FsFile } from '../models';
 
 
 @Injectable()
@@ -16,7 +16,7 @@ export class InputProcessorService {
   public inputEl: HTMLInputElement;
   public multiple = false;
   public api: 'html5' | 'any' | 'cordova' = null;
-  public capture: 'camera' | 'library' = 'camera';
+  public capture: 'camera' | 'library';
   public disabled;
   public allowClick = true;
   public allowDrop = true;
@@ -30,7 +30,7 @@ export class InputProcessorService {
 
   constructor(
     @Optional() @Inject(FS_FILE_CLICK_INTERCEPTOR) private _clickInterceptors: FileClickInterceptor[],
-  ) {}
+  ) { }
 
   public get accept() {
     return this._accept;
@@ -44,13 +44,13 @@ export class InputProcessorService {
 
     this._accept = [
       ...Array.from(this._acceptableTypes)
-        .reduce((accum, [ key, values ]) => {
+        .reduce((accum, [key, values]) => {
           return [
-            ...accum, 
+            ...accum,
             ...Array.from(values)
               .map((value) => `${key}/${value}`),
           ];
-        },[]),
+        }, []),
       ...Array.from(this._acceptableExts).values(),
     ].join(',');
   }
@@ -76,11 +76,11 @@ export class InputProcessorService {
       }
 
       const files = FileAPI.getFiles(event);
-      
+
       if (files) {
         this.selectFiles(files);
       }
-      
+
       this.inputEl.value = null;
     });
   }
@@ -168,9 +168,9 @@ export class InputProcessorService {
       this._declinedFiles$.next(declinedFiles);
     }
 
-    if(files.length === 1) {
+    if (files.length === 1) {
       this.select.emit(fsFiles[0]);
-    } else if(files.length > 0) {
+    } else if (files.length > 0) {
       this.select.emit(fsFiles);
     }
   }
@@ -183,13 +183,13 @@ export class InputProcessorService {
    */
   private checkAcceptableTypes(targetType, targetExt) {
     targetType = targetType.trim();
-    const [ type, ext ] = targetType.split('/');
+    const [type, ext] = targetType.split('/');
     const acceptableType = this._acceptableTypes.get(type);
 
     return this.accept === '*'
-            || this.accept === '*/*'
-            || (!!acceptableType && (acceptableType.has('*') || acceptableType.has(ext)))
-            || this._acceptableExts.has(`.${targetExt}`);
+      || this.accept === '*/*'
+      || (!!acceptableType && (acceptableType.has('*') || acceptableType.has(ext)))
+      || this._acceptableExts.has(`.${targetExt}`);
   }
 
   /**
@@ -198,11 +198,11 @@ export class InputProcessorService {
    */
   private parseAcceptTypes(value) {
     let types = [];
-    if (typeof value === 'string') { 
+    if (typeof value === 'string') {
       types = value.split(/[,;]/);
     }
-    
-    if(!types.length) {
+
+    if (!types.length) {
       return;
     }
 
@@ -210,10 +210,10 @@ export class InputProcessorService {
       .map((type) => type.trim());
 
     types.forEach((part) => {
-      if(part === '*') {
+      if (part === '*') {
         this._acceptableExts.add('*');
       } else if (part.indexOf('/') !== -1) {
-        const [ type, ext ] = part.split('/');
+        const [type, ext] = part.split('/');
         if (this._acceptableTypes.has(type)) {
           const existedType = this._acceptableTypes.get(type);
 
@@ -225,12 +225,12 @@ export class InputProcessorService {
           this._acceptableTypes.set(type, extensions);
           extensions.add(ext);
         }
-      } else if(part.indexOf('.') !== -1) {
-        part = part.replace(/^\*/,'');
+      } else if (part.indexOf('.') !== -1) {
+        part = part.replace(/^\*/, '');
         if (!this._acceptableExts.has(part)) {
           this._acceptableExts.add(part);
         }
-      } else if(part.match(/[a-z0-9]{3,4}/i)) {
+      } else if (part.match(/[a-z0-9]{3,4}/i)) {
         if (!this._acceptableExts.has(part)) {
           this._acceptableExts.add(`.${part}`);
         }

@@ -69,7 +69,7 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
   }
 
   @Input()
-  public set capture(value) {
+  public set capture(value: 'camera' | 'library') {
     this.inputProcessor.capture = value;
   }
 
