@@ -2,31 +2,35 @@ import {
   AfterContentInit,
   ChangeDetectionStrategy,
   Component,
+  ContentChildren,
   EventEmitter,
   Input,
   OnChanges,
   OnInit,
   Output,
+  QueryList,
   SimpleChanges,
 } from '@angular/core';
 
 import { isArray } from 'lodash-es';
 
+import { FsFilePreviewActionDirective } from '../../directives';
 import { FsFile } from '../../models';
-import { FsFilePreviewsBaseComponent } from '../fs-file-preview-base/fs-file-preview-base';
 
 
 @Component({
   selector: 'fs-file-preview',
-  templateUrl: 'fs-file-preview.component.html',
-  styleUrls: ['fs-file-preview.component.scss'],
+  templateUrl: './fs-file-preview.component.html',
+  styleUrls: ['./fs-file-preview.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implements AfterContentInit, OnInit, OnChanges {
+export class FsFilePreviewComponent implements AfterContentInit, OnInit, OnChanges {
 
-  public loaded = false;
+  @ContentChildren(FsFilePreviewActionDirective)
+  public childrenPreviewActions: QueryList<FsFilePreviewActionDirective>;
 
-  @Input() showFilename = true;
+  @Input() public previewActions: FsFilePreviewActionDirective[] = [];
+  @Input() public showFilename = true;
   @Input() public previewWidth: number = 150;
   @Input() public previewHeight: number = 150;
   @Input() public file: FsFile;
@@ -34,15 +38,13 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
   @Input() public index: number;
   @Input() public showActionOn: 'hover' | 'always' = 'hover';
 
-  @Input() set setActions(value) {
-    this.actions.push(...value);
-  }
+  @Output() public remove = new EventEmitter<{ event: MouseEvent; file: FsFile }>();
 
-  @Input() set setActionsTemplate(value) {
-    this.actionsTemplate.push(...value);
-  }
+  public loaded = false;
 
-  @Output() public remove = new EventEmitter<{ event: MouseEvent, file: FsFile, index: number }>();
+  public get typeImage(): boolean {
+    return this.file?.typeImage && this.file?.exists;
+  }
 
   public ngOnInit(): void {
     if (this.url) {
@@ -64,19 +66,22 @@ export class FsFilePreviewComponent extends FsFilePreviewsBaseComponent implemen
     this.loaded = true;
   }
 
-  public callAction($event: MouseEvent, action, index) {
-    if (action.click) {
-      action.click.emit({ event: $event, file: this.file, index });
+  public callAction($event: MouseEvent, previewAction: FsFilePreviewActionDirective) {
+    if (previewAction.click.observers.length) {
+      $event.stopImmediatePropagation();
+      $event.stopPropagation();
+
+      previewAction.click.emit({ event: $event, file: this.file });
     }
 
-    if (action.action == 'remove') {
-      this.remove.emit({ event: $event, file: this.file, index });
+    if (previewAction.action === 'remove') {
+      this.remove.emit({ event: $event, file: this.file });
     }
   }
 
   private _cleanActions() {
-    this.actionTemplates
-      .forEach(action => {
+    this.previewActions
+      .forEach((action) => {
         if (action.forTypes) {
           // save original type
           const [originalFileType, originalContentType] = this.file.type.split('/');

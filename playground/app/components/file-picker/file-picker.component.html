@@ -4,6 +4,13 @@
     [imageWidth]="500"
     [imageHeight]="500">
   <div fsFileLabel>File Picker Label</div>
+  <ng-template 
+      fs-file-preview-action 
+      placement="bottom-left" 
+      (click)="view($event)"
+      tooltip="View">
+    <mat-icon>search</mat-icon>
+  </ng-template>
 </fs-file-picker>
 <fieldset *ngIf="file">
   <legend>File</legend>

@@ -14,14 +14,18 @@ import {
   QueryList,
   TemplateRef,
   ViewChild,
-  forwardRef
+  forwardRef,
 } from '@angular/core';
-import { AbstractControl, AsyncValidator, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors } from '@angular/forms';
+import {
+  AbstractControl, AsyncValidator, ControlValueAccessor,
+  NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors,
+} from '@angular/forms';
+
+import { FsApiFile } from '@firestitch/api';
 
 import { Subject } from 'rxjs';
 
-import { FsApiFile } from '@firestitch/api';
-import { FsFilePickerSelectDirective } from '../../directives';
+import { FsFilePickerSelectDirective, FsFilePreviewActionDirective } from '../../directives';
 import { FsFileLabelDirective } from '../../directives/fs-file-label.directive';
 import { FS_FILE_MODULE_CONFIG } from '../../injectors/file-config.injector';
 import { FsFile } from '../../models/fs-file';
@@ -30,8 +34,8 @@ import { FsFileDragBaseComponent } from '../fs-file-drag-base/fs-file-drag-base'
 
 @Component({
   selector: 'fs-file-picker',
-  templateUrl: 'fs-file-picker.component.html',
-  styleUrls: ['fs-file-picker.component.scss'],
+  templateUrl: './fs-file-picker.component.html',
+  styleUrls: ['./fs-file-picker.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
@@ -42,11 +46,13 @@ import { FsFileDragBaseComponent } from '../fs-file-drag-base/fs-file-drag-base'
     {
       provide: NG_VALIDATORS,
       useExisting: FsFilePickerComponent,
-      multi: true
-    }
+      multi: true,
+    },
   ],
 })
-export class FsFilePickerComponent extends FsFileDragBaseComponent implements OnInit, ControlValueAccessor, AsyncValidator, OnDestroy {
+export class FsFilePickerComponent
+  extends FsFileDragBaseComponent
+  implements OnInit, ControlValueAccessor, AsyncValidator, OnDestroy {
 
   @ViewChild('fileInput')
   public fileInput: any;
@@ -56,6 +62,9 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
 
   @ContentChild(FsFilePickerSelectDirective, { read: TemplateRef })
   public filePickerSelectTemplate: TemplateRef<any>;
+
+  @ContentChildren(FsFilePreviewActionDirective)
+  public previewActions: QueryList<FsFilePreviewActionDirective>;
 
   @Input() public minWidth = 0;
   @Input() public minHeight = 0;
@@ -69,11 +78,11 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
   @Input() public multiple = false;
   @Input() public allowRemove = false;
 
-  @Input('url') set url(url) {
+  @Input('url') public set url(url) {
     this.file = url ? new FsFile(url) : null;
   }
 
-  @Input('file') set file(file: FsFile | FsApiFile | string) {
+  @Input('file') public set file(file: FsFile | FsApiFile | string) {
     if (file instanceof FsApiFile) {
       this._file = new FsFile(file);
     } else if (file instanceof FsFile) {
@@ -87,12 +96,13 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
     this.previewFile = this._file;
   }
 
-  @Input()
-  public accept: string | string[];
-
   public get file(): FsFile {
     return this._file;
   }
+
+  @Input()
+  public accept: string | string[];
+
 
   @Input()
   public set disabled(value) {
@@ -125,10 +135,7 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
   @Output() public remove = new EventEmitter();
   @Output() public download = new EventEmitter<FsFile>();
 
-  public onChange: any = () => { };
-  public onTouch: any = () => { };
-  public registerOnChange(fn): void { this.onChange = fn; }
-  public registerOnTouched(fn): void { this.onTouch = fn; }
+
   public instruction = 'Drag & Drop your file or use the button below';
   public previewFile: FsFile;
 
@@ -138,21 +145,31 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
   private _file: FsFile;
   private _previewHeight = '150px';
 
-  public constructor(
+  constructor(
     @Optional() @Inject(FS_FILE_MODULE_CONFIG) private _moduleConfig,
     private _cdRef: ChangeDetectorRef,
   ) {
     super();
   }
 
+  public onChange: any = () => { };
+  public onTouch: any = () => { };
+  public registerOnChange(fn): void {
+    this.onChange = fn;
+  }
+
+  public registerOnTouched(fn): void {
+    this.onTouch = fn;
+  }
+
   public ngOnInit() {
     if (this._moduleConfig) {
       if (this.allowDownload === void 0) {
-        this.allowDownload = this._moduleConfig.allowDownload
+        this.allowDownload = this._moduleConfig.allowDownload;
       }
 
       if (this.allowRemove === void 0) {
-        this.allowRemove = this._moduleConfig.allowRemove
+        this.allowRemove = this._moduleConfig.allowRemove;
       }
     }
   }
@@ -165,7 +182,7 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
 
       // if(this.file.imageHeight < this.minHeight) {
       //   return { minWidth: `Minimum height ${this.minHeight}px` };
-      // }      
+      // }
     }
 
     return null;
@@ -200,11 +217,11 @@ export class FsFilePickerComponent extends FsFileDragBaseComponent implements On
     this.onChange(null);
   }
 
-  public actionClick(event: { event: PointerEvent }) {
+  public actionClick(event: { event: MouseEvent }) {
     event.event.stopPropagation();
   }
 
-  public downloadClicked(event: { event: PointerEvent }) {
+  public downloadClicked(event: { event: MouseEvent }) {
     event.event.stopPropagation();
 
     if (this.download.observers.length) {

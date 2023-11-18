@@ -1,22 +1,27 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ContentChildren,
   EventEmitter,
   HostBinding,
   Input,
   Output,
+  QueryList,
 } from '@angular/core';
 
+import { FsFilePreviewActionDirective } from '../../directives';
 import { FsFile } from '../../models';
-import { FsFilePreviewsBaseComponent } from '../fs-file-preview-base/fs-file-preview-base';
 
 
 @Component({
   selector: 'fs-file-previews',
-  templateUrl: 'fs-file-previews.component.html',
+  templateUrl: './fs-file-previews.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FsFilePreviewsComponent extends FsFilePreviewsBaseComponent {
+export class FsFilePreviewsComponent {
+
+  @ContentChildren(FsFilePreviewActionDirective)
+  public previewActions: QueryList<FsFilePreviewActionDirective>;
 
   @Input() public files: FsFile[] | any[];
   @Input() public mapFile: (file: any) => FsFile;
@@ -26,7 +31,7 @@ export class FsFilePreviewsComponent extends FsFilePreviewsBaseComponent {
 
   @Output() public removed = new EventEmitter();
 
-  @HostBinding('class.queue') queue = true;
+  @HostBinding('class.queue') public queue = true;
 
   public removeFile(data) {
     const index = this.files.indexOf(data.file);

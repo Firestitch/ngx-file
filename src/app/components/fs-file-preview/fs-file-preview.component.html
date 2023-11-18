@@ -3,15 +3,14 @@
     [style.height.px]="previewHeight"
     class="preview-container"
     [ngClass]="{ 
-      'has-actions': !!actions.length, 
-      'type-image': file.typeImage && file.exists,
+      'has-actions': (childrenPreviewActions.length !== 0 || previewActions.length !== 0),  
+      'type-image': typeImage,
       'loaded': loaded,
       'show-action-always': showActionOn === 'always'
     }">
-
   <!-- Image container -->
   <ng-container 
-      *ngIf="file?.exists && file.typeImage; else nonImage">
+      *ngIf="typeImage; else nonImage">
     <ng-container *ngIf="(file | fsFileSrc | async) as src">
       <img 
         [src]="src" 
@@ -35,23 +34,35 @@
   </ng-template>
 
   <div class="actions">
-    <ng-container *ngFor="let action of actionTemplates; let index = index">
-      <div
-          class="action mat-mini-fab mat-primary"
-          *ngIf="!action.hide"
-          [class]="action.placement"
-          [matTooltip]="action.tooltip"
-          (click)="callAction($event, action, index)">
-        <span class="mat-button-wrapper">
-          <ng-template [ngTemplateOutlet]="actionTemplateRefs[index]"></ng-template>
-        </span>
-      </div>
+    <ng-container *ngFor="let previewAction of previewActions">
+      <ng-container 
+        [ngTemplateOutlet]="previewActionTmpl" 
+        [ngTemplateOutletContext]="{ previewAction: previewAction}">
+      </ng-container>
+    </ng-container>
+    <ng-container *ngFor="let previewAction of childrenPreviewActions">
+      <ng-container 
+        [ngTemplateOutlet]="previewActionTmpl" 
+        [ngTemplateOutletContext]="{ previewAction: previewAction }">
+      </ng-container>
     </ng-container>
   </div>
 
   <div class="spinner">
     <mat-spinner *ngIf="file.progress" [diameter]="30"></mat-spinner>
   </div>
-
   <ng-content></ng-content>
 </div>
+
+<ng-template #previewActionTmpl let-previewAction="previewAction">
+  <div
+      class="action mat-mini-fab mat-primary"
+      *ngIf="!previewAction.hide"
+      [class]="previewAction.placement"
+      [matTooltip]="previewAction.tooltip"
+      (click)="callAction($event, previewAction)">
+    <span class="mat-button-wrapper">
+      <ng-template [ngTemplateOutlet]="previewAction.templateRef"></ng-template>
+    </span>
+  </div>
+</ng-template>

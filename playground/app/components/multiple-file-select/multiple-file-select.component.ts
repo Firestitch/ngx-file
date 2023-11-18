@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+
 import { FsFile } from '@firestitch/file';
 import { FsMessage } from '@firestitch/message';
 
 
 @Component({
   selector: 'multiple-file-select',
-  templateUrl: 'multiple-file-select.component.html',
-  styleUrls: ['multiple-file-select.component.css'],
+  templateUrl: './multiple-file-select.component.html',
+  styleUrls: ['./multiple-file-select.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MultipleFileSelectComponent {
@@ -15,7 +16,7 @@ export class MultipleFileSelectComponent {
   public filesJsonInfo = [];
   public hide = true;
 
-  public constructor(
+  constructor(
     private _message: FsMessage,
     private _cdRef: ChangeDetectorRef,
   ) { }
@@ -36,7 +37,7 @@ export class MultipleFileSelectComponent {
     console.log(error);
   }
 
-  public download(event: { file?: FsFile, event?: PointerEvent }) {
+  public download(event: { file?: FsFile; event?: MouseEvent }) {
     event.file.download();
   }
 }

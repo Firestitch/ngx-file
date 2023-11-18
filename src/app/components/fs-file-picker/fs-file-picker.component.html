@@ -27,6 +27,7 @@
           *ngIf="previewFile; else preview"
           (remove)="removeFile()"
           [file]="previewFile"
+          [previewActions]="previewActions.toArray()"
           [showFilename]="showFilename"
           [previewHeight]="null"
           [previewWidth]="null">
@@ -42,6 +43,7 @@
         <ng-template
             *ngIf="allowReupload"
             fs-file-preview-action
+            action="reupload"
             placement="bottom-right"
             tooltip="Reupload">
           <mat-icon>upload</mat-icon>
@@ -51,7 +53,7 @@
             placement="bottom-left"
             action="download"
             tooltip="Download"
-            [hide]="!(allowDownload && ((download.observers.length && file) || file.url))"
+            [hide]="!(allowDownload && ((download.observers.length && file) || file?.url))"
             (click)="downloadClicked($event)">
           <a
               [href]="previewFile.url"

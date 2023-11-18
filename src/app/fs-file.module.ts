@@ -1,5 +1,7 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ModuleWithProviders, NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -8,28 +10,24 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
-import { FsFileComponent } from './components/fs-file/fs-file.component';
-import { FsFilePreviewsComponent } from './components/fs-file-previews/fs-file-previews.component';
-import { FsFilePreviewComponent, } from './components/fs-file-preview/fs-file-preview.component';
-import { FsFilePickerComponent, } from './components/fs-file-picker/fs-file-picker.component';
-import { FsFilePreviewsBaseComponent, } from './components/fs-file-preview-base/fs-file-preview-base';
-import { FsFileDragBaseComponent, } from './components/fs-file-drag-base/fs-file-drag-base';
-import { FsFileImagePickerComponent } from './components/fs-file-image-picker/fs-file-image-picker.component';
-import { FsFileImagePickerDialogComponent } from './components/fs-file-image-picker/fs-file-image-picker-dialog/fs-file-image-picker-dialog.component';
-import { FsFileBouncingIconComponent } from './components/fs-file-bouncing-icon/fs-file-bouncing-icon.component';
-import { FsFileDragoverMessageComponent } from './components/fs-file-dragover-message/fs-file-dragover-message.component';
+import { FsLabelModule } from '@firestitch/label';
 
+import { FsFileBouncingIconComponent } from './components/fs-file-bouncing-icon/fs-file-bouncing-icon.component';
+import { FsFileDragBaseComponent } from './components/fs-file-drag-base/fs-file-drag-base';
+import { FsFileDragoverMessageComponent } from './components/fs-file-dragover-message/fs-file-dragover-message.component';
+import { FsFileImagePickerDialogComponent } from './components/fs-file-image-picker/fs-file-image-picker-dialog/fs-file-image-picker-dialog.component';
+import { FsFileImagePickerComponent } from './components/fs-file-image-picker/fs-file-image-picker.component';
+import { FsFilePickerComponent } from './components/fs-file-picker/fs-file-picker.component';
+import { FsFilePreviewComponent } from './components/fs-file-preview/fs-file-preview.component';
+import { FsFilePreviewsComponent } from './components/fs-file-previews/fs-file-previews.component';
+import { FsFileComponent } from './components/fs-file/fs-file.component';
+import { FsFilePickerSelectDirective } from './directives';
 import { FsFileHintDirective } from './directives/fs-file-hint.directive';
 import { FsFileLabelDirective } from './directives/fs-file-label.directive';
 import { FsFilePreviewActionDirective } from './directives/fs-file-preview-action.directive';
-
 import { FS_FILE_MODULE_CONFIG } from './injectors';
 import { FsFileModuleConfig } from './interfaces/module-config.interface';
-
-import { FsLabelModule } from '@firestitch/label';
-import { FormsModule } from '@angular/forms';
 import { FilePreviewMapFilePipe, FsFileSrcPipe } from './pipes';
-import { FsFilePickerSelectDirective } from './directives';
 
 
 @NgModule({
@@ -65,7 +63,6 @@ import { FsFilePickerSelectDirective } from './directives';
     FsFilePreviewComponent,
     FsFilePreviewActionDirective,
     FsFileDragBaseComponent,
-    FsFilePreviewsBaseComponent,
     FsFilePickerComponent,
     FsFileImagePickerComponent,
     FsFileBouncingIconComponent,
@@ -79,7 +76,7 @@ import { FsFilePickerSelectDirective } from './directives';
   ],
 })
 export class FsFileModule {
-  static forRoot(config: FsFileModuleConfig = null): ModuleWithProviders<FsFileModule> {
+  public static forRoot(config: FsFileModuleConfig = null): ModuleWithProviders<FsFileModule> {
     return {
       ngModule: FsFileModule,
       providers: [
@@ -88,10 +85,10 @@ export class FsFileModule {
           useValue: config || {
             allowDownload: true,
             allowRemove: true,
-            dragoverMessage: true
-          }
-        }
-      ]
+            dragoverMessage: true,
+          },
+        },
+      ],
     };
   }
 }
