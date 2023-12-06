@@ -41,6 +41,8 @@ export class FsFilePreviewComponent implements AfterContentInit, OnInit, OnChang
   @Output() public remove = new EventEmitter<{ event: MouseEvent; file: FsFile }>();
 
   public loaded = false;
+  public iconDim = 100;
+  public extensionFontSize = 20;
 
   public get typeImage(): boolean {
     return this.file?.typeImage && this.file?.exists;
@@ -49,6 +51,15 @@ export class FsFilePreviewComponent implements AfterContentInit, OnInit, OnChang
   public ngOnInit(): void {
     if (this.url) {
       this.file = new FsFile(this.url);
+    }
+
+    this.previewHeight = this.previewHeight || 150;
+    this.previewWidth = this.previewWidth || 150;
+
+    const iconDim = this.previewWidth * .7;
+    if (iconDim < 100) {
+      this.iconDim = iconDim;
+      this.extensionFontSize = this.extensionFontSize * (iconDim / 100);
     }
   }
 

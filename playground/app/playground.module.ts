@@ -1,39 +1,39 @@
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
+import { FS_API_RESPONSE_HANDLER, FsApiModule } from '@firestitch/api';
 import { FsExampleModule } from '@firestitch/example';
-import { FsMessageModule, FsMessage } from '@firestitch/message';
-import { FsFormModule } from '@firestitch/form';
-import { FsApiModule, FS_API_RESPONSE_HANDLER } from '@firestitch/api';
 import { FS_FILE_CLICK_INTERCEPTOR, FsFileModule } from '@firestitch/file';
+import { FsFormModule } from '@firestitch/form';
+import { FsMessage, FsMessageModule } from '@firestitch/message';
 
-import { ToastrModule } from 'ngx-toastr'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
-import { AppMaterialModule } from './material.module';
-import { ResponseHandler } from './handlers/response.handler';
 import { AppComponent } from './app.component';
-
 import {
-  SingleFileSelectComponent,
-  MultipleFileSelectComponent,
-  ImageFileManipulationComponent,
+  CaptureMultipleComponent,
+  CaptureSingleComponent,
+  DialogComponent,
+  FileImagePickerComponent,
   FilePickerComponent,
   FilePickerExistingFileComponent,
   FilePickerExistingUrlComponent,
-  CaptureSingleComponent,
-  CaptureMultipleComponent,
-  FileImagePickerComponent,
-  DialogComponent,
+  FilePreviewComponent,
+  ImageFileManipulationComponent,
+  MultipleFileSelectComponent,
+  SingleFileSelectComponent,
 } from './components';
 import { FilePickerModelComponent } from './components/file-picker-model';
+import { ResponseHandler } from './handlers/response.handler';
 import { CordovaClickInterceptor } from './interceptors/cordova-click-interceptor';
+import { AppMaterialModule } from './material.module';
 
 
 @NgModule({
-  bootstrap: [ AppComponent ],
+  bootstrap: [AppComponent],
   imports: [
     BrowserModule,
     FsFileModule.forRoot({
@@ -64,11 +64,12 @@ import { CordovaClickInterceptor } from './interceptors/cordova-click-intercepto
     FileImagePickerComponent,
     FilePickerModelComponent,
     DialogComponent,
+    FilePreviewComponent,
   ],
   providers: [
-    { 
-      provide: FS_API_RESPONSE_HANDLER, 
-      useClass: ResponseHandler, deps: [FsMessage]
+    {
+      provide: FS_API_RESPONSE_HANDLER,
+      useClass: ResponseHandler, deps: [FsMessage],
     },
     {
       provide: FS_FILE_CLICK_INTERCEPTOR,
@@ -76,16 +77,16 @@ import { CordovaClickInterceptor } from './interceptors/cordova-click-intercepto
       useFactory: () => {
         return new CordovaClickInterceptor();
       },
-    }
+    },
   ],
 })
 export class PlaygroundModule {
 
   constructor() {
-    document.addEventListener('deviceready', function() {
+    document.addEventListener('deviceready', function () {
 
       if ((<any>navigator).splashscreen) {
-        setTimeout(function() {
+        setTimeout(function () {
           (<any>navigator).splashscreen.hide();
         }, 200);
       }

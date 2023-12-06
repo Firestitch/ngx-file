@@ -1,16 +1,21 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+
+import { MatDialog } from '@angular/material/dialog';
+
 import { FsApi, FsApiFile } from '@firestitch/api';
 import { FsFile } from '@firestitch/file';
 import { FsMessage } from '@firestitch/message';
+
 import { UploadService } from 'playground/app/services';
+
 import { DialogComponent } from './dialog';
-import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
   selector: 'file-picker-existing-file',
-  templateUrl: 'file-picker-existing-file.component.html',
-  styleUrls: [ 'file-picker-existing-file.component.css' ],
+  templateUrl: './file-picker-existing-file.component.html',
+  styleUrls: ['./file-picker-existing-file.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilePickerExistingFileComponent {
 
@@ -18,23 +23,23 @@ export class FilePickerExistingFileComponent {
   public file = new FsFile('http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf', 'Document.pdf');
   public apiFile: FsApiFile;
 
-  public constructor(
+  constructor(
     private _message: FsMessage,
     private _upload: UploadService,
     private _api: FsApi,
     private _dialog: MatDialog,
   ) {
-    this.apiFile = this._api.createApiFile(`/assets/lamborghini-sian-roadster-t1-1024x576.jpg`);
+    this.apiFile = this._api.createApiFile('/assets/lamborghini-sian-roadster-t1-1024x576.jpg');
   }
 
   public select(file: FsFile) {
 
     file.progress = true;
     this._upload.upload(file)
-    .subscribe(() => {
-      this.file = file;
-      file.progress = false;
-    });
+      .subscribe(() => {
+        this.file = file;
+        file.progress = false;
+      });
   }
 
   public download(fsFile) {

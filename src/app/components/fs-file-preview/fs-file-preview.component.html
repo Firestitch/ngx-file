@@ -26,10 +26,23 @@
   <ng-template #nonImage>
     <div class="file-details">
       <div class="file-icon">
-        <div class="file-ext">{{file.extension}}</div>
-        <mat-icon>insert_drive_file</mat-icon>
+        <div 
+            class="file-ext"
+            [style.fontSize]="extensionFontSize + 'px'">
+          {{file.extension}}
+        </div>
+        <mat-icon 
+          [style.width]="iconDim + 'px'" 
+          [style.height]="iconDim + 'px'"
+          [style.fontSize]="iconDim + 'px'">insert_drive_file</mat-icon>
       </div>
-      <div class="file-name" [matTooltip]="file.name" *ngIf="showFilename && file.name">{{file.name}}</div>
+      <ng-container *ngIf="showFilename && file.name">
+        <a 
+            class="file-name" 
+            [matTooltip]="file.name">
+          {{file.name}}
+        </a>
+      </ng-container>
     </div>
   </ng-template>
 

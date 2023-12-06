@@ -14,12 +14,13 @@ $desktop-width-min: 992px;
   .file-details {
     flex-direction: column;
     display: flex;
-    align-items: center;
-
     padding: 5px;
+    min-width: 0;
 
     .file-icon {
       position: relative;
+      display: flex;
+      justify-content: center;
     }
 
     .file-ext {
@@ -29,26 +30,24 @@ $desktop-width-min: 992px;
       font-size: 20px;
       position: absolute;
       width: 100%;
-      bottom: 28px;
+      bottom: 25%;
       color: #fff;
     }
 
     mat-icon {
-      font-size: 90px;
-      width: 90px;
-      height: 90px;
       color: #ccc;
-
     }
 
     .file-name {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      padding: 0 5px;
+      padding: 5px;
       font-size: 75%;
       text-align: center;
       width: 100%;
+      color: inherit;
+      box-sizing: border-box;
     }
   }
 
@@ -134,10 +133,10 @@ $desktop-width-min: 992px;
     box-sizing: border-box;
     margin: auto;
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-grow: 1;
     height: 100%;
+    justify-content: center;
 
     &.type-image {
       background-image:
@@ -167,12 +166,6 @@ $desktop-width-min: 992px;
   }
 
   .actions {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-
     @include apply-to(less-than, phone) {
       display: block;
     }
