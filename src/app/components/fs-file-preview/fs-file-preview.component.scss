@@ -51,7 +51,6 @@ $desktop-width-min: 992px;
     }
   }
 
-
   @mixin action-positions {
     &.top-left {
       top: 8px;
@@ -240,6 +239,8 @@ $desktop-width-min: 992px;
 
   img {
     display: block;
+    transform: translate3d(0px, 0px, 0.1px);
+    object-position: top;
     object-fit: cover;
     width: 100%;
     height: 100%;
