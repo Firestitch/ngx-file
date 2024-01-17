@@ -82,7 +82,7 @@ export class FsFilePreviewComponent implements AfterContentInit, OnInit, OnChang
       $event.stopImmediatePropagation();
       $event.stopPropagation();
 
-      previewAction.click.emit({ event: $event, file: this.file });
+      previewAction.click.emit({ event: $event, file: this.file, index: this.index });
     }
 
     if (previewAction.action === 'remove') {

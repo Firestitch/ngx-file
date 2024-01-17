@@ -14,7 +14,7 @@ export class FsFilePreviewActionDirective {
   @Input() public hide: boolean;
   @Input('for-types') public forTypes: string | string[];
 
-  @Output() public click = new EventEmitter<{ file: FsFile; event: MouseEvent }>();
+  @Output() public click = new EventEmitter<{ file: FsFile; event: MouseEvent; index: number }>();
 
   constructor(
     public templateRef: TemplateRef<any>,
