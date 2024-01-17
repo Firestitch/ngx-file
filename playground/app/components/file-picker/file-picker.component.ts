@@ -15,6 +15,6 @@ export class FilePickerComponent {
   }
 
   public view(file) {
-    debugger;
+
   }
 }

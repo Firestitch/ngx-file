@@ -192,6 +192,11 @@ export class FsFilePickerComponent
     return String(this._previewWidth).match(/%/);
   }
 
+  public clear(): void {
+    this.file = null;
+    this._cdRef.markForCheck();
+  }
+
   public writeValue(file): void {
     this.file = file;
     this._cdRef.markForCheck();
