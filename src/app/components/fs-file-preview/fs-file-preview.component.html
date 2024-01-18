@@ -14,7 +14,8 @@
     <ng-container *ngIf="(file | fsFileSrc | async) as src">
       <img 
         [src]="src" 
-        (load)="previewLoaded()">
+        (load)="previewLoaded()"
+        (error)="previewError()">
     </ng-container>
    
     <ng-container *ngIf="!loaded">

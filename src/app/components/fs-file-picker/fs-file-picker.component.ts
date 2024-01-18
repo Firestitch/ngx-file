@@ -135,7 +135,6 @@ export class FsFilePickerComponent
   @Output() public remove = new EventEmitter();
   @Output() public download = new EventEmitter<FsFile>();
 
-
   public instruction = 'Drag & Drop your file or use the button below';
   public previewFile: FsFile;
 
