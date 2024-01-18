@@ -152,8 +152,14 @@ export class FsFilePickerComponent
     super();
   }
 
-  public onChange: any = () => { };
-  public onTouch: any = () => { };
+  public onChange: any = () => {
+    //
+  };
+
+  public onTouch: any = () => {
+    //
+  };
+
   public registerOnChange(fn): void {
     this.onChange = fn;
   }
@@ -164,11 +170,11 @@ export class FsFilePickerComponent
 
   public ngOnInit() {
     if (this._moduleConfig) {
-      if (this.allowDownload === void 0) {
+      if (this.allowDownload === undefined) {
         this.allowDownload = this._moduleConfig.allowDownload;
       }
 
-      if (this.allowRemove === void 0) {
+      if (this.allowRemove === undefined) {
         this.allowRemove = this._moduleConfig.allowRemove;
       }
     }

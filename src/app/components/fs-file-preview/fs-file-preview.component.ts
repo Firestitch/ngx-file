@@ -77,6 +77,10 @@ export class FsFilePreviewComponent implements AfterContentInit, OnInit, OnChang
     this.loaded = true;
   }
 
+  public previewError() {
+    this.loaded = true;
+  }
+
   public callAction($event: MouseEvent, previewAction: FsFilePreviewActionDirective) {
     if (previewAction.click.observers.length) {
       $event.stopImmediatePropagation();
