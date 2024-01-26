@@ -12,8 +12,6 @@ import {
   SimpleChanges,
 } from '@angular/core';
 
-import { isArray } from 'lodash-es';
-
 import { FsFilePreviewActionDirective } from '../../directives';
 import { FsFile } from '../../models';
 
@@ -98,20 +96,19 @@ export class FsFilePreviewComponent implements AfterContentInit, OnInit, OnChang
     this.previewActions
       .forEach((action) => {
         if (action.forTypes) {
-          // save original type
           const [originalFileType, originalContentType] = this.file.type.split('/');
-          const types: any = isArray(action.forTypes) ? action.forTypes : [action.forTypes];
+          const types: string[] = Array.isArray(action.forTypes) ?
+            action.forTypes :
+            [action.forTypes];
 
-          // Looking for allowed type
-          for (let i = 0; i < types.length; i++) {
-            const [fileType, contentType] = types[i].split('/');
-            const allowed = fileType === originalFileType && (contentType === originalContentType || contentType === '*');
+          action.hide = types
+            .some((type) => {
+              const [fileType, contentType] = type.split('/');
+              const allowed = fileType === originalFileType &&
+                (contentType === originalContentType || contentType === '*');
 
-            if (!allowed) {
-              action.hide = true;
-              break;
-            }
-          }
+              return !allowed;
+            });
         }
       });
   }

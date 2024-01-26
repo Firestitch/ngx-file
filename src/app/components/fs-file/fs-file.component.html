@@ -2,12 +2,12 @@
   <ng-content></ng-content>
 </span>
 <input
+  #fileInput
   type="file"
   [hidden]="true"
   [disabled]="inputProcessor.disabled"
   [multiple]="inputProcessor.multiple"
   [attr.accept]="inputProcessor.accept"
-  [attr.capture]="inputProcessor.capture"
-  #fileInput>
+  [attr.capture]="inputProcessor.capture">
 
 <fs-file-dragover-message *ngIf="moduleConfig.dragoverMessage"></fs-file-dragover-message>

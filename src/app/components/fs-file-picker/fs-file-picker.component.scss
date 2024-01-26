@@ -1,15 +1,4 @@
 :host {
-  .wrap {
-    border: 1px #efefef solid;
-    border-radius: 3px;
-
-    &:after {
-      border-width: 3px;
-      border-style: dashed;
-      border-radius: 3px;
-    }
-  }
-
   &.dragover {
     .wrap {
       border-color: transparent;
@@ -55,6 +44,30 @@
       border: none;
       height: 100%;
       width: 100%;
+    }
+  }
+}
+
+.wrap {
+  border: 1px #efefef solid;
+  border-radius: 3px;
+
+  &:after {
+    border-width: 3px;
+    border-style: dashed;
+    border-radius: 3px;
+  }
+
+  &.processing {
+    .select {
+      display: none;
+    }
+
+    mat-spinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 

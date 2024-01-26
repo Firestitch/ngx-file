@@ -137,6 +137,7 @@ export class FsFilePickerComponent
 
   public instruction = 'Drag & Drop your file or use the button below';
   public previewFile: FsFile;
+  public processing = false;
 
   private _destroy$ = new Subject();
   private _disabled: boolean;
@@ -207,8 +208,8 @@ export class FsFilePickerComponent
     this._cdRef.markForCheck();
   }
 
-  public selectFilePreview(fsFiles: FsFile[]) {
-    this.previewFile = fsFiles[0];
+  public beforeProcessing(fsFiles: FsFile[]) {
+    this.processing = true;
   }
 
   public selectFile(fsFile: FsFile) {
@@ -217,6 +218,7 @@ export class FsFilePickerComponent
       this.onChange(fsFile);
     }
 
+    this.processing = false;
     this.select.emit(fsFile);
   }
 

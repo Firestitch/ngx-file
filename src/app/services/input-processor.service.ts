@@ -25,8 +25,8 @@ export class InputProcessorService {
   public clicked = new EventEmitter();
 
   private _accept = '*';
-  private _acceptableTypes = new Map();
-  private _acceptableExts = new Set();
+  private _acceptableTypes = new Map<string,Set<string>>();
+  private _acceptableExts = new Set<string>();
   private _declinedFiles$ = new Subject<File[]>();
 
   constructor(
@@ -225,7 +225,7 @@ export class InputProcessorService {
             existedType.add(ext);
           }
         } else {
-          const extensions = new Set();
+          const extensions = new Set<string>();
           this._acceptableTypes.set(type, extensions);
           extensions.add(ext);
         }
@@ -240,5 +240,11 @@ export class InputProcessorService {
         }
       }
     });
+
+    const imageType = this._acceptableTypes.get('image');
+    if(imageType?.has('*')) {
+      this._acceptableExts.add('.heic');
+    }
+
   }
 }

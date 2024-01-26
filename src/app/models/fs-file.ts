@@ -29,46 +29,6 @@ export class FsFile {
     this._checkIfFileExists();
   }
 
-  private _init(obj?: File|Blob|string|FsApiFile, filename?: string) {
-    if (obj instanceof File) {
-      return this.file = obj;
-    }
-
-    let type;
-    let fileBlob = [];
-    if (obj instanceof Blob) {
-      fileBlob = [obj];
-
-      if(obj.type) {
-        type = obj.type;
-
-        if(!filename) {
-          filename = `file.${  obj.type.split('/').pop()}`;
-        }
-      }
-
-    } else if(typeof obj === 'string') {
-      const url = new URL(obj);
-      filename = filename || url.pathname.split('/').pop();
-      this.url = url.href;
-    } else if (obj instanceof FsApiFile) {
-      this._apiFile = obj;
-      filename = filename || this._apiFile.name;
-    }
-
-    if (filename) {
-      const match = filename.toLowerCase().match(/([^\.]+)$/);
-      this.extension = match ? match[1] : '';
-      type = `${this._getExtensionMime()}/${this.extension}`;
-    }
-
-    this.file = new File(fileBlob, filename, { type });
-  }
-
-  private _getExtensionMime() {
-    return this.extension.match(/(jpe?g|png|gif|tiff?|bmp|svg|heic)/) ? 'image' : 'application';
-  }
-
   public get imageWidth(): Promise<number> {
     return new Promise((resolve, reject) => {
       this.imageInfo
@@ -235,5 +195,45 @@ export class FsFile {
 
   private _checkIfFileExists() {
     this._fileExists = !!this.url || !!this.size || !!this.apiFile;
+  }
+
+  private _init(obj?: File|Blob|string|FsApiFile, filename?: string) {
+    if (obj instanceof File) {
+      return this.file = obj;
+    }
+
+    let type;
+    let fileBlob = [];
+    if (obj instanceof Blob) {
+      fileBlob = [obj];
+
+      if(obj.type) {
+        type = obj.type;
+
+        if(!filename) {
+          filename = `file.${  obj.type.split('/').pop()}`;
+        }
+      }
+
+    } else if(typeof obj === 'string') {
+      const url = new URL(obj);
+      filename = filename || url.pathname.split('/').pop();
+      this.url = url.href;
+    } else if (obj instanceof FsApiFile) {
+      this._apiFile = obj;
+      filename = filename || this._apiFile.name;
+    }
+
+    if (filename) {
+      const match = filename.toLowerCase().match(/([^\.]+)$/);
+      this.extension = match ? match[1] : '';
+      type = `${this._getExtensionMime()}/${this.extension}`;
+    }
+
+    this.file = new File(fileBlob, filename, { type });
+  }
+
+  private _getExtensionMime() {
+    return this.extension.match(/(jpe?g|png|gif|tiff?|bmp|svg|heic)/) ? 'image' : 'application';
   }
 }

@@ -8,7 +8,7 @@ import {
   OnDestroy, OnInit,
   Optional,
   Output,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 
 import { FsMessage, MessageMode } from '@firestitch/message';
@@ -18,6 +18,7 @@ import { catchError, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 import { FileProcessor } from '../../classes';
 import { FS_FILE_MODULE_CONFIG } from '../../injectors';
+import { FsFileModuleConfig } from '../../interfaces';
 import { FileProcessConfig, FsFile } from '../../models';
 import { InputProcessorService } from '../../services';
 import { FsFileDragBaseComponent } from '../fs-file-drag-base/fs-file-drag-base';
@@ -32,32 +33,37 @@ import { FsFileDragBaseComponent } from '../fs-file-drag-base/fs-file-drag-base'
 })
 export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, OnDestroy {
 
-  private _destroy$ = new Subject();
-  private processConfig = new FileProcessConfig();
+  @Output() public select = new EventEmitter();
+  @Output() public error = new EventEmitter();
+  @Output() public beforeProcessing = new EventEmitter<FsFile[]>();
+  @Output() public clicked = new EventEmitter();
+  @Output() public declined = new EventEmitter<File[]>();
+
+  @ViewChild('fileInput', { static: true })
+  public fileInput: any;
+
+  @ViewChild('fileLabel', { static: true })
+  public fileLabel: any;
 
   @Input()
   public set minHeight(value) {
-    this.processConfig.minHeight = value;
+    this._processConfig.minHeight = value;
   }
 
   @Input()
   public set minWidth(value) {
-    this.processConfig.minWidth = value;
+    this._processConfig.minWidth = value;
   }
 
   @Input()
   public set orientate(value) {
-    this.processConfig.orientate = value;
+    this._processConfig.orientate = value;
   }
 
   @Input()
   public set multiple(value) {
     // TODO This should be a helper function in @firestitch/common
-    if (typeof (value) === 'boolean') {
-      this.inputProcessor.multiple = value;
-    } else {
-      this.inputProcessor.multiple = value === 'true';
-    }
+    this.inputProcessor.multiple = typeof (value) === 'boolean' ? value : value === 'true';
   }
 
   public get multiple() {
@@ -73,6 +79,10 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
     this.inputProcessor.capture = value;
   }
 
+  public get capture() {
+    return this.inputProcessor.capture;
+  }
+
   @Input()
   public set allowClick(value) {
     this.inputProcessor.allowClick = value;
@@ -83,13 +93,9 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
     this.inputProcessor.allowDrop = value;
   }
 
-  public get capture() {
-    return this.inputProcessor.capture;
-  }
-
   /**
    * Accept Examples
-   * 
+   *
    * image/*,audio/*,video/*,image/jpg,.pdf
    */
   @Input()
@@ -112,48 +118,37 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
 
   @Input()
   public set imageWidth(value) {
-    this.processConfig.maxWidth = +value;
+    this._processConfig.maxWidth = +value;
   }
 
   @Input()
   public set imageHeight(value) {
-    this.processConfig.maxHeight = +value;
+    this._processConfig.maxHeight = +value;
   }
 
   @Input()
   public set imageQuality(value) {
-    this.processConfig.quality = value;
+    this._processConfig.quality = value;
   }
 
-  @Output() public select = new EventEmitter();
-  @Output() public selectPreviews = new EventEmitter<FsFile[]>();
-  @Output() public error = new EventEmitter();
-  @Output() public clicked = new EventEmitter();
-  @Output() public declined = new EventEmitter<File[]>();
-
-  @ViewChild('fileInput', { static: true })
-  public fileInput: any;
-
-  @ViewChild('fileLabel', { static: true })
-  public fileLabel: any;
+  private _destroy$ = new Subject();
+  private _processConfig = new FileProcessConfig();
 
   constructor(
     public el: ElementRef,
     public inputProcessor: InputProcessorService,
-    @Optional()
-    @Inject(FS_FILE_MODULE_CONFIG)
-    public moduleConfig,
+    @Optional() @Inject(FS_FILE_MODULE_CONFIG) public moduleConfig: FsFileModuleConfig,
     private _message: FsMessage,
   ) {
     super();
-    this.initSelect();
+    this._initSelect();
   }
 
   public ngOnInit() {
     this.inputProcessor.registerInput(this.fileInput);
     this.inputProcessor.registerLabel(this.fileLabel);
     this.inputProcessor.registerDrop(this.el);
-    this.listenDeclinedFiles();
+    this._listenDeclinedFiles();
   }
 
   public ngOnDestroy() {
@@ -161,7 +156,7 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
     this._destroy$.complete();
   }
 
-  private initSelect() {
+  private _initSelect() {
     const fileProcessor = new FileProcessor();
 
     this.inputProcessor.clicked
@@ -178,10 +173,10 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
           return Array.isArray(files) ? files : [files];
         }),
         tap((files) => {
-          this.selectPreviews.emit(files);
+          this.beforeProcessing.emit(files);
         }),
         switchMap((files) => {
-          return fileProcessor.processFiles(files, this.processConfig);
+          return fileProcessor.processFiles(files, this._processConfig);
         }),
         map((fsFiles) => {
           return this.inputProcessor.multiple ? fsFiles : fsFiles[0];
@@ -191,7 +186,7 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
         }),
         catchError((e) => {
           this.error.emit(e);
-          this.initSelect();
+          this._initSelect();
 
           return of(null);
         }),
@@ -200,7 +195,7 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
       .subscribe();
   }
 
-  private listenDeclinedFiles(): void {
+  private _listenDeclinedFiles(): void {
     this.inputProcessor
       .declinedFiles$
       .pipe(
@@ -215,9 +210,9 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
             {
               mode: MessageMode.Toast,
               positionClass: 'toast-bottom-right',
-            }
-          )
-        })
-      })
+            },
+          );
+        });
+      });
   }
 }

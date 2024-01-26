@@ -12,7 +12,7 @@
   <fs-file
       [accept]="accept"
       (select)="selectFile($event)"
-      (selectPreviews)="selectFilePreview($event)"
+      (beforeProcessing)="beforeProcessing($event)"
       [imageWidth]="imageWidth"
       [imageHeight]="imageHeight"
       [imageQuality]="imageQuality"
@@ -21,50 +21,54 @@
     <div
         class="wrap"
         [style.width]="previewWidth"
-        [style.height]="previewHeight">
-      <fs-file-preview
-          class="preview"
-          *ngIf="previewFile; else preview"
-          (remove)="removeFile()"
-          [file]="previewFile"
-          [previewActions]="previewActions.toArray()"
-          [showFilename]="showFilename"
-          [previewHeight]="null"
-          [previewWidth]="null">
-        <ng-template
-            *ngIf="allowRemove"
-            fs-file-preview-action
-            placement="top-right"
-            action="remove"
-            tooltip="Remove"
-            (click)="actionClick($event)">
-          <mat-icon>close</mat-icon>
-        </ng-template>
-        <ng-template
-            *ngIf="allowReupload"
-            fs-file-preview-action
-            action="reupload"
-            placement="bottom-right"
-            tooltip="Reupload">
-          <mat-icon>upload</mat-icon>
-        </ng-template>
-        <ng-template
-            fs-file-preview-action
-            placement="bottom-left"
-            action="download"
-            tooltip="Download"
-            [hide]="!(allowDownload && ((download.observers.length && file) || file?.url))"
-            (click)="downloadClicked($event)">
-          <a
-              [href]="previewFile.url"
-              target="_blank"
-              tabindex="-1"
-              class="download">
-            <mat-icon>download</mat-icon>
-          </a>
-        </ng-template>
-      </fs-file-preview>
-
+        [style.height]="previewHeight"
+        [ngClass]="{ processing: processing }">
+      <ng-container *ngIf="processing">
+        <mat-spinner [diameter]="50"></mat-spinner>
+      </ng-container>
+      <ng-container *ngIf="previewFile; else preview">
+        <fs-file-preview
+            class="preview"
+            (remove)="removeFile()"
+            [file]="previewFile"
+            [previewActions]="previewActions.toArray()"
+            [showFilename]="showFilename"
+            [previewHeight]="null"
+            [previewWidth]="null">
+          <ng-template
+              *ngIf="allowRemove"
+              fs-file-preview-action
+              placement="top-right"
+              action="remove"
+              tooltip="Remove"
+              (click)="actionClick($event)">
+            <mat-icon>close</mat-icon>
+          </ng-template>
+          <ng-template
+              *ngIf="allowReupload"
+              fs-file-preview-action
+              action="reupload"
+              placement="bottom-right"
+              tooltip="Reupload">
+            <mat-icon>upload</mat-icon>
+          </ng-template>
+          <ng-template
+              fs-file-preview-action
+              placement="bottom-left"
+              action="download"
+              tooltip="Download"
+              [hide]="!(allowDownload && ((download.observers.length && file) || file?.url))"
+              (click)="downloadClicked($event)">
+            <a
+                [href]="previewFile.url"
+                target="_blank"
+                tabindex="-1"
+                class="download">
+              <mat-icon>download</mat-icon>
+            </a>
+          </ng-template>
+        </fs-file-preview>
+      </ng-container>
       <ng-template #preview>
         <ng-container *ngIf="filePickerSelectTemplate">
           <ng-container [ngTemplateOutlet]="filePickerSelectTemplate"></ng-container>
