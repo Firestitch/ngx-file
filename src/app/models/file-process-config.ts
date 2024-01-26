@@ -1,4 +1,4 @@
-import { FsFileProcessConfig } from "../interfaces";
+import { FsFileProcessConfig } from '../interfaces';
 
 
 export class FileProcessConfig {
@@ -10,6 +10,7 @@ export class FileProcessConfig {
   private _minWidth: number;
   private _minHeight: number;
   private _orientate = true;
+  private _heic = false;
 
   constructor(config: FsFileProcessConfig = {}) {
     this.maxWidth = config.maxWidth;
@@ -21,7 +22,7 @@ export class FileProcessConfig {
   }
 
   public set maxWidth(value) {
-    if (value !== void 0) {
+    if (value !== undefined) {
       this._maxWidth = +value;
     }
   }
@@ -31,7 +32,7 @@ export class FileProcessConfig {
   }
 
   public set maxHeight(value) {
-    if (value !== void 0) {
+    if (value !== undefined) {
       this._maxHeight = +value;
     }
   }
@@ -53,7 +54,7 @@ export class FileProcessConfig {
 
   public set format(value: 'jpg' | 'png') {
     if (['jpg', 'png'].indexOf(value) > -1) {
-      this._format = value
+      this._format = value;
     }
   }
 

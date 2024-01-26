@@ -1,9 +1,10 @@
 import { FsApiFile } from '@firestitch/api';
 import * as EXIF from '@firestitch/exif-js';
 
-import * as FileAPI from 'fileapi';
-import { from, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
+
+import * as FileAPI from 'fileapi';
 
 
 export class FsFile {
@@ -20,48 +21,52 @@ export class FsFile {
   private _fileExists = false;
   private _imageWidth: number;
   private _imageHeight: number;
-  private _exifInfo: any;  
+  private _exifInfo: any;
   private _apiFile: FsApiFile;
 
-  constructor(obj?: File|Blob|string|FsApiFile, filename?: string) {    
+  constructor(obj?: File|Blob|string|FsApiFile, filename?: string) {
+    this._init(obj, filename);
+    this._checkIfFileExists();
+  }
+
+  private _init(obj?: File|Blob|string|FsApiFile, filename?: string) {
     if (obj instanceof File) {
-      this.file = obj;
-    } else {
-      let type;
-      let fileBlob = [];
-
-      if (obj instanceof Blob) {
-        fileBlob = [obj];
-
-        if(obj.type) {
-          type = obj.type;
-
-          if(!filename) {
-            filename = 'file.' + obj.type.split('/').pop();
-          }
-        }
-
-      } else if(typeof obj === 'string') {
-        const url = new URL(obj);
-        filename = filename || url.pathname.split('/').pop();
-        this.url = url.href;
-      } else if (obj instanceof FsApiFile) {
-        this._apiFile = obj;
-        filename = filename || this._apiFile.name;
-      }
-
-      if (filename) {
-        const match = filename.toLowerCase().match(/([^\.]+)$/);
-        this.extension = match ? match[1] : '';
-
-        const mime = this.extension.match(/(jpe?g|png|gif|tiff?|bmp|svg)/) ? 'image' : 'application';
-        type = mime + '/' + this.extension;
-      }
-
-      this.file = new File(fileBlob, filename, { type });
+      return this.file = obj;
     }
 
-    this._checkIfFileExists();
+    let type;
+    let fileBlob = [];
+    if (obj instanceof Blob) {
+      fileBlob = [obj];
+
+      if(obj.type) {
+        type = obj.type;
+
+        if(!filename) {
+          filename = `file.${  obj.type.split('/').pop()}`;
+        }
+      }
+
+    } else if(typeof obj === 'string') {
+      const url = new URL(obj);
+      filename = filename || url.pathname.split('/').pop();
+      this.url = url.href;
+    } else if (obj instanceof FsApiFile) {
+      this._apiFile = obj;
+      filename = filename || this._apiFile.name;
+    }
+
+    if (filename) {
+      const match = filename.toLowerCase().match(/([^\.]+)$/);
+      this.extension = match ? match[1] : '';
+      type = `${this._getExtensionMime()}/${this.extension}`;
+    }
+
+    this.file = new File(fileBlob, filename, { type });
+  }
+
+  private _getExtensionMime() {
+    return this.extension.match(/(jpe?g|png|gif|tiff?|bmp|svg|heic)/) ? 'image' : 'application';
   }
 
   public get imageWidth(): Promise<number> {
@@ -115,16 +120,16 @@ export class FsFile {
     return this._file;
   }
 
-  public get name() {
-    return this._name;
-  }
-
   public set file(value: File) {
     this._file = value;
     this.size = value.size;
     this.type = value.type;
     this.name = value.name;
     this._checkIfFileExists();
+  }
+
+  public get name() {
+    return this._name;
   }
 
   public set name(name) {
@@ -158,7 +163,7 @@ export class FsFile {
 
       fr.onerror = () => {
         observer.error(fr.error);
-      }
+      };
 
       fr.readAsArrayBuffer(this.file);
     });
@@ -169,7 +174,7 @@ export class FsFile {
           observer.next(info);
           observer.complete();
         } else {
-          observer.error(err);        
+          observer.error(err);
         }
       });
     });
@@ -179,12 +184,12 @@ export class FsFile {
         switchMap(() => dims$
           .pipe(
             tap((dims) => {
-            this._imageWidth = dims.width;
-            this._imageHeight = dims.height;
+              this._imageWidth = dims.width;
+              this._imageHeight = dims.height;
             }),
 
             catchError(() => of(true)),
-          )
+          ),
         ),
         switchMap(() => exif$
           .pipe(
@@ -192,7 +197,7 @@ export class FsFile {
               this._exifInfo = exif || {};
             }),
             catchError(() => of(true)),
-          )
+          ),
         ),
         map(() => ({
           width: this._imageWidth,
@@ -208,10 +213,10 @@ export class FsFile {
       URL.createObjectURL(this.file) :
       this.file;
 
-    var link = document.createElement('a'); 
+    const link = document.createElement('a');
     link.href = href;
     link.download = this.name;
-    document.body.appendChild(link); 
+    document.body.appendChild(link);
     link.click();
     link.remove();
   }
@@ -224,8 +229,8 @@ export class FsFile {
       progress: this.progress,
       extension: this.extension,
       imageWidth: this.imageWidth,
-      imageHeight: this.imageHeight
-    }
+      imageHeight: this.imageHeight,
+    };
   }
 
   private _checkIfFileExists() {

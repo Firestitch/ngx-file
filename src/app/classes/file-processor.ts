@@ -1,7 +1,8 @@
 import { forkJoin, from, Observable, of, throwError } from 'rxjs';
-import { catchError, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 
 import * as FileAPI from 'fileapi';
+import heic2any from 'heic2any';
 import { toInteger } from 'lodash-es';
 
 import { FsFileProcessConfig } from '../interfaces';
@@ -13,36 +14,34 @@ export class FileProcessor {
   public processFile(fsFile: FsFile, config: FileProcessConfig | FsFileProcessConfig): Observable<FsFile> {
     const processConfig = config instanceof FileProcessConfig ? config : new FileProcessConfig(config);
 
-    return (
-      fsFile.imageProcess ?
-        this._applyTransforms(fsFile, processConfig) :
-        of(fsFile)
-    )
+    return this._transform(fsFile, processConfig)
       .pipe(
-        switchMap((fsFile) => this._validate(fsFile, processConfig))
+        switchMap((item) => this._validate(item, processConfig)),
       );
   }
 
   public processFiles(fsFiles: FsFile[], config: FileProcessConfig | FsFileProcessConfig): Observable<FsFile[]> {
     const errors = [];
+
     return forkJoin(
       fsFiles.map((fsFile) => this.processFile(fsFile, config)
         .pipe(
           catchError((error) => {
             errors.push(error);
+
             return of(null);
           }),
-        )
-      )
+        ),
+      ),
     )
       .pipe(
-        switchMap((fsFiles) => {
+        switchMap((result) => {
           if (errors.length) {
             const error = errors
               .reduce((accum, item) => {
                 return [
                   ...accum,
-                  item.error
+                  item.error,
                 ];
               }, [])
               .join(', ');
@@ -51,7 +50,7 @@ export class FileProcessor {
               .reduce((accum, item) => {
                 return [
                   ...accum,
-                  item.code
+                  item.code,
                 ];
               }, [])
               .join(', ');
@@ -59,8 +58,8 @@ export class FileProcessor {
             return throwError({ error, code, message: error });
           }
 
-          return of(fsFiles);
-        })
+          return of(result);
+        }),
       );
   }
 
@@ -85,7 +84,35 @@ export class FileProcessor {
     return of(fsFile);
   }
 
+
+  private _transformHeic(fsFile: FsFile): Observable<FsFile> {
+    if(fsFile.extension === 'heic' && fsFile.file instanceof Blob) {
+      return from(heic2any({ blob: fsFile.file }))
+        .pipe(
+          map((blob: Blob) => {
+            const ext = blob.type?.split('/') || [];
+            const name = fsFile.name.replace(/heic$/i, ext[1] || 'jpg');
+
+            return new FsFile(blob, name);
+          }),
+        );
+    }
+
+    return of(fsFile);
+  }
+
   private _transform(fsFile: FsFile, processConfig: FileProcessConfig): Observable<FsFile> {
+    return this._transformHeic(fsFile)
+      .pipe(
+        switchMap((response)=> this._transformImage(response, processConfig)),
+      );
+  }
+
+  private _transformImage(fsFile: FsFile, processConfig: FileProcessConfig): Observable<FsFile> {
+    if(fsFile.imageProcess) {
+      return of(fsFile);
+    }
+
     if (
       !processConfig.orientate &&
       !processConfig.maxWidth &&
@@ -114,7 +141,7 @@ export class FileProcessor {
                 // Process transformed files
                 if (!err && images[0]) {
                   const canvas: HTMLCanvasElement = images[0];
-                  const type = (processConfig.format) ? 'image/' + processConfig.format : fsFile.type;
+                  const type = (processConfig.format) ? `image/${  processConfig.format}` : fsFile.type;
 
                   canvas.toBlob((blob) => {
                     fsFile.file = new File([blob], fsFile.file.name, { type: fsFile.type });
@@ -126,12 +153,8 @@ export class FileProcessor {
                 }
               });
           });
-        })
+        }),
       );
-  }
-
-  private _applyTransforms(fsFile: FsFile, processConfig: FileProcessConfig): Observable<FsFile> {
-    return this._transform(fsFile, processConfig);
   }
 
   private _generateTransformConfig(file, config: FileProcessConfig) {
@@ -141,7 +164,7 @@ export class FileProcessor {
       maxHeight: config.maxHeight,
 
       // Quality for result image
-      quality: config.quality || 1
+      quality: config.quality || 1,
     };
   }
 }

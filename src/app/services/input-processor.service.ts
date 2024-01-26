@@ -3,6 +3,7 @@ import { ElementRef, EventEmitter, Inject, Injectable, Optional } from '@angular
 import { Subject } from 'rxjs';
 
 import * as FileAPI from 'fileapi';
+
 import { FileClickHandler, FileClickInterceptor } from '../classes';
 import { ClickInterceptor } from '../classes/click-interceptor';
 import { FS_FILE_CLICK_INTERCEPTOR } from '../injectors';
@@ -40,7 +41,7 @@ export class InputProcessorService {
     value = value || '*';
     this._acceptableTypes.clear();
     this._acceptableExts.clear();
-    this.parseAcceptTypes(value);
+    this._parseAcceptTypes(value);
 
     this._accept = [
       ...Array.from(this._acceptableTypes)
@@ -48,7 +49,7 @@ export class InputProcessorService {
           return [
             ...accum,
             ...Array.from(values)
-              .map((value) => `${key}/${value}`),
+              .map((item) => `${key}/${item}`),
           ];
         }, []),
       ...Array.from(this._acceptableExts).values(),
@@ -61,11 +62,12 @@ export class InputProcessorService {
 
   /**
    * Initialize service for target element
+   *
    * @param el
    */
   public registerInput(el: ElementRef) {
     if (!el) {
-      return
+      return;
     }
 
     this.inputEl = el.nativeElement;
@@ -87,7 +89,7 @@ export class InputProcessorService {
 
   public registerDrop(el: ElementRef) {
     if (!el) {
-      return
+      return;
     }
 
     this.containerEl = el.nativeElement;
@@ -110,7 +112,7 @@ export class InputProcessorService {
 
   public registerLabel(el: ElementRef) {
     if (!el) {
-      return
+      return;
     }
 
     FileAPI.event.on(el.nativeElement, 'click', (event) => {
@@ -123,7 +125,7 @@ export class InputProcessorService {
 
         const interceptors: FileClickInterceptor[] = [
           ...this._clickInterceptors || [],
-          new ClickInterceptor()
+          new ClickInterceptor(),
         ];
 
         const interceptorChain: FileClickHandler = interceptors.reduceRight(
@@ -154,8 +156,8 @@ export class InputProcessorService {
           ext = nameParts[nameParts.length - 1];
         }
 
-        ext = (ext + '').toLowerCase();
-        const acceptableFile = this.checkAcceptableTypes(file.type, ext);
+        ext = (`${ext  }`).toLowerCase();
+        const acceptableFile = this._checkAcceptableTypes(file.type, ext);
 
         if (!acceptableFile) {
           declinedFiles.push(file);
@@ -177,11 +179,12 @@ export class InputProcessorService {
 
   /**
    * Check if file mimetype or extention is acceptable by @accept field
+   *
    * @param targetType
    * @param targetExt
    * @returns boolean
    */
-  private checkAcceptableTypes(targetType, targetExt) {
+  private _checkAcceptableTypes(targetType, targetExt) {
     targetType = targetType.trim();
     const [type, ext] = targetType.split('/');
     const acceptableType = this._acceptableTypes.get(type);
@@ -194,9 +197,10 @@ export class InputProcessorService {
 
   /**
    * Parset and store acceptable types for feature filter
+   *
    * @param types
    */
-  private parseAcceptTypes(value) {
+  private _parseAcceptTypes(value) {
     let types = [];
     if (typeof value === 'string') {
       types = value.split(/[,;]/);
@@ -235,6 +239,6 @@ export class InputProcessorService {
           this._acceptableExts.add(`.${part}`);
         }
       }
-    })
+    });
   }
 }
