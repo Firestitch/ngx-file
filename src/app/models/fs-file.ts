@@ -96,7 +96,7 @@ export class FsFile {
     this._name = name;
     const parts = String(name).split('.');
     if (parts.length > 1) {
-      this.extension = parts[parts.length - 1];
+      this.extension = parts[parts.length - 1].toLowerCase();
     }
   }
 
@@ -258,7 +258,7 @@ export class FsFile {
 
     if (filename) {
       const match = filename.toLowerCase().match(/([^\.]+)$/);
-      this.extension = match ? match[1] : '';
+      this.extension = match ? match[1].toLowerCase() : '';
       type = `${this._getExtensionMime()}/${this.extension}`;
     }
 
