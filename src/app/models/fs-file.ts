@@ -194,6 +194,10 @@ export class FsFile {
   }
 
   public get base64(): Observable<string> {
+    if(this._apiFile) {
+      return this._apiFile.base64;
+    }
+
     if(this.file instanceof File) {
       return new Observable<string>((observer) => {
         const reader = new FileReader();
@@ -206,20 +210,16 @@ export class FsFile {
       });
     }
 
-    if(this._apiFile) {
-      return this._apiFile.base64;
-    }
-
     return throwError('Unable to create base64');
   }
 
   public get blobUrl(): Observable<string> {
-    if(this.file instanceof File) {
-      return of(URL.createObjectURL(this.file));
-    }
-
     if(this._apiFile) {
       return this._apiFile.blobUrl;
+    }
+
+    if(this.file instanceof File) {
+      return of(URL.createObjectURL(this.file));
     }
 
     return throwError('Unable to create blobUrl');
