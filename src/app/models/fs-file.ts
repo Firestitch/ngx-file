@@ -1,7 +1,7 @@
 import { FsApiFile } from '@firestitch/api';
 import * as EXIF from '@firestitch/exif-js';
 
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 import * as FileAPI from 'fileapi';
@@ -16,7 +16,7 @@ export class FsFile {
   public url = '';
   public size: number;
 
-  private _file: any;
+  private _file: File;
   private _name: string;
   private _fileExists = false;
   private _imageWidth: number;
@@ -76,7 +76,7 @@ export class FsFile {
     return this._fileExists;
   }
 
-  public get file() {
+  public get file(): File {
     return this._file;
   }
 
@@ -191,6 +191,38 @@ export class FsFile {
       imageWidth: this.imageWidth,
       imageHeight: this.imageHeight,
     };
+  }
+
+  public get base64(): Observable<string> {
+    if(this.file instanceof File) {
+      return new Observable<string>((observer) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(this._file);
+        reader.onload = () => {
+          observer.next(reader.result as string);
+          observer.complete();
+        };
+        reader.onerror = (error) => observer.error(error);
+      });
+    }
+
+    if(this._apiFile) {
+      return this._apiFile.base64;
+    }
+
+    return throwError('Unable to create base64');
+  }
+
+  public get blobUrl(): Observable<string> {
+    if(this.file instanceof File) {
+      return of(URL.createObjectURL(this.file));
+    }
+
+    if(this._apiFile) {
+      return this._apiFile.blobUrl;
+    }
+
+    return throwError('Unable to create blobUrl');
   }
 
   private _checkIfFileExists() {
