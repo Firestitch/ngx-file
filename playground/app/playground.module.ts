@@ -10,7 +10,6 @@ import { FsFormModule } from '@firestitch/form';
 import { FsMessage, FsMessageModule } from '@firestitch/message';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import {
@@ -49,7 +48,6 @@ import { AppMaterialModule } from './material.module';
     FsExampleModule.forRoot(),
     FlexLayoutModule,
     FsMessageModule.forRoot(),
-    ToastrModule.forRoot({ preventDuplicates: true }),
   ],
   declarations: [
     AppComponent,
