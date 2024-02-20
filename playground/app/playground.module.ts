@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -11,6 +10,7 @@ import { FsMessage, FsMessageModule } from '@firestitch/message';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import {
   CaptureMultipleComponent,
@@ -46,8 +46,8 @@ import { AppMaterialModule } from './material.module';
     AppMaterialModule,
     FormsModule,
     FsExampleModule.forRoot(),
-    FlexLayoutModule,
     FsMessageModule.forRoot(),
+    RouterModule.forRoot([]),
   ],
   declarations: [
     AppComponent,
