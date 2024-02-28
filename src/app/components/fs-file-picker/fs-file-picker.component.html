@@ -12,6 +12,7 @@
   <fs-file
       [accept]="accept"
       (select)="selectFile($event)"
+      (declined)="declined()"
       (beforeProcessing)="beforeProcessing($event)"
       [imageWidth]="imageWidth"
       [imageHeight]="imageHeight"

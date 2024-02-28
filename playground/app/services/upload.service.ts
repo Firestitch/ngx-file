@@ -9,7 +9,7 @@ export class UploadService {
   constructor(private _api: FsApi) {}
 
   public upload(file) {
-    return this._api.post('https://boilerplate.firestitch.com/api/dummy/upload', { file: file.file });
+    return this._api.post('https://specify.dev.firestitch.com/api/dummy/upload', { file: file.file });
   }
 }
 

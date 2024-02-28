@@ -63,7 +63,9 @@
   </div>
 
   <div class="spinner">
-    <mat-spinner *ngIf="file.progress" [diameter]="30"></mat-spinner>
+    <ng-container *ngIf="file.progress">
+      <mat-spinner [diameter]="50"></mat-spinner>
+    </ng-container>
   </div>
   <ng-content></ng-content>
 </div>

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 
 import { MatDialog } from '@angular/material/dialog';
 
@@ -19,7 +19,7 @@ import { DialogComponent } from './dialog';
 })
 export class FilePickerExistingFileComponent {
 
-  public url = 'https://editorial.pxcrush.net/carsales/general/editorial/ferrari-sf90-stradale-0056.jpg?width=1024&height=683';
+  public url = `${window.location.origin}/assets/ferrari-sf90-stradale-0056.jpg`;
   public file = new FsFile('http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf', 'Document.pdf');
   public apiFile: FsApiFile;
 
@@ -28,17 +28,18 @@ export class FilePickerExistingFileComponent {
     private _upload: UploadService,
     private _api: FsApi,
     private _dialog: MatDialog,
+    private _cdRef: ChangeDetectorRef
   ) {
     this.apiFile = this._api.createApiFile('/assets/lamborghini-sian-roadster-t1-1024x576.jpg');
   }
 
   public select(file: FsFile) {
-
     file.progress = true;
     this._upload.upload(file)
       .subscribe(() => {
         this.file = file;
         file.progress = false;
+        this._cdRef.markForCheck();
       });
   }
 

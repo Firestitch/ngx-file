@@ -212,6 +212,14 @@ export class FsFilePickerComponent
     this.processing = true;
   }
 
+  public declined() {
+    this.processing = false;
+    this.file = null;
+    this.previewFile = null;
+    this.onChange(null);
+    this._cdRef.markForCheck();
+  }
+
   public selectFile(fsFile: FsFile) {
     if (!this.multiple) {
       this.file = fsFile;

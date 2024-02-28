@@ -1,8 +1,9 @@
-<div fxLayout="row" fxLayoutGap="20px">
+<div class="fs-row.gap-md">
   <fs-file-picker
       (select)="select($event)"
       (remove)="remove()"
       [file]="file"
+      [accept]="'*.pdf'"
       [allowDownload]="true"
       (download)="download($event)">
     <div fsFileLabel>File Picker Label</div>

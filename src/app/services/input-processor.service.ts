@@ -170,10 +170,10 @@ export class InputProcessorService {
       this._declinedFiles$.next(declinedFiles);
     }
 
-    if (files.length === 1) {
-      this.select.emit(fsFiles[0]);
-    } else if (files.length > 0) {
+    if (this.multiple) {
       this.select.emit(fsFiles);
+    } else if (fsFiles.length > 0) {
+      this.select.emit(fsFiles[0]);
     }
   }
 
