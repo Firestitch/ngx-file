@@ -18,7 +18,7 @@ export class FsFileDragBaseComponent implements OnDestroy {
   private dragover = null;
   private drop = null;
 
-  @HostBinding('class.dragover') 
+  @HostBinding('class.dragover')
   public fileOverTarget = false;
 
   @HostListener('dragenter')
@@ -51,7 +51,7 @@ export class FsFileDragBaseComponent implements OnDestroy {
   public onWindowDrop(event: Event) {
     event.preventDefault();
     event.stopPropagation();
-    this.ngOnDestroy();
+    // this.ngOnDestroy();
     this.dragging = 0;
     return false;
   }
