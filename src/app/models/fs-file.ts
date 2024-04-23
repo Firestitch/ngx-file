@@ -262,7 +262,7 @@ export class FsFile {
       type = `${this._getExtensionMime()}/${this.extension}`;
     }
 
-    this.file = new File(fileBlob, filename, { type });
+    this.file = new File(fileBlob, filename || '', { type });
   }
 
   private _getExtensionMime() {
