@@ -40,10 +40,10 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
   @Output() public declined = new EventEmitter<File[]>();
 
   @ViewChild('fileInput', { static: true })
-  public fileInput: any;
+  public fileInput: ElementRef;
 
-  @ViewChild('fileLabel', { static: true })
-  public fileLabel: any;
+  @ViewChild('fileContainer', { static: true })
+  public fileContainer: ElementRef;
 
   @Input()
   public set minHeight(value) {
@@ -146,7 +146,7 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
 
   public ngOnInit() {
     this.inputProcessor.registerInput(this.fileInput);
-    this.inputProcessor.registerLabel(this.fileLabel);
+    this.inputProcessor.registerLabel(this.fileContainer);
     this.inputProcessor.registerDrop(this.el);
     this._listenDeclinedFiles();
   }

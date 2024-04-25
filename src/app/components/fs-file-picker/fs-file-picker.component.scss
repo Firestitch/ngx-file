@@ -30,14 +30,10 @@
 
   ::ng-deep {
     .percent-preview {
-      fs-file .file-label,
+      fs-file .file-container,
       fs-file-preview {
         display: block;
       }
-    }
-
-    fs-file .file-label {
-      position: relative;
     }
 
     fs-file-preview {
