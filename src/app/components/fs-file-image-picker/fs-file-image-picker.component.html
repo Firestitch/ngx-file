@@ -20,11 +20,16 @@
     class="wrap" 
     [ngClass]="{ 
       disabled: disabled, 
+      processing: processing,
       exists: file?.exists && file.typeImage 
     }">
+    <ng-container *ngIf="processing">
+      <mat-spinner [diameter]="previewDiameter * .25"></mat-spinner>
+    </ng-container>
     <fs-file
         *ngIf="!disabled; else filePreview"
         (select)="selectFile($event)"
+        (beforeProcessing)="beforeProcessing($event)"
         (error)="error.emit($event)"
         (clicked)="clicked($event)"
         [minHeight]="minHeight"

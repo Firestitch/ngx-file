@@ -1,11 +1,12 @@
-<fs-file-preview
-  *ngFor="let file of files; let index = index"
-  [file]="file | filePreviewMapFile:mapFile"
-  [previewWidth]="previewWidth"
-  [previewActions]="previewActions.toArray()"
-  [previewHeight]="previewHeight"
-  [index]="index"
-  [showActionOn]="showActionOn"
-  (remove)="removeFile($event)"
-  class="preview">
-</fs-file-preview>
+<ng-container *ngFor="let file of files; let index = index">
+  <fs-file-preview  
+    [file]="file | filePreviewMapFile:mapFile"
+    [previewWidth]="previewWidth"
+    [previewActions]="previewActions.toArray()"
+    [previewHeight]="previewHeight"
+    [index]="index"
+    [showActionOn]="showActionOn"
+    (remove)="removeFile($event)"
+    class="preview">
+  </fs-file-preview>
+</ng-container>

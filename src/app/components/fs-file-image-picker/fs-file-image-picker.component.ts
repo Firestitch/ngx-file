@@ -52,6 +52,7 @@ export class FsFileImagePickerComponent {
 
   public _file: FsFile;
   public preview: string;
+  public processing = false;
 
   private _previousFile: FsFile;
 
@@ -63,10 +64,16 @@ export class FsFileImagePickerComponent {
   public get file(): FsFile {
     return this._file;
   }
+  
+  public beforeProcessing(fsFiles: FsFile[]) {
+    this.processing = true;
+  }
 
   public selectFile(file): void {
     this._previousFile = this._file;
     this._file = file;
+    this.processing = false;
+    
     setTimeout(() => {
       this.select.emit(file);
     });    

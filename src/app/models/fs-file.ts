@@ -76,6 +76,15 @@ export class FsFile {
     return this._fileExists;
   }
 
+  public isExtension(extension): boolean {
+    const extensions = (
+      Array.isArray(extension) ? extension : [extension]
+    )
+    .map((extension) => extension.toLowerCase());
+    
+    return extensions.indexOf(this.extension) !== -1;
+  }
+
   public get file(): File {
     return this._file;
   }
@@ -266,6 +275,6 @@ export class FsFile {
   }
 
   private _getExtensionMime() {
-    return this.extension.match(/(jpe?g|png|gif|tiff?|bmp|svg|heic)/) ? 'image' : 'application';
+    return this.extension.match(/(jpe?g|png|gif|tiff?|bmp|svg|heic|heif)/) ? 'image' : 'application';
   }
 }

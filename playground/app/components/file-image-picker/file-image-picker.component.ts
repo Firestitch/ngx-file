@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 
 import { FsFileImagePickerComponent } from '@firestitch/file';
 import { FsMessage } from '@firestitch/message';
@@ -7,8 +7,10 @@ import { FsMessage } from '@firestitch/message';
 @Component({
   selector: 'file-image-picker',
   templateUrl: './file-image-picker.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FileImagePickerComponent {
+
   @ViewChild('imagePicker', { static: true })
   public imagePicker: FsFileImagePickerComponent;
 
@@ -16,12 +18,14 @@ export class FileImagePickerComponent {
   public url = 'https://cdn.luxe.digital/media/2020/12/16175821/most-expensive-cars-2021-Maserati-MC20-luxe-digital%402x.jpg';
 
   constructor(
-    private message: FsMessage,
+    private _message: FsMessage,
+    private _cdRef: ChangeDetectorRef,
   ) {}
 
   public select(file) {
     this.file = file;
     console.log('Select File', file);
+    this._cdRef.markForCheck();
   }
 
   public cancel() {
@@ -29,10 +33,10 @@ export class FileImagePickerComponent {
   }
 
   public error(e) {
-    this.message.error(e.message);
+    this._message.error(e.message);
   }
 
   public selectUrl(url) {
-    this.message.info(`Image URL: ${  url}`);
+    this._message.info(`Image URL: ${  url}`);
   }
 }

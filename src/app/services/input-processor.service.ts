@@ -246,6 +246,7 @@ export class InputProcessorService {
     const imageType = this._acceptableTypes.get('image');
     if(imageType?.has('*')) {
       this._acceptableExts.add('.heic');
+      this._acceptableExts.add('.heif');
     }
 
   }

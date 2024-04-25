@@ -86,14 +86,14 @@ export class FileProcessor {
 
 
   private _transformHeic(fsFile: FsFile): Observable<FsFile> {
-    if(fsFile.extension === 'heic' && fsFile.file instanceof Blob) {
-      return from(heic2any({ blob: fsFile.file }))
+    if(fsFile.isExtension(['heic','heif']) && fsFile.file instanceof Blob) {
+      return from(heic2any({ blob: fsFile.file, multiple: true, toType: 'image/jpeg' }))
         .pipe(
           map((blob: Blob) => {
             const ext = blob.type?.split('/') || [];
-            const name = fsFile.name.replace(/heic$/i, ext[1] || 'jpg');
+            const name = fsFile.name.replace(/(heic|heif)$/i, ext[1] || 'jpg');
 
-            return new FsFile(blob, name);
+            return new FsFile(blob[0], name);
           }),
         );
     }
