@@ -1,10 +1,10 @@
 import { FsApiFile } from '@firestitch/api';
-import * as EXIF from '@firestitch/exif-js';
 
-import { Observable, of, throwError } from 'rxjs';
+import { from, Observable, of, throwError } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 import * as FileAPI from 'fileapi';
+import { Exif } from '../classes/exif';
 
 
 export class FsFile {
@@ -30,21 +30,19 @@ export class FsFile {
   }
 
   public get imageWidth(): Promise<number> {
-    return new Promise((resolve, reject) => {
-      this.imageInfo
-        .then((data) => {
-          resolve(data.exif);
-        }, reject);
-    });
+    return from(this.dims)
+      .pipe(
+        map((dims) => dims.width),
+      )
+      .toPromise();       
   }
 
   public get imageHeight(): Promise<number> {
-    return new Promise((resolve, reject) => {
-      this.imageInfo
-        .then((data) => {
-          resolve(data.height);
-        }, reject);
-    });
+    return from(this.dims)
+      .pipe(
+        map((dims) => dims.height),
+      )
+    .toPromise();       
   }
 
   public get exifInfo(): Promise<any> {
@@ -109,6 +107,34 @@ export class FsFile {
     }
   }
 
+  public get dims(): Promise<{ width: number; height: number }> {
+    if (this._imageHeight || this._imageWidth) {
+      return of({
+        width: this._imageWidth,
+        height: this._imageHeight,
+      })
+      .toPromise();
+    }
+
+    return new Observable<any>((observer) => {
+      FileAPI.getInfo(this.file, (err, info) => {
+        if (!err) {
+          observer.next(info);
+          observer.complete();
+        } else {
+          observer.error(err);
+        }
+      });
+    })
+    .pipe(
+      tap((dims) => {
+        this._imageWidth = dims.width;
+        this._imageHeight = dims.height;
+      }),
+    )
+    .toPromise();
+  }
+
   public get imageInfo(): Promise<{ width: number; height: number; exif: any }> {
     if (!this.typeImage || this._exifInfo) {
       return Promise.resolve({
@@ -121,7 +147,7 @@ export class FsFile {
     const exif$ = new Observable<any>((observer) => {
       const fr = new FileReader();
       fr.onload = () => {
-        const exif = EXIF.readFromBinaryFile(fr.result);
+        const exif = (new Exif()).readFromBinaryFile(fr.result);
         if(exif) {
           observer.next(exif);
           observer.complete();
@@ -137,29 +163,9 @@ export class FsFile {
       fr.readAsArrayBuffer(this.file);
     });
 
-    const dims$ = new Observable<any>((observer) => {
-      FileAPI.getInfo(this.file, (err, info) => {
-        if (!err) {
-          observer.next(info);
-          observer.complete();
-        } else {
-          observer.error(err);
-        }
-      });
-    });
-
-    return of(true)
+    return from(this.dims)
       .pipe(
-        switchMap(() => dims$
-          .pipe(
-            tap((dims) => {
-              this._imageWidth = dims.width;
-              this._imageHeight = dims.height;
-            }),
-
-            catchError(() => of(true)),
-          ),
-        ),
+        catchError(null),
         switchMap(() => exif$
           .pipe(
             tap((exif) => {

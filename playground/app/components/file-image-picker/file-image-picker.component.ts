@@ -15,7 +15,7 @@ export class FileImagePickerComponent {
   public imagePicker: FsFileImagePickerComponent;
 
   public file;
-  public url = 'https://cdn.luxe.digital/media/2020/12/16175821/most-expensive-cars-2021-Maserati-MC20-luxe-digital%402x.jpg';
+  public url = 'https://i.etsystatic.com/40403146/r/il/27fde4/4577393439/il_fullxfull.4577393439_7at9.jpg';
 
   constructor(
     private _message: FsMessage,
