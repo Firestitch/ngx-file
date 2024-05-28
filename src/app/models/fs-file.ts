@@ -208,9 +208,9 @@ export class FsFile {
     };
   }
 
-  public get base64(): Observable<string> {
+  public get base64Url(): Observable<string> {
     if(this._apiFile) {
-      return this._apiFile.base64;
+      return this._apiFile.base64Url;
     }
 
     if(this.file instanceof File) {
@@ -225,7 +225,7 @@ export class FsFile {
       });
     }
 
-    return throwError('Unable to create base64');
+    return throwError('Unable to create base64Url');
   }
 
   public get blobUrl(): Observable<string> {
