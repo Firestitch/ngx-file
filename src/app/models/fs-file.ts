@@ -62,7 +62,7 @@ export class FsFile {
     return this.type.match(/\/svg/);
   }
 
-  public get imageProcess() {
+  public get imageProcessable() {
     return this.typeImage && !this.typeSvg;
   }
 

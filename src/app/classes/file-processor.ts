@@ -109,7 +109,7 @@ export class FileProcessor {
   }
 
   private _transformImage(fsFile: FsFile, processConfig: FileProcessConfig): Observable<FsFile> {
-    if(fsFile.imageProcess) {
+    if(!fsFile.imageProcessable) {
       return of(fsFile);
     }
 
