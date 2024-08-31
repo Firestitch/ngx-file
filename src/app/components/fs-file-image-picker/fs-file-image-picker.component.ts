@@ -6,13 +6,14 @@ import {
   EventEmitter,
   Input,
   Output,
-  TemplateRef
+  TemplateRef,
 } from '@angular/core';
 
 import { MatDialog } from '@angular/material/dialog';
-import { FsFileHintDirective, FsFileLabelDirective } from '../../directives';
 
+import { FsFileHintDirective, FsFileLabelDirective } from '../../directives';
 import { FsFile } from '../../models/fs-file';
+
 import { FsFileImagePickerDialogComponent } from './fs-file-image-picker-dialog/fs-file-image-picker-dialog.component';
 
 
@@ -41,7 +42,7 @@ export class FsFileImagePickerComponent {
   @Input() public minHeight = 0;
   @Input() public disabled = false;
 
-  @Input('url') set url(url) {
+  @Input('url') public set url(url) {
     this._previousFile = this._file;
     this._file = url ? new FsFile(url) : null;
   }
@@ -96,10 +97,10 @@ export class FsFileImagePickerComponent {
       this._dialog.open(FsFileImagePickerDialogComponent, {
         data: {
           file: this._file,
-          selectUrl: this.selectUrl
+          selectUrl: this.selectUrl,
         },
         width: '500px',
-        autoFocus: false
+        autoFocus: false,
       });
     }
   }

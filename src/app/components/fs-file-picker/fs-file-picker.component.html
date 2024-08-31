@@ -1,6 +1,6 @@
 <fs-label-field
     class="fs-form-wrapper"
-    [ngClass]="{ 'percent-preview': previewPercent }">
+    [ngClass]="{ 'percent-preview': previewPercent, disabled: disabled }">
   <ng-container *ngIf="label; else labelContent">
     <fs-label class="fs-form-label">{{label}}</fs-label>
   </ng-container>
@@ -37,7 +37,7 @@
             [previewHeight]="null"
             [previewWidth]="null">
           <ng-template
-              *ngIf="allowRemove"
+              *ngIf="allowRemove && !disabled"
               fs-file-preview-action
               placement="top-right"
               action="remove"
@@ -46,7 +46,7 @@
             <mat-icon>close</mat-icon>
           </ng-template>
           <ng-template
-              *ngIf="allowReupload"
+              *ngIf="allowReupload && !disabled"
               fs-file-preview-action
               action="reupload"
               placement="bottom-right"
