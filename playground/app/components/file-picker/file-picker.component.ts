@@ -8,6 +8,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilePickerComponent {
+  
   public file;
 
   public select(file) {
@@ -15,6 +16,6 @@ export class FilePickerComponent {
   }
 
   public view(file) {
-
+    //
   }
 }

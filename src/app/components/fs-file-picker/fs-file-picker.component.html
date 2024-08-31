@@ -13,6 +13,7 @@
       [accept]="accept"
       (select)="selectFile($event)"
       (declined)="declined()"
+      [disabled]="disabled"
       (beforeProcessing)="beforeProcessing($event)"
       [imageWidth]="imageWidth"
       [imageHeight]="imageHeight"
@@ -78,7 +79,12 @@
           <div class="select">
             <mat-icon>upload</mat-icon>
             <div class="instruction">{{instruction}}</div>
-            <button type="button" mat-raised-button>Upload</button>
+            <button
+                [disabled]="disabled" 
+                type="button" 
+                mat-raised-button>'
+              Upload
+            </button>
           </div>
         </ng-container>
       </ng-template>
