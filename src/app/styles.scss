@@ -24,7 +24,7 @@ $desktop-width-min: 992px;
 
 @mixin fs-file($theme) {
 
-  $primary: mat.define-palette($theme);
+  $primary: mat.m2-define-palette($theme);
 
   fs-file {
     fs-file-dragover-message {
@@ -32,11 +32,11 @@ $desktop-width-min: 992px;
         z-index: 999;
         display: none;
         .content {
-          background-color: mat.get-color-from-palette($primary);
+          background-color: mat.m2-get-color-from-palette($primary);
         }
 
         .bounce {
-          color: mat.get-color-from-palette($primary);
+          color: mat.m2-get-color-from-palette($primary);
         }
       }
     }
@@ -54,7 +54,7 @@ fs-file-picker {
   &.dragover {
     .wrap {
       &:after {
-        border-color: mat.get-color-from-palette($primary);
+        border-color: mat.m2-get-color-from-palette($primary);
       }
     }
   }
@@ -64,7 +64,7 @@ fs-file-picker {
 fs-file-image-picker {
   .wrap:not(.exists) {
     .image-preview {
-      border-color: mat.get-color-from-palette($primary) !important;
+      border-color: mat.m2-get-color-from-palette($primary) !important;
     }
   }
 }

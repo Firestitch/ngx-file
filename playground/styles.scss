@@ -8,7 +8,7 @@
 
 @include mat.core();
 @include fs-style.core();
-@include fs-file(mat.$blue-palette);
+@include fs-file(mat.$m2-blue-palette);
 
 pre {
   word-break: break-all;
