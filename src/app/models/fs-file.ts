@@ -127,22 +127,33 @@ export class FsFile {
     );
   }
 
+  public get dataUrl$(): Observable<string> {
+    return new Observable<string>((observer) => {
+      const reader = new FileReader();
+      reader.onload = (readerEvent) => {
+        observer.next(readerEvent.target.result as string);
+        observer.complete();
+      };
+      reader.onerror = (error) => observer.error(error);
+      reader.readAsDataURL(this.file);
+    });
+  }
+
+  public get arrayBuffer$(): Observable<ArrayBuffer> {
+    return new Observable<ArrayBuffer>((observer) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        observer.next(reader.result as ArrayBuffer);
+        observer.complete();
+      };
+      reader.onerror = (error) => observer.error(error);
+      reader.readAsArrayBuffer(this.file);
+    });
+  }
+
   public _getImageInfo(): Promise<{ width: number; height: number,  exif: any }> {
     return lastValueFrom(
-      new Observable<ArrayBuffer>((observer) => {
-        const fr = new FileReader;
-
-        fr.onload = () => {
-          observer.next(fr.result as ArrayBuffer);
-          observer.complete();
-        };
-
-        fr.onerror = () => {
-          observer.error(fr.error);
-        };
-
-        fr.readAsArrayBuffer(this.file); 
-      })
+      this.arrayBuffer$
         .pipe(
           switchMap((arrayBuffer: ArrayBuffer) => {
             return new Observable<{ width: number; height: number }>((observer) => {
@@ -191,9 +202,6 @@ export class FsFile {
   }
 
   public get imageInfo(): Promise<{ width: number; height: number; exif: any }> {
-    if (this._imageInfo) {
-      return Promise.resolve(this._imageInfo);
-    }
 
     return this._getImageInfo();
   }

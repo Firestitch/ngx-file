@@ -170,6 +170,12 @@ $desktop-width-min: 992px;
     }
 
     .action {
+      ::ng-deep {
+        mat-icon {
+          display: flex;
+        }
+      }
+
       &.top-left {
         top: 8px;
         left: 8px;

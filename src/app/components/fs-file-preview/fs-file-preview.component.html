@@ -72,14 +72,15 @@
 
 <ng-template #previewActionTmpl let-previewAction="previewAction">
   <ng-container *ngIf="!previewAction.hide">
-    <div
-        class="action mat-mini-fab mat-primary"      
-        [class]="previewAction.placement"
+    <div 
+        class="action"
+        [class]="previewAction.placement">
+      <a
+        mat-mini-fab
         [matTooltip]="previewAction.tooltip"
         (click)="callAction($event, previewAction)">
-      <span class="mat-button-wrapper">
         <ng-template [ngTemplateOutlet]="previewAction.templateRef"></ng-template>
-      </span>
-    </div>
+    </a>
+  </div>
   </ng-container>
 </ng-template>

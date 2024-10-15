@@ -1,9 +1,7 @@
 import { forkJoin, from, Observable, of, throwError } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 
-import * as FileAPI from 'fileapi';
 import heic2any from 'heic2any';
-import { toInteger } from 'lodash-es';
 
 import { FsFileProcessConfig } from '../interfaces';
 import { FileProcessConfig, FsFile } from '../models';
@@ -11,8 +9,12 @@ import { FileProcessConfig, FsFile } from '../models';
 
 export class FileProcessor {
 
-  public processFile(fsFile: FsFile, config: FileProcessConfig | FsFileProcessConfig): Observable<FsFile> {
-    const processConfig = config instanceof FileProcessConfig ? config : new FileProcessConfig(config);
+  public processFile(
+    fsFile: FsFile, 
+    config: FileProcessConfig | FsFileProcessConfig,
+  ): Observable<FsFile> {
+    const processConfig = config instanceof FileProcessConfig ? 
+      config : new FileProcessConfig(config);
 
     return this._transform(fsFile, processConfig)
       .pipe(
@@ -20,7 +22,10 @@ export class FileProcessor {
       );
   }
 
-  public processFiles(fsFiles: FsFile[], config: FileProcessConfig | FsFileProcessConfig): Observable<FsFile[]> {
+  public processFiles(
+    fsFiles: FsFile[], 
+    config: FileProcessConfig | FsFileProcessConfig,
+  ): Observable<FsFile[]> {
     const errors = [];
 
     return forkJoin(
@@ -68,12 +73,16 @@ export class FileProcessor {
       return from(fsFile.imageInfo)
         .pipe(
           switchMap((data) => {
-            if (data.height < toInteger(processConfig.minHeight)) {
-              return throwError({ error: `Height must be at least ${processConfig.minHeight}px.`, code: 'minHeight' });
+            if (data.height < Number(processConfig.minHeight || 0)) {
+              return throwError(() => ({
+                error: `Height must be at least ${processConfig.minHeight}px.`, code: 'minHeight', 
+              }));
             }
 
-            if (data.width < toInteger(processConfig.minWidth)) {
-              return throwError({ error: `Width must be at least ${processConfig.minWidth}px.`, code: 'minWidth' });
+            if (data.width < Number(processConfig.minWidth || 0)) {
+              return throwError(() => ({ 
+                error: `Width must be at least ${processConfig.minWidth}px.`, code: 'minWidth', 
+              }));
             }
 
             return of(fsFile);
@@ -109,15 +118,14 @@ export class FileProcessor {
   }
 
   private _transformImage(fsFile: FsFile, processConfig: FileProcessConfig): Observable<FsFile> {
-    if(!fsFile.imageProcessable) {
-      return of(fsFile);
-    }
-
     if (
-      !processConfig.orientate &&
-      !processConfig.maxWidth &&
-      !processConfig.maxHeight &&
-      processConfig.quality === 1
+      !fsFile.imageProcessable || 
+      (
+        !processConfig.orientate &&
+        !processConfig.maxWidth &&
+        !processConfig.maxHeight &&
+        processConfig.quality === 1
+      )
     ) {
       return of(fsFile);
     }
@@ -125,46 +133,114 @@ export class FileProcessor {
     return from(fsFile.exifInfo)
       .pipe(
         switchMap((exifInfo: any) => {
-          if (!exifInfo?.Orientation) {
-            return of(fsFile);
-          }
+          const config = this._generateTransformConfig(processConfig);
+        
+          return this
+            ._processTransformImage(
+              fsFile, 
+              config.maxWidth,
+              config.maxHeight,
+              config.quality,
+              config.orientate ? exifInfo?.Orientation : 0,
+            );
 
+        }),
+      );
+  }
+
+  private _processTransformImage(
+    fsFile: FsFile, 
+    maxWidth: number,
+    maxHeight: number,
+    quality: number,
+    orientation: number,
+  ): Observable<FsFile> {   
+    return fsFile.dataUrl$
+      .pipe(
+        switchMap((dataUrl) => {
           return new Observable<FsFile>((observer) => {
-            const transformConfig = this._generateTransformConfig(fsFile, processConfig);
+            const image = new Image();
+            image.onerror = () => {
+              observer.error(new Error('Image not found'));
+            };
 
-            // Transform image by options and rotate if needed
-            FileAPI.Image.transform(
-              fsFile.file,
-              [transformConfig],
-              processConfig.orientate,
-              (err, images) => {
-                // Process transformed files
-                if (!err && images[0]) {
-                  const canvas: HTMLCanvasElement = images[0];
-                  const type = (processConfig.format) ? `image/${  processConfig.format}` : fsFile.type;
+            image.onload = () => {
+              const canvas = document.createElement('canvas');
+              this._updateCanvas(canvas, image, orientation, maxWidth, maxHeight);
 
-                  canvas.toBlob((blob) => {
-                    fsFile.file = new File([blob], fsFile.file.name, { type: fsFile.type });
-                    observer.next(fsFile);
-                    observer.complete();
-                  }, type, processConfig.quality);
-                } else {
-                  observer.error(err);
-                }
-              });
+              canvas
+                .toBlob((blob) => {
+                  fsFile.file = new File([blob], fsFile.file.name, { type: fsFile.type });
+                  observer.next(fsFile);
+                  observer.complete();
+                },
+                fsFile.type,
+                quality,
+                );
+            };
+
+            image.src = dataUrl;
           });
         }),
       );
   }
 
-  private _generateTransformConfig(file, config: FileProcessConfig) {
+  private _updateCanvas(
+    canvas: HTMLCanvasElement, 
+    image: HTMLImageElement, 
+    orientation: number, 
+    maxWidth: number, 
+    maxHeight: number,
+  ) {
+    const calculateSize = (w, h) => {
+      if (w > h) {
+        if (w > maxWidth) {
+          h = Math.round((h * maxWidth) / w);
+          w = maxWidth;
+        }
+      } else {
+        if (h > maxHeight) {
+          w = Math.round((w * maxHeight) / h);
+          h = maxHeight;
+        }
+      }
+
+      return { width: w, height: h };
+    };
+
+    const ctx = canvas.getContext('2d');
+    if (orientation > 4 && orientation < 9) {
+      canvas.width = image.height;
+      canvas.height = image.width;
+    } else {
+      canvas.width = image.width;
+      canvas.height = image.height;
+    }
+  
+    switch (orientation) {
+      case 2: ctx.transform(-1, 0, 0, 1, image.width, 0); break;
+      case 3: ctx.transform(-1, 0, 0, -1, image.width, image.height); break;
+      case 4: ctx.transform(1, 0, 0, -1, 0, image.height); break;
+      case 5: ctx.transform(0, 1, 1, 0, 0, 0); break;
+      case 6: ctx.transform(0, 1, -1, 0, image.height, 0); break;
+      case 7: ctx.transform(0, -1, -1, 0, image.height, image.width); break;
+      case 8: ctx.transform(0, -1, 1, 0, 0, image.width); break;
+      default: break;
+    }
+
+    const size = calculateSize(image.width, image.height);
+    canvas.width = size.width;
+    canvas.height = size.height;
+    ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, size.width, size.height);
+    ctx.restore();
+  }
+
+  private _generateTransformConfig(config: FileProcessConfig) {
     return {
-      // Resize
       maxWidth: config.maxWidth,
       maxHeight: config.maxHeight,
-
-      // Quality for result image
       quality: config.quality || 1,
+      orientate: config.orientate,
     };
   }
 }

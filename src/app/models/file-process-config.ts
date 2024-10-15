@@ -10,7 +10,6 @@ export class FileProcessConfig {
   private _minWidth: number;
   private _minHeight: number;
   private _orientate = true;
-  private _heic = false;
 
   constructor(config: FsFileProcessConfig = {}) {
     this.maxWidth = config.maxWidth;

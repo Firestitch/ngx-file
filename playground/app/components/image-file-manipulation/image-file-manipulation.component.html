@@ -1,7 +1,10 @@
 <fs-file 
     (select)="select($event)"
     accept="image/*"
-    [multiple]="true">
+    [multiple]="true"
+    [imageWidth]="1000"
+    [imageHeight]="1000"
+    [imageQuality]="0.8">
   <button mat-raised-button color="primary">Select File</button>
 </fs-file>
 
