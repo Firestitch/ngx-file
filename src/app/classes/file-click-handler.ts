@@ -1,16 +1,18 @@
-import { Observable, of } from 'rxjs';
-import { FileClickInterceptor } from "./file-click-interceptor";
-import { InputProcessorService } from "../services";
+import { Observable } from 'rxjs';
+
+import { InputProcessorService } from '../services';
+
+import { FileClickInterceptor } from './file-click-interceptor';
 
 
 export class FileClickHandler {
 
-  public constructor(
+  constructor(
     private _next: FileClickHandler,
-    private _interceptor: FileClickInterceptor
+    private _interceptor: FileClickInterceptor,
   ) {}
 
-  public handle(event: PointerEvent, inputProcessorService: InputProcessorService): Observable<PointerEvent> {
+  public handle(event: MouseEvent, inputProcessorService: InputProcessorService): Observable<MouseEvent> {
     return this._interceptor.intercept(event, inputProcessorService, this._next);
   }
 

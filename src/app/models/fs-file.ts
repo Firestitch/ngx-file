@@ -1,9 +1,8 @@
 import { FsApiFile } from '@firestitch/api';
 
-import { from, Observable, of, throwError } from 'rxjs';
+import { from, lastValueFrom, Observable, of, throwError } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
-import * as FileAPI from 'fileapi';
 import { Exif } from '../classes/exif';
 
 
@@ -19,10 +18,8 @@ export class FsFile {
   private _file: File;
   private _name: string;
   private _fileExists = false;
-  private _imageWidth: number;
-  private _imageHeight: number;
-  private _exifInfo: any;
   private _apiFile: FsApiFile;
+  private _imageInfo: { width: number; height: number; exif: any };
 
   constructor(obj?: File|Blob|string|FsApiFile, filename?: string) {
     this._init(obj, filename);
@@ -42,16 +39,7 @@ export class FsFile {
       .pipe(
         map((dims) => dims.height),
       )
-    .toPromise();       
-  }
-
-  public get exifInfo(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.imageInfo
-        .then((data) => {
-          resolve(data.exif);
-        }, reject);
-    });
+      .toPromise();       
   }
 
   public get typeImage() {
@@ -78,7 +66,7 @@ export class FsFile {
     const extensions = (
       Array.isArray(extension) ? extension : [extension]
     )
-    .map((extension) => extension.toLowerCase());
+      .map((data) => data.toLowerCase());
     
     return extensions.indexOf(this.extension) !== -1;
   }
@@ -107,80 +95,107 @@ export class FsFile {
     }
   }
 
-  public get dims(): Promise<{ width: number; height: number }> {
-    if (this._imageHeight || this._imageWidth) {
-      return of({
-        width: this._imageWidth,
-        height: this._imageHeight,
-      })
-      .toPromise();
+  public get exifInfo(): Promise<any> {
+    if (this._imageInfo) {
+      return Promise.resolve(this._imageInfo?.exif);
     }
 
-    return new Observable<any>((observer) => {
-      FileAPI.getInfo(this.file, (err, info) => {
-        if (!err) {
-          observer.next(info);
-          observer.complete();
-        } else {
-          observer.error(err);
-        }
+    return lastValueFrom(
+      from(this._getImageInfo())
+        .pipe(
+          map((data) => data.exif),
+        ),
+    );
+  }
+
+  public get dims(): Promise<{ width: number; height: number }> {
+    if (this._imageInfo) {
+      return Promise.resolve({
+        width: this._imageInfo.width,
+        height: this._imageInfo.height,
       });
-    })
-    .pipe(
-      tap((dims) => {
-        this._imageWidth = dims.width;
-        this._imageHeight = dims.height;
-      }),
-    )
-    .toPromise();
+    }
+
+    return lastValueFrom(
+      from(this._getImageInfo())
+        .pipe(
+          map((data) => ({
+            width: data.width,
+            height: data.height,
+          })),
+        ),
+    );
+  }
+
+  public _getImageInfo(): Promise<{ width: number; height: number,  exif: any }> {
+    return lastValueFrom(
+      new Observable<ArrayBuffer>((observer) => {
+        const fr = new FileReader;
+
+        fr.onload = () => {
+          observer.next(fr.result as ArrayBuffer);
+          observer.complete();
+        };
+
+        fr.onerror = () => {
+          observer.error(fr.error);
+        };
+
+        fr.readAsArrayBuffer(this.file); 
+      })
+        .pipe(
+          switchMap((arrayBuffer: ArrayBuffer) => {
+            return new Observable<{ width: number; height: number }>((observer) => {
+              const img = new Image;
+      
+              img.onload = () => {
+                observer.next({
+                  width: img.width,
+                  height: img.height,
+                });
+                observer.complete();
+              };
+
+              img.onerror = (e) => {
+                observer.error(e);
+              };
+    
+              img.src = window.URL.createObjectURL(this.file); 
+            })
+              .pipe(
+                catchError(() => {
+                  return of({ width: 0, height: 0 });
+                }),
+                map((dims) => {
+                  let exif = null;
+                  
+                  try {
+                    exif = (new Exif()).readFromBinaryFile(arrayBuffer);
+                  } catch (error) {
+                    console.error(error);
+                  }
+
+                  return {
+                    width: dims.width,
+                    height: dims.height,
+                    exif,
+                  };
+                }),
+              );
+          }),
+          tap((data) => {
+            this._imageInfo = data;
+          }),
+        ),
+    );
   }
 
   public get imageInfo(): Promise<{ width: number; height: number; exif: any }> {
-    if (!this.typeImage || this._exifInfo) {
-      return Promise.resolve({
-        width: this._imageWidth,
-        height: this._imageHeight,
-        exif: this._exifInfo,
-      });
+    if (this._imageInfo) {
+      return Promise.resolve(this._imageInfo);
     }
 
-    const exif$ = new Observable<any>((observer) => {
-      const fr = new FileReader();
-      fr.onload = () => {
-        const exif = (new Exif()).readFromBinaryFile(fr.result);
-        if(exif) {
-          observer.next(exif);
-          observer.complete();
-        } else {
-          observer.error('Failed to read from binary file');
-        }
-      };
-
-      fr.onerror = () => {
-        observer.error(fr.error);
-      };
-
-      fr.readAsArrayBuffer(this.file);
-    });
-
-    return from(this.dims)
-      .pipe(
-        catchError(null),
-        switchMap(() => exif$
-          .pipe(
-            tap((exif) => {
-              this._exifInfo = exif || {};
-            }),
-            catchError(() => of(true)),
-          ),
-        ),
-        map(() => ({
-          width: this._imageWidth,
-          height: this._imageHeight,
-          exif: this._exifInfo,
-        })),
-      )
-      .toPromise();
+    return this._getImageInfo();
   }
 
   public download() {
@@ -225,7 +240,7 @@ export class FsFile {
       });
     }
 
-    return throwError('Unable to create base64Url');
+    return throwError(() => new Error('Unable to create base64Url'));
   }
 
   public get blobUrl(): Observable<string> {
@@ -237,7 +252,7 @@ export class FsFile {
       return of(URL.createObjectURL(this.file));
     }
 
-    return throwError('Unable to create blobUrl');
+    return throwError(() => new Error('Unable to create blobUrl'));
   }
 
   private _checkIfFileExists() {
@@ -272,7 +287,7 @@ export class FsFile {
     }
 
     if (filename) {
-      const match = filename.toLowerCase().match(/([^\.]+)$/);
+      const match = filename.toLowerCase().match(/([^.]+)$/);
       this.extension = match ? match[1].toLowerCase() : '';
       type = `${this._getExtensionMime()}/${this.extension}`;
     }

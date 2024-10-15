@@ -1,7 +1,9 @@
 import { Observable, of } from 'rxjs';
-import { FileClickHandler } from "./file-click-handler";
-import { FileClickInterceptor } from "./file-click-interceptor";
+
 import { InputProcessorService } from '../services';
+
+import { FileClickHandler } from './file-click-handler';
+import { FileClickInterceptor } from './file-click-interceptor';
 
 
 export class ClickInterceptor extends FileClickInterceptor {

@@ -2,7 +2,6 @@ import { ElementRef, EventEmitter, Inject, Injectable, Optional } from '@angular
 
 import { Subject } from 'rxjs';
 
-import * as FileAPI from 'fileapi';
 
 import { FileClickHandler, FileClickInterceptor } from '../classes';
 import { ClickInterceptor } from '../classes/click-interceptor';
@@ -13,7 +12,6 @@ import { FsFile } from '../models';
 @Injectable()
 export class InputProcessorService {
 
-  public containerEl: any;
   public inputEl: HTMLInputElement;
   public multiple = false;
   public api: 'html5' | 'any' | 'cordova' = null;
@@ -30,7 +28,8 @@ export class InputProcessorService {
   private _declinedFiles$ = new Subject<File[]>();
 
   constructor(
-    @Optional() @Inject(FS_FILE_CLICK_INTERCEPTOR) private _clickInterceptors: FileClickInterceptor[],
+    @Optional() @Inject(FS_FILE_CLICK_INTERCEPTOR) 
+    private _clickInterceptors: FileClickInterceptor[],
   ) { }
 
   public get accept() {
@@ -71,16 +70,14 @@ export class InputProcessorService {
     }
 
     this.inputEl = el.nativeElement;
-
-    FileAPI.event.on(this.inputEl, 'change', (event) => {
+   
+    this.inputEl.addEventListener('change', () => {
       if (!this.allowClick) {
         return;
       }
-
-      const files = FileAPI.getFiles(event);
-
-      if (files) {
-        this.selectFiles(files);
+      
+      if (this.inputEl.files) {
+        this.selectFiles(Array.from(this.inputEl.files));
       }
 
       this.inputEl.value = null;
@@ -92,21 +89,16 @@ export class InputProcessorService {
       return;
     }
 
-    this.containerEl = el.nativeElement;
-    FileAPI.event.on(this.containerEl, 'drop', (event) => {
-
+    el.nativeElement.addEventListener('drop', (event: DragEvent) => {
       if (!this.allowDrop) {
         return;
       }
-
-      const files = FileAPI.getFiles(event);
-
-      if (files) {
-        this.selectFiles(files);
+      
+      if (event.dataTransfer.files) {
+        this.selectFiles(Array.from(event.dataTransfer.files));
       }
 
-      this.inputEl.value = null;
-
+      el.nativeElement.value = null;
     });
   }
 
@@ -115,7 +107,7 @@ export class InputProcessorService {
       return;
     }
 
-    FileAPI.event.on(el.nativeElement, 'click', (event) => {
+    el.nativeElement.addEventListener('click', (event) => {
       if (!this.allowClick) {
         return;
       }

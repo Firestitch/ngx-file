@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+
 import { FsApi } from '@firestitch/api';
 
 
@@ -7,16 +8,16 @@ import { FsApi } from '@firestitch/api';
   styleUrls: ['./dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DialogComponent {
+export class DialogComponent implements OnInit {
 
   public fileApi;
 
-  public constructor(
+  constructor(
     private _api: FsApi,
   ) {}
 
   public ngOnInit(): void {
-    this.fileApi = this._api.createApiFile(`/assets/lamborghini-sian-roadster-t1-1024x576.jpg`);
+    this.fileApi = this._api.createApiFile('/assets/lamborghini-sian-roadster-t1-1024x576.jpg');
   }
 
 }

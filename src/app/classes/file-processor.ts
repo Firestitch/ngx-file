@@ -55,7 +55,7 @@ export class FileProcessor {
               }, [])
               .join(', ');
 
-            return throwError({ error, code, message: error });
+            return throwError(() => ({ error, code, message: error }));
           }
 
           return of(result);

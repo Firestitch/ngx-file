@@ -102,7 +102,6 @@
             "styles": [
               "playground/styles.scss"
             ],
-            "scripts": [],
             "assets": [
               "playground/favicon.ico",
               "playground/assets"

@@ -19,7 +19,7 @@ import { DialogComponent } from './dialog';
 })
 export class FilePickerExistingFileComponent {
 
-  public url = `${window.location.origin}/assets/ferrari-sf90-stradale-0056.jpg`;
+  public url = `${window.location.origin}/assets/Ferrari-SF90_Stradale-2020-1600-01.jpg`;
   public file = new FsFile('http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf', 'Document.pdf');
   public apiFile: FsApiFile;
 
@@ -28,7 +28,7 @@ export class FilePickerExistingFileComponent {
     private _upload: UploadService,
     private _api: FsApi,
     private _dialog: MatDialog,
-    private _cdRef: ChangeDetectorRef
+    private _cdRef: ChangeDetectorRef,
   ) {
     this.apiFile = this._api.createApiFile('/assets/lamborghini-sian-roadster-t1-1024x576.jpg', { name: 'lamborghini-sian-roadster-t1-1024x576.jpg' });
   }
@@ -43,7 +43,7 @@ export class FilePickerExistingFileComponent {
       });
   }
 
-  public download(fsFile) {
+  public download() {
     this._message.success('Downloaded');
   }
 
