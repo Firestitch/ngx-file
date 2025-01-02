@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 
-import { FS_API_RESPONSE_HANDLER, FsApiModule } from '@firestitch/api';
+import { FsApiModule } from '@firestitch/api';
 import { FsExampleModule } from '@firestitch/example';
 import { FS_FILE_CLICK_INTERCEPTOR, FsFileModule } from '@firestitch/file';
 import { FsFormModule } from '@firestitch/form';
-import { FsMessage, FsMessageModule } from '@firestitch/message';
+import { FsMessageModule } from '@firestitch/message';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import {
   CaptureMultipleComponent,
@@ -26,7 +26,6 @@ import {
   SingleFileSelectComponent,
 } from './components';
 import { FilePickerModelComponent } from './components/file-picker-model';
-import { ResponseHandler } from './handlers/response.handler';
 import { CordovaClickInterceptor } from './interceptors/cordova-click-interceptor';
 import { AppMaterialModule } from './material.module';
 
@@ -65,10 +64,6 @@ import { AppMaterialModule } from './material.module';
     FilePreviewComponent,
   ],
   providers: [
-    {
-      provide: FS_API_RESPONSE_HANDLER,
-      useClass: ResponseHandler, deps: [FsMessage],
-    },
     {
       provide: FS_FILE_CLICK_INTERCEPTOR,
       multi: true,

@@ -1,6 +1,6 @@
 import { FsApiFile } from '@firestitch/api';
 
-import { from, lastValueFrom, Observable, of, throwError } from 'rxjs';
+import { firstValueFrom, from, lastValueFrom, Observable, of, throwError } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 import { Exif } from '../classes/exif';
@@ -27,19 +27,20 @@ export class FsFile {
   }
 
   public get imageWidth(): Promise<number> {
-    return from(this.dims)
-      .pipe(
-        map((dims) => dims.width),
-      )
-      .toPromise();       
+    return firstValueFrom(
+      from(this.dims)
+        .pipe(
+          map((dims) => dims.width),
+        ));       
   }
+  
 
   public get imageHeight(): Promise<number> {
-    return from(this.dims)
-      .pipe(
-        map((dims) => dims.height),
-      )
-      .toPromise();       
+    return firstValueFrom(
+      from(this.dims)
+        .pipe(
+          map((dims) => dims.height),
+        ));       
   }
 
   public get typeImage() {
@@ -304,6 +305,7 @@ export class FsFile {
   }
 
   private _getExtensionMime() {
-    return this.extension.match(/(jpe?g|png|gif|tiff?|bmp|svg|heic|heif)/) ? 'image' : 'application';
+    return this.extension.match(/(jpe?g|png|gif|tiff?|bmp|svg|heic|heif)/) ? 
+      'image' : 'application';
   }
 }

@@ -30,7 +30,10 @@ export class FilePickerExistingFileComponent {
     private _dialog: MatDialog,
     private _cdRef: ChangeDetectorRef,
   ) {
-    this.apiFile = this._api.createApiFile('/assets/lamborghini-sian-roadster-t1-1024x576.jpg', { name: 'lamborghini-sian-roadster-t1-1024x576.jpg' });
+    this.apiFile = this._api
+      .createApiFile('/assets/lamborghini-sian-roadster-t1-1024x576.jpg', { 
+        name: 'lamborghini-sian-roadster-t1-1024x576.jpg',
+      });
   }
 
   public select(file: FsFile) {
