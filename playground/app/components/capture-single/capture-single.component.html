@@ -1,18 +1,39 @@
-<div fxLayout="row wrap" fxLayoutGap="10px">
+<div
+    fxLayout="row wrap"
+    fxLayoutGap="10px">
   <div>
-    <fs-file (select)="select($event)" accept="image/*" capture="camera" api="html5">
-      <button mat-raised-button color="primary">Take a Photo</button>
+    <fs-file
+        (select)="select($event)"
+        accept="image/*"
+        capture="camera"
+        api="html5">
+      <button
+          mat-flat-button
+          color="primary">
+        Take a Photo
+      </button>
     </fs-file>
   </div>
   <div>
-    <fs-file (select)="select($event)" accept="video/*" capture="camera" api="html5">
-      <button mat-raised-button color="primary">Take a Video</button>
+    <fs-file
+        (select)="select($event)"
+        accept="video/*"
+        capture="camera"
+        api="html5">
+      <button
+          mat-flat-button
+          color="primary">
+        Take a Video
+      </button>
     </fs-file>
   </div>
 </div>
-
 <fieldset *ngIf="file">
-  <legend>File</legend>
+  <legend>
+    File
+  </legend>
   <fs-file-preview [file]="file"></fs-file-preview>
-  <pre>{{ file | json }}</pre>
+  <pre>
+    {{ file | json }}
+  </pre>
 </fieldset>

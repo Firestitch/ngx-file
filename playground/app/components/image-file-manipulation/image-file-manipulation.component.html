@@ -1,41 +1,89 @@
-<fs-file 
+<fs-file
     (select)="select($event)"
     accept="image/*"
     [multiple]="true"
     [imageWidth]="1000"
     [imageHeight]="1000"
     [imageQuality]="0.8">
-  <button mat-raised-button color="primary">Select File</button>
+  <button
+      mat-flat-button
+      color="primary">
+    Select File
+  </button>
 </fs-file>
-
 <p>
   <fs-file-previews
       [files]="files"
       width="200"
       height="200"
       (removed)="removed($event)">
-    <ng-template fs-file-preview-action placement="top-right" action="remove" tooltip="Remove">
-      <mat-icon>close</mat-icon>
+    <ng-template
+        fs-file-preview-action
+        placement="top-right"
+        action="remove"
+        tooltip="Remove">
+      <mat-icon>
+        close
+      </mat-icon>
     </ng-template>
-    <ng-template 
-       fs-file-preview-action
+    <ng-template
+        fs-file-preview-action
         placement="bottom-right"
         (click)="enhance($event)"
         tooltip="Enhance"
         for-types="image/*">
-      <mat-icon>brush</mat-icon>
+      <mat-icon>
+        brush
+      </mat-icon>
     </ng-template>
-    <ng-template fs-file-preview-action placement="bottom-left" action="zoom" tooltip="Zoom" (click)="search($event)" for-types="image/*">
-      <mat-icon>search</mat-icon>
+    <ng-template
+        fs-file-preview-action
+        placement="bottom-left"
+        action="zoom"
+        tooltip="Zoom"
+        (click)="search($event)"
+        for-types="image/*">
+      <mat-icon>
+        search
+      </mat-icon>
     </ng-template>
   </fs-file-previews>
 </p>
-
 <ul>
-  <li>Accept: <b>image/*</b></li>
-  <li>Multiple: <b>true</b></li>
-  <li>Quality: <b>80%</b></li>
-  <li>Max width: <b>1000</b></li>
-  <li>Max height: <b>1000</b></li>
-  <li>Preview: <b>200x200</b></li>
+  <li>
+    Accept:
+    <b>
+      image/*
+    </b>
+  </li>
+  <li>
+    Multiple:
+    <b>
+      true
+    </b>
+  </li>
+  <li>
+    Quality:
+    <b>
+      80%
+    </b>
+  </li>
+  <li>
+    Max width:
+    <b>
+      1000
+    </b>
+  </li>
+  <li>
+    Max height:
+    <b>
+      1000
+    </b>
+  </li>
+  <li>
+    Preview:
+    <b>
+      200x200
+    </b>
+  </li>
 </ul>

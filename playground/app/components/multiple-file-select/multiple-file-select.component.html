@@ -2,37 +2,43 @@
     (select)="select($event)"
     (error)="error($event)"
     [multiple]="true">
-  <button 
-      mat-raised-button 
+  <button
+      mat-flat-button
       color="primary">
     Select File
   </button>
 </fs-file>
-
 <div class="previews">
-  <fs-file-previews 
+  <fs-file-previews
       [files]="files"
       [mapFile]="mapFile"
       [showActionOn]="'always'">
-    <ng-template 
-        fs-file-preview-action 
-        placement="top-right" 
-        action="remove" 
-        tooltip="Remove" 
+    <ng-template
+        fs-file-preview-action
+        placement="top-right"
+        action="remove"
+        tooltip="Remove"
         (click)="removed($event)">
-      <mat-icon>close</mat-icon>
+      <mat-icon>
+        close
+      </mat-icon>
     </ng-template>
-    <ng-template 
-        fs-file-preview-action 
-        placement="top-left" 
-        tooltip="Download" 
+    <ng-template
+        fs-file-preview-action
+        placement="top-left"
+        tooltip="Download"
         (click)="download($event)">
-      <mat-icon>download</mat-icon>
-    </ng-template>    
+      <mat-icon>
+        download
+      </mat-icon>
+    </ng-template>
   </fs-file-previews>
 </div>
-
 <fieldset *ngIf="filesJsonInfo.length > 0">
-  <legend>Files</legend>
-  <pre>{{ filesJsonInfo | json }}</pre>
+  <legend>
+    Files
+  </legend>
+  <pre>
+    {{ filesJsonInfo | json }}
+  </pre>
 </fieldset>

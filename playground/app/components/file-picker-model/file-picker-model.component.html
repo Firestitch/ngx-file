@@ -8,18 +8,25 @@
       [previewHeight]="150"
       [required]="true"
       [allowRemove]="true">
-    <div fsFileLabel>Label</div>
-    <div fsFileHint>Hint</div>
+    <div fsFileLabel>
+      Label
+    </div>
+    <div fsFileHint>
+      Hint
+    </div>
   </fs-file-picker>
   <button
-      mat-raised-button
+      mat-flat-button
       color="primary"
       type="submit">
     Save
   </button>
-
   <fieldset *ngIf="file?.url">
-    <legend>File URL</legend>
-    <pre>{{ file.url }}</pre>
+    <legend>
+      File URL
+    </legend>
+    <pre>
+      {{ file.url }}
+    </pre>
   </fieldset>
 </form>
