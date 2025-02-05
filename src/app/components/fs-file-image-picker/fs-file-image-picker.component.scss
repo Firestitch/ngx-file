@@ -47,6 +47,10 @@
     left: 11%;
     margin: -13px;
 
+    button {
+      box-shadow: none;
+    }
+
     mat-icon {
       color: rgb(233, 233, 233);
     }
