@@ -9,59 +9,56 @@
       'show-action-always': showActionOn === 'always'
     }">
   <!-- Image container -->
-  <ng-container 
-      *ngIf="typeImage; else nonImage">
+  <ng-container *ngIf="typeImage; else nonImage">
     <ng-container *ngIf="(file | fsFileSrc | async) as src">
-      <img 
-        [src]="src" 
+      <img
+        [src]="src"
         (load)="previewLoaded()"
         (error)="previewError()">
     </ng-container>
-   
     <ng-container *ngIf="!loaded">
       <mat-spinner [diameter]="50"></mat-spinner>
     </ng-container>
   </ng-container>
-
   <!-- Non image container -->
   <ng-template #nonImage>
     <div class="file-details">
       <div class="file-icon">
-        <div 
+        <div
             class="file-ext"
             [style.fontSize]="extensionFontSize + 'px'">
-          {{file.extension}}
+          {{ file.extension }}
         </div>
-        <mat-icon 
-          [style.width]="iconDim + 'px'" 
-          [style.height]="iconDim + 'px'"
-          [style.fontSize]="iconDim + 'px'">insert_drive_file</mat-icon>
+        <mat-icon
+            [style.width]="iconDim + 'px'"
+            [style.height]="iconDim + 'px'"
+            [style.fontSize]="iconDim + 'px'">
+          insert_drive_file
+        </mat-icon>
       </div>
       <ng-container *ngIf="showFilename && file.name">
-        <a 
-            class="file-name" 
+        <a
+            class="file-name"
             [matTooltip]="file.name">
-          {{file.name}}
+          {{ file.name }}
         </a>
       </ng-container>
     </div>
   </ng-template>
-
   <div class="actions">
     <ng-container *ngFor="let previewAction of previewActions">
-      <ng-container 
-        [ngTemplateOutlet]="previewActionTmpl" 
+      <ng-container
+        [ngTemplateOutlet]="previewActionTmpl"
         [ngTemplateOutletContext]="{ previewAction: previewAction }">
       </ng-container>
     </ng-container>
     <ng-container *ngFor="let previewAction of childrenPreviewActions">
-      <ng-container 
-        [ngTemplateOutlet]="previewActionTmpl" 
+      <ng-container
+        [ngTemplateOutlet]="previewActionTmpl"
         [ngTemplateOutletContext]="{ previewAction: previewAction }">
       </ng-container>
     </ng-container>
   </div>
-
   <div class="spinner">
     <ng-container *ngIf="file.progress">
       <mat-spinner [diameter]="50"></mat-spinner>
@@ -69,18 +66,18 @@
   </div>
   <ng-content></ng-content>
 </div>
-
-<ng-template #previewActionTmpl let-previewAction="previewAction">
+<ng-template
+    #previewActionTmpl
+    let-previewAction="previewAction">
   <ng-container *ngIf="!previewAction.hide">
-    <div 
+    <div
         class="action"
         [class]="previewAction.placement">
       <a
-        mat-mini-fab
-        [matTooltip]="previewAction.tooltip"
-        (click)="callAction($event, previewAction)">
+          mat-mini-fab
+          (click)="callAction($event, previewAction)">
         <ng-template [ngTemplateOutlet]="previewAction.templateRef"></ng-template>
-    </a>
-  </div>
+      </a>
+    </div>
   </ng-container>
 </ng-template>

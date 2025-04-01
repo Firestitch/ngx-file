@@ -9,7 +9,6 @@ import { FsFile } from '../models';
 export class FsFilePreviewActionDirective {
 
   @Input() public placement: 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right';
-  @Input() public tooltip: string;
   @Input() public action: string;
   @Input() public hide: boolean;
   @Input('for-types') public forTypes: string | string[];
