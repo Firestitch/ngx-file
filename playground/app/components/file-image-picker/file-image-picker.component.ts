@@ -24,8 +24,8 @@ export class FileImagePickerComponent {
 
   public select(file) {
     this.file = file;
-    console.log('Select File', file);
     this._cdRef.markForCheck();
+    console.log('Select File', file);
   }
 
   public cancel() {

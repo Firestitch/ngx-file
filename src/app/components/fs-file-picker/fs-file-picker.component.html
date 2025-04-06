@@ -1,23 +1,33 @@
-<fs-label-field
-    class="fs-form-wrapper"
-    [ngClass]="{ disabled: disabled }">
-  <ng-container *ngIf="label; else labelContent">
-    <fs-label class="fs-form-label">
-      {{ label }}
-    </fs-label>
-  </ng-container>
-  <ng-template #labelContent>
-    <fs-label
-        *ngIf="labels.length"
-        class="fs-form-label">
-      <ng-content select="[fsFileLabel]"></ng-content>
-    </fs-label>
-  </ng-template>
+@if (label || labels.length) {
+  <fs-label-field>
+    <ng-container *ngIf="label; else labelContent">
+      <fs-label class="fs-form-label">
+        {{ label }}
+      </fs-label>
+    </ng-container>
+    <ng-template #labelContent>
+      <fs-label
+          *ngIf="labels.length"
+          class="fs-form-label">
+        <ng-content select="[fsFileLabel]"></ng-content>
+      </fs-label>
+    </ng-template>
+    <ng-container [ngTemplateOutlet]="fileTemplate"></ng-container>
+    <fs-label-message class="fs-form-message">
+      <span class="fs-form-hint">
+        <ng-content select="[fsFileHint]"></ng-content>
+        <ng-content select="[fsFileMessageLabel]"></ng-content>
+      </span>
+    </fs-label-message>
+  </fs-label-field>
+} @else {
+  <ng-container [ngTemplateOutlet]="fileTemplate"></ng-container>
+}
+<ng-template #fileTemplate>
   <fs-file
       [accept]="accept"
       (select)="selectFile($event)"
       (declined)="declined()"
-      [disabled]="disabled"
       (beforeProcessing)="beforeProcessing($event)"
       [imageWidth]="imageWidth"
       [imageHeight]="imageHeight"
@@ -44,6 +54,7 @@
           @for (action of actions; track action.placement) {
             <ng-template
               fs-file-action
+              [hide]="action.hide"
               [actionDirective]="action">
             </ng-template>
           }
@@ -97,10 +108,4 @@
       </ng-template>
     </div>
   </fs-file>
-  <fs-label-message class="fs-form-message">
-    <span class="fs-form-hint">
-      <ng-content select="[fsFileHint]"></ng-content>
-      <ng-content select="[fsFileMessageLabel]"></ng-content>
-    </span>
-  </fs-label-message>
-</fs-label-field>
+</ng-template>

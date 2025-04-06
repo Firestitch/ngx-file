@@ -47,7 +47,8 @@
     @for (action of actions; track action.placement) {
       <ng-template
         fs-file-action
-        [actionDirective]="action">
+        [actionDirective]="action"
+        [hide]="action.hide">
       </ng-template>
     }
   </fs-file-actions>

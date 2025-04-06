@@ -29,9 +29,6 @@
   }
 
   ::ng-deep {
-    .file-container {
-      width: 100%;
-    }
 
     fs-file-preview {
       border: none;
@@ -51,8 +48,9 @@
 }
 
 .wrap {
-    border: 1px #efefef solid;
-    border-radius: 5px;
+  border: 1px #efefef solid;
+  border-radius: 5px;
+  position: relative;
 
   &.processing {
     .select {

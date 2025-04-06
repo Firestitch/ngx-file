@@ -11,7 +11,7 @@
       [ngTemplateOutletContext]="{ previewAction: previewAction }">
     </ng-container>
   </ng-container> -->
-  @for (action of childrenActions; track action.placement) {
+  @for (action of actions; track action.placement) {
     @if (!action.hide) {
       <div
           class="action"

@@ -1,7 +1,6 @@
 <fs-file-picker
     (select)="selectFile($event)"
     [file]="file"
-    [allowDownload]="true"
     [showActionOn]="'always'"
     [minHeight]="minHeight"
     [minWidth]="minWidth"
@@ -16,6 +15,7 @@
   @for (action of actions; track action.placement) {
     <ng-template
       fs-file-action
+      [hide]="action.hide"
       [actionDirective]="action">
     </ng-template>
   }
@@ -33,6 +33,7 @@
         @for (action of actions; track action.placement) {
           <ng-template
             fs-file-action
+            [hide]="action.hide"
             [actionDirective]="action">
           </ng-template>
         }

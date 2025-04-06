@@ -1,5 +1,4 @@
 import {
-  AfterContentInit,
   ChangeDetectionStrategy,
   Component,
   ContentChildren,
@@ -15,14 +14,10 @@ import { FsFilePreviewActionDirective } from '../../directives';
   styleUrls: ['./fs-file-actions.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FsFileActionsComponent implements AfterContentInit {
+export class FsFileActionsComponent {
 
   @ContentChildren(FsFilePreviewActionDirective)
-  public childrenActions: QueryList<FsFilePreviewActionDirective>;
-
-  public ngAfterContentInit() {
-    // this._cleanActions();
-  }
+  public actions: QueryList<FsFilePreviewActionDirective>;
 
   public callAction(event: MouseEvent, action: FsFilePreviewActionDirective) {
     if (action.click.observers.length) {
@@ -31,10 +26,6 @@ export class FsFileActionsComponent implements AfterContentInit {
 
       action.click.emit({ event, file: action.file });
     }
-
-    // if (action.action === 'remove') {
-    // //  this.remove.emit({ event: $event, file: this.file });
-    // }
   }
 
   // private _cleanActions() {
