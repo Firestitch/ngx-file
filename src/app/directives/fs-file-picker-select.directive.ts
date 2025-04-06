@@ -2,7 +2,7 @@ import { Directive } from '@angular/core';
 
 
 @Directive({
-  selector: '[fsFilePickerSelect]'
+  selector: '[fsFilePickerSelect]',
 })
 export class FsFilePickerSelectDirective {}
 

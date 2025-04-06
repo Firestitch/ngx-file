@@ -39,4 +39,8 @@ export class FileImagePickerComponent {
   public selectUrl(url) {
     this._message.info(`Image URL: ${  url}`);
   }
+
+  public edit(e) {
+    console.log('Edit', e);
+  }
 }

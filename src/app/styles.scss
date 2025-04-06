@@ -62,10 +62,8 @@ fs-file-picker {
 
 
 fs-file-image-picker {
-  .wrap:not(.exists) {
-    .image-preview {
-      border-color: mat.m2-get-color-from-palette($primary) !important;
-    }
+  .fs-file-image-picker-placeholder {
+    border-color: mat.m2-get-color-from-palette($primary) !important;
   }
 }
 

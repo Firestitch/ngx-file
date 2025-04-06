@@ -37,11 +37,9 @@ export class FilePickerExistingFileComponent {
   }
 
   public select(file: FsFile) {
-    file.progress = true;
     this._upload.upload(file)
       .subscribe(() => {
         this.file = file;
-        file.progress = false;
         this._cdRef.markForCheck();
       });
   }

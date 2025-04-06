@@ -12,23 +12,13 @@
   <fs-file-previews
       [files]="files"
       [mapFile]="mapFile"
+      [remove]="remove"
       [showActionOn]="'always'">
     <ng-template
-        fs-file-preview-action
-        placement="top-right"
-        action="remove"
-        (click)="removed($event)">
-      <mat-icon>
-        close
-      </mat-icon>
-    </ng-template>
-    <ng-template
-        fs-file-preview-action
-        placement="top-left"
-        (click)="download($event)">
-      <mat-icon>
-        download
-      </mat-icon>
+      fs-file-preview-action
+      placement="top-left"
+      (click)="download($event)"
+      [icon]="'download'">
     </ng-template>
   </fs-file-previews>
 </div>

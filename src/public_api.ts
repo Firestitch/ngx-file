@@ -1,9 +1,8 @@
 export { FsFileModule } from './app/fs-file.module';
-export {
-  ScaleExifImage, isImageType
-} from './app/helpers';
+export { isImageType, ScaleExifImage } from './app/helpers';
 export { FsFile } from './app/models/fs-file';
 
+export { FsFileActionsComponent } from './app/components/fs-file-actions/fs-file-actions.component';
 export { FsFileDragBaseComponent } from './app/components/fs-file-drag-base/fs-file-drag-base';
 export { FsFileImagePickerComponent } from './app/components/fs-file-image-picker/fs-file-image-picker.component';
 export { FsFilePickerComponent } from './app/components/fs-file-picker/fs-file-picker.component';

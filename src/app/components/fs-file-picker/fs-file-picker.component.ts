@@ -64,7 +64,7 @@ export class FsFilePickerComponent
   public filePickerSelectTemplate: TemplateRef<any>;
 
   @ContentChildren(FsFilePreviewActionDirective)
-  public previewActions: QueryList<FsFilePreviewActionDirective>;
+  public actions: QueryList<FsFilePreviewActionDirective>;
 
   @Input() public minWidth = 0;
   @Input() public minHeight = 0;
@@ -77,6 +77,7 @@ export class FsFilePickerComponent
   @Input() public allowReupload = true;
   @Input() public multiple = false;
   @Input() public allowRemove = false;
+  @Input() public showActionOn: 'hover' | 'always' = 'hover';
 
   @Input('url') public set url(url) {
     this.file = url ? new FsFile(url) : null;
@@ -92,8 +93,6 @@ export class FsFilePickerComponent
     } else {
       this._file = null;
     }
-
-    this.previewFile = this._file;
   }
 
   public get file(): FsFile {
@@ -114,36 +113,24 @@ export class FsFilePickerComponent
   }
 
   @Input()
-  public set previewWidth(value: string | number) {
-    this._previewWidth = Number.isInteger(value) ? `${value}px` : value?.toString() || '';
-  }
-
-  public get previewWidth() {
-    return this._previewWidth;
-  }
+  public previewHeight = 150;
 
   @Input()
-  public set previewHeight(value: string | number) {
-    this._previewHeight = Number.isInteger(value) ? `${value}px` : value?.toString() || '';
-  }
+  public previewWidth = 150;
 
-  public get previewHeight() {
-    return this._previewHeight;
-  }
+  @Input()
+  public uploadIcon = 'upload';
 
   @Output() public select = new EventEmitter<any>();
-  @Output() public remove = new EventEmitter();
+  @Output() public remove = new EventEmitter<FsFile>();
   @Output() public download = new EventEmitter<FsFile>();
 
   public instruction = 'Drag & Drop your file or use the button below';
-  public previewFile: FsFile;
   public processing = false;
 
   private _destroy$ = new Subject();
   private _disabled: boolean;
-  private _previewWidth = '150px';
   private _file: FsFile;
-  private _previewHeight = '150px';
 
   constructor(
     @Optional() @Inject(FS_FILE_MODULE_CONFIG) private _moduleConfig,
@@ -193,11 +180,7 @@ export class FsFilePickerComponent
 
     return null;
   }
-
-  public get previewPercent() {
-    return String(this._previewWidth).match(/%/);
-  }
-
+  
   public clear(): void {
     this.file = null;
     this._cdRef.markForCheck();
@@ -215,7 +198,6 @@ export class FsFilePickerComponent
   public declined() {
     this.processing = false;
     this.file = null;
-    this.previewFile = null;
     this.onChange(null);
     this._cdRef.markForCheck();
   }
@@ -231,22 +213,23 @@ export class FsFilePickerComponent
   }
 
   public removeFile() {
-    this.file = null;
-    this.previewFile = null;
     this.remove.emit(this.file);
     this.onChange(null);
+    this.file = null;
   }
 
   public actionClick(event: { event: MouseEvent }) {
     event.event.stopPropagation();
   }
 
-  public downloadClicked(event: { event: MouseEvent }) {
+  public downloadClicked(event: { event: MouseEvent; file: FsFile }) {
     event.event.stopPropagation();
 
     if (this.download.observers.length) {
       event.event.preventDefault();
-      this.download.emit(this.file);
+      this.download.emit(event.file);
+    } else if (event.file?.url) {
+      window.open(event.file.url, '_blank');
     }
   }
 

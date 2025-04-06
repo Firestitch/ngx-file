@@ -1,84 +1,47 @@
-
-
-<ng-container *ngIf="labelTemplate || hintTemplate || label; else preview">
-  <fs-label-field class="fs-image-label">
-    <fs-label *ngIf="labelTemplate || label">
-      {{ label }}
-      <ng-container *ngTemplateOutlet="labelTemplate"></ng-container>
-    </fs-label>
-    <ng-container *ngTemplateOutlet="preview"></ng-container>
-    <fs-label-message class="fs-form-message">
-      <span class="fs-form-hint">
-        <ng-container *ngTemplateOutlet="hintTemplate"></ng-container>
-      </span>
-    </fs-label-message>
-  </fs-label-field>
-</ng-container>
-
-<ng-template #preview>
-  <div 
-    class="wrap" 
-    [ngClass]="{ 
-      disabled: disabled, 
-      processing: processing,
-      exists: file?.exists && file.typeImage 
-    }">
-    <ng-container *ngIf="processing">
-      <mat-spinner [diameter]="previewDiameter * .25"></mat-spinner>
-    </ng-container>
-    <fs-file
-        *ngIf="!disabled; else filePreview"
-        (select)="selectFile($event)"
-        (beforeProcessing)="beforeProcessing($event)"
-        (error)="error.emit($event)"
-        (clicked)="clicked($event)"
-        [minHeight]="minHeight"
-        [minWidth]="minWidth"
-        [imageWidth]="imageWidth"
-        [imageHeight]="imageHeight"
-        [imageQuality]="imageQuality"
-        [disabled]="disabled"
-        accept="image/*"
-        [multiple]="false">
-      <ng-container *ngTemplateOutlet="filePreview"></ng-container>
-    </fs-file>
-  </div>
-
-  <ng-template #filePreview>
-    <div 
-        class="image-preview"
-        [style.borderRadius]="borderRadius"
+<fs-file-picker
+    (select)="selectFile($event)"
+    [file]="file"
+    [allowDownload]="true"
+    [showActionOn]="'always'"
+    [minHeight]="minHeight"
+    [minWidth]="minWidth"
+    [imageWidth]="imageWidth"
+    [imageHeight]="imageHeight"
+    [imageQuality]="imageQuality"
+    [previewHeight]="previewDiameter"
+    [previewWidth]="previewDiameter"
+    [uploadIcon]="'photo_camera'"
+    [accept]="'image/*'"
+    [disabled]="disabled">
+  @for (action of actions; track action.placement) {
+    <ng-template
+      fs-file-action
+      [actionDirective]="action">
+    </ng-template>
+  }
+  <ng-template fsFilePickerSelect>
+    <div
+        class="fs-file-image-picker-placeholder"
         [style.height]="previewDiameter + 'px'"
         [style.width]="previewDiameter + 'px'">
-      <ng-container 
-        *ngIf="file?.exists && file.typeImage; else noImage">
-        <ng-container *ngIf="(file | fsFileSrc | async) as src">
-          <img 
-            [style.borderRadius]="borderRadius"
-            [src]="src">
-        </ng-container>
-      </ng-container>
-      <ng-template #noImage>
-        <div class="no-image">
-          <mat-icon
-              [style.transform]="'scale(' + ((previewDiameter / 50) * 100) + '%)'">
-            image
-          </mat-icon>
-        </div>
-      </ng-template>
-      <div 
-          [style.transform]="'rotate(46deg) translate(' + (previewDiameter - 1) + 'px) rotate(-46deg)'"
-          class="upload-icon">
-        <button 
-            mat-mini-fab
-            type="button"
-            [style.margin]="(previewDiameter < 100 ? (1 - (previewDiameter / 100)) * -10 : 1) + 'px'"
-            [style.transform]="'scale(' + (previewDiameter < 100 ? (previewDiameter / 100) : 1) + ')'">
-          <mat-icon>
-              photo_camera
-          </mat-icon>
-        </button>
-      </div>
+      <mat-icon
+          class="image-icon"
+          [style.transform]="'scale(' + previewDiameter/50 + ')'">
+        image
+      </mat-icon>
+      <fs-file-actions>
+        @for (action of actions; track action.placement) {
+          <ng-template
+            fs-file-action
+            [actionDirective]="action">
+          </ng-template>
+        }
+        <ng-template
+          fs-file-action
+          placement="bottom-right"
+          [icon]="'photo_camera'">
+        </ng-template>
+      </fs-file-actions>
     </div>
   </ng-template>
-</ng-template>
+</fs-file-picker>

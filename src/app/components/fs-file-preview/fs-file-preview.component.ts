@@ -1,13 +1,10 @@
 import {
-  AfterContentInit,
   ChangeDetectionStrategy,
   Component,
   ContentChildren,
-  EventEmitter,
   Input,
   OnChanges,
   OnInit,
-  Output,
   QueryList,
   SimpleChanges,
 } from '@angular/core';
@@ -22,21 +19,17 @@ import { FsFile } from '../../models';
   styleUrls: ['./fs-file-preview.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FsFilePreviewComponent implements AfterContentInit, OnInit, OnChanges {
+export class FsFilePreviewComponent implements OnInit, OnChanges {
 
   @ContentChildren(FsFilePreviewActionDirective)
-  public childrenPreviewActions: QueryList<FsFilePreviewActionDirective>;
+  public actions: QueryList<FsFilePreviewActionDirective>;
 
-  @Input() public previewActions: FsFilePreviewActionDirective[] = [];
   @Input() public showFilename = true;
   @Input() public previewWidth: number = 150;
   @Input() public previewHeight: number = 150;
   @Input() public file: FsFile;
   @Input() public url: string;
-  @Input() public index: number;
-  @Input() public showActionOn: 'hover' | 'always' = 'hover';
-
-  @Output() public remove = new EventEmitter<{ event: MouseEvent; file: FsFile }>();
+  @Input() public showActionOn: 'hover' | 'always' = 'always';
 
   public loaded = false;
   public iconDim = 100;
@@ -67,10 +60,6 @@ export class FsFilePreviewComponent implements AfterContentInit, OnInit, OnChang
     }
   }
 
-  public ngAfterContentInit() {
-    this._cleanActions();
-  }
-
   public previewLoaded() {
     this.loaded = true;
   }
@@ -79,37 +68,4 @@ export class FsFilePreviewComponent implements AfterContentInit, OnInit, OnChang
     this.loaded = true;
   }
 
-  public callAction($event: MouseEvent, previewAction: FsFilePreviewActionDirective) {
-    if (previewAction.click.observers.length) {
-      $event.stopImmediatePropagation();
-      $event.stopPropagation();
-
-      previewAction.click.emit({ event: $event, file: this.file, index: this.index });
-    }
-
-    if (previewAction.action === 'remove') {
-      this.remove.emit({ event: $event, file: this.file });
-    }
-  }
-
-  private _cleanActions() {
-    this.previewActions
-      .forEach((action) => {
-        if (action.forTypes) {
-          const [originalFileType, originalContentType] = this.file.type.split('/');
-          const types: string[] = Array.isArray(action.forTypes) ?
-            action.forTypes :
-            [action.forTypes];
-
-          action.hide = types
-            .some((type) => {
-              const [fileType, contentType] = type.split('/');
-              const allowed = fileType === originalFileType &&
-                (contentType === originalContentType || contentType === '*');
-
-              return !allowed;
-            });
-        }
-      });
-  }
 }

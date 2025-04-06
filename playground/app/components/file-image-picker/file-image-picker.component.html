@@ -1,24 +1,28 @@
-<div
-    fxLayout="row"
-    fxLayoutGap="20px"
-    fxLayoutAlign="start center">
+<div class="fs-row.gap-lg.align-start">
+  <fs-file-image-picker
+      (select)="select($event)"
+      (selectUrl)="selectUrl($event)"
+      (error)="error($event)">
+    <ng-template
+      fs-file-action
+      (click)="edit($event)"
+      placement="bottom-left"
+      icon="edit">
+    </ng-template>
+  </fs-file-image-picker>
   <div>
     <fs-file-image-picker
-        #imagePicker
-        (select)="select($event)"
-        (selectUrl)="selectUrl($event)"
-        (error)="error($event)"
-        [url]="url"
-        [imageQuality]=".8"
-        [imageWidth]="500"
-        [imageHeight]="500"
-        [minHeight]="300"
-        [minWidth]="300"
-        [previewDiameter]="250"
-        label="Picker With Label">
-      <div fsFileMessageLabel>
-        Hint!
-      </div>
+      #imagePicker
+      (select)="select($event)"
+      (selectUrl)="selectUrl($event)"
+      (error)="error($event)"
+      [url]="url"
+      [imageQuality]=".8"
+      [imageWidth]="500"
+      [imageHeight]="500"
+      [minHeight]="300"
+      [minWidth]="300"
+      [previewDiameter]="250">
     </fs-file-image-picker>
     <ul>
       <li>

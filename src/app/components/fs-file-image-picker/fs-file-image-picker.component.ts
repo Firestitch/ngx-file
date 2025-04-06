@@ -3,15 +3,17 @@ import {
   ChangeDetectorRef,
   Component,
   ContentChild,
+  ContentChildren,
   EventEmitter,
   Input,
   Output,
+  QueryList,
   TemplateRef,
 } from '@angular/core';
 
 import { MatDialog } from '@angular/material/dialog';
 
-import { FsFileHintDirective, FsFileLabelDirective } from '../../directives';
+import { FsFileHintDirective, FsFileLabelDirective, FsFilePreviewActionDirective } from '../../directives';
 import { FsFile } from '../../models/fs-file';
 
 import { FsFileImagePickerDialogComponent } from './fs-file-image-picker-dialog/fs-file-image-picker-dialog.component';
@@ -30,6 +32,9 @@ export class FsFileImagePickerComponent {
 
   @ContentChild(FsFileHintDirective, { read: TemplateRef })
   public hintTemplate: TemplateRef<any>;
+
+  @ContentChildren(FsFilePreviewActionDirective)
+  public actions: QueryList<FsFilePreviewActionDirective>;
 
   @Input() public imageQuality: number;
   @Input() public borderRadius = '100%';
@@ -60,7 +65,8 @@ export class FsFileImagePickerComponent {
   constructor(
     private _dialog: MatDialog,
     private _cdRef: ChangeDetectorRef,
-  ) {}
+  ) {
+  }
 
   public get file(): FsFile {
     return this._file;

@@ -1,6 +1,6 @@
 <fs-label-field
     class="fs-form-wrapper"
-    [ngClass]="{ 'percent-preview': previewPercent, disabled: disabled }">
+    [ngClass]="{ disabled: disabled }">
   <ng-container *ngIf="label; else labelContent">
     <fs-label class="fs-form-label">
       {{ label }}
@@ -26,57 +26,51 @@
       [multiple]="multiple">
     <div
         class="wrap"
-        [style.width]="previewWidth"
-        [style.height]="previewHeight"
-        [ngClass]="{ processing: processing }">
+        [style.width]="previewWidth ? previewWidth + 'px' : '100%'"
+        [style.height]="previewHeight + 'px'"
+        [ngClass]="{ processing: processing, 'has-file': !!file }">
       <ng-container *ngIf="processing">
         <mat-spinner [diameter]="50"></mat-spinner>
       </ng-container>
-      <ng-container *ngIf="previewFile; else preview">
+      <ng-container *ngIf="file; else preview">
         <fs-file-preview
             class="preview"
             (remove)="removeFile()"
-            [file]="previewFile"
-            [previewActions]="previewActions.toArray()"
+            [file]="file"
+            [showActionOn]="showActionOn"
             [showFilename]="showFilename"
-            [previewHeight]="null"
-            [previewWidth]="null">
+            [previewHeight]="previewHeight"
+            [previewWidth]="previewWidth">
+          @for (action of actions; track action.placement) {
+            <ng-template
+              fs-file-action
+              [actionDirective]="action">
+            </ng-template>
+          }
           <ng-template
-              *ngIf="allowRemove && !disabled"
-              fs-file-preview-action
-              placement="top-right"
-              action="remove"
-              (click)="actionClick($event)">
-            <mat-icon>
-              close
-            </mat-icon>
+            *ngIf="allowRemove && !disabled"
+            fs-file-preview-action
+            placement="bottom-left"
+            action="remove"
+            [icon]="'close'"
+            (click)="removeFile()">
           </ng-template>
           <ng-template
-              *ngIf="allowReupload && !disabled"
-              fs-file-preview-action
-              action="reupload"
-              placement="bottom-right"
-              tooltip="Reupload">
-            <mat-icon>
-              upload
-            </mat-icon>
+            *ngIf="allowReupload && !disabled"
+            fs-file-preview-action
+            placement="bottom-right"
+            tooltip="Reupload"
+            [file]="file"
+            [icon]="uploadIcon">
           </ng-template>
           <ng-template
-              fs-file-preview-action
-              placement="bottom-left"
-              action="download"
-              tooltip="Download"
-              [hide]="!(allowDownload && ((download.observers.length && file) || file?.url))"
-              (click)="downloadClicked($event)">
-            <a
-                [href]="previewFile.url"
-                target="_blank"
-                tabindex="-1"
-                class="download">
-              <mat-icon>
-                download
-              </mat-icon>
-            </a>
+            fs-file-preview-action
+            placement="top-right"
+            action="download"
+            [file]="file"
+            [icon]="'download'"
+            [hide]="!(allowDownload && ((download.observers.length && file) || file?.url))"
+            (click)="downloadClicked($event)">
           </ng-template>
         </fs-file-preview>
       </ng-container>

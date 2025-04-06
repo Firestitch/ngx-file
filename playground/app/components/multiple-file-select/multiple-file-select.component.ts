@@ -3,6 +3,8 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/
 import { FsFile } from '@firestitch/file';
 import { FsMessage } from '@firestitch/message';
 
+import { of, tap } from 'rxjs';
+
 
 @Component({
   selector: 'multiple-file-select',
@@ -25,9 +27,14 @@ export class MultipleFileSelectComponent {
     this.files = [...this.files, ...files];
   }
 
-  public removed(event) {
-    this._message.success('Removed');
-  }
+  public remove = (file: FsFile) => {
+    return of(null)
+      .pipe( 
+        tap(() => {
+          this._message.success(`Removed ${file.name}`);
+        }),
+      );
+  };
 
   public mapFile(file) {
     return file;
@@ -37,7 +44,8 @@ export class MultipleFileSelectComponent {
     console.log(error);
   }
 
-  public download(event: { file?: FsFile; event?: MouseEvent }) {
+  public download(event: { event: MouseEvent; file: FsFile }) {
+    event.event.stopPropagation();
     event.file.download();
   }
 }

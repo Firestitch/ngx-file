@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 
 @Component({
@@ -7,12 +7,6 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./fs-file-dragover-message.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FsFileDragoverMessageComponent implements OnInit {
-
-  constructor() { }
-
-  public ngOnInit() {
-
-  }
+export class FsFileDragoverMessageComponent {
 
 }

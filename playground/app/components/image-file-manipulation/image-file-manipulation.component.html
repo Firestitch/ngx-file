@@ -18,33 +18,27 @@
       height="200"
       (removed)="removed($event)">
     <ng-template
-        fs-file-preview-action
-        placement="top-right"
-        action="remove">
-      <mat-icon>
-        close
-      </mat-icon>
+      fs-file-preview-action
+      placement="top-right"
+      [icon]="'close'"
+      action="remove">
     </ng-template>
     <ng-template
-        fs-file-preview-action
-        placement="bottom-right"
-        (click)="enhance($event)"
-        tooltip="Enhance"
-        for-types="image/*">
-      <mat-icon>
-        brush
-      </mat-icon>
+      fs-file-preview-action
+      placement="bottom-right"
+      (click)="enhance($event)"
+      tooltip="Enhance"
+      [icon]="'brush'"
+      for-types="image/*">
     </ng-template>
     <ng-template
-        fs-file-preview-action
-        placement="bottom-left"
-        action="zoom"
-        tooltip="Zoom"
-        (click)="search($event)"
-        for-types="image/*">
-      <mat-icon>
-        search
-      </mat-icon>
+      fs-file-preview-action
+      placement="bottom-left"
+      action="zoom"
+      tooltip="Zoom"
+      [icon]="'search'"
+      (click)="search($event)"
+      for-types="image/*">
     </ng-template>
   </fs-file-previews>
 </p>

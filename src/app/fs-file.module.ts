@@ -12,6 +12,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { FsLabelModule } from '@firestitch/label';
 
+import { FsFileActionsComponent } from './components/fs-file-actions/fs-file-actions.component';
 import { FsFileBouncingIconComponent } from './components/fs-file-bouncing-icon/fs-file-bouncing-icon.component';
 import { FsFileDragBaseComponent } from './components/fs-file-drag-base/fs-file-drag-base';
 import { FsFileDragoverMessageComponent } from './components/fs-file-dragover-message/fs-file-dragover-message.component';
@@ -28,7 +29,6 @@ import { FsFilePreviewActionDirective } from './directives/fs-file-preview-actio
 import { FS_FILE_MODULE_CONFIG } from './injectors';
 import { FsFileModuleConfig } from './interfaces/module-config.interface';
 import { FilePreviewMapFilePipe, FsFileSrcPipe } from './pipes';
-
 
 @NgModule({
   imports: [
@@ -56,6 +56,7 @@ import { FilePreviewMapFilePipe, FsFileSrcPipe } from './pipes';
     FsFileLabelDirective,
     FsFilePickerSelectDirective,
     FsFileSrcPipe,
+    FsFileActionsComponent,
   ],
   declarations: [
     FsFileComponent,
@@ -73,6 +74,7 @@ import { FilePreviewMapFilePipe, FsFileSrcPipe } from './pipes';
     FsFileSrcPipe,
     FilePreviewMapFilePipe,
     FsFilePickerSelectDirective,
+    FsFileActionsComponent,
   ],
 })
 export class FsFileModule {

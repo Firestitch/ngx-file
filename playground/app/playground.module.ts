@@ -17,7 +17,6 @@ import {
   CaptureSingleComponent,
   DialogComponent,
   FileImagePickerComponent,
-  FilePickerComponent,
   FilePickerExistingFileComponent,
   FilePickerExistingUrlComponent,
   FilePreviewComponent,
@@ -25,7 +24,6 @@ import {
   MultipleFileSelectComponent,
   SingleFileSelectComponent,
 } from './components';
-import { FilePickerModelComponent } from './components/file-picker-model';
 import { CordovaClickInterceptor } from './interceptors/cordova-click-interceptor';
 import { AppMaterialModule } from './material.module';
 
@@ -53,13 +51,11 @@ import { AppMaterialModule } from './material.module';
     SingleFileSelectComponent,
     MultipleFileSelectComponent,
     ImageFileManipulationComponent,
-    FilePickerComponent,
     FilePickerExistingFileComponent,
     FilePickerExistingUrlComponent,
     CaptureSingleComponent,
     CaptureMultipleComponent,
     FileImagePickerComponent,
-    FilePickerModelComponent,
     DialogComponent,
     FilePreviewComponent,
   ],

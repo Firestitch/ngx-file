@@ -1,13 +1,15 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChildren,
-  EventEmitter,
   HostBinding,
+  inject,
   Input,
-  Output,
   QueryList,
 } from '@angular/core';
+
+import { Observable } from 'rxjs';
 
 import { FsFilePreviewActionDirective } from '../../directives';
 import { FsFile } from '../../models';
@@ -21,23 +23,25 @@ import { FsFile } from '../../models';
 export class FsFilePreviewsComponent {
 
   @ContentChildren(FsFilePreviewActionDirective)
-  public previewActions: QueryList<FsFilePreviewActionDirective>;
+  public actions: QueryList<FsFilePreviewActionDirective>;
 
   @Input() public files: FsFile[] | any[];
   @Input() public mapFile: (file: any) => FsFile;
   @Input() public previewWidth = 150;
   @Input() public previewHeight = 150;
-  @Input() public showActionOn: 'hover' | 'always' = 'hover';
-
-  @Output() public removed = new EventEmitter();
+  @Input() public remove: (file: FsFile) => Observable<any>;
+  @Input() public showActionOn: 'hover' | 'always' = 'always';
 
   @HostBinding('class.queue') public queue = true;
 
-  public removeFile(data) {
-    const index = this.files.indexOf(data.file);
-    if (index > -1) {
-      this.files.splice(index, 1);
-      this.removed.emit(this.files);
-    }
+  private _cdRef = inject(ChangeDetectorRef);
+
+  public removeFile(event: { file: FsFile }) {
+    this.remove(event.file)
+      .subscribe(() => {
+        this.files = this.files
+          .filter((f) => f !== event.file);
+        this._cdRef.markForCheck();
+      });
   }
 }
