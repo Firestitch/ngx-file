@@ -40,6 +40,7 @@ export class FsFilePreviewComponent implements OnInit, OnChanges {
   @Input() public previewHeight: number = 150;
   @Input() public file: FsFile;
   @Input() public url: string;
+  @Input() public filename: string;
   @Input() public showActionOn: 'hover' | 'always' = 'always';
 
   public loaded = false;
@@ -53,8 +54,8 @@ export class FsFilePreviewComponent implements OnInit, OnChanges {
   }
 
   public ngOnInit(): void {
-    if (this.url) {
-      this.file = new FsFile(this.url);
+    if (this.url || this.filename) {
+      this.file = new FsFile(this.url, this.filename);
     }
 
     this.previewHeight = this.previewHeight || 150;

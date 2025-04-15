@@ -46,7 +46,7 @@
     [file]="file">
   </fs-file-actions>
   <div class="spinner">
-    <ng-container *ngIf="file.progress">
+    <ng-container *ngIf="file?.progress">
       <mat-spinner [diameter]="50"></mat-spinner>
     </ng-container>
   </div>
