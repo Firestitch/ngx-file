@@ -1,23 +1,22 @@
 
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { of, throwError } from 'rxjs';
-
 import { FsApiFile } from '@firestitch/api';
-import { map, switchMap } from 'rxjs/operators';
-import { FsFile } from '../models';
 
-import { DomSanitizer } from '@angular/platform-browser';
+import { of, throwError } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
+
+import { FsFile } from '../models';
 
 
 @Pipe({ name: 'fsFileSrc' })
 export class FsFileSrcPipe implements PipeTransform {
 
-  public constructor(
-    private _domSanitizer: DomSanitizer,
-  ) { }
+  public transform(file: FsFile) {
+    if (file.previewUrl) {
+      return of(file.previewUrl);
+    }
 
-  public transform(file) {
     return of(null)
       .pipe(
         switchMap(() => {
@@ -33,9 +32,12 @@ export class FsFileSrcPipe implements PipeTransform {
                 switchMap(() => {
                   return data instanceof FsApiFile ? data.blob : of(data);
                 }),
-                map((data: any) => {
-                  return this._domSanitizer.bypassSecurityTrustUrl(URL.createObjectURL(data));
-                })
+                map((blob) => {
+                  return URL.createObjectURL(blob);
+                }),
+                tap((src) => {
+                  file.previewUrl = src;
+                }),
               );
 
           }

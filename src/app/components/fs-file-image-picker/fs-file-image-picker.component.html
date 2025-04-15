@@ -9,16 +9,10 @@
     [imageQuality]="imageQuality"
     [previewHeight]="previewDiameter"
     [previewWidth]="previewDiameter"
+    [actions]="actions"
     [uploadIcon]="'photo_camera'"
     [accept]="'image/*'"
     [disabled]="disabled">
-  @for (action of actions; track action.placement) {
-    <ng-template
-      fs-file-action
-      [hide]="action.hide"
-      [actionDirective]="action">
-    </ng-template>
-  }
   <ng-template fsFilePickerSelect>
     <div
         class="fs-file-image-picker-placeholder"
@@ -29,14 +23,9 @@
           [style.transform]="'scale(' + previewDiameter/50 + ')'">
         image
       </mat-icon>
-      <fs-file-actions>
-        @for (action of actions; track action.placement) {
-          <ng-template
-            fs-file-action
-            [hide]="action.hide"
-            [actionDirective]="action">
-          </ng-template>
-        }
+      <fs-file-actions
+          [actions]="actions"
+          [file]="file">
         <ng-template
           fs-file-action
           placement="bottom-right"

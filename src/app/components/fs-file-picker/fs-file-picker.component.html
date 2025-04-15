@@ -47,17 +47,11 @@
             class="preview"
             (remove)="removeFile()"
             [file]="file"
+            [actions]="actions"
             [showActionOn]="showActionOn"
             [showFilename]="showFilename"
             [previewHeight]="previewHeight"
             [previewWidth]="previewWidth">
-          @for (action of actions; track action.placement) {
-            <ng-template
-              fs-file-action
-              [hide]="action.hide"
-              [actionDirective]="action">
-            </ng-template>
-          }
           <ng-template
             *ngIf="allowRemove && !disabled"
             fs-file-preview-action
@@ -71,16 +65,14 @@
             fs-file-preview-action
             placement="bottom-right"
             tooltip="Reupload"
-            [file]="file"
             [icon]="uploadIcon">
           </ng-template>
           <ng-template
             fs-file-preview-action
             placement="top-right"
             action="download"
-            [file]="file"
             [icon]="'download'"
-            [hide]="!(allowDownload && ((download.observers.length && file) || file?.url))"
+            [show]="allowDownload && ((this.download.observers.length && !!file) || !!file?.url)"
             (click)="downloadClicked($event)">
           </ng-template>
         </fs-file-preview>

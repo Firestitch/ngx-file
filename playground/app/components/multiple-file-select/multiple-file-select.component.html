@@ -1,6 +1,5 @@
 <fs-file
     (select)="select($event)"
-    (error)="error($event)"
     [multiple]="true">
   <button
       mat-flat-button
@@ -8,25 +7,39 @@
     Select File
   </button>
 </fs-file>
-<div class="previews">
-  <fs-file-previews
-      [files]="files"
-      [mapFile]="mapFile"
-      [remove]="remove"
-      [showActionOn]="'always'">
-    <ng-template
-      fs-file-preview-action
-      placement="top-left"
-      (click)="download($event)"
-      [icon]="'download'">
-    </ng-template>
-  </fs-file-previews>
+<div class="previews fs-row.gap-sm.wrap">
+  @for (file of files; track file.id) {
+    <fs-file-preview [file]="file.file">
+      <ng-template
+        fs-file-preview-action
+        placement="bottom-left"
+        [tooltip]="'Download'"
+        (click)="download($event)"
+        [icon]="'download'">
+      </ng-template>
+      <ng-template
+        fs-file-preview-action
+        placement="bottom-right"
+        [tooltip]="'Remove'"
+        (click)="remove(file)"
+        [icon]="'close'">
+      </ng-template>
+      <ng-template
+        fs-file-preview-action
+        placement="top-right"
+        [tooltip]="'Default'"
+        [show]="!file.default"
+        (click)="default(file)"
+        [icon]="'settings'">
+      </ng-template>
+    </fs-file-preview>
+  }
 </div>
-<fieldset *ngIf="filesJsonInfo.length > 0">
+<fieldset *ngIf="files.length > 0">
   <legend>
     Files
   </legend>
   <pre>
-    {{ filesJsonInfo | json }}
+    {{ files | json }}
   </pre>
 </fieldset>

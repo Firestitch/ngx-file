@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, QueryList, ViewChildren } from '@angular/core';
 
+import { guid } from '@firestitch/common';
 import { FsFile } from '@firestitch/file';
 import { FsMessage } from '@firestitch/message';
 
-import { of, tap } from 'rxjs';
-
+import { FsFilePreviewComponent } from '../../../../src/app/components/fs-file-preview/fs-file-preview.component';
 
 @Component({
   selector: 'multiple-file-select',
@@ -14,9 +14,10 @@ import { of, tap } from 'rxjs';
 })
 export class MultipleFileSelectComponent {
 
-  public files = [];
-  public filesJsonInfo = [];
-  public hide = true;
+  @ViewChildren(FsFilePreviewComponent)
+  public filePreviews: QueryList<FsFilePreviewComponent>;
+
+  public files: { id: string; file: FsFile; default: boolean }[] = [];
 
   constructor(
     private _message: FsMessage,
@@ -24,24 +25,43 @@ export class MultipleFileSelectComponent {
   ) { }
 
   public select(files) {
-    this.files = [...this.files, ...files];
+    this.files = [
+      ...this.files,
+      ...files
+        .map((f) => {
+          return { id: guid(), file: f, default: false };
+        }),
+    ];
+
+    const defaultFile = files.find((f) => f.default);
+    if (!defaultFile && files.length > 1) {
+      this.files[0].default = true;
+    }
   }
 
-  public remove = (file: FsFile) => {
-    return of(null)
-      .pipe( 
-        tap(() => {
-          this._message.success(`Removed ${file.name}`);
-        }),
-      );
+  public show = (file: FsFile) => {
+    return !(file as any).default;
   };
 
-  public mapFile(file) {
-    return file;
+  public remove(event: { file: FsFile }) {
+    this.files = this.files
+      .filter((f) => f.file !== event.file);
+    this._cdRef.markForCheck();
+    this._message.success(`Removed ${event.file.name}`);
   }
 
-  public error(error) {
-    console.log(error);
+  public default(item) {
+    this.files = this.files
+      .map((file) => {
+        return {
+          ...file,
+          default: file.id === item.id,
+        };
+      });
+
+    this.filePreviews.forEach((filePreview) => {
+      filePreview.updateActionVisibility();
+    });
   }
 
   public download(event: { event: MouseEvent; file: FsFile }) {

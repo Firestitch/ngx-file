@@ -3,21 +3,16 @@
       [file]="file | filePreviewMapFile:mapFile"
       [previewWidth]="previewWidth"
       [previewHeight]="previewHeight"
+      [actions]="actions"
       [showActionOn]="showActionOn"
       class="preview">
     @if (remove) {
       <ng-template
         fs-file-preview-action
         placement="bottom-right"
+        [show]="!!remove"
         (click)="removeFile($event)"
-        [file]="file"
         [icon]="'close'">
-      </ng-template>
-    }
-    @for (action of actions; track action.placement) {
-      <ng-template
-        fs-file-action
-        [actionDirective]="action">
       </ng-template>
     }
   </fs-file-preview>

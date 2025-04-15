@@ -6,7 +6,6 @@ import heic2any from 'heic2any';
 import { FsFileProcessConfig } from '../interfaces';
 import { FileProcessConfig, FsFile } from '../models';
 
-
 export class FileProcessor {
 
   public processFile(
@@ -141,9 +140,8 @@ export class FileProcessor {
               config.maxWidth,
               config.maxHeight,
               config.quality,
-              config.orientate ? exifInfo?.Orientation : 0,
+              config.orientate ? exifInfo?.Orientation?.value : 0,
             );
-
         }),
       );
   }
@@ -155,6 +153,10 @@ export class FileProcessor {
     quality: number,
     orientation: number,
   ): Observable<FsFile> {   
+    if(!maxWidth && !maxHeight && quality === 1 && orientation === undefined) {
+      return of(fsFile);
+    }
+
     return fsFile.dataUrl$
       .pipe(
         switchMap((dataUrl) => {

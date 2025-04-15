@@ -1,11 +1,15 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChildren,
+  inject,
+  Input,
   QueryList,
 } from '@angular/core';
 
 import { FsFilePreviewActionDirective } from '../../directives';
+import { FsFile } from '../../models';
 
 
 @Component({
@@ -16,36 +20,26 @@ import { FsFilePreviewActionDirective } from '../../directives';
 })
 export class FsFileActionsComponent {
 
+  @Input() public actions = new QueryList<FsFilePreviewActionDirective>();
+  @Input() public file: FsFile;
+
   @ContentChildren(FsFilePreviewActionDirective)
-  public actions: QueryList<FsFilePreviewActionDirective>;
+  public set actionDirectives(actionDirectives: QueryList<FsFilePreviewActionDirective>) {
+    this.actions.reset([...actionDirectives.toArray(), ...this.actions.toArray()]);
+  }
+
+  private _cdRef = inject(ChangeDetectorRef);
 
   public callAction(event: MouseEvent, action: FsFilePreviewActionDirective) {
     if (action.click.observers.length) {
       event.stopImmediatePropagation();
       event.stopPropagation();
 
-      action.click.emit({ event, file: action.file });
+      action.click.emit({ event, file: this.file });
     }
   }
 
-  // private _cleanActions() {
-  //   this.previewActions
-  //     .forEach((action) => {
-  //       if (action.forTypes) {
-  //         const [originalFileType, originalContentType] = this.file.type.split('/');
-  //         const types: string[] = Array.isArray(action.forTypes) ?
-  //           action.forTypes :
-  //           [action.forTypes];
-
-  //         action.hide = types
-  //           .some((type) => {
-  //             const [fileType, contentType] = type.split('/');
-  //             const allowed = fileType === originalFileType &&
-  //               (contentType === originalContentType || contentType === '*');
-
-  //             return !allowed;
-  //           });
-  //       }
-  //     });
-  // }
+  public updateActionVisibility() {
+    this._cdRef.markForCheck();
+  }
 }

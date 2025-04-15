@@ -1,16 +1,20 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChildren,
+  inject,
   Input,
   OnChanges,
   OnInit,
   QueryList,
   SimpleChanges,
+  ViewChild,
 } from '@angular/core';
 
 import { FsFilePreviewActionDirective } from '../../directives';
 import { FsFile } from '../../models';
+import { FsFileActionsComponent } from '../fs-file-actions/fs-file-actions.component';
 
 
 @Component({
@@ -21,8 +25,15 @@ import { FsFile } from '../../models';
 })
 export class FsFilePreviewComponent implements OnInit, OnChanges {
 
+  @ViewChild(FsFileActionsComponent)
+  public actionsComponent: FsFileActionsComponent;
+
+  @Input() public actions = new QueryList<FsFilePreviewActionDirective>();
+
   @ContentChildren(FsFilePreviewActionDirective)
-  public actions: QueryList<FsFilePreviewActionDirective>;
+  public set actionDirectives(actionDirectives: QueryList<FsFilePreviewActionDirective>) {
+    this.actions.reset([...actionDirectives.toArray(), ...this.actions.toArray()]);
+  }
 
   @Input() public showFilename = true;
   @Input() public previewWidth: number = 150;
@@ -34,6 +45,8 @@ export class FsFilePreviewComponent implements OnInit, OnChanges {
   public loaded = false;
   public iconDim = 100;
   public extensionFontSize = 20;
+
+  private _cdRef = inject(ChangeDetectorRef);
 
   public get typeImage(): boolean {
     return this.file?.typeImage && this.file?.exists;
@@ -60,12 +73,17 @@ export class FsFilePreviewComponent implements OnInit, OnChanges {
     }
   }
 
-  public previewLoaded() {
+  public previewLoaded(event: Event) {
     this.loaded = true;
   }
 
   public previewError() {
     this.loaded = true;
+  }
+
+  public updateActionVisibility() {
+    this.actionsComponent.updateActionVisibility();
+    this._cdRef.markForCheck();
   }
 
 }

@@ -1,29 +1,18 @@
 <div class="actions">
-  <!-- <ng-container *ngFor="let previewAction of previewActions">
-    <ng-container
-      [ngTemplateOutlet]="previewActionTmpl"
-      [ngTemplateOutletContext]="{ previewAction: previewAction }">
-    </ng-container>
-  </ng-container>
-  <ng-container *ngFor="let previewAction of childrenPreviewActions">
-    <ng-container
-      [ngTemplateOutlet]="previewActionTmpl"
-      [ngTemplateOutletContext]="{ previewAction: previewAction }">
-    </ng-container>
-  </ng-container> -->
-  @for (action of actions; track action.placement) {
-    @if (!action.hide) {
-      <div
-          class="action"
-          [ngClass]="action.placement">
-        <a
-            mat-mini-fab
-            (click)="callAction($event, action)">
-          <mat-icon>
-            {{ action.icon }}
-          </mat-icon>
-        </a>
-      </div>
-    }
+  @for (action of actions; track action) {
+    <div
+        class="action"
+        [class.hidden]="!action.show"
+        [matTooltip]="action.tooltip"
+        [matTooltipDisabled]="!action.tooltip"
+        [ngClass]="action.placement">
+      <a
+          mat-mini-fab
+          (click)="callAction($event, action)">
+        <mat-icon>
+          {{ action.icon }}
+        </mat-icon>
+      </a>
+    </div>
   }
 </div>

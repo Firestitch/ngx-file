@@ -1,7 +1,7 @@
 {
   "name": "@firestitch/file",
   "title": "File",
-  "version": "18.0.9",
+  "version": "18.0.10",
   "repository": {
     "type": "git",
     "url": "https://github.com/Firestitch/ngx-file"
@@ -76,6 +76,7 @@
     "node": ">=10.0.0"
   },
   "dependencies": {
-    "heic2any": "^0.0.4"
+    "heic2any": "^0.0.4",
+    "exifreader": "^4.28.1"
   }
 }

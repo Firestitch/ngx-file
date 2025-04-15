@@ -64,7 +64,9 @@ export class FsFilePickerComponent
   public filePickerSelectTemplate: TemplateRef<any>;
 
   @ContentChildren(FsFilePreviewActionDirective)
-  public actions: QueryList<FsFilePreviewActionDirective>;
+  public set actionDirectives(actionDirectives: QueryList<FsFilePreviewActionDirective>) {
+    this.actions.reset([...actionDirectives.toArray(), ...this.actions.toArray()]);
+  }
 
   @Input() public minWidth = 0;
   @Input() public minHeight = 0;
@@ -77,6 +79,7 @@ export class FsFilePickerComponent
   @Input() public allowReupload = true;
   @Input() public multiple = false;
   @Input() public allowRemove = false;
+  @Input() public actions = new QueryList<FsFilePreviewActionDirective>();
   @Input() public showActionOn: 'hover' | 'always' = 'hover';
 
   @Input('url') public set url(url) {

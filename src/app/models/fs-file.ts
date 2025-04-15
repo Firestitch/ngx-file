@@ -3,7 +3,7 @@ import { FsApiFile } from '@firestitch/api';
 import { firstValueFrom, from, lastValueFrom, Observable, of, throwError } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
-import { Exif } from '../classes/exif';
+import * as ExifReader from 'exifreader';
 
 
 export class FsFile {
@@ -14,6 +14,7 @@ export class FsFile {
   public type: string;
   public url = '';
   public size: number;
+  public previewUrl: string;
 
   private _file: File;
   private _name: string;
@@ -140,66 +141,50 @@ export class FsFile {
     });
   }
 
-  public get arrayBuffer$(): Observable<ArrayBuffer> {
-    return new Observable<ArrayBuffer>((observer) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        observer.next(reader.result as ArrayBuffer);
+  public _getImageInfo(): Promise<{ width: number; height: number, exif: any }> {
+    return new Observable<{ width: number; height: number }>((observer) => {
+      const img = new Image;
+      
+      img.onload = () => {
+        observer.next({
+          width: img.width,
+          height: img.height,
+        });
         observer.complete();
       };
-      reader.onerror = (error) => observer.error(error);
-      reader.readAsArrayBuffer(this.file);
-    });
-  }
 
-  public _getImageInfo(): Promise<{ width: number; height: number,  exif: any }> {
-    return lastValueFrom(
-      this.arrayBuffer$
-        .pipe(
-          switchMap((arrayBuffer: ArrayBuffer) => {
-            return new Observable<{ width: number; height: number }>((observer) => {
-              const img = new Image;
-      
-              img.onload = () => {
-                observer.next({
-                  width: img.width,
-                  height: img.height,
-                });
-                observer.complete();
-              };
-
-              img.onerror = (e) => {
-                observer.error(e);
-              };
+      img.onerror = (e) => {
+        observer.error(e);
+      };
     
-              img.src = window.URL.createObjectURL(this.file); 
-            })
-              .pipe(
-                catchError(() => {
-                  return of({ width: 0, height: 0 });
-                }),
-                map((dims) => {
-                  let exif = null;
-                  
-                  try {
-                    exif = (new Exif()).readFromBinaryFile(arrayBuffer);
-                  } catch (error) {
-                    console.error(error);
-                  }
+      img.src = window.URL.createObjectURL(this.file); 
+    })
+      .pipe(
+        catchError(() => {
+          return of({ width: 0, height: 0 });
+        }),
+        switchMap((dims) => {
+          return from(ExifReader.load(this.file))
+            .pipe(
+              map((exif) => {
+                return {
+                  width: dims.width,
+                  height: dims.height,
+                  exif,
+                };
+              }),
+              catchError((error) => {
+                console.error(error);
 
-                  return {
-                    width: dims.width,
-                    height: dims.height,
-                    exif,
-                  };
-                }),
-              );
-          }),
-          tap((data) => {
-            this._imageInfo = data;
-          }),
-        ),
-    );
+                return of({ width: dims.width, height: dims.height, exif: null });
+              }),
+            );
+        }),
+        tap((data) => {
+          this._imageInfo = data;
+        }),
+      ) 
+      .toPromise();
   }
 
   public get imageInfo(): Promise<{ width: number; height: number; exif: any }> {

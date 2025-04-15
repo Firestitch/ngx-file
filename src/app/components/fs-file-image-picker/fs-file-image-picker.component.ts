@@ -34,7 +34,9 @@ export class FsFileImagePickerComponent {
   public hintTemplate: TemplateRef<any>;
 
   @ContentChildren(FsFilePreviewActionDirective)
-  public actions: QueryList<FsFilePreviewActionDirective>;
+  public set actionDirectives(actionDirectives: QueryList<FsFilePreviewActionDirective>) {
+    this.actions.reset([...actionDirectives.toArray(), ...this.actions.toArray()]);
+  }
 
   @Input() public imageQuality: number;
   @Input() public borderRadius = '100%';
@@ -45,7 +47,8 @@ export class FsFileImagePickerComponent {
   @Input() public label = '';
   @Input() public minWidth = 0;
   @Input() public minHeight = 0;
-  @Input() public disabled = false;
+  @Input() public disabled = false; 
+  @Input() public actions = new QueryList<FsFilePreviewActionDirective>();
 
   @Input('url') public set url(url) {
     this._previousFile = this._file;
