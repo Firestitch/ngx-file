@@ -42,7 +42,7 @@
       <ng-container *ngIf="processing">
         <mat-spinner [diameter]="50"></mat-spinner>
       </ng-container>
-      <ng-container *ngIf="file; else preview">
+      @if (file) {
         <fs-file-preview
             class="preview"
             (remove)="removeFile()"
@@ -76,8 +76,7 @@
             (click)="downloadClicked($event)">
           </ng-template>
         </fs-file-preview>
-      </ng-container>
-      <ng-template #preview>
+      } @else {
         <ng-container *ngIf="filePickerSelectTemplate">
           <ng-container [ngTemplateOutlet]="filePickerSelectTemplate"></ng-container>
         </ng-container>
@@ -97,7 +96,7 @@
             </button>
           </div>
         </ng-container>
-      </ng-template>
+      }
     </div>
   </fs-file>
 </ng-template>
