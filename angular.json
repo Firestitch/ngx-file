@@ -21,12 +21,16 @@
             "tsConfig": "playground/tsconfig.app.json",
             "assets": [
               "playground/favicon.ico",
-              "playground/assets"
+              "playground/assets",
+              {
+                "glob": "**/*",
+                "input": "./src/app/assets",
+                "output": "./assets/file"
+              }
             ],
             "styles": [
               "playground/styles.scss"
             ],
-            "scripts": [],
             "allowedCommonJsDependencies": [
               "highlight.js",
               "date-fns-tz"
@@ -139,8 +143,8 @@
           "options": {
             "tsConfig": "src/tsconfig.lib.json",
             "project": "src/ng-package.json"
-          }
-        ,          "configurations": {
+          },          
+          "configurations": {
             "production": {
               "tsConfig": "src/tsconfig.lib.prod.json"
             }

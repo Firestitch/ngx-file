@@ -1,7 +1,7 @@
+import { loadJs } from '@firestitch/common';
+
 import { forkJoin, from, Observable, of, throwError } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-
-import heic2any from 'heic2any';
 
 import { FsFileProcessConfig } from '../interfaces';
 import { FileProcessConfig, FsFile } from '../models';
@@ -92,16 +92,27 @@ export class FileProcessor {
     return of(fsFile);
   }
 
-
   private _transformHeic(fsFile: FsFile): Observable<FsFile> {
     if(fsFile.isExtension(['heic','heif']) && fsFile.file instanceof Blob) {
-      return from(heic2any({ blob: fsFile.file, multiple: true, toType: 'image/jpeg' }))
+      return loadJs('/assets/file/heic2any.js')
         .pipe(
+          switchMap(() => {
+            const result = (window as any)
+              .heic2any({ blob: fsFile.file, multiple: false, toType: 'image/jpeg' });
+
+            return from(result);
+          }),
           map((blob: Blob) => {
             const ext = blob.type?.split('/') || [];
             const name = fsFile.name.replace(/(heic|heif)$/i, ext[1] || 'jpg');
 
-            return new FsFile(blob[0], name);
+            return new FsFile(blob, name);
+          }),
+          catchError(() => {
+            const message = 'Failed to convert HEIC/HEIF to JPEG';
+            console.error(message);
+
+            return throwError(() => new Error(message));
           }),
         );
     }
