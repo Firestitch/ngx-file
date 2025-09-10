@@ -49,6 +49,7 @@ export class FsFileImagePickerComponent {
   @Input() public minHeight = 0;
   @Input() public disabled = false; 
   @Input() public actions = new QueryList<FsFilePreviewActionDirective>();
+  @Input() public showUploadButton = true;
 
   @Input('url') public set url(url) {
     this._previousFile = this._file;

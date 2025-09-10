@@ -26,11 +26,13 @@
       <fs-file-actions
           [actions]="actions"
           [file]="file">
-        <ng-template
-          fs-file-action
-          placement="bottom-right"
-          [icon]="'photo_camera'">
-        </ng-template>
+        @if (showUploadButton) {
+          <ng-template
+            fs-file-action
+            placement="bottom-right"
+            [icon]="'photo_camera'">
+          </ng-template>
+        }
       </fs-file-actions>
     </div>
   </ng-template>
