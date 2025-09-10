@@ -61,7 +61,7 @@
             (click)="removeFile()">
           </ng-template>
           <ng-template
-            *ngIf="allowReupload && !disabled"
+            *ngIf="showReuploadAction && allowReupload && !disabled"
             fs-file-preview-action
             placement="bottom-right"
             tooltip="Reupload"

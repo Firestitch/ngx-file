@@ -9,6 +9,7 @@
     [imageQuality]="imageQuality"
     [previewHeight]="previewDiameter"
     [previewWidth]="previewDiameter"
+    [showReuploadAction]="showReuploadAction"
     [actions]="actions"
     [uploadIcon]="'photo_camera'"
     [accept]="'image/*'"
@@ -26,7 +27,7 @@
       <fs-file-actions
           [actions]="actions"
           [file]="file">
-        @if (showSelectAction) {
+        @if (showUploadAction && !disabled) {
           <ng-template
             fs-file-action
             placement="bottom-right"

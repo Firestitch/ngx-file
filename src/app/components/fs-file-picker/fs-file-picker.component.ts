@@ -79,6 +79,7 @@ export class FsFilePickerComponent
   @Input() public allowReupload = true;
   @Input() public multiple = false;
   @Input() public allowRemove = false;
+  @Input() public showReuploadAction = true;
   @Input() public actions = new QueryList<FsFilePreviewActionDirective>();
   @Input() public showActionOn: 'hover' | 'always' = 'hover';
 
