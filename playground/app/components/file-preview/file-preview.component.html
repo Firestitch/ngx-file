@@ -1,7 +1,13 @@
 <fs-file-preview
-  [file]="file"
-  [previewWidth]="100"
-  [previewHeight]="100">
+    [file]="file"
+    [previewWidth]="100"
+    [previewHeight]="100">
+  <ng-template
+    fs-file-preview-action
+    placement="top-left"
+    [tooltip]="'Download'"
+    [icon]="'download'">
+  </ng-template>
 </fs-file-preview>
 <br>
 <br>

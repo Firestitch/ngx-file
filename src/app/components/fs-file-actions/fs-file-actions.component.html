@@ -2,15 +2,15 @@
   @for (action of actions; track action) {
     <div
         class="action"
-        [class.hidden]="!action.show"
-        [matTooltip]="action.tooltip"
-        [matTooltipDisabled]="!action.tooltip"
-        [ngClass]="action.placement">
+        [class.hidden]="action.hide$ | async"
+        [matTooltip]="action.tooltip$ | async"
+        [matTooltipDisabled]="action.tooltipDisabled$ | async"
+        [ngClass]="action.placement$ | async">
       <a
           mat-mini-fab
           (click)="callAction($event, action)">
         <mat-icon>
-          {{ action.icon }}
+          {{ action.icon$ | async }}
         </mat-icon>
       </a>
     </div>

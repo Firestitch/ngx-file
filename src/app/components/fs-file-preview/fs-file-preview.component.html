@@ -10,7 +10,7 @@
   <ng-container *ngIf="typeImage; else nonImage">
     <img
       [src]="file | fsFileSrc | async"
-      (load)="previewLoaded($event)"
+      (load)="previewLoaded()"
       (error)="previewError()">
     <ng-container *ngIf="!loaded">
       <mat-spinner [diameter]="50"></mat-spinner>

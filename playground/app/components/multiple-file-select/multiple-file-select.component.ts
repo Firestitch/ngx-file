@@ -22,7 +22,8 @@ export class MultipleFileSelectComponent {
   constructor(
     private _message: FsMessage,
     private _cdRef: ChangeDetectorRef,
-  ) { }
+  ) { 
+  }
 
   public select(files) {
     this.files = [

@@ -9,6 +9,7 @@ import { FsFile } from '@firestitch/file';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilePreviewComponent {
-
   public file = new FsFile(null, 'Insurance Documentation.pdf');
 }
+
+

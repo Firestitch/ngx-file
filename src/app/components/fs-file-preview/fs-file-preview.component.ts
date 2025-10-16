@@ -74,7 +74,7 @@ export class FsFilePreviewComponent implements OnInit, OnChanges {
     }
   }
 
-  public previewLoaded(event: Event) {
+  public previewLoaded() {
     this.loaded = true;
   }
 
