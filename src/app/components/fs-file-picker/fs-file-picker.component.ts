@@ -192,7 +192,6 @@ export class FsFilePickerComponent
 
   public writeValue(file): void {
     this.file = file;
-    this._cdRef.markForCheck();
   }
 
   public beforeProcessing(fsFiles: FsFile[]) {
@@ -216,10 +215,11 @@ export class FsFilePickerComponent
     this.select.emit(fsFile);
   }
 
-  public removeFile() {
-    this.remove.emit(this.file);
+  public removeFile(e: { event: MouseEvent }) {
+    e.event.stopPropagation();
+    e.event.preventDefault();
     this.onChange(null);
-    this.file = null;
+    this.clear();
   }
 
   public actionClick(event: { event: MouseEvent }) {

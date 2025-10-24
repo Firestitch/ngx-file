@@ -31,10 +31,10 @@ export class FsFileActionsComponent {
   private _cdRef = inject(ChangeDetectorRef);
 
   public callAction(event: MouseEvent, action: FsFilePreviewActionDirective) {
+    event.stopImmediatePropagation();
+    event.stopPropagation();
+    
     if (action.click.observers.length) {
-      event.stopImmediatePropagation();
-      event.stopPropagation();
-
       action.click.emit({ event, file: this.file });
     }
   }

@@ -19,6 +19,7 @@ import {
   FileImagePickerComponent,
   FilePickerExistingFileComponent,
   FilePickerExistingUrlComponent,
+  FilePickerFormComponent,
   FilePreviewComponent,
   ImageFileManipulationComponent,
   MultipleFileSelectComponent,
@@ -58,6 +59,7 @@ import { AppMaterialModule } from './material.module';
     FileImagePickerComponent,
     DialogComponent,
     FilePreviewComponent,
+    FilePickerFormComponent,
   ],
   providers: [
     {

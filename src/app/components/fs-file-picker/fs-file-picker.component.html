@@ -16,8 +16,8 @@
     <fs-label-message class="fs-form-message">
       <span class="fs-form-hint">
         <ng-content select="[fsFileHint]"></ng-content>
-        <ng-content select="[fsFileMessageLabel]"></ng-content>
       </span>
+      <ng-content select="[fsFileMessageLabel]"></ng-content>
     </fs-label-message>
   </fs-label-field>
 } @else {
@@ -45,7 +45,6 @@
       @if (file) {
         <fs-file-preview
             class="preview"
-            (remove)="removeFile()"
             [file]="file"
             [actions]="actions"
             [showActionOn]="showActionOn"
@@ -58,7 +57,7 @@
             placement="bottom-left"
             action="remove"
             [icon]="'close'"
-            (click)="removeFile()">
+            (click)="removeFile($event)">
           </ng-template>
           <ng-template
             *ngIf="showReuploadAction && allowReupload && !disabled"
