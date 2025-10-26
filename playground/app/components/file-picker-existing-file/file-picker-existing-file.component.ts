@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
 
 import { MatDialog } from '@angular/material/dialog';
 
@@ -27,18 +27,18 @@ import { JsonPipe } from '@angular/common';
     ],
 })
 export class FilePickerExistingFileComponent {
+  private _message = inject(FsMessage);
+  private _upload = inject(UploadService);
+  private _api = inject(FsApi);
+  private _dialog = inject(MatDialog);
+  private _cdRef = inject(ChangeDetectorRef);
+
 
   public url = `${window.location.origin}/assets/Ferrari-SF90_Stradale-2020-1600-01.jpg`;
   public file = new FsFile('http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf', 'Document.pdf');
   public apiFile: FsApiFile;
 
-  constructor(
-    private _message: FsMessage,
-    private _upload: UploadService,
-    private _api: FsApi,
-    private _dialog: MatDialog,
-    private _cdRef: ChangeDetectorRef,
-  ) {
+  constructor() {
     this.apiFile = this._api
       .createApiFile('/assets/lamborghini-sian-roadster-t1-1024x576.jpg', { 
         name: 'lamborghini-sian-roadster-t1-1024x576.jpg',

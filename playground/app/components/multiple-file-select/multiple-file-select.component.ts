@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, QueryList, ViewChildren } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, QueryList, ViewChildren, inject } from '@angular/core';
 
 import { guid } from '@firestitch/common';
 import { FsFile } from '@firestitch/file';
@@ -27,17 +27,14 @@ import { JsonPipe } from '@angular/common';
     ],
 })
 export class MultipleFileSelectComponent {
+  private _message = inject(FsMessage);
+  private _cdRef = inject(ChangeDetectorRef);
+
 
   @ViewChildren(FsFilePreviewComponent)
   public filePreviews: QueryList<FsFilePreviewComponent>;
 
   public files: { id: string; file: FsFile; default: boolean }[] = [];
-
-  constructor(
-    private _message: FsMessage,
-    private _cdRef: ChangeDetectorRef,
-  ) { 
-  }
 
   public select(files) {
     this.files = [

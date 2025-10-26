@@ -1,21 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  ContentChild,
-  ContentChildren,
-  EventEmitter,
-  Inject,
-  Input,
-  OnDestroy,
-  OnInit,
-  Optional,
-  Output,
-  QueryList,
-  TemplateRef,
-  ViewChild,
-  forwardRef,
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ContentChildren, EventEmitter, Input, OnDestroy, OnInit, Output, QueryList, TemplateRef, ViewChild, forwardRef, inject } from '@angular/core';
 import {
   AbstractControl, AsyncValidator, ControlValueAccessor,
   NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors,
@@ -73,6 +56,9 @@ import { MatButton } from '@angular/material/button';
 export class FsFilePickerComponent
   extends FsFileDragBaseComponent
   implements OnInit, ControlValueAccessor, AsyncValidator, OnDestroy {
+  private _moduleConfig = inject(FS_FILE_MODULE_CONFIG, { optional: true });
+  private _cdRef = inject(ChangeDetectorRef);
+
 
   @ViewChild('fileInput')
   public fileInput: any;
@@ -155,13 +141,6 @@ export class FsFilePickerComponent
   private _destroy$ = new Subject();
   private _disabled: boolean;
   private _file: FsFile;
-
-  constructor(
-    @Optional() @Inject(FS_FILE_MODULE_CONFIG) private _moduleConfig,
-    private _cdRef: ChangeDetectorRef,
-  ) {
-    super();
-  }
 
   public onChange: any = () => {
     //

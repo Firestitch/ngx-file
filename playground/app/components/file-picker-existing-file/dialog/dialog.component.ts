@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 
 import { FsApi } from '@firestitch/api';
 import { MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
@@ -25,12 +25,10 @@ import { FsFormModule } from '@firestitch/form';
     ],
 })
 export class DialogComponent implements OnInit {
+  private _api = inject(FsApi);
+
 
   public fileApi;
-
-  constructor(
-    private _api: FsApi,
-  ) {}
 
   public ngOnInit(): void {
     this.fileApi = this._api.createApiFile('/assets/lamborghini-sian-roadster-t1-1024x576.jpg');

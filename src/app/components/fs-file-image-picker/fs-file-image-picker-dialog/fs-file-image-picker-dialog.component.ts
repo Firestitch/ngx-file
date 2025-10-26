@@ -1,6 +1,4 @@
-import {
-  Component, Inject, EventEmitter, ChangeDetectionStrategy
-} from '@angular/core';
+import { Component, EventEmitter, ChangeDetectionStrategy, inject } from '@angular/core';
 
 import { FsFile } from '../../../models/fs-file';
 import { MAT_DIALOG_DATA, MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
@@ -26,6 +24,8 @@ import { MatButton, MatAnchor } from '@angular/material/button';
     ],
 })
 export class FsFileImagePickerDialogComponent {
+  data = inject(MAT_DIALOG_DATA);
+
 
   public file: FsFile;
   public reverseUrl = '';
@@ -33,9 +33,9 @@ export class FsFileImagePickerDialogComponent {
   public width;
   public selectUrl: EventEmitter<any>;
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
-  ) {
+  constructor() {
+    const data = this.data;
+
 
     if (data.file) {
       this.reverseUrl = 'https://images.google.com/searchbyimage?image_url=' + encodeURIComponent(data.file.url);

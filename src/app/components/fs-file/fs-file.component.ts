@@ -1,15 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Inject,
-  Input,
-  OnDestroy, OnInit,
-  Optional,
-  Output,
-  ViewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild, inject } from '@angular/core';
 
 import { FsMessage, MessageMode } from '@firestitch/message';
 
@@ -36,6 +25,11 @@ import { FsFileDragoverMessageComponent } from '../fs-file-dragover-message/fs-f
     imports: [NgClass, FsFileDragoverMessageComponent],
 })
 export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, OnDestroy {
+  el = inject(ElementRef);
+  inputProcessor = inject(InputProcessorService);
+  moduleConfig = inject<FsFileModuleConfig>(FS_FILE_MODULE_CONFIG, { optional: true });
+  private _message = inject(FsMessage);
+
 
   @Output() public select = new EventEmitter();
   @Output() public error = new EventEmitter();
@@ -138,12 +132,7 @@ export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, 
   private _destroy$ = new Subject();
   private _processConfig = new FileProcessConfig();
 
-  constructor(
-    public el: ElementRef,
-    public inputProcessor: InputProcessorService,
-    @Optional() @Inject(FS_FILE_MODULE_CONFIG) public moduleConfig: FsFileModuleConfig,
-    private _message: FsMessage,
-  ) {
+  constructor() {
     super();
     this._initSelect();
   }

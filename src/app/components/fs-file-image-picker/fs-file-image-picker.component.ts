@@ -1,15 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  ContentChild,
-  ContentChildren,
-  EventEmitter,
-  Input,
-  Output,
-  QueryList,
-  TemplateRef,
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ContentChildren, EventEmitter, Input, Output, QueryList, TemplateRef, inject } from '@angular/core';
 
 import { MatDialog } from '@angular/material/dialog';
 
@@ -39,6 +28,9 @@ import { FsFilePreviewActionDirective as FsFilePreviewActionDirective_1 } from '
     ],
 })
 export class FsFileImagePickerComponent {
+  private _dialog = inject(MatDialog);
+  private _cdRef = inject(ChangeDetectorRef);
+
 
   @ContentChild(FsFileLabelDirective, { read: TemplateRef })
   public labelTemplate: TemplateRef<any>;
@@ -79,12 +71,6 @@ export class FsFileImagePickerComponent {
   public processing = false;
 
   private _previousFile: FsFile;
-
-  constructor(
-    private _dialog: MatDialog,
-    private _cdRef: ChangeDetectorRef,
-  ) {
-  }
 
   public get file(): FsFile {
     return this._file;

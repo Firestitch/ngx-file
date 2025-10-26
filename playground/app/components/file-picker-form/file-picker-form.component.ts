@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject } from '@angular/core';
 
 
 import { FsFile } from '@firestitch/file';
@@ -27,15 +27,12 @@ import { MatButton } from '@angular/material/button';
     ],
 })
 export class FilePickerFormComponent {
+  private _message = inject(FsMessage);
+  private _upload = inject(UploadService);
+  private _cdRef = inject(ChangeDetectorRef);
+
 
   public file = null;
-
-  constructor(
-    private _message: FsMessage,
-    private _upload: UploadService,
-    private _cdRef: ChangeDetectorRef,
-  ) {
-  }
 
   public select(file: FsFile) {
     this._upload.upload(file)

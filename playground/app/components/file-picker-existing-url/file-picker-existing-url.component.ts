@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { FsFile } from '@firestitch/file';
 import { FsMessage } from '@firestitch/message';
@@ -20,13 +20,11 @@ import { JsonPipe } from '@angular/common';
     ],
 })
 export class FilePickerExistingUrlComponent {
+  private _message = inject(FsMessage);
+
 
   public previewUrl = `${window.location.origin}/assets/Ferrari-SF90_Stradale-2020-1600-01.jpg`;
   public file = new FsFile(this.previewUrl);
-
-  constructor(
-    private _message: FsMessage,
-  ) {}
 
   public select(file) {
     this.file = file;

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { MatIconRegistry } from '@angular/material/icon';
 
@@ -29,12 +29,12 @@ import { FilePreviewComponent } from './components/file-preview/file-preview.com
     ],
 })
 export class AppComponent {
+  private _iconRegistry = inject(MatIconRegistry);
+
 
   public config = environment;
 
-  constructor(
-    private _iconRegistry: MatIconRegistry,
-  ) {
+  constructor() {
     this._iconRegistry.setDefaultFontSetClass('material-symbols-outlined');
   }
 }

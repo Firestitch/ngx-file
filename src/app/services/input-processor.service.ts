@@ -1,4 +1,4 @@
-import { ElementRef, EventEmitter, Inject, Injectable, Optional } from '@angular/core';
+import { ElementRef, EventEmitter, Injectable, inject } from '@angular/core';
 
 import { Subject } from 'rxjs';
 
@@ -11,6 +11,8 @@ import { FsFile } from '../models';
 
 @Injectable()
 export class InputProcessorService {
+  private _clickInterceptors = inject(FS_FILE_CLICK_INTERCEPTOR, { optional: true });
+
 
   public inputEl: HTMLInputElement;
   public multiple = false;
@@ -26,11 +28,6 @@ export class InputProcessorService {
   private _acceptableTypes = new Map<string,Set<string>>();
   private _acceptableExts = new Set<string>();
   private _declinedFiles$ = new Subject<File[]>();
-
-  constructor(
-    @Optional() @Inject(FS_FILE_CLICK_INTERCEPTOR) 
-    private _clickInterceptors: FileClickInterceptor[],
-  ) { }
 
   public get accept() {
     return this._accept;

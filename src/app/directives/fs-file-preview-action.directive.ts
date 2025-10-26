@@ -1,4 +1,4 @@
-import { Directive, EventEmitter, Input, OnChanges, Output, SimpleChanges, TemplateRef } from '@angular/core';
+import { Directive, EventEmitter, Input, OnChanges, Output, SimpleChanges, TemplateRef, inject } from '@angular/core';
 
 import { BehaviorSubject, Observable, map } from 'rxjs';
 
@@ -10,6 +10,8 @@ import { FsFile } from '../models/fs-file';
     standalone: true,
 })
 export class FsFilePreviewActionDirective implements OnChanges {
+  templateRef = inject<TemplateRef<any>>(TemplateRef);
+
 
   @Input() public placement: 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right';
   @Input() public show: boolean = true;
@@ -22,11 +24,6 @@ export class FsFilePreviewActionDirective implements OnChanges {
   private _icon$ = new BehaviorSubject<string | undefined>(undefined);
   private _tooltip$ = new BehaviorSubject<string | undefined>(undefined);
   private _placement$ = new BehaviorSubject<string | undefined>(undefined);
-
-  constructor(
-    public templateRef: TemplateRef<any>,
-  ) {
-  }
 
   public get show$(): Observable<boolean> {
     return this._show$.asObservable();
