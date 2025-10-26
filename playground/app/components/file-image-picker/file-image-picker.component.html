@@ -1,8 +1,8 @@
 <div class="fs-row.gap-lg.align-start">
   <fs-file-image-picker
-      (select)="select($event)"
-      (selectUrl)="selectUrl($event)"
-      (error)="error($event)">
+    (select)="select($event)"
+    (selectUrl)="selectUrl($event)"
+    (error)="error($event)">
     <ng-template
       fs-file-action
       (click)="edit($event)"
@@ -73,17 +73,19 @@
   </div>
 </div>
 <br>
-<button
+  <button
     mat-flat-button
     color="primary"
     (click)="cancel()">
-  Cancel changing
-</button>
-<fieldset *ngIf="file">
-  <legend>
-    File
-  </legend>
-  <pre>
-    {{ file | json }}
-  </pre>
-</fieldset>
+    Cancel changing
+  </button>
+  @if (file) {
+    <fieldset>
+      <legend>
+        File
+      </legend>
+      <pre>
+        {{ file | json }}
+      </pre>
+    </fieldset>
+  }

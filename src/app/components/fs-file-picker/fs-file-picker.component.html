@@ -1,17 +1,17 @@
 @if (label || labels.length) {
   <fs-label-field>
-    <ng-container *ngIf="label; else labelContent">
+    @if (label) {
       <fs-label class="fs-form-label">
         {{ label }}
       </fs-label>
-    </ng-container>
-    <ng-template #labelContent>
-      <fs-label
-          *ngIf="labels.length"
+    } @else {
+      @if (labels.length) {
+        <fs-label
           class="fs-form-label">
-        <ng-content select="[fsFileLabel]"></ng-content>
-      </fs-label>
-    </ng-template>
+          <ng-content select="[fsFileLabel]"></ng-content>
+        </fs-label>
+      }
+    }
     <ng-container [ngTemplateOutlet]="fileTemplate"></ng-container>
     <fs-label-message class="fs-form-message">
       <span class="fs-form-hint">
@@ -25,47 +25,49 @@
 }
 <ng-template #fileTemplate>
   <fs-file
-      [accept]="accept"
-      (select)="selectFile($event)"
-      (declined)="declined()"
-      (beforeProcessing)="beforeProcessing($event)"
-      [imageWidth]="imageWidth"
-      [imageHeight]="imageHeight"
-      [imageQuality]="imageQuality"
-      [disabled]="disabled"
-      [multiple]="multiple">
+    [accept]="accept"
+    (select)="selectFile($event)"
+    (declined)="declined()"
+    (beforeProcessing)="beforeProcessing($event)"
+    [imageWidth]="imageWidth"
+    [imageHeight]="imageHeight"
+    [imageQuality]="imageQuality"
+    [disabled]="disabled"
+    [multiple]="multiple">
     <div
-        class="wrap"
-        [style.width]="previewWidth ? previewWidth + 'px' : '100%'"
-        [style.height]="previewHeight + 'px'"
-        [ngClass]="{ processing: processing, 'has-file': !!file }">
-      <ng-container *ngIf="processing">
+      class="wrap"
+      [style.width]="previewWidth ? previewWidth + 'px' : '100%'"
+      [style.height]="previewHeight + 'px'"
+      [ngClass]="{ processing: processing, 'has-file': !!file }">
+      @if (processing) {
         <mat-spinner [diameter]="50"></mat-spinner>
-      </ng-container>
+      }
       @if (file) {
         <fs-file-preview
-            class="preview"
-            [file]="file"
-            [actions]="actions"
-            [showActionOn]="showActionOn"
-            [showFilename]="showFilename"
-            [previewHeight]="previewHeight"
-            [previewWidth]="previewWidth">
-          <ng-template
-            *ngIf="allowRemove && !disabled"
-            fs-file-preview-action
-            placement="bottom-left"
-            action="remove"
-            [icon]="'close'"
-            (click)="removeFile($event)">
-          </ng-template>
-          <ng-template
-            *ngIf="showReuploadAction && allowReupload && !disabled"
-            fs-file-preview-action
-            placement="bottom-right"
-            tooltip="Reupload"
-            [icon]="uploadIcon">
-          </ng-template>
+          class="preview"
+          [file]="file"
+          [actions]="actions"
+          [showActionOn]="showActionOn"
+          [showFilename]="showFilename"
+          [previewHeight]="previewHeight"
+          [previewWidth]="previewWidth">
+          @if (allowRemove && !disabled) {
+            <ng-template
+              fs-file-preview-action
+              placement="bottom-left"
+              action="remove"
+              [icon]="'close'"
+              (click)="removeFile($event)">
+            </ng-template>
+          }
+          @if (showReuploadAction && allowReupload && !disabled) {
+            <ng-template
+              fs-file-preview-action
+              placement="bottom-right"
+              tooltip="Reupload"
+              [icon]="uploadIcon">
+            </ng-template>
+          }
           <ng-template
             fs-file-preview-action
             placement="top-right"
@@ -76,10 +78,10 @@
           </ng-template>
         </fs-file-preview>
       } @else {
-        <ng-container *ngIf="filePickerSelectTemplate">
+        @if (filePickerSelectTemplate) {
           <ng-container [ngTemplateOutlet]="filePickerSelectTemplate"></ng-container>
-        </ng-container>
-        <ng-container *ngIf="!filePickerSelectTemplate">
+        }
+        @if (!filePickerSelectTemplate) {
           <div class="select">
             <mat-icon>
               upload
@@ -88,13 +90,13 @@
               {{ instruction }}
             </div>
             <button
-                [disabled]="disabled"
-                type="button"
-                mat-stroked-button>
+              [disabled]="disabled"
+              type="button"
+              mat-stroked-button>
               Upload
             </button>
           </div>
-        </ng-container>
+        }
       }
     </div>
   </fs-file>

@@ -1,15 +1,17 @@
 <fs-file (select)="select($event)">
   <button
-      mat-flat-button
-      color="primary">
+    mat-flat-button
+    color="primary">
     Select File
   </button>
 </fs-file>
-<fieldset *ngIf="file">
-  <legend>
-    File
-  </legend>
-  <pre>
-    {{ file | json }}
-  </pre>
-</fieldset>
+@if (file) {
+  <fieldset>
+    <legend>
+      File
+    </legend>
+    <pre>
+      {{ file | json }}
+    </pre>
+  </fieldset>
+}

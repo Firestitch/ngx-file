@@ -10,4 +10,6 @@
   [attr.accept]="inputProcessor.accept"
   [attr.capture]="inputProcessor.capture">
 
-<fs-file-dragover-message *ngIf="moduleConfig.dragoverMessage"></fs-file-dragover-message>
+@if (moduleConfig.dragoverMessage) {
+  <fs-file-dragover-message></fs-file-dragover-message>
+}

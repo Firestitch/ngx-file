@@ -1,23 +1,28 @@
 <h1 mat-dialog-title>Image</h1>
 <mat-dialog-content>
 
-  <div *ngIf="data.file" class="details">
+  @if (data.file) {
+    <div class="details">
       <a [href]="data.file.url" target="_blank" class="image-url"><img class="image" [src]="data.file.url" (load)="imageLoad($event)"></a>
-    <br>
-    <fs-label-field>
-      <fs-label>Image Size</fs-label>
-      {{width}} x {{height}}
-    </fs-label-field>
+      <br>
+        <fs-label-field>
+          <fs-label>Image Size</fs-label>
+          {{width}} x {{height}}
+        </fs-label-field>
+        <fs-label-field>
+          <fs-label>Image Url</fs-label>
+          <a [href]="data.file.url" target="_blank" class="url">{{data.file.url}}</a>
+        </fs-label-field>
+      </div>
+    }
 
-    <fs-label-field>
-      <fs-label>Image Url</fs-label>
-      <a [href]="data.file.url" target="_blank" class="url">{{data.file.url}}</a>
-    </fs-label-field>
-  </div>
-
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close color="primary">Done</button>
-  <button mat-button mat-dialog-close (click)="upload()" *ngIf="selectUrl.observers.length">Upload Via URL</button>
-  <a mat-button [href]="reverseUrl" target="_blank" type="button" *ngIf="reverseUrl">Reverse Image Lookup</a>
-</mat-dialog-actions>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close color="primary">Done</button>
+    @if (selectUrl.observers.length) {
+      <button mat-button mat-dialog-close (click)="upload()">Upload Via URL</button>
+    }
+    @if (reverseUrl) {
+      <a mat-button [href]="reverseUrl" target="_blank" type="button">Reverse Image Lookup</a>
+    }
+  </mat-dialog-actions>

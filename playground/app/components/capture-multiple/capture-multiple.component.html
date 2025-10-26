@@ -1,41 +1,41 @@
 <div
-    fxLayout="row wrap"
-    fxLayoutGap="10px">
+  fxLayout="row wrap"
+  fxLayoutGap="10px">
   <div>
     <fs-file
-        (select)="select($event)"
-        accept="image/*"
-        capture="camera"
-        [multiple]="true">
+      (select)="select($event)"
+      accept="image/*"
+      capture="camera"
+      [multiple]="true">
       <button
-          mat-flat-button
-          color="primary">
+        mat-flat-button
+        color="primary">
         Take a Photo
       </button>
     </fs-file>
   </div>
   <div>
     <fs-file
-        (select)="select($event)"
-        accept="video/*"
-        capture="camera"
-        [multiple]="true">
+      (select)="select($event)"
+      accept="video/*"
+      capture="camera"
+      [multiple]="true">
       <button
-          mat-flat-button
-          color="primary">
+        mat-flat-button
+        color="primary">
         Take a Video
       </button>
     </fs-file>
   </div>
   <div>
     <fs-file
-        (select)="select($event)"
-        accept="video/*;image/*"
-        capture="library"
-        [multiple]="true">
+      (select)="select($event)"
+      accept="video/*;image/*"
+      capture="library"
+      [multiple]="true">
       <button
-          mat-flat-button
-          color="primary">
+        mat-flat-button
+        color="primary">
         Select From Library
       </button>
       <div>
@@ -46,12 +46,14 @@
     </fs-file>
   </div>
 </div>
-<fieldset *ngIf="files.length">
-  <legend>
-    Files
-  </legend>
-  <fs-file-previews [files]="files"></fs-file-previews>
-  <pre>
-    {{ files | json }}
-  </pre>
-</fieldset>
+@if (files.length) {
+  <fieldset>
+    <legend>
+      Files
+    </legend>
+    <fs-file-previews [files]="files"></fs-file-previews>
+    <pre>
+      {{ files | json }}
+    </pre>
+  </fieldset>
+}

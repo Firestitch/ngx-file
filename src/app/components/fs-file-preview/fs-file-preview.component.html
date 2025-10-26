@@ -1,54 +1,53 @@
 <div
-    [style.width.px]="previewWidth"
-    [style.height.px]="previewHeight"
-    class="preview-container"
+  [style.width.px]="previewWidth"
+  [style.height.px]="previewHeight"
+  class="preview-container"
     [ngClass]="{ 
       'type-image': typeImage,
       'loaded': loaded,
     }">
   <!-- Image container -->
-  <ng-container *ngIf="typeImage; else nonImage">
+  @if (typeImage) {
     <img
       [src]="file | fsFileSrc | async"
       (load)="previewLoaded()"
       (error)="previewError()">
-    <ng-container *ngIf="!loaded">
+    @if (!loaded) {
       <mat-spinner [diameter]="50"></mat-spinner>
-    </ng-container>
-  </ng-container>
-  <!-- Non image container -->
-  <ng-template #nonImage>
+    }
+  } @else {
     <div class="file-details">
       <div class="file-icon">
         <div
-            class="file-ext"
-            [style.fontSize]="extensionFontSize + 'px'">
+          class="file-ext"
+          [style.fontSize]="extensionFontSize + 'px'">
           {{ file.extension }}
         </div>
         <mat-icon
-            [style.width]="iconDim + 'px'"
-            [style.height]="iconDim + 'px'"
-            [style.fontSize]="iconDim + 'px'">
+          [style.width]="iconDim + 'px'"
+          [style.height]="iconDim + 'px'"
+          [style.fontSize]="iconDim + 'px'">
           insert_drive_file
         </mat-icon>
       </div>
-      <ng-container *ngIf="showFilename && file.name">
+      @if (showFilename && file.name) {
         <a
-            class="file-name"
-            [matTooltip]="file.name">
+          class="file-name"
+          [matTooltip]="file.name">
           {{ file.name }}
         </a>
-      </ng-container>
+      }
     </div>
-  </ng-template>
+  }
+  <!-- Non image container -->
   <fs-file-actions
     [actions]="actions"
     [file]="file">
   </fs-file-actions>
   <div class="spinner">
-    <ng-container *ngIf="file?.progress">
+    @if (file?.progress) {
       <mat-spinner [diameter]="50"></mat-spinner>
-    </ng-container>
+    }
   </div>
   <ng-content></ng-content>
 </div>

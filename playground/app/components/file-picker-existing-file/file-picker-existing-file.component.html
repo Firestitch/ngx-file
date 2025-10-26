@@ -1,19 +1,19 @@
 <div class="fs-row.gap-md">
   <fs-file-picker
-      (select)="select($event)"
-      (remove)="remove()"
-      [file]="file"
-      [accept]="'*.pdf'"
-      [allowDownload]="true"
-      (download)="download()">
+    (select)="select($event)"
+    (remove)="remove()"
+    [file]="file"
+    [accept]="'*.pdf'"
+    [allowDownload]="true"
+    (download)="download()">
     <div fsFileLabel>
       File Picker Label
     </div>
   </fs-file-picker>
   <fs-file-picker
-      (remove)="remove()"
-      [allowRemove]="true"
-      [url]="url">
+    (remove)="remove()"
+    [allowRemove]="true"
+    [url]="url">
     <div fsFileLabel>
       File Picker From URL
     </div>
@@ -22,27 +22,29 @@
     </div>
   </fs-file-picker>
   <fs-file-picker
-      (remove)="remove()"
-      [allowRemove]="true"
-      [file]="apiFile">
+    (remove)="remove()"
+    [allowRemove]="true"
+    [file]="apiFile">
     <div fsFileLabel>
       File Picker from ApiFile
     </div>
   </fs-file-picker>
 </div>
 <fs-file-picker
-    (select)="select($event)"
-    (remove)="remove()"
-    [previewWidth]="null">
+  (select)="select($event)"
+  (remove)="remove()"
+  [previewWidth]="null">
   <div fsFileLabel>
     File Picker Label
   </div>
 </fs-file-picker>
-<fieldset *ngIf="file">
-  <legend>
-    File
-  </legend>
-  <pre>form
-    {{ file | json }}
-  </pre>
-</fieldset>
+@if (file) {
+  <fieldset>
+    <legend>
+      File
+    </legend>
+    <pre>form
+      {{ file | json }}
+    </pre>
+  </fieldset>
+}

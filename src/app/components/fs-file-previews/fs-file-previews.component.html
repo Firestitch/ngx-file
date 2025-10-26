@@ -1,11 +1,11 @@
-<ng-container *ngFor="let file of files; let index = index">
+@for (file of files; track file; let index = $index) {
   <fs-file-preview
-      [file]="file | filePreviewMapFile:mapFile"
-      [previewWidth]="previewWidth"
-      [previewHeight]="previewHeight"
-      [actions]="actions"
-      [showActionOn]="showActionOn"
-      class="preview">
+    [file]="file | filePreviewMapFile:mapFile"
+    [previewWidth]="previewWidth"
+    [previewHeight]="previewHeight"
+    [actions]="actions"
+    [showActionOn]="showActionOn"
+    class="preview">
     @if (remove) {
       <ng-template
         fs-file-preview-action
@@ -16,4 +16,4 @@
       </ng-template>
     }
   </fs-file-preview>
-</ng-container>
+}
