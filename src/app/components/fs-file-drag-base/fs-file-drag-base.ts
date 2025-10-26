@@ -8,9 +8,10 @@ import {
 
 
 @Component({
-  selector: 'fs-file-drag-base',
-  template: '',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fs-file-drag-base',
+    template: '',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
 })
 export class FsFileDragBaseComponent implements OnDestroy {
 

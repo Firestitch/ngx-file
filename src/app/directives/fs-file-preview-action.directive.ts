@@ -6,7 +6,8 @@ import { FsFile } from '../models/fs-file';
 
 
 @Directive({
-  selector: '[fs-file-preview-action],[fs-file-action]',
+    selector: '[fs-file-preview-action],[fs-file-action]',
+    standalone: true,
 })
 export class FsFilePreviewActionDirective implements OnChanges {
 

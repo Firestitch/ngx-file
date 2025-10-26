@@ -22,14 +22,18 @@ import { FsFileModuleConfig } from '../../interfaces';
 import { FileProcessConfig, FsFile } from '../../models';
 import { InputProcessorService } from '../../services';
 import { FsFileDragBaseComponent } from '../fs-file-drag-base/fs-file-drag-base';
+import { NgClass } from '@angular/common';
+import { FsFileDragoverMessageComponent } from '../fs-file-dragover-message/fs-file-dragover-message.component';
 
 
 @Component({
-  selector: 'fs-file',
-  templateUrl: './fs-file.component.html',
-  styleUrls: ['./fs-file.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [InputProcessorService],
+    selector: 'fs-file',
+    templateUrl: './fs-file.component.html',
+    styleUrls: ['./fs-file.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [InputProcessorService],
+    standalone: true,
+    imports: [NgClass, FsFileDragoverMessageComponent],
 })
 export class FsFileComponent extends FsFileDragBaseComponent implements OnInit, OnDestroy {
 

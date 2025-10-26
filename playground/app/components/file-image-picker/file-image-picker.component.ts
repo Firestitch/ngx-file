@@ -2,12 +2,25 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from
 
 import { FsFileImagePickerComponent } from '@firestitch/file';
 import { FsMessage } from '@firestitch/message';
+import { FsFileImagePickerComponent as FsFileImagePickerComponent_1 } from '../../../../src/app/components/fs-file-image-picker/fs-file-image-picker.component';
+import { FsFilePreviewActionDirective } from '../../../../src/app/directives/fs-file-preview-action.directive';
+import { MatButton } from '@angular/material/button';
+import { FsFormModule } from '@firestitch/form';
+import { JsonPipe } from '@angular/common';
 
 
 @Component({
-  selector: 'file-image-picker',
-  templateUrl: './file-image-picker.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'file-image-picker',
+    templateUrl: './file-image-picker.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        FsFileImagePickerComponent_1,
+        FsFilePreviewActionDirective,
+        MatButton,
+        FsFormModule,
+        JsonPipe,
+    ],
 })
 export class FileImagePickerComponent {
 

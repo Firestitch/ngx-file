@@ -9,7 +9,10 @@ import { map, switchMap, tap } from 'rxjs/operators';
 import { FsFile } from '../models';
 
 
-@Pipe({ name: 'fsFileSrc' })
+@Pipe({
+    name: 'fsFileSrc',
+    standalone: true
+})
 export class FsFileSrcPipe implements PipeTransform {
 
   public transform(file: FsFile) {

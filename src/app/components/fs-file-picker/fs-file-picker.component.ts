@@ -30,25 +30,45 @@ import { FsFileLabelDirective } from '../../directives/fs-file-label.directive';
 import { FS_FILE_MODULE_CONFIG } from '../../injectors/file-config.injector';
 import { FsFile } from '../../models/fs-file';
 import { FsFileDragBaseComponent } from '../fs-file-drag-base/fs-file-drag-base';
+import { FsLabelModule } from '@firestitch/label';
+import { NgTemplateOutlet, NgClass } from '@angular/common';
+import { FsFileComponent } from '../fs-file/fs-file.component';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { FsFilePreviewComponent } from '../fs-file-preview/fs-file-preview.component';
+import { FsFilePreviewActionDirective as FsFilePreviewActionDirective_1 } from '../../directives/fs-file-preview-action.directive';
+import { MatIcon } from '@angular/material/icon';
+import { MatButton } from '@angular/material/button';
 
 
 @Component({
-  selector: 'fs-file-picker',
-  templateUrl: './fs-file-picker.component.html',
-  styleUrls: ['./fs-file-picker.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => FsFilePickerComponent),
-      multi: true,
-    },
-    {
-      provide: NG_VALIDATORS,
-      useExisting: FsFilePickerComponent,
-      multi: true,
-    },
-  ],
+    selector: 'fs-file-picker',
+    templateUrl: './fs-file-picker.component.html',
+    styleUrls: ['./fs-file-picker.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => FsFilePickerComponent),
+            multi: true,
+        },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: FsFilePickerComponent,
+            multi: true,
+        },
+    ],
+    standalone: true,
+    imports: [
+        FsLabelModule,
+        NgTemplateOutlet,
+        FsFileComponent,
+        NgClass,
+        MatProgressSpinner,
+        FsFilePreviewComponent,
+        FsFilePreviewActionDirective_1,
+        MatIcon,
+        MatButton,
+    ],
 })
 export class FsFilePickerComponent
   extends FsFileDragBaseComponent

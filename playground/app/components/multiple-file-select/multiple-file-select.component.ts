@@ -5,12 +5,26 @@ import { FsFile } from '@firestitch/file';
 import { FsMessage } from '@firestitch/message';
 
 import { FsFilePreviewComponent } from '../../../../src/app/components/fs-file-preview/fs-file-preview.component';
+import { FsFileComponent } from '../../../../src/app/components/fs-file/fs-file.component';
+import { MatButton } from '@angular/material/button';
+import { FsFormModule } from '@firestitch/form';
+import { FsFilePreviewActionDirective } from '../../../../src/app/directives/fs-file-preview-action.directive';
+import { JsonPipe } from '@angular/common';
 
 @Component({
-  selector: 'multiple-file-select',
-  templateUrl: './multiple-file-select.component.html',
-  styleUrls: ['./multiple-file-select.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'multiple-file-select',
+    templateUrl: './multiple-file-select.component.html',
+    styleUrls: ['./multiple-file-select.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        FsFileComponent,
+        MatButton,
+        FsFormModule,
+        FsFilePreviewComponent,
+        FsFilePreviewActionDirective,
+        JsonPipe,
+    ],
 })
 export class MultipleFileSelectComponent {
 

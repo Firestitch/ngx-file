@@ -9,13 +9,22 @@ import { FsMessage } from '@firestitch/message';
 import { UploadService } from 'playground/app/services';
 
 import { DialogComponent } from './dialog';
+import { FsFilePickerComponent } from '../../../../src/app/components/fs-file-picker/fs-file-picker.component';
+import { FsFileLabelDirective } from '../../../../src/app/directives/fs-file-label.directive';
+import { JsonPipe } from '@angular/common';
 
 
 @Component({
-  selector: 'file-picker-existing-file',
-  templateUrl: './file-picker-existing-file.component.html',
-  styleUrls: ['./file-picker-existing-file.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'file-picker-existing-file',
+    templateUrl: './file-picker-existing-file.component.html',
+    styleUrls: ['./file-picker-existing-file.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        FsFilePickerComponent,
+        FsFileLabelDirective,
+        JsonPipe,
+    ],
 })
 export class FilePickerExistingFileComponent {
 

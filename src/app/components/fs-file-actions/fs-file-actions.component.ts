@@ -10,13 +10,25 @@ import {
 
 import { FsFilePreviewActionDirective } from '../../directives';
 import { FsFile } from '../../models';
+import { MatTooltip } from '@angular/material/tooltip';
+import { NgClass, AsyncPipe } from '@angular/common';
+import { MatMiniFabAnchor } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 
 @Component({
-  selector: 'fs-file-actions',
-  templateUrl: './fs-file-actions.component.html',
-  styleUrls: ['./fs-file-actions.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fs-file-actions',
+    templateUrl: './fs-file-actions.component.html',
+    styleUrls: ['./fs-file-actions.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        MatTooltip,
+        NgClass,
+        MatMiniFabAnchor,
+        MatIcon,
+        AsyncPipe,
+    ],
 })
 export class FsFileActionsComponent {
 

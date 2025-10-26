@@ -3,13 +3,27 @@ import {
 } from '@angular/core';
 
 import { FsFile } from '../../../models/fs-file';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { FsLabelModule } from '@firestitch/label';
+import { MatButton, MatAnchor } from '@angular/material/button';
 
 
 @Component({
-  templateUrl: 'fs-file-image-picker-dialog.component.html',
-  styleUrls: ['./fs-file-image-picker-dialog.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: 'fs-file-image-picker-dialog.component.html',
+    styleUrls: ['./fs-file-image-picker-dialog.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        MatDialogTitle,
+        CdkScrollable,
+        MatDialogContent,
+        FsLabelModule,
+        MatDialogActions,
+        MatButton,
+        MatDialogClose,
+        MatAnchor,
+    ],
 })
 export class FsFileImagePickerDialogComponent {
 

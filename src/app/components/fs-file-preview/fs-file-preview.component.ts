@@ -15,13 +15,28 @@ import {
 import { FsFilePreviewActionDirective } from '../../directives';
 import { FsFile } from '../../models';
 import { FsFileActionsComponent } from '../fs-file-actions/fs-file-actions.component';
+import { NgClass, AsyncPipe } from '@angular/common';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatIcon } from '@angular/material/icon';
+import { MatTooltip } from '@angular/material/tooltip';
+import { FsFileSrcPipe } from '../../pipes/preview-pipe';
 
 
 @Component({
-  selector: 'fs-file-preview',
-  templateUrl: './fs-file-preview.component.html',
-  styleUrls: ['./fs-file-preview.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fs-file-preview',
+    templateUrl: './fs-file-preview.component.html',
+    styleUrls: ['./fs-file-preview.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        NgClass,
+        MatProgressSpinner,
+        MatIcon,
+        MatTooltip,
+        FsFileActionsComponent,
+        AsyncPipe,
+        FsFileSrcPipe,
+    ],
 })
 export class FsFilePreviewComponent implements OnInit, OnChanges {
 

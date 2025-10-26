@@ -13,13 +13,22 @@ import { Observable } from 'rxjs';
 
 import { FsFilePreviewActionDirective } from '../../directives';
 import { FsFile } from '../../models';
+import { FsFilePreviewComponent } from '../fs-file-preview/fs-file-preview.component';
+import { FsFilePreviewActionDirective as FsFilePreviewActionDirective_1 } from '../../directives/fs-file-preview-action.directive';
+import { FilePreviewMapFilePipe } from '../../pipes/file-preview-map-file';
 
 
 @Component({
-  selector: 'fs-file-previews',
-  styleUrls: ['./fs-file-previews.component.scss'],
-  templateUrl: './fs-file-previews.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fs-file-previews',
+    styleUrls: ['./fs-file-previews.component.scss'],
+    templateUrl: './fs-file-previews.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        FsFilePreviewComponent,
+        FsFilePreviewActionDirective_1,
+        FilePreviewMapFilePipe,
+    ],
 })
 export class FsFilePreviewsComponent {
 

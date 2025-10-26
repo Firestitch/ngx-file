@@ -26,29 +26,26 @@ import {
   SingleFileSelectComponent,
 } from './components';
 import { CordovaClickInterceptor } from './interceptors/cordova-click-interceptor';
-import { AppMaterialModule } from './material.module';
 
 
-@NgModule({
-  bootstrap: [AppComponent],
-  imports: [
+
+@NgModule(/* TODO(standalone-migration): clean up removed NgModule class manually. 
+{
+    bootstrap: [AppComponent],
+    imports: [
     BrowserModule,
     FsFileModule.forRoot({
-      // allowDownload: true,
-      // allowRemove: true,
-      // dragoverMessage: true
+    // allowDownload: true,
+    // allowRemove: true,
+    // dragoverMessage: true
     }),
     FsFormModule,
     FsApiModule,
     BrowserAnimationsModule,
-    AppMaterialModule,
     FormsModule,
     FsExampleModule.forRoot(),
     FsMessageModule.forRoot(),
     RouterModule.forRoot([]),
-  ],
-  declarations: [
-    AppComponent,
     SingleFileSelectComponent,
     MultipleFileSelectComponent,
     ImageFileManipulationComponent,
@@ -60,17 +57,18 @@ import { AppMaterialModule } from './material.module';
     DialogComponent,
     FilePreviewComponent,
     FilePickerFormComponent,
-  ],
-  providers: [
-    {
-      provide: FS_FILE_CLICK_INTERCEPTOR,
-      multi: true,
-      useFactory: () => {
-        return new CordovaClickInterceptor();
-      },
-    },
-  ],
-})
+],
+    declarations: [AppComponent],
+    providers: [
+        {
+            provide: FS_FILE_CLICK_INTERCEPTOR,
+            multi: true,
+            useFactory: () => {
+                return new CordovaClickInterceptor();
+            },
+        },
+    ],
+} */)
 export class PlaygroundModule {
 
   constructor() {

@@ -17,13 +17,26 @@ import { FsFileHintDirective, FsFileLabelDirective, FsFilePreviewActionDirective
 import { FsFile } from '../../models/fs-file';
 
 import { FsFileImagePickerDialogComponent } from './fs-file-image-picker-dialog/fs-file-image-picker-dialog.component';
+import { FsFilePickerComponent } from '../fs-file-picker/fs-file-picker.component';
+import { FsFilePickerSelectDirective } from '../../directives/fs-file-picker-select.directive';
+import { MatIcon } from '@angular/material/icon';
+import { FsFileActionsComponent } from '../fs-file-actions/fs-file-actions.component';
+import { FsFilePreviewActionDirective as FsFilePreviewActionDirective_1 } from '../../directives/fs-file-preview-action.directive';
 
 
 @Component({
-  selector: 'fs-file-image-picker',
-  templateUrl: './fs-file-image-picker.component.html',
-  styleUrls: ['./fs-file-image-picker.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fs-file-image-picker',
+    templateUrl: './fs-file-image-picker.component.html',
+    styleUrls: ['./fs-file-image-picker.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        FsFilePickerComponent,
+        FsFilePickerSelectDirective,
+        MatIcon,
+        FsFileActionsComponent,
+        FsFilePreviewActionDirective_1,
+    ],
 })
 export class FsFileImagePickerComponent {
 
