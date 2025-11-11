@@ -6,8 +6,7 @@
       </fs-label>
     } @else {
       @if (labels.length) {
-        <fs-label
-          class="fs-form-label">
+        <fs-label class="fs-form-label">
           <ng-content select="[fsFileLabel]"></ng-content>
         </fs-label>
       }
@@ -25,32 +24,32 @@
 }
 <ng-template #fileTemplate>
   <fs-file
-    [accept]="accept"
-    (select)="selectFile($event)"
-    (declined)="declined()"
-    (beforeProcessing)="beforeProcessing($event)"
-    [imageWidth]="imageWidth"
-    [imageHeight]="imageHeight"
-    [imageQuality]="imageQuality"
-    [disabled]="disabled"
-    [multiple]="multiple">
+      [accept]="accept"
+      (select)="selectFile($event)"
+      (declined)="declined()"
+      (beforeProcessing)="beforeProcessing($event)"
+      [imageWidth]="imageWidth"
+      [imageHeight]="imageHeight"
+      [imageQuality]="imageQuality"
+      [disabled]="disabled"
+      [multiple]="multiple">
     <div
-      class="wrap"
-      [style.width]="previewWidth ? previewWidth + 'px' : '100%'"
-      [style.height]="previewHeight + 'px'"
-      [ngClass]="{ processing: processing, 'has-file': !!file }">
+        class="wrap"
+        [style.width]="previewWidth ? previewWidth + 'px' : '100%'"
+        [style.height]="previewHeight + 'px'"
+        [ngClass]="{ processing: processing, 'has-file': !!file }">
       @if (processing) {
         <mat-spinner [diameter]="50"></mat-spinner>
       }
       @if (file) {
         <fs-file-preview
-          class="preview"
-          [file]="file"
-          [actions]="actions"
-          [showActionOn]="showActionOn"
-          [showFilename]="showFilename"
-          [previewHeight]="previewHeight"
-          [previewWidth]="previewWidth">
+            class="preview"
+            [file]="file"
+            [actions]="actions"
+            [showActionOn]="showActionOn"
+            [showFilename]="showFilename"
+            [previewHeight]="previewHeight"
+            [previewWidth]="previewWidth">
           @if (allowRemove && !disabled) {
             <ng-template
               fs-file-preview-action
@@ -90,9 +89,9 @@
               {{ instruction }}
             </div>
             <button
-              [disabled]="disabled"
-              type="button"
-              mat-stroked-button>
+                [disabled]="disabled"
+                type="button"
+                mat-stroked-button>
               Upload
             </button>
           </div>

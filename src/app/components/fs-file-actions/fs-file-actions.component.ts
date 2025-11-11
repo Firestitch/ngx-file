@@ -1,34 +1,35 @@
+import { AsyncPipe, NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ContentChildren,
-  inject,
   Input,
   QueryList,
+  inject,
 } from '@angular/core';
+
+import { MatMiniFabAnchor } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatTooltip } from '@angular/material/tooltip';
 
 import { FsFilePreviewActionDirective } from '../../directives';
 import { FsFile } from '../../models';
-import { MatTooltip } from '@angular/material/tooltip';
-import { NgClass, AsyncPipe } from '@angular/common';
-import { MatMiniFabAnchor } from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
 
 
 @Component({
-    selector: 'fs-file-actions',
-    templateUrl: './fs-file-actions.component.html',
-    styleUrls: ['./fs-file-actions.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [
-        MatTooltip,
-        NgClass,
-        MatMiniFabAnchor,
-        MatIcon,
-        AsyncPipe,
-    ],
+  selector: 'fs-file-actions',
+  templateUrl: './fs-file-actions.component.html',
+  styleUrls: ['./fs-file-actions.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    MatTooltip,
+    NgClass,
+    MatMiniFabAnchor,
+    MatIcon,
+    AsyncPipe,
+  ],
 })
 export class FsFileActionsComponent {
 
@@ -43,10 +44,9 @@ export class FsFileActionsComponent {
   private _cdRef = inject(ChangeDetectorRef);
 
   public callAction(event: MouseEvent, action: FsFilePreviewActionDirective) {
-    event.stopImmediatePropagation();
-    event.stopPropagation();
-    
     if (action.click.observers.length) {
+      event.stopImmediatePropagation();
+      event.stopPropagation();
       action.click.emit({ event, file: this.file });
     }
   }

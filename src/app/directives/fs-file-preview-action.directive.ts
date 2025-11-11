@@ -6,12 +6,10 @@ import { FsFile } from '../models/fs-file';
 
 
 @Directive({
-    selector: '[fs-file-preview-action],[fs-file-action]',
-    standalone: true,
+  selector: '[fs-file-preview-action],[fs-file-action]',
+  standalone: true,
 })
 export class FsFilePreviewActionDirective implements OnChanges {
-  templateRef = inject<TemplateRef<any>>(TemplateRef);
-
 
   @Input() public placement: 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right';
   @Input() public show: boolean = true;
@@ -19,6 +17,8 @@ export class FsFilePreviewActionDirective implements OnChanges {
   @Input() public tooltip: string;
 
   @Output() public click = new EventEmitter<{ event: MouseEvent; file: FsFile }>();
+  
+  public templateRef = inject<TemplateRef<any>>(TemplateRef);
 
   private _show$ = new BehaviorSubject<boolean>(this.show);
   private _icon$ = new BehaviorSubject<string | undefined>(undefined);
