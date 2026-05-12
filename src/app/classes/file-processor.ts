@@ -103,8 +103,7 @@ export class FileProcessor {
             return from(result);
           }),
           map((blob: Blob) => {
-            const ext = blob.type?.split('/') || [];
-            const name = fsFile.name.replace(/(heic|heif)$/i, ext[1] || 'jpg');
+            const name = fsFile.name.replace(/(heic|heif)$/i, 'jpg');
 
             return new FsFile(blob, name);
           }),
