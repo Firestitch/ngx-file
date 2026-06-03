@@ -85,7 +85,7 @@ export class FsFilePickerComponent
   @Input() public allowRemove = false;
   @Input() public showReuploadAction = true;
   @Input() public actions = new QueryList<FsFilePreviewActionDirective>();
-  @Input() public showActionOn: 'hover' | 'always' = 'hover';
+  @Input() public showActionOn: 'hover' | 'always' = 'always';
 
   @Input('url') public set url(url) {
     this.file = url ? new FsFile(url) : null;
@@ -193,7 +193,7 @@ export class FsFilePickerComponent
     this.file = file;
   }
 
-  public beforeProcessing(fsFiles: FsFile[]) {
+  public beforeProcessing() {
     this.processing = true;
   }
 

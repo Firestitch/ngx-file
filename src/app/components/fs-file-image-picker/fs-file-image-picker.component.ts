@@ -1,36 +1,33 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ContentChildren, EventEmitter, Input, Output, QueryList, TemplateRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ContentChildren, EventEmitter, HostBinding, Input, Output, QueryList, TemplateRef, inject } from '@angular/core';
 
 import { MatDialog } from '@angular/material/dialog';
+import { MatIcon } from '@angular/material/icon';
 
 import { FsFileHintDirective, FsFileLabelDirective, FsFilePreviewActionDirective } from '../../directives';
+import { FsFilePickerSelectDirective } from '../../directives/fs-file-picker-select.directive';
+import { FsFilePreviewActionDirective as FsFilePreviewActionDirective_1 } from '../../directives/fs-file-preview-action.directive';
 import { FsFile } from '../../models/fs-file';
+import { FsFileActionsComponent } from '../fs-file-actions/fs-file-actions.component';
+import { FsFilePickerComponent } from '../fs-file-picker/fs-file-picker.component';
 
 import { FsFileImagePickerDialogComponent } from './fs-file-image-picker-dialog/fs-file-image-picker-dialog.component';
-import { FsFilePickerComponent } from '../fs-file-picker/fs-file-picker.component';
-import { FsFilePickerSelectDirective } from '../../directives/fs-file-picker-select.directive';
-import { MatIcon } from '@angular/material/icon';
-import { FsFileActionsComponent } from '../fs-file-actions/fs-file-actions.component';
-import { FsFilePreviewActionDirective as FsFilePreviewActionDirective_1 } from '../../directives/fs-file-preview-action.directive';
 
 
 @Component({
-    selector: 'fs-file-image-picker',
-    templateUrl: './fs-file-image-picker.component.html',
-    styleUrls: ['./fs-file-image-picker.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [
-        FsFilePickerComponent,
-        FsFilePickerSelectDirective,
-        MatIcon,
-        FsFileActionsComponent,
-        FsFilePreviewActionDirective_1,
-    ],
+  selector: 'fs-file-image-picker',
+  templateUrl: './fs-file-image-picker.component.html',
+  styleUrls: ['./fs-file-image-picker.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    FsFilePickerComponent,
+    FsFilePickerSelectDirective,
+    MatIcon,
+    FsFileActionsComponent,
+    FsFilePreviewActionDirective_1,
+  ],
 })
 export class FsFileImagePickerComponent {
-  private _dialog = inject(MatDialog);
-  private _cdRef = inject(ChangeDetectorRef);
-
 
   @ContentChild(FsFileLabelDirective, { read: TemplateRef })
   public labelTemplate: TemplateRef<any>;
@@ -56,6 +53,15 @@ export class FsFileImagePickerComponent {
   @Input() public actions = new QueryList<FsFilePreviewActionDirective>();
   @Input() public showUploadAction = true;
   @Input() public showReuploadAction = true;
+  @Input() public showActionOn: 'hover' | 'always' = 'always';
+
+  /**
+   * Border color of the avatar circle.
+   * - `undefined` (default): use the standard border color from the stylesheet.
+   * - `null`: show no border at all.
+   * - a color string: use it as the border color.
+   */
+  @Input() public borderColor: string;
 
   @Input('url') public set url(url) {
     this._previousFile = this._file;
@@ -71,11 +77,18 @@ export class FsFileImagePickerComponent {
   public processing = false;
 
   private _previousFile: FsFile;
+  private _dialog = inject(MatDialog);
+  private _cdRef = inject(ChangeDetectorRef);
 
   public get file(): FsFile {
     return this._file;
   }
-  
+
+  @HostBinding('style.--fs-file-image-picker-border-color')
+  public get _borderColorVar(): string | null {
+    return this.borderColor === null ? 'transparent' : this.borderColor;
+  }
+
   public beforeProcessing(fsFiles: FsFile[]) {
     this.processing = true;
   }

@@ -3,6 +3,7 @@
     <div
         class="action"
         [class.hidden]="action.hide$ | async"
+        [class.show-on-hover]="(action.showOn$ | async) === 'hover'"
         [matTooltip]="action.tooltip$ | async"
         [matTooltipDisabled]="action.tooltipDisabled$ | async"
         [ngClass]="action.placement$ | async">

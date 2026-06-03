@@ -67,12 +67,25 @@ $percent: 51%;
     }
   }
 
+  &:hover {
+    .action.show-on-hover {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
   .action {
     position: absolute;
     cursor: pointer;
 
     &.hidden {
       display: none;
+    }
+
+    &.show-on-hover {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s ease-in-out;
     }
 
     &.top-left {

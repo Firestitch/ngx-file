@@ -5,7 +5,9 @@ import {
   Component,
   ContentChildren,
   Input,
+  OnChanges,
   QueryList,
+  SimpleChanges,
   inject,
 } from '@angular/core';
 
@@ -31,17 +33,25 @@ import { FsFile } from '../../models';
     AsyncPipe,
   ],
 })
-export class FsFileActionsComponent {
+export class FsFileActionsComponent implements OnChanges {
 
   @Input() public actions = new QueryList<FsFilePreviewActionDirective>();
   @Input() public file: FsFile;
+  @Input() public showActionOn: 'hover' | 'always' = 'always';
 
   @ContentChildren(FsFilePreviewActionDirective)
   public set actionDirectives(actionDirectives: QueryList<FsFilePreviewActionDirective>) {
     this.actions.reset([...actionDirectives.toArray(), ...this.actions.toArray()]);
+    this._applyShowActionOn();
   }
 
   private _cdRef = inject(ChangeDetectorRef);
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes.showActionOn) {
+      this._applyShowActionOn();
+    }
+  }
 
   public callAction(event: MouseEvent, action: FsFilePreviewActionDirective) {
     if (action.click.observers.length) {
@@ -53,5 +63,9 @@ export class FsFileActionsComponent {
 
   public updateActionVisibility() {
     this._cdRef.markForCheck();
+  }
+
+  private _applyShowActionOn(): void {
+    this.actions?.forEach((action) => action.setDefaultShowOn(this.showActionOn));
   }
 }
