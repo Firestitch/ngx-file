@@ -56,12 +56,13 @@ export class FsFileImagePickerComponent {
   @Input() public showActionOn: 'hover' | 'always' = 'always';
 
   /**
-   * Border color of the avatar circle.
-   * - `undefined` (default): use the standard border color from the stylesheet.
-   * - `null`: show no border at all.
-   * - a color string: use it as the border color.
+   * Whether to show the border around the empty (unselected) placeholder.
+   * - `true` (default): the placeholder shows a circular border.
+   * - `false`: the placeholder shows no border.
+   *
+   * A selected image never shows a border regardless of this value.
    */
-  @Input() public borderColor: string;
+  @Input() public border = true;
 
   @Input('url') public set url(url) {
     this._previousFile = this._file;
@@ -84,9 +85,9 @@ export class FsFileImagePickerComponent {
     return this._file;
   }
 
-  @HostBinding('style.--fs-file-image-picker-border-color')
-  public get _borderColorVar(): string | null {
-    return this.borderColor === null ? 'transparent' : this.borderColor;
+  @HostBinding('class.fs-file-image-picker-border')
+  public get _border(): boolean {
+    return this.border;
   }
 
   public beforeProcessing(fsFiles: FsFile[]) {

@@ -6,7 +6,9 @@ fs-file-picker {
 
     .preview-container {
       border-radius: 100% !important;
-      box-shadow: inset 0 0 0 2px var(--fs-file-image-picker-border-color, transparent) !important;
+      // Avatars are always opaque/cropped — drop the transparency checker so the
+      // circular clip's anti-aliased edge doesn't blend into a gray ring.
+      background: none !important;
     }
 
     fs-file-actions {
@@ -15,8 +17,15 @@ fs-file-picker {
   }
 }
 
+// The border only ever applies to the unselected placeholder, and only when
+// the `border` input is true. A selected image never shows a border.
+:host(.fs-file-image-picker-border) {
+  .fs-file-image-picker-placeholder {
+    border: 2px solid #ccc;
+  }
+}
+
 .fs-file-image-picker-placeholder {
-  border: 2px solid var(--fs-file-image-picker-border-color, #ccc);
   box-sizing: border-box;
   border-radius: 100%;
   display: flex;
