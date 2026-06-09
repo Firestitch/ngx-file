@@ -1,4 +1,6 @@
-fs-file-picker {
+@use '@firestitch/style/variables' as variables;
+
+:host {
   ::ng-deep {
     .wrap {
       border: none !important;
@@ -34,7 +36,7 @@ fs-file-picker {
 
   .image-icon {
     transform: scale(1.5);
-    color: #ececec;
+    color: variables.$disabled-color;
   }
 
   fs-file-actions {

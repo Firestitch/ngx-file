@@ -1,3 +1,5 @@
+@use '@firestitch/style/variables' as variables;
+
 :host {
   &.dragover {
     .wrap {
@@ -84,7 +86,7 @@
 
     mat-icon {
       transform: scale(1.8);
-      color: #ddd;
+      color: variables.$disabled-color;
     }
   }
 

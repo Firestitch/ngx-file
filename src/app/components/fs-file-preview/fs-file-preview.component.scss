@@ -1,3 +1,5 @@
+@use '@firestitch/style/variables' as variables;
+
 $phone-width-max: 767.98px;
 $tablet-width-min: 768px;
 $tablet-width-max: 991.98px;
@@ -30,11 +32,11 @@ $desktop-width-min: 992px;
       position: absolute;
       width: 100%;
       bottom: 25%;
-      color: #838383;
+      color: variables.$disabled-color;
     }
 
     mat-icon {
-      color: #ccc;
+      color: variables.$disabled-color;
     }
 
     .file-name {
