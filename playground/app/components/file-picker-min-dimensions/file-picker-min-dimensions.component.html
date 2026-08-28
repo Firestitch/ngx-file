@@ -1,0 +1,116 @@
+<div class="fs-row gap-lg align-start">
+  <div>
+    <fs-file-picker
+        [label]="'Neither set'"
+        [accept]="'.jpg,.jpeg,.png'"
+        (select)="select($event)"
+        (error)="error($event)">
+    </fs-file-picker>
+    <ul>
+      <li>
+        Min Width:
+        <b>
+          not set
+        </b>
+      </li>
+      <li>
+        Min Height:
+        <b>
+          not set
+        </b>
+      </li>
+      <li>
+        Any image is accepted
+      </li>
+    </ul>
+  </div>
+  <div>
+    <fs-file-picker
+        [label]="'Width only'"
+        [accept]="'.jpg,.jpeg,.png'"
+        [minWidth]="1024"
+        (select)="select($event)"
+        (error)="error($event)">
+    </fs-file-picker>
+    <ul>
+      <li>
+        Min Width:
+        <b>
+          1024px
+        </b>
+      </li>
+      <li>
+        Min Height:
+        <b>
+          not set
+        </b>
+      </li>
+      <li>
+        A 1024x200 image is accepted
+      </li>
+    </ul>
+  </div>
+  <div>
+    <fs-file-picker
+        [label]="'Height only'"
+        [accept]="'.jpg,.jpeg,.png'"
+        [minHeight]="1024"
+        (select)="select($event)"
+        (error)="error($event)">
+    </fs-file-picker>
+    <ul>
+      <li>
+        Min Width:
+        <b>
+          not set
+        </b>
+      </li>
+      <li>
+        Min Height:
+        <b>
+          1024px
+        </b>
+      </li>
+      <li>
+        A 200x1024 image is accepted
+      </li>
+    </ul>
+  </div>
+  <div>
+    <fs-file-picker
+        [label]="'Both set'"
+        [accept]="'.jpg,.jpeg,.png'"
+        [minWidth]="1024"
+        [minHeight]="1024"
+        (select)="select($event)"
+        (error)="error($event)">
+    </fs-file-picker>
+    <ul>
+      <li>
+        Min Width:
+        <b>
+          1024px
+        </b>
+      </li>
+      <li>
+        Min Height:
+        <b>
+          1024px
+        </b>
+      </li>
+      <li>
+        Both edges must reach 1024px
+      </li>
+    </ul>
+  </div>
+</div>
+@if (file) {
+  <fieldset>
+    <legend>
+      Accepted file
+    </legend>
+    <pre>
+      {{ file | json }}
+    </pre>
+  </fieldset>
+}

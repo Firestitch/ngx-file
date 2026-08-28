@@ -7,6 +7,7 @@ import { FsExampleModule } from '@firestitch/example';
 import { SingleFileSelectComponent } from './components/single-file-select/single-file-select.component';
 import { MultipleFileSelectComponent } from './components/multiple-file-select/multiple-file-select.component';
 import { FilePickerFormComponent } from './components/file-picker-form/file-picker-form.component';
+import { FilePickerMinDimensionsComponent } from './components/file-picker-min-dimensions/file-picker-min-dimensions.component';
 import { ImageFileManipulationComponent } from './components/image-file-manipulation/image-file-manipulation.component';
 import { FilePickerExistingFileComponent } from './components/file-picker-existing-file/file-picker-existing-file.component';
 import { FileImagePickerComponent } from './components/file-image-picker/file-image-picker.component';
@@ -22,6 +23,7 @@ import { FilePreviewComponent } from './components/file-preview/file-preview.com
         SingleFileSelectComponent,
         MultipleFileSelectComponent,
         FilePickerFormComponent,
+        FilePickerMinDimensionsComponent,
         ImageFileManipulationComponent,
         FilePickerExistingFileComponent,
         FileImagePickerComponent,

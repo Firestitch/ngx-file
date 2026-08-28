@@ -132,6 +132,7 @@ export class FsFilePickerComponent
   @Output() public select = new EventEmitter<any>();
   @Output() public remove = new EventEmitter<FsFile>();
   @Output() public download = new EventEmitter<FsFile>();
+  @Output() public error = new EventEmitter<any>();
 
   public instruction = 'Drag & Drop your file or use the button below';
   public processing = false;
@@ -170,20 +171,12 @@ export class FsFilePickerComponent
     }
   }
 
+  // minWidth/minHeight are enforced at selection time by fs-file, which refuses the file
+  // outright, so a rejected image never reaches the model for a form validator to see.
   public validate(control: AbstractControl): Promise<ValidationErrors | null> | null {
-    if (this.file?.typeImage && (this.minWidth || this.minHeight)) {
-      // if(this.file.imageWidth < this.minWidth) {
-      //   return { minWidth: `Minimum width ${this.minWidth}px` };
-      // }
-
-      // if(this.file.imageHeight < this.minHeight) {
-      //   return { minWidth: `Minimum height ${this.minHeight}px` };
-      // }
-    }
-
     return null;
   }
-  
+
   public clear(): void {
     this.file = null;
     this._cdRef.markForCheck();
@@ -202,6 +195,16 @@ export class FsFilePickerComponent
     this.file = null;
     this.onChange(null);
     this._cdRef.markForCheck();
+  }
+
+  // Mirrors declined(): a file refused by validation (minWidth/minHeight) never reaches
+  // selectFile(), which is otherwise the only path that clears the processing spinner.
+  public errored(error: any) {
+    this.processing = false;
+    this.file = null;
+    this.onChange(null);
+    this._cdRef.markForCheck();
+    this.error.emit(error);
   }
 
   public selectFile(fsFile: FsFile) {

@@ -1,5 +1,6 @@
 <fs-file-picker
     (select)="selectFile($event)"
+    (error)="error.emit($event)"
     [file]="file"
     [showActionOn]="showActionOn"
     [minHeight]="minHeight"
