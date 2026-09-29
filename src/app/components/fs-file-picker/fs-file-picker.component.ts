@@ -220,8 +220,14 @@ export class FsFilePickerComponent
   public removeFile(e: { event: MouseEvent }) {
     e.event.stopPropagation();
     e.event.preventDefault();
+
+    // Captured before clear() nulls it, so consumers that persist the removal
+    // server-side still know which file the X was clicked on.
+    const file = this.file;
+
     this.onChange(null);
     this.clear();
+    this.remove.emit(file);
   }
 
   public actionClick(event: { event: MouseEvent }) {
